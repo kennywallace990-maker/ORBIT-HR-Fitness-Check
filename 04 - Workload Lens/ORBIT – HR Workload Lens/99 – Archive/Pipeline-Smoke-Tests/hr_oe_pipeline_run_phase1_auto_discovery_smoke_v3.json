@@ -1,0 +1,41 @@
+{
+  "pass": false,
+  "failed_step": "input_validation",
+  "error": "Phase I CSV does not cover the required trailing two-week window. Missing dates: ['2026-02-16', '2026-02-17', '2026-02-18', '2026-02-19', '2026-02-20', '2026-02-21']",
+  "phase1_date_check": {
+    "csv": "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase I\\Phase I CSV\\Snowflake UKG data.csv",
+    "row_count": 149369,
+    "min_date": "2026-02-09",
+    "max_date": "2026-03-01",
+    "locked_window_missing_dates": {
+      "week8": [
+        "2026-02-16",
+        "2026-02-17",
+        "2026-02-18",
+        "2026-02-19",
+        "2026-02-20",
+        "2026-02-21"
+      ],
+      "week9": []
+    },
+    "required_trailing_two_week_window": {
+      "pull_date": "2026-03-03",
+      "required_week8_start": "2026-02-15",
+      "required_week8_end": "2026-02-21",
+      "required_week9_start": "2026-02-22",
+      "required_week9_end": "2026-02-28",
+      "missing_dates": [
+        "2026-02-16",
+        "2026-02-17",
+        "2026-02-18",
+        "2026-02-19",
+        "2026-02-20",
+        "2026-02-21"
+      ],
+      "range_covered": false
+    }
+  },
+  "outputs": {},
+  "run_summary_path": "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_pipeline_run_phase1_auto_discovery_smoke_v3.json",
+  "generated_at_utc": "2026-03-06T01:24:01+00:00"
+}

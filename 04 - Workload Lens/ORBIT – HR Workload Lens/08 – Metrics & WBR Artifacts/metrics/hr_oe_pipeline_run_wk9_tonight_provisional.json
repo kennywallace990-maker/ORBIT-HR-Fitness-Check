@@ -1,0 +1,140 @@
+{
+  "pass": true,
+  "steps": [
+    {
+      "step": "analysis",
+      "command": [
+        "C:\\Users\\kwallace12\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\weekly_hr_oe\\hr_oe_weekly_analysis.py",
+        "--phase1-csv",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase I\\Phase I CSV\\Snowflake UKG data.csv",
+        "--week8-start",
+        "2026-02-15",
+        "--week8-end",
+        "2026-02-21",
+        "--week9-start",
+        "2026-02-22",
+        "--week9-end",
+        "2026-02-28",
+        "--output-markdown",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_answer_pack_wk9_tonight_provisional.md",
+        "--output-metrics",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_metrics_wk9_tonight_provisional.json",
+        "--phase2-csv",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\Phase II CSVs\\Attendance Inquiry.csv",
+        "--phase2-csv",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\Phase II CSVs\\CS Time and Attendance.csv",
+        "--phase2-csv",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\Phase II CSVs\\FC General Inquiry.csv",
+        "--phase2-csv",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\Phase II CSVs\\Timesheet Inquiry.csv"
+      ],
+      "returncode": 0,
+      "stdout": "{\"markdown_path\": \"C:\\\\Users\\\\kwallace12\\\\OneDrive - Chewy.com, LLC\\\\Desktop\\\\ORBIT Products\\\\04 - Workload Lens\\\\Phase II\\\\output\\\\hr_oe_answer_pack_wk9_tonight_provisional.md\", \"metrics_path\": \"C:\\\\Users\\\\kwallace12\\\\OneDrive - Chewy.com, LLC\\\\Desktop\\\\ORBIT Products\\\\04 - Workload Lens\\\\Phase II\\\\output\\\\hr_oe_metrics_wk9_tonight_provisional.json\"}",
+      "stderr": ""
+    },
+    {
+      "step": "math_validation",
+      "command": [
+        "C:\\Users\\kwallace12\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\weekly_hr_oe\\hr_oe_math_validator.py",
+        "--phase1-csv",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase I\\Phase I CSV\\Snowflake UKG data.csv",
+        "--metrics-json",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_metrics_wk9_tonight_provisional.json",
+        "--output-json",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_math_validation_wk9_tonight_provisional.json",
+        "--week8-start",
+        "2026-02-15",
+        "--week8-end",
+        "2026-02-21",
+        "--week9-start",
+        "2026-02-22",
+        "--week9-end",
+        "2026-02-28",
+        "--phase2-csv",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\Phase II CSVs\\Attendance Inquiry.csv",
+        "--phase2-csv",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\Phase II CSVs\\CS Time and Attendance.csv",
+        "--phase2-csv",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\Phase II CSVs\\FC General Inquiry.csv",
+        "--phase2-csv",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\Phase II CSVs\\Timesheet Inquiry.csv"
+      ],
+      "returncode": 0,
+      "stdout": "{\"pass\": true, \"mismatch_count\": 0, \"mismatches\": [], \"validated_metrics\": [\"phase2 totals\", \"phase2 resolved counts\", \"phase2 by service\", \"phase1 total and rework touches\", \"cross phase visibility percentages\"], \"validated_at_utc\": \"2026-03-06T13:45:56+00:00\"}",
+      "stderr": ""
+    },
+    {
+      "step": "quality_validation",
+      "command": [
+        "C:\\Users\\kwallace12\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\weekly_hr_oe\\hr_oe_quality_validator.py",
+        "--markdown",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_answer_pack_wk9_tonight_provisional.md",
+        "--output-json",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_quality_validation_wk9_tonight_provisional.json",
+        "--week8-start",
+        "2026-02-15",
+        "--week8-end",
+        "2026-02-21",
+        "--week9-start",
+        "2026-02-22",
+        "--week9-end",
+        "2026-02-28"
+      ],
+      "returncode": 0,
+      "stdout": "{\"pass\": true, \"error_count\": 0, \"warning_count\": 0, \"errors\": [], \"warnings\": [], \"validated_at_utc\": \"2026-03-06T13:45:56+00:00\"}",
+      "stderr": ""
+    }
+  ],
+  "phase1_csv": "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase I\\Phase I CSV\\Snowflake UKG data.csv",
+  "phase2_csvs": [
+    "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\Phase II CSVs\\Attendance Inquiry.csv",
+    "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\Phase II CSVs\\CS Time and Attendance.csv",
+    "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\Phase II CSVs\\FC General Inquiry.csv",
+    "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\Phase II CSVs\\Timesheet Inquiry.csv"
+  ],
+  "allow_partial_phase1": true,
+  "phase1_date_check": {
+    "csv": "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase I\\Phase I CSV\\Snowflake UKG data.csv",
+    "row_count": 149369,
+    "min_date": "2026-02-09",
+    "max_date": "2026-03-01",
+    "locked_window_missing_dates": {
+      "week8": [
+        "2026-02-16",
+        "2026-02-17",
+        "2026-02-18",
+        "2026-02-19",
+        "2026-02-20",
+        "2026-02-21"
+      ],
+      "week9": []
+    },
+    "required_trailing_two_week_window": {
+      "pull_date": "2026-03-03",
+      "required_week8_start": "2026-02-15",
+      "required_week8_end": "2026-02-21",
+      "required_week9_start": "2026-02-22",
+      "required_week9_end": "2026-02-28",
+      "missing_dates": [
+        "2026-02-16",
+        "2026-02-17",
+        "2026-02-18",
+        "2026-02-19",
+        "2026-02-20",
+        "2026-02-21"
+      ],
+      "range_covered": false
+    }
+  },
+  "outputs": {
+    "markdown": "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_answer_pack_wk9_tonight_provisional.md",
+    "metrics": "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_metrics_wk9_tonight_provisional.json",
+    "math_validation": "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_math_validation_wk9_tonight_provisional.json",
+    "quality_validation": "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_quality_validation_wk9_tonight_provisional.json"
+  },
+  "run_summary_path": "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_pipeline_run_wk9_tonight_provisional.json",
+  "generated_at_utc": "2026-03-06T13:45:56+00:00"
+}

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HR Workload Lens &mdash; Week 10 Insights</title>
+  <style>
+    :root {--ink:#1a1f2b;--body:#3a3f4c;--muted:#717888;--border:#e2e6ee;--panel:#ffffff;--bg:#f7f8fb;--blue:#0d5f73;--blue-soft:#e4f3f7;--blue-mid:#b0dce8;--green:#14643a;--green-bg:#e6f4ea;--red:#9b2c2c;--red-bg:#fdf0f0;--warn:#7a3e00;--warn-bg:#fff7ed;--purple:#5b21b6;--purple-bg:#f3edff;--shadow:0 4px 20px rgba(20,30,50,0.06);}
+    *{box-sizing:border-box;margin:0;}
+    body{font-family:Aptos,"Segoe UI",Calibri,sans-serif;color:var(--body);background:var(--bg);line-height:1.68;font-size:15.5px;}
+    .wrap{max-width:860px;margin:0 auto;padding:40px 28px 64px;}
+    .header{background:var(--ink);color:#fff;padding:36px 36px 28px;border-radius:16px;margin-bottom:36px;}
+    .header .kicker{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-mid);font-weight:700;margin-bottom:8px;}
+    .header h1{font-size:30px;font-weight:700;line-height:1.15;margin-bottom:6px;}
+    .header .subtitle{font-size:15px;color:#a8b0c0;line-height:1.5;max-width:700px;}
+    .header .meta{margin-top:16px;font-size:12px;color:#8090a8;border-top:1px solid #334;padding-top:12px;}
+    .summary-box{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:28px 30px;margin-bottom:32px;box-shadow:var(--shadow);}
+    .summary-box h2{font-size:17px;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;font-weight:700;}
+    .summary-box p{font-size:15.5px;color:var(--body);line-height:1.72;margin:0 0 12px;}
+    .summary-box p:last-child{margin-bottom:0;}
+    .toc{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px 24px;margin-bottom:32px;box-shadow:var(--shadow);}
+    .toc h2{font-size:17px;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;font-weight:700;}
+    .toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 22px;}
+    .toc a{color:var(--ink);text-decoration:none;font-size:14px;}
+    .toc a:hover{color:var(--blue);text-decoration:underline;}
+    .kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:36px;}
+    .kpi{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 14px;text-align:center;box-shadow:var(--shadow);}
+    .kpi .label{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px;}
+    .kpi .value{font-size:28px;font-weight:700;color:var(--ink);}
+    .kpi .note{font-size:12.5px;color:var(--muted);margin-top:4px;}
+    h2.section{font-size:22px;color:var(--ink);margin:44px 0 6px;font-weight:700;}
+    .section-sub{font-size:13.5px;color:var(--muted);margin-bottom:18px;}
+    h3{font-size:17px;color:var(--ink);margin:28px 0 8px;font-weight:700;}
+    p{margin:0 0 14px;}
+    strong{color:var(--ink);}
+    .focus{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:28px 28px 24px;margin:20px 0;box-shadow:var(--shadow);position:relative;overflow:hidden;}
+    .focus::before{content:'';position:absolute;top:0;left:0;width:5px;height:100%;border-radius:14px 0 0 14px;}
+    .focus.blue::before{background:var(--blue);}
+    .focus.green::before{background:var(--green);}
+    .focus.warn::before{background:var(--warn);}
+    .focus .focus-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;flex-wrap:wrap;gap:6px;}
+    .focus .focus-header h3{margin:0;font-size:18px;}
+    .focus .focus-tag{font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;padding:3px 10px;border-radius:6px;white-space:nowrap;}
+    .focus .focus-tag.ops{background:var(--blue-soft);color:var(--blue);}
+    .focus .focus-tag.def{background:var(--red-bg);color:var(--red);}
+    .focus .focus-tag.pr{background:var(--warn-bg);color:var(--warn);}
+    .insight-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;}
+    .insight-stat{background:var(--bg);border-radius:10px;padding:14px 16px;text-align:center;}
+    .insight-stat .big{font-size:26px;font-weight:700;color:var(--ink);}
+    .insight-stat .desc{font-size:12px;color:var(--muted);margin-top:2px;}
+    .rec{border-left:4px solid var(--green);background:var(--green-bg);padding:16px 20px;border-radius:0 10px 10px 0;margin:16px 0 8px;}
+    .rec p{margin:0 0 6px;} .rec p:last-child{margin:0;} .rec strong{color:var(--green);}
+    table{width:100%;border-collapse:collapse;margin:16px 0 18px;font-size:13.5px;}
+    th,td{padding:8px 10px;border-bottom:1px solid var(--border);text-align:left;}
+    th{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:2px solid var(--border);}
+    td.r{text-align:right;font-variant-numeric:tabular-nums;}
+    tr.total{font-weight:700;} tr.total td{border-top:2px solid var(--ink);}
+    .down{color:var(--green);} .up{color:var(--red);}
+    .callout{background:var(--purple-bg);border-left:4px solid var(--purple);padding:18px 22px;border-radius:0 10px 10px 0;margin:20px 0;}
+    .callout p:last-child{margin:0;}
+    hr{border:none;border-top:1px solid var(--border);margin:36px 0;}
+    .footer{margin-top:48px;padding-top:16px;border-top:2px solid var(--ink);font-size:11.5px;color:var(--muted);text-align:center;}
+    @media print{body{background:#fff;font-size:11pt;} .wrap{max-width:100%;padding:0;} .header{border-radius:0;}}
+    @media(max-width:700px){.wrap{padding:20px 14px 40px;} .kpi-strip{grid-template-columns:1fr 1fr;} .insight-row{grid-template-columns:1fr;} .header h1{font-size:24px;}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <div class="kicker">ORBIT Program &bull; HR Workload Lens</div>
+    <h1>Week 10 Insights</h1>
+    <div class="subtitle">What changed versus Week 9, what is structurally driving the queue, and where leadership action should focus first.</div>
+    <div class="meta">
+      Prepared for HR Operations Leadership &nbsp;|&nbsp; March 11, 2026<br>
+      Reporting week: Week 10 (Mar 01 – Mar 07, 2026) &nbsp;|&nbsp; WoW reference: Week 9 (Feb 22 – Feb 28, 2026)<br>
+      Scope: Attendance Inquiry &bull; CC Time and Attendance &bull; FC General Inquiry &bull; Timesheet Inquiry
+    </div>
+  </div>
+
+  <div class="summary-box">
+    <h2>Focused Summary</h2>
+    <p><strong>Scope note:</strong> this report analyzes 4 services and explains 26.1% of total Week 10 ticket volume (1,962 of 7,514). It is a meaningful slice of the work, but not the full enterprise picture.</p>
+    <p><strong>Data reviewed:</strong> we looked at 4,175 ticket records across Weeks 9 and 10 and 67,543 UKG timecard touches as operational context, focusing on 4 of the top 5 HR service drivers by volume. LOAA remains intentionally out of scope at this stage.</p>
+    <p><strong>OBR Question 1 | What is causing the week-to-week variance?</strong> Week 10 closed at 1,962 tickets across four HR services, down 251 (-11.3%) from Week 9. The drop was led by Attendance Inquiry (906, down 147) and FC General Inquiry (316, down 95), while CC Time and Attendance remained essentially flat at 645. FC General Inquiry is explainable in validated data, led by lower Onboarding/I9 processing and fewer Smartsheet notifications. Attendance Inquiry is down as well, but validated process-required and defect categories explain only 33 of that decline, so we should not treat the full improvement as a confirmed behavior shift yet.</p>
+    <p><strong>OBR Question 2 | What specific types of issues are driving variability?</strong> The validated variance is coming primarily from movement inside process-required and defect categories, not from NICE-to-UKG sync work, which stayed nearly flat at 617 this week versus 609 last week. The largest decreases were Onboarding/I9 processing (-31), Time-off reimbursement/correction needed (-24), Smartsheet automated notification (-21), VET management (-12). The main increases were NCNS documentation (+9), WFM/NICE-UKG sync request (Real Time Analyst) (+8), TM reporting time/coding error (+8).</p>
+    <p><strong>OBR Question 3 | What actions can stabilize the trend?</strong> AI insight and recommendation: fix the NICE-to-UKG handoff, retire Smartsheet notifications, remediate the time-off reimbursement/correction needed defect, and focus queue cleanup first on the five assignment groups generating 53.0% of Week 10 volume. The goal is fewer tickets of the right kind: less recurring operational rework, fewer defect-driven corrections, and a cleaner remaining queue that reflects legitimate HR work. For Attendance Inquiry, complete validation of the remaining mix before treating this week&rsquo;s drop as durable improvement or baking it into the narrative.</p>
+    <p><strong>Model note:</strong> self-service candidate metrics are intentionally withheld this week while model training and validation are completed. They will be added next week once the output has been reviewed.</p>
+  </div>
+
+  <div class="toc">
+    <h2>Table of Contents</h2>
+    <div class="toc-grid">
+      <a href="#classification-breakdown">What We Found: The Classification Breakdown</a>
+      <a href="#service-mix">Week 10 Service Mix</a>
+      <a href="#focus-1">Focus Area 1: NICE &amp; UKG Sync Work</a>
+      <a href="#focus-2">Focus Area 2: Legitimate HR Process Volume</a>
+      <a href="#focus-3">Focus Area 3: Defect Concentration</a>
+      <a href="#focus-4">Focus Area 4: Where Volume Is Concentrated</a>
+      <a href="#bigger-picture">The Bigger Picture: What Tickets Don&rsquo;t Show</a>
+      <a href="#combined-impact">Combined Impact: What This Gets Us</a>
+      <a href="#bottom-line">The Bottom Line</a>
+    </div>
+  </div>
+
+  <div class="kpi-strip">
+    <div class="kpi"><div class="label">Week 10 Ticket Volume</div><div class="value">1,962</div><div class="note">Mar 01 – Mar 07</div></div>
+    <div class="kpi"><div class="label">WoW Volume Change</div><div class="value" style="color:var(--green)">-251 (-11.3%)</div><div class="note">2,213 &rarr; 1,962</div></div>
+    <div class="kpi"><div class="label">Largest Service</div><div class="value">906</div><div class="note">Attendance Inquiry (46.2%)</div></div>
+    <div class="kpi"><div class="label">WFM Sync Load</div><div class="value">617</div><div class="note">31.4% of Week 10</div></div>
+  </div>
+
+  <h2 class="section" id="classification-breakdown">What We Found: The Classification Breakdown</h2>
+  <p class="section-sub">This table reports Week 10 only. Week 9 is shown only for change context. Self-service metrics are intentionally withheld until model validation is complete.</p>
+
+  <table>
+    <thead><tr><th>Classification</th><th>Week 10 Tickets</th><th>% of Week 10</th><th>Week 9</th><th>WoW Change</th></tr></thead>
+    <tbody><tr><td>Process Optimization</td><td class="r">617</td><td class="r">31.4%</td><td class="r">609</td><td class="r up">+8 (+1.3%)</td></tr><tr><td>Process Required</td><td class="r">617</td><td class="r">31.4%</td><td class="r">714</td><td class="r down">-97 (-13.6%)</td></tr><tr><td>Defect</td><td class="r">75</td><td class="r">3.8%</td><td class="r">95</td><td class="r down">-20 (-21.1%)</td></tr><tr><td>Unclear</td><td class="r">2</td><td class="r">0.1%</td><td class="r">2</td><td class="r ">+0 (+0.0%)</td></tr><tr><td>Self-service candidate model</td><td colspan="4">Training and validation are in progress. Metrics are intentionally withheld this week and will be published starting next week.</td></tr><tr class="total"><td>Total Week 10 Volume</td><td class="r">1,962</td><td class="r">100.0%</td><td class="r">2,213</td><td class="r down">-251 (-11.3%)</td></tr></tbody>
+  </table>
+
+  <div class="callout">
+    <p><strong>Model status:</strong> the self-service candidate model is still in training and validation. It will be added back to this section next week after the output has been reviewed and signed off.</p>
+  </div>
+
+  <h2 class="section" id="service-mix">Week 10 Service Mix</h2>
+  <p class="section-sub">Attendance Inquiry still represented nearly half of total volume, while CC Time and Attendance held flat week over week.</p>
+
+  <table>
+    <thead><tr><th>HR Service</th><th>Week 10 Tickets</th><th>% of Week 10</th><th>Week 9</th><th>WoW Change</th></tr></thead>
+    <tbody><tr><td>Attendance Inquiry</td><td class="r">906</td><td class="r">46.2%</td><td class="r">1,053</td><td class="r down">-147 (-14.0%)</td></tr><tr><td>CC Time and Attendance</td><td class="r">645</td><td class="r">32.9%</td><td class="r">643</td><td class="r up">+2 (+0.3%)</td></tr><tr><td>FC General Inquiry</td><td class="r">316</td><td class="r">16.1%</td><td class="r">411</td><td class="r down">-95 (-23.1%)</td></tr><tr><td>Timesheet Inquiry</td><td class="r">95</td><td class="r">4.8%</td><td class="r">106</td><td class="r down">-11 (-10.4%)</td></tr><tr class="total"><td>Total</td><td class="r">1,962</td><td class="r">100.0%</td><td class="r">2,213</td><td class="r down">-251 (-11.3%)</td></tr></tbody>
+  </table>
+
+  <hr>
+
+  <h2 class="section" id="focus-1">Focus Area 1: NICE &harr; UKG Sync Work</h2>
+  <p class="section-sub">A large share of Week 10 volume is operational rework created by system handoff gaps.</p>
+
+  <div class="focus blue">
+    <div class="focus-header">
+      <h3>WFM-to-HRSS Sync Requests Remain a Structural Load</h3>
+      <span class="focus-tag ops">Validated</span>
+    </div>
+    <div class="insight-row">
+      <div class="insight-stat"><div class="big">617</div><div class="desc">Week 10 sync tickets<br>(31.4% of all Week 10 volume)</div></div>
+      <div class="insight-stat"><div class="big">+8</div><div class="desc">WoW change vs Week 9<br>609 to 617</div></div>
+    </div>
+    <p>These tickets are generated by the Real Time Analyst workflow when NICE and UKG do not align and HRSS must manually update the record. This is not normal employee demand. It is recurring operational rework created by a system handoff gap.</p>
+    <div class="rec">
+      <p><strong>Recommendation:</strong> treat NICE-to-UKG sync as a system stabilization priority, not an HRSS productivity issue.</p>
+      <p><strong>Expected impact:</strong> resolving this handoff would remove roughly 617 tickets per week from the queue at the current run rate.</p>
+    </div>
+  </div>
+
+  <hr>
+
+  <h2 class="section" id="focus-2">Focus Area 2: Legitimate HR Process Volume</h2>
+  <p class="section-sub">A material share of Week 10 demand genuinely requires HR intervention and should not be treated as avoidable noise.</p>
+
+  <div class="focus warn">
+    <div class="focus-header">
+      <h3>Smartsheet and Required Process Work Are Still Material Drivers</h3>
+      <span class="focus-tag pr">Validated</span>
+    </div>
+    <div class="insight-row">
+      <div class="insight-stat"><div class="big">617</div><div class="desc">Week 10 process-required tickets<br>(31.4% of total volume)</div></div>
+      <div class="insight-stat"><div class="big">216</div><div class="desc">Smartsheet-driven tickets in Week 10<br>(35.0% of process-required volume)</div></div>
+    </div>
+    <table>
+      <thead><tr><th>Process-Required Category</th><th>Week 10 Tickets</th><th>% of PR</th><th>Week 9</th><th>WoW Change</th></tr></thead>
+      <tbody><tr><td>Smartsheet automated notification</td><td class="r">216</td><td class="r">35.0%</td><td class="r">237</td><td class="r down">-21 (-8.9%)</td></tr><tr><td>FMLA/LOA administration</td><td class="r">109</td><td class="r">17.7%</td><td class="r">127</td><td class="r down">-18 (-14.2%)</td></tr><tr><td>IT incident resolution coding</td><td class="r">84</td><td class="r">13.6%</td><td class="r">86</td><td class="r down">-2 (-2.3%)</td></tr><tr><td>NCNS documentation</td><td class="r">45</td><td class="r">7.3%</td><td class="r">36</td><td class="r up">+9 (+25.0%)</td></tr><tr><td>Onboarding/I9 processing</td><td class="r">44</td><td class="r">7.1%</td><td class="r">75</td><td class="r down">-31 (-41.3%)</td></tr><tr><td>VET management</td><td class="r">43</td><td class="r">7.0%</td><td class="r">55</td><td class="r down">-12 (-21.8%)</td></tr><tr><td>Manager submitted timecard adjustment</td><td class="r">16</td><td class="r">2.6%</td><td class="r">9</td><td class="r up">+7 (+77.8%)</td></tr><tr><td>Return to work processing</td><td class="r">15</td><td class="r">2.4%</td><td class="r">23</td><td class="r down">-8 (-34.8%)</td></tr><tr><td>All other process-required</td><td class="r">45</td><td class="r">7.3%</td><td class="r">66</td><td class="r down">-21 (-31.8%)</td></tr><tr class="total"><td>Total Process Required</td><td class="r">617</td><td class="r">100.0%</td><td class="r">714</td><td class="r"></td></tr></tbody>
+    </table>
+    <p>Required HR work remains a large part of the queue, but some of it is more stabilizable than it looks. Smartsheet-driven notifications alone accounted for 216 tickets this week, and site-level examples such as fewer AVP4 Smartsheet triggers show how local process design can materially move volume.</p>
+    <div class="rec">
+      <p><strong>Recommendation:</strong> continue Smartsheet retirement and clean up local trigger-based workflows before treating week-to-week improvement as a pure demand story.</p>
+      <p><strong>Expected impact:</strong> removing or redesigning these triggers lowers volume without reducing service quality and leaves a cleaner queue made up of the right kinds of HR work.</p>
+    </div>
+  </div>
+
+  <hr>
+
+  <h2 class="section" id="focus-3">Focus Area 3: Defect Concentration</h2>
+  <p class="section-sub">The largest defect is concentrated enough to justify a direct fix rather than ongoing manual handling.</p>
+
+  <div class="focus green">
+    <div class="focus-header">
+      <h3>Time-off reimbursement/correction needed</h3>
+      <span class="focus-tag def">Validated</span>
+    </div>
+    <div class="insight-row">
+      <div class="insight-stat"><div class="big">43</div><div class="desc">Week 10 tickets<br>(57.3% of all defects)</div></div>
+      <div class="insight-stat"><div class="big">75</div><div class="desc">Total defect tickets in Week 10<br>(3.8% of total volume)</div></div>
+    </div>
+    <p>Time-off reimbursement/correction needed remains the dominant confirmed defect in the queue. This should be treated as a fixable system issue, not as normal operating demand.</p>
+    <div class="rec">
+      <p><strong>Recommendation:</strong> assign an owner to audit the coding and reimbursement logic behind this defect and remove the repeat correction work.</p>
+      <p><strong>Expected impact:</strong> sustaining this improvement lowers corrective tickets directly and reduces one of the clearest trust-eroding issues in the current queue.</p>
+    </div>
+  </div>
+
+  <hr>
+
+  <h2 class="section" id="focus-4">Focus Area 4: Where Volume Is Concentrated</h2>
+  <p class="section-sub">Just a handful of assignment groups account for most of the Week 10 queue.</p>
+
+  <div class="focus warn">
+    <div class="focus-header">
+      <h3>Top 5 Assignment Groups = 53.0% of Week 10 Volume</h3>
+      <span class="focus-tag pr">Validated</span>
+    </div>
+    <table>
+      <thead><tr><th>Assignment Group</th><th>Week 10 Tickets</th><th>% of Week 10</th><th>Week 9</th><th>WoW Change</th></tr></thead>
+      <tbody><tr><td>Real Time Analyst Tier I</td><td class="r">611</td><td class="r">31.1%</td><td class="r">607</td><td class="r up">+4 (+0.7%)</td></tr><tr><td>SDF2 HR</td><td class="r">116</td><td class="r">5.9%</td><td class="r">141</td><td class="r down">-25 (-17.7%)</td></tr><tr><td>AVP2 HR</td><td class="r">114</td><td class="r">5.8%</td><td class="r">148</td><td class="r down">-34 (-23.0%)</td></tr><tr><td>HR Team Member Service Center</td><td class="r">100</td><td class="r">5.1%</td><td class="r">113</td><td class="r down">-13 (-11.5%)</td></tr><tr><td>PHX2 HR</td><td class="r">98</td><td class="r">5.0%</td><td class="r">112</td><td class="r down">-14 (-12.5%)</td></tr><tr class="total"><td>Top 5 Subtotal</td><td class="r">1,039</td><td class="r">53.0%</td><td class="r"></td><td class="r"></td></tr></tbody>
+    </table>
+    <p><strong>53.0% of Week 10 tickets came from just five assignment groups.</strong> That concentration makes piloting changes at a small number of queues materially more effective than broad network-wide messaging.</p>
+    <div class="rec">
+      <p><strong>Recommendation:</strong> target operational fixes and intake cleanup at the highest-volume assignment groups first, starting with Real Time Analyst Tier I and the largest site HR queues.</p>
+      <p><strong>Expected impact:</strong> working the top five queues first gives us coverage across 53.0% of this ticket slice and the fastest signal on which interventions actually reduce demand.</p>
+    </div>
+  </div>
+
+  <hr>
+
+  <h2 class="section" id="bigger-picture">The Bigger Picture: What Tickets Don&rsquo;t Show</h2>
+  <p class="section-sub">Tickets are only the visible layer of the work. The underlying operational load is materially larger.</p>
+
+  <p>This report explains a meaningful slice of visible demand, but not the full workload picture. These 4 services represent 26.1% of total Week 10 ticket volume (1,962 of 7,514), and ticket counts alone do not capture the proactive HR and WFM work happening underneath them.</p>
+
+  <table>
+    <thead><tr><th>Workload Signal</th><th>Weekly Volume</th><th>Implication</th></tr></thead>
+    <tbody>
+      <tr><td>Tickets in this report</td><td class="r">1,962</td><td>This is the visible slice we are explaining here</td></tr>
+      <tr><td>Total Week 10 ticket volume</td><td class="r">7,514</td><td>Our current scope covers about 26.1% of the full enterprise queue</td></tr>
+      <tr><td>UKG actions per week</td><td class="r">67,543</td><td>Underlying operational activity is far larger than ticket counts alone suggest</td></tr>
+      <tr><td>UKG rework actions per week</td><td class="r">22,885</td><td>Ticket volume maps to only 8.6% of known rework activity</td></tr>
+      <tr><td>Estimated FTE hours per week</td><td class="r">761</td><td>Workload remains meaningful even when tickets improve WoW</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <p><strong>Model direction:</strong> this model will increasingly look across both ticket signals and operational workload signals so future readouts explain not only what changed in tickets, but what changed in the actual work underneath them.</p>
+  </div>
+
+  <hr>
+
+  <h2 class="section" id="combined-impact">Combined Impact: What This Gets Us</h2>
+
+  <table>
+    <thead><tr><th>Focus Area</th><th>Current Signal</th><th>What Stabilizing It Gets Us</th></tr></thead>
+    <tbody>
+      <tr><td>NICE &harr; UKG handoff</td><td class="r">617 tickets / week</td><td>Less recurring operational rework and a more stable baseline</td></tr>
+      <tr><td>Smartsheet and trigger cleanup</td><td class="r">216 tickets / week</td><td>Fewer auto-generated tickets and less site-specific noise</td></tr>
+      <tr><td>Time-off reimbursement defect</td><td class="r">43 tickets / week</td><td>Fewer corrective contacts and better trust in the system</td></tr>
+      <tr><td>Top 5 assignment groups</td><td class="r">53.0% of this slice</td><td>Faster interventions and clearer signal on what actually works</td></tr>
+      <tr class="total"><td colspan="2"><strong>Combined effect</strong></td><td><strong>Fewer tickets of the right kind: less rework and defect noise, with a remaining queue that is easier to explain and stabilize</strong></td></tr>
+    </tbody>
+  </table>
+
+  <p>That is the immediate value of these four focus areas. The next step is better precision: as model validation continues, we will be able to move from high-level stabilization insights to deeper root-cause guidance and sharper recommendations.</p>
+
+  <hr>
+
+  <h2 class="section" id="bottom-line">The Bottom Line</h2>
+
+  <p>Week 10 improved versus Week 9, but this report shows why stabilization is not just about fewer tickets. It is about fewer tickets of the right kind: less NICE-to-UKG rework, fewer trigger-driven process tickets, fewer defect corrections, and better concentration of intervention where the queue is heaviest. This week&rsquo;s report intentionally stays inside the bounds of what has been validated. Self-service candidate metrics will be added next week once the model review is complete.</p>
+
+  <hr>
+
+  <p style="font-size:13px;color:var(--muted);line-height:1.5;">
+    <strong>Methodology:</strong> Reported week is Week 10 (Mar 01 – Mar 07, 2026) across 4 HR services representing 26.1% of total Week 10 ticket volume (1,962 of 7,514). Week 9 (Feb 22 – Feb 28, 2026) is used only as change context. Classification is rule-based on ticket description and contact type, but self-service candidate metrics are withheld in this version while model training and validation are in progress. Separate UKG workload figures are included as directional operational context. Report generated automatically by the ORBIT Workload Lens pipeline.
+  </p>
+
+  <div class="footer">
+    ORBIT HR Workload Lens &nbsp;|&nbsp; Week 10 Insights &nbsp;|&nbsp; Mar 01 – Mar 07, 2026<br>
+    Generated March 11, 2026 &nbsp;|&nbsp; Pipeline v1.0
+  </div>
+
+</div>
+</body>
+</html>

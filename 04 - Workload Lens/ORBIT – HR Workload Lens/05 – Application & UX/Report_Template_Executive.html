@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ORBIT HR Workload Lens — Executive Briefing Wk9–Wk10</title>
+  <style>
+    :root {
+      --ink: #1a1f2b;
+      --body: #394050;
+      --muted: #6b7385;
+      --border: #dfe3ec;
+      --panel: #ffffff;
+      --accent: #0d5f73;
+      --accent-soft: #e4f3f7;
+      --green: #14643a;
+      --green-bg: #e9f5ea;
+      --red: #9b2c2c;
+      --red-bg: #fee2e2;
+      --warn: #7a3e00;
+      --warn-bg: #fff3e3;
+      --purple: #5b21b6;
+      --purple-bg: #f0e6ff;
+      --shadow: 0 6px 24px rgba(20,30,50,0.07);
+    }
+    * { box-sizing: border-box; margin: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--body);
+      background: #f6f8fb;
+      line-height: 1.72;
+      font-size: 16.5px;
+    }
+    .wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 48px 28px 64px;
+    }
+
+    /* ── Header ── */
+    .header {
+      border-bottom: 3px solid var(--ink);
+      padding-bottom: 20px;
+      margin-bottom: 36px;
+    }
+    .header .kicker {
+      font-family: Aptos, "Segoe UI", Calibri, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .header h1 {
+      font-size: 36px;
+      line-height: 1.15;
+      color: var(--ink);
+      margin: 8px 0 6px;
+    }
+    .header .subtitle {
+      font-size: 19px;
+      color: var(--muted);
+      font-style: italic;
+    }
+    .header .meta {
+      margin-top: 14px;
+      font-family: Aptos, "Segoe UI", Calibri, sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ── Prose ── */
+    h2 {
+      font-size: 26px;
+      color: var(--ink);
+      margin: 44px 0 14px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+    h3 {
+      font-size: 19px;
+      color: var(--ink);
+      margin: 28px 0 8px;
+    }
+    p { margin: 0 0 16px; }
+    strong { color: var(--ink); }
+
+    /* ── Pull quotes / callouts ── */
+    .pullquote {
+      border-left: 4px solid var(--accent);
+      padding: 18px 22px;
+      margin: 24px 0;
+      background: var(--accent-soft);
+      border-radius: 0 12px 12px 0;
+      font-size: 17px;
+      font-style: italic;
+      color: var(--ink);
+    }
+    .pullquote strong { font-style: normal; }
+    .insight {
+      border-left: 4px solid var(--purple);
+      padding: 18px 22px;
+      margin: 24px 0;
+      background: var(--purple-bg);
+      border-radius: 0 12px 12px 0;
+    }
+    .insight strong { color: var(--purple); }
+    .action-box {
+      border-left: 4px solid var(--green);
+      padding: 18px 22px;
+      margin: 24px 0;
+      background: var(--green-bg);
+      border-radius: 0 12px 12px 0;
+    }
+    .caution {
+      border-left: 4px solid var(--warn);
+      padding: 18px 22px;
+      margin: 24px 0;
+      background: var(--warn-bg);
+      border-radius: 0 12px 12px 0;
+    }
+
+    /* ── Compact supporting tables ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 20px;
+      font-family: Aptos, "Segoe UI", Calibri, sans-serif;
+      font-size: 14px;
+    }
+    th, td {
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+    th {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+    td.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+    /* ── KPI strip ── */
+    .kpi-strip {
+      display: flex;
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .kpi {
+      flex: 1;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .kpi .label {
+      font-family: Aptos, "Segoe UI", Calibri, sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+    .kpi .value {
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 6px 0 4px;
+      font-family: Aptos, "Segoe UI", Calibri, sans-serif;
+    }
+    .kpi .note {
+      font-family: Aptos, "Segoe UI", Calibri, sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .down { color: var(--green); }
+    .up { color: var(--red); }
+
+    /* ── Divider ── */
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 36px 0;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 48px;
+      padding-top: 18px;
+      border-top: 2px solid var(--ink);
+      font-family: Aptos, "Segoe UI", Calibri, sans-serif;
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 700px) {
+      .wrap { padding: 28px 16px 40px; }
+      .header h1 { font-size: 28px; }
+      h2 { font-size: 22px; }
+      .kpi-strip { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ═══════════ HEADER ═══════════ -->
+  <header class="header">
+    <div class="kicker">ORBIT Program &bull; HR Workload Lens</div>
+    <h1>Why Ticket Volumes Swing &mdash; and What We Can Do About It</h1>
+    <div class="subtitle">An integrated analysis of ServiceNow ticket demand and UKG operational workload, Weeks 9&ndash;10</div>
+    <div class="meta">Prepared by Kenny Wallace, ORBIT Program Lead &nbsp;|&nbsp; March 10, 2026 &nbsp;|&nbsp; Week 9 (2/22&ndash;2/28) &amp; Week 10 (3/1&ndash;3/7)</div>
+  </header>
+
+  <!-- ═══════════ EXECUTIVE SUMMARY ═══════════ -->
+  <h2>Executive Summary</h2>
+
+  <p>Every week, leadership looks at the HR Operations OBR and asks a version of the same question: <em>Why did ticket volume go up? Why did it go down? What changed?</em> This week, our four tracked services closed at 1,962 tickets &mdash; down 244 from Week 9 &mdash; and the question returned.</p>
+
+  <p>This report answers it definitively by doing something the OBR cannot do today: <strong>integrating the ticket demand signal with UKG timecard audit data</strong> to reveal what is actually happening underneath the numbers. The findings reframe the conversation.</p>
+
+  <div class="kpi-strip">
+    <div class="kpi">
+      <div class="label">Wk10 Tickets</div>
+      <div class="value">1,962</div>
+      <div class="note"><span class="down">&darr; 244 (&minus;11.1%)</span> vs Wk9</div>
+    </div>
+    <div class="kpi">
+      <div class="label">UKG Actions (Wk9)</div>
+      <div class="value">67,543</div>
+      <div class="note">760.9 FTE hours consumed</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Rework Ticketed</div>
+      <div class="value" style="color:var(--red)">8%</div>
+      <div class="note">92% of rework is invisible to SNOW</div>
+    </div>
+  </div>
+
+  <p>The headline: <strong>the 244-ticket decline does not mean HR workload decreased.</strong> UKG data shows the network processed 67,543 timecard actions last week, consuming an estimated 761 FTE hours. That workload is largely stable week to week. What swings is not how much HR does &mdash; it is how often team members pick up the phone. And that distinction matters enormously for how we interpret the OBR and where we invest to stabilize the trend.</p>
+
+  <hr>
+
+  <!-- ═══════════ THE VARIANCE STORY ═══════════ -->
+  <h2>The Variance Story</h2>
+
+  <h3>The decline was not broad-based chaos. It was three specific, identifiable forces.</h3>
+
+  <p><strong>Force 1: Phone volume dropped.</strong> This is the single biggest factor. Attendance Inquiry fell 147 tickets, and 110 of those &mdash; 75% &mdash; came from fewer phone calls. Not fewer emails, not fewer self-service submissions, not fewer automated tickets. Phone calls. The Smartsheet automation that generates ~205 Attendance Inquiry tickets per week held at exactly 205 both weeks. The variance lived entirely in the manual, human-initiated channel.</p>
+
+  <p>Why does phone volume swing? Because team members call in absences ad hoc. A bad weather day drives calls up. A quiet week drives them down. There is no centralized intake process governing when or how TMs report attendance events by phone, so the volume is inherently unpredictable. This single channel &mdash; phone calls to report absences and ask about UTO balances &mdash; accounts for <strong>45% of the total 244-ticket WoW decline</strong>.</p>
+
+  <p><strong>Force 2: Seasonal compliance artifacts tapered.</strong> FC General Inquiry dropped 95 tickets. The two largest movers were I-9/Compliance documents (down 56) and PTO inquiries (down 25). The I-9 decline is straightforward: Kentucky pharmacy license renewals at SDF2 are a predictable February/March seasonal event. SDF2's compliance document volume went from 60 to 41 as renewal season winds down. This happens every year. The PTO decline reflects normalization after MCO1 experienced an anomalous all-PTO spike in Week 9 that partially resolved. Neither of these is a signal of process improvement or deterioration &mdash; they are calendar-driven artifacts.</p>
+
+  <p><strong>Force 3: A weather event normalized.</strong> AVP2 in the Lehigh Valley experienced a winter storm in Week 8 that pushed Attendance Inquiry volume to 148. By Week 10, AVP2 had settled to 114 &mdash; still elevated, but receding. Weather events create 1&ndash;2 week volume waves that crest and then return to baseline. This is expected behavior.</p>
+
+  <div class="pullquote">
+    <strong>The critical insight:</strong> Automation-generated tickets are remarkably stable at 216 per week. The entire 244-ticket swing came from human-initiated demand &mdash; primarily phone calls. If the OBR separated automation from manual volume, the week-to-week variance would become immediately explainable without ad hoc analysis.
+  </div>
+
+  <hr>
+
+  <!-- ═══════════ WHAT ISSUES DRIVE VARIABILITY ═══════════ -->
+  <h2>The Issues That Drive Variability</h2>
+
+  <p>When we classify every ticket by its root issue type and then look at the same issue in UKG data, a clear pattern emerges. Five issue types account for more than 80% of all ticket volume and virtually all of the week-to-week variance. Each one tells a different story about why HR demand fluctuates.</p>
+
+  <h3>1. UTO Balance Confusion &mdash; The Structural Floor</h3>
+
+  <p>UTO-related inquiries are the single largest demand driver in the entire ticket queue. In Attendance Inquiry, the "UTO Balance / Negative UTO" sub-category accounted for 700 tickets in Week 9 and 648 in Week 10 &mdash; roughly <strong>two-thirds of the entire Attendance Inquiry queue</strong>. Over in CC Time &amp; Attendance, the "UTO / Time-Off Coding" category was the only one that <em>grew</em> week to week, rising from 174 to 205.</p>
+
+  <p>Combined across channels, UTO-related tickets represent approximately 850 per week. This is not a spike. It is a <strong>structural baseline</strong>. Team members do not understand their UTO balances, and they contact HR to ask.</p>
+
+  <div class="insight">
+    <strong>UKG corroboration:</strong> The timecard audit data shows 4,869 manual UTO deduction actions per week across FC, CC, and Rx. Every one of those manual coding events is an opportunity for a TM to see an unexpected balance change and pick up the phone. The ticket volume and the UKG coding volume are <em>linked</em> &mdash; reduce the manual coding, and you reduce the inquiries.
+  </div>
+
+  <h3>2. Attendance Enforcement &mdash; The Manual Machine</h3>
+
+  <p>Late arrivals, early departures, call-offs, and NCNS generate approximately 390&ndash;440 tickets per week across Attendance Inquiry. But the ticket number dramatically understates the actual work. UKG data shows that in FC alone, Local HR coded <strong>4,733 late arrivals and 3,710 early departures</strong> in a single week &mdash; all manually. Add call-offs and NCNS, and attendance enforcement represents over 10,000 manual actions per week that generate fewer than 100 tickets.</p>
+
+  <p>The ticket variance in this category is driven by weather and seasonal patterns. A storm hits and call-offs spike for two weeks. A holiday approaches and early departures rise. These are event-driven waves, not trend changes. But underneath the waves, the manual attendance coding workload is constant and enormous.</p>
+
+  <h3>3. Missed Punches &mdash; The Invisible Giant</h3>
+
+  <p>Approximately 260 tickets per week relate to missed punch or clock issues, mostly in CC Time &amp; Attendance. This category is stable &mdash; it barely moved WoW. But it has the most striking ticket-to-UKG ratio of any issue type.</p>
+
+  <p>UKG data shows <strong>32,693 manual punch corrections per week across the network</strong>. That is one punch correction for every 126 tickets about punches. Punch corrections are the single largest action type in the entire UKG dataset &mdash; nearly half of all FC work &mdash; yet they generate almost no ticket demand. This is the definition of dark work: operational effort that consumes hundreds of FTE hours per week with zero OBR visibility.</p>
+
+  <h3>4. I-9 / Compliance Documents &mdash; The Seasonal Noise</h3>
+
+  <p>I-9 and compliance document submissions account for 55&ndash;111 tickets per week depending on season. These are not inquiries at all &mdash; they are document uploads routed into FC General Inquiry by email. SDF2 pharmacy license renewals peak in February and taper in March. AVP2 processes I-9 uploads through a local HR inbox that auto-creates SNOW tickets. This category is the largest source of predictable, <em>artificial</em> variance in FC General Inquiry. Reclassifying these into a dedicated SNOW service would remove the noise.</p>
+
+  <h3>5. IT / System Issues &mdash; The External Factor</h3>
+
+  <p>CC Time &amp; Attendance saw 167 IT/system issue tickets in Week 9 and 138 in Week 10 &mdash; a 29-ticket decline that offset the UTO coding increase. IT outages are episodic and outside HR's control, but they cascade into timekeeping compliance issues. When systems go down, punches get missed, and the downstream rework lands on WFM and HRSS. The UKG data confirms this: CC's WFM team processed 14,254 timecard actions in Week 9, and IT disruptions are a known catalyst for punch correction spikes.</p>
+
+  <div class="pullquote">
+    <strong>The pattern:</strong> UTO confusion creates the high baseline. Phone call fluctuations and seasonal events create the waves on top of it. Missed punches and attendance enforcement create the massive dark-work iceberg underneath. The tickets we see are surface foam &mdash; the ocean is in UKG.
+  </div>
+
+  <hr>
+
+  <!-- ═══════════ THE DARK WORK BRIDGE ═══════════ -->
+  <h2>The Iceberg: What Tickets Don't Show</h2>
+
+  <p>This is perhaps the most important section of this report, because it reframes the entire OBR conversation.</p>
+
+  <p>When leadership asks "why did ticket volume change by 244 this week?" they are asking about the <strong>2.9% of HR operational work that team members happen to create a ServiceNow ticket for</strong>. The other 97.1% &mdash; 67,543 timecard actions, 22,885 corrections, 761 FTE hours of manual effort &mdash; happens invisibly.</p>
+
+  <p>Consider the ratios:</p>
+
+  <table>
+    <thead><tr><th>Issue Type</th><th>Tickets / Week</th><th>UKG Actions / Week</th><th>Ratio</th></tr></thead>
+    <tbody>
+      <tr><td>Punch / Clock Issues</td><td class="num">~260</td><td class="num">32,693</td><td class="num"><strong>1 : 126</strong></td></tr>
+      <tr><td>Late / Early / Attendance</td><td class="num">~70</td><td class="num">8,517</td><td class="num"><strong>1 : 122</strong></td></tr>
+      <tr><td>Leave of Absence</td><td class="num">~60</td><td class="num">2,573</td><td class="num"><strong>1 : 43</strong></td></tr>
+      <tr><td>UTO / Time-Off</td><td class="num">~850</td><td class="num">4,869</td><td class="num"><strong>1 : 6</strong></td></tr>
+    </tbody>
+  </table>
+
+  <p>UTO has the tightest ratio (1:6) because it directly affects TM pay and balances &mdash; people notice and complain. Punch corrections have the loosest ratio (1:126) because HR fixes them proactively before the TM ever knows there was a problem. <strong>The issues that generate the most HR work are the issues that generate the fewest tickets.</strong></p>
+
+  <p>This means the -244 ticket decline is a demand-side fluctuation &mdash; fewer TMs called in &mdash; not a supply-side change. HR processed roughly the same volume of corrections, edits, and manual entries as the week before. The workload didn't change. The ticket count did.</p>
+
+  <div class="insight">
+    <strong>The implication for the OBR:</strong> If we add a single UKG-derived metric to the weekly report &mdash; <em>Ticketed Rework Coverage %</em> (currently 8%) &mdash; leadership would immediately see that ticket swings represent movement in the visible 8%, not changes in the full workload. This one metric would reduce the "explain the variance" cycle to a footnote.
+  </div>
+
+  <hr>
+
+  <!-- ═══════════ SITE STORY ═══════════ -->
+  <h2>Where the Variance Lives: The Site Story</h2>
+
+  <p>The ticket decline was not evenly distributed. Five sites accounted for nearly all of it, and each has a distinct explanation:</p>
+
+  <p><strong>AVP1 (&minus;55 tickets)</strong> had the largest single-site decline. The drop was broad-based across Attendance and FC General Inquiry, consistent with a return-to-normal after an elevated prior week. UKG shows AVP1 processes roughly 3,400 timecard actions per week &mdash; the ticket decline does not reflect less work at the site.</p>
+
+  <p><strong>AVP4 (&minus;48)</strong> is largely explained by the Smartsheet swag automation dropping from 29 to 6 tickets. Remove the automation artifact, and AVP4's decline is a modest &minus;19 &mdash; unremarkable.</p>
+
+  <p><strong>AVP2 (&minus;34)</strong> continues to normalize from the Lehigh Valley winter storm. Still the #2 site by volume after centralized teams.</p>
+
+  <p><strong>SDF2 (&minus;25)</strong> reflects the pharmacy license renewal taper. Expect continued decline through mid-March.</p>
+
+  <p><strong>PHX1 (&minus;27)</strong> saw an Attendance Inquiry decline consistent with the network-wide phone volume drop. No site-specific cause identified.</p>
+
+  <p>On the other side, <strong>DAY1 (+15)</strong> posted the largest site-level increase. This is notable because EPA's Attendance Management data also shows DAY1 at 44 automated NCNS/UTO-negative-balance notifications &mdash; one of the highest Attendance Management volumes in the network. DAY1 warrants a site-level review this week to determine if an attendance trend is emerging.</p>
+
+  <hr>
+
+  <!-- ═══════════ THE MONDAY EFFECT ═══════════ -->
+  <h2>The Monday Effect</h2>
+
+  <p>One temporal pattern cuts across every service and every week: <strong>Monday is the peak day</strong>. Week 9 Monday generated 441 tickets; Week 10 Monday generated 362. The 79-ticket Monday-to-Monday gap is the single largest day-level variance contributor in the dataset.</p>
+
+  <p>Monday is when team members report weekend absences, check UTO balances after seeing unexpected deductions, and local HR processes the weekend backlog. The volume ramps from Sunday (~210), peaks Monday (~400), settles to a plateau Tuesday through Friday (~270&ndash;350), and drops Saturday (~200). This shape is identical both weeks &mdash; only the amplitude changed.</p>
+
+  <p>Any initiative to stabilize the weekly trend line should target Monday demand specifically. A Monday-morning UTO balance notification pushed through the UKG TM app &mdash; preempting the "what's my balance?" call &mdash; could shave 40&ndash;60 tickets off the Monday peak alone.</p>
+
+  <hr>
+
+  <!-- ═══════════ WHAT WE SHOULD DO ═══════════ -->
+  <h2>Recommendations: How to Stabilize the Trend</h2>
+
+  <p>The analysis points to four actions, ordered by expected impact. The first costs nothing. The last three require partnership but have substantial upside.</p>
+
+  <h3>1. Change how we report &mdash; separate automation from manual, and add UKG context</h3>
+
+  <p>This is the single highest-value, lowest-cost action available. The current OBR blends 216 automation tickets into the total, making every week look more volatile than it is. If we split the volume table into automation (stable) and manual (variable), the WoW change immediately makes sense without analysis. Adding the Ticketed Rework Coverage metric (8%) gives leadership a frame for how much of the real workload the ticket number actually represents.</p>
+
+  <div class="action-box">
+    <strong>Action:</strong> Propose a three-line change to the OBR format: (a) automation vs. manual split in the volume row, (b) contact type breakdown for Attendance Inquiry (phone / email / self-service), (c) Ticketed Rework Coverage % as a contextual metric. <strong>Owner:</strong> ORBIT + EPA. <strong>Timeline:</strong> Next OBR cycle.
+  </div>
+
+  <h3>2. Attack the UTO baseline with self-service</h3>
+
+  <p>UTO confusion generates ~850 tickets per week and 4,869 manual UKG coding actions. This is the structural floor underneath the variance &mdash; a high baseline from which any spike looks alarming. The reason TMs call is that they cannot see their own UTO balance in real time. A UKG TM app feature showing current PTO/UTO balances would directly deflect a meaningful share of these inquiries.</p>
+
+  <p>A conservative 20% reduction would remove ~180 tickets per week from the baseline. That changes the math: the same &plusmn;100/week variance that currently represents a ~5% swing would represent ~10% of a lower baseline &mdash; still visible, but no longer triggering executive concern. More importantly, it would reduce the 4,869 manual UTO coding actions, returning capacity to local HR and WFM.</p>
+
+  <div class="action-box">
+    <strong>Action:</strong> Evaluate UKG TM app PTO/UTO balance visibility as a near-term self-service initiative. Pilot at 2&ndash;3 high-UTO sites (PHX2, AVP1, SDF2). <strong>Owner:</strong> ORBIT + UKG Platform. <strong>Timeline:</strong> 30&ndash;60 days.
+  </div>
+
+  <h3>3. Centralize the call-off intake channel</h3>
+
+  <p>Phone volume is the #1 variance driver because call-offs arrive through an unstructured, unpredictable channel. A centralized call-off line &mdash; or better, a UKG TM app call-off submission &mdash; would convert ad hoc phone calls into structured, trackable submissions. This doesn't reduce absences; it reduces the <em>variance</em> in how absences are reported, creating a more predictable daily intake pattern.</p>
+
+  <p>Based on the 582&ndash;692 phone range observed across these two weeks, a structured intake could stabilize phone-channel Attendance Inquiry at ~600 &plusmn; 30 per week, reducing variance amplitude by approximately 40%.</p>
+
+  <div class="action-box">
+    <strong>Action:</strong> Scope a centralized call-off intake workflow through UKG self-service. Evaluate feasibility with WFM and site HR leads. <strong>Owner:</strong> ORBIT + HRSS. <strong>Timeline:</strong> 60&ndash;90 days.
+  </div>
+
+  <h3>4. Reclassify process artifacts out of FC General Inquiry</h3>
+
+  <p>I-9 document submissions (~55&ndash;110/week, seasonal) and Smartsheet swag automation (~6&ndash;29/week) are not inquiries. They are process artifacts that inflate FC General Inquiry volume and create artificial seasonal variance. Creating dedicated SNOW service categories ("Compliance Document Submission," "Swag Request") is a configuration change, not a process change, and would immediately clean the FC General Inquiry trend line.</p>
+
+  <div class="action-box">
+    <strong>Action:</strong> Submit SNOW service reclassification request for I-9/Compliance docs and Smartsheet swag automation. <strong>Owner:</strong> ORBIT + SNOW Admin. <strong>Timeline:</strong> 2 weeks.
+  </div>
+
+  <hr>
+
+  <!-- ═══════════ WHAT TO SAY THIS WEEK ═══════════ -->
+  <h2>What to Say This Week</h2>
+
+  <p>If the question is <em>"What is causing the week-to-week variance we are seeing in ticket volumes?"</em> &mdash; here is the answer in three sentences:</p>
+
+  <div class="pullquote">
+    The variance is driven by phone-channel call volume fluctuations (45% of the swing), seasonal compliance artifacts like pharmacy license renewals (32%), and weather-event normalization (23%). Automation-generated tickets are perfectly stable at 216 per week &mdash; the entire variance lives in human-initiated, manual demand. And critically, the ticket queue represents only about 8% of actual HR rework &mdash; UKG data shows 67,500 timecard actions consuming 761 FTE hours per week, largely unchanged regardless of ticket swings.
+  </div>
+
+  <p>If pressed on <em>"What specific types of issues cause the variability?"</em> &mdash;</p>
+
+  <div class="pullquote">
+    Five issue types drive over 80% of volume: UTO balance confusion (~850 tickets/week, structural), attendance enforcement (phone-driven, event-sensitive), missed punches (stable but generates 32,000+ UKG corrections with almost no ticket visibility), I-9/compliance documents (seasonal, should be reclassified), and IT outages (episodic, cascading impact on timekeeping). UTO is the dominant thread &mdash; it appears in every channel, every week, and has the highest ticket-generation rate per UKG action.
+  </div>
+
+  <p>And for <em>"What actions can we take to stabilize our trend?"</em> &mdash;</p>
+
+  <div class="pullquote">
+    Four actions, in priority order: First, change the OBR to separate automation from manual volume and add a UKG rework coverage metric &mdash; this costs nothing and makes variance immediately interpretable. Second, deploy UTO balance self-service through the UKG TM app to reduce the ~850-ticket structural baseline. Third, centralize the call-off intake channel to reduce phone variance by ~40%. Fourth, reclassify I-9 docs and swag automation out of FC General Inquiry to clean the trend line. Combined, these could reduce variance amplitude by 50&ndash;60% and lower baseline volume by 180&ndash;290 tickets per week.
+  </div>
+
+  <hr>
+
+  <!-- ═══════════ OPEN ITEMS ═══════════ -->
+  <h2>Open Items for Next Week</h2>
+
+  <p><strong>DAY1 investigation.</strong> DAY1 showed the largest site-level ticket increase (+15) and has 44 Attendance Management notifications in the EPA data. Site HR lead should review for an emerging attendance trend.</p>
+
+  <p><strong>Attendance Management CSV.</strong> EPA tracks 438 Attendance Management tickets per week (automated NCNS/UTO-negative-balance notifications) that we do not yet have. Requesting this data would add significant upstream context for Attendance Inquiry volume.</p>
+
+  <p><strong>Wk10 UKG data.</strong> This report uses Week 9 UKG data because Snowflake views are pending deployment. Once V_HWL_BASE and V_HWL_HR are deployed, we can run true WoW UKG comparisons and update the dark-work estimates weekly.</p>
+
+  <p><strong>MCO1 PTO concentration.</strong> MCO1 normalized from 19 to 10 FC General Inquiry tickets, but 8 of 10 remain PTO-related. The root cause from the Week 9 anomaly may still be active.</p>
+
+  <hr>
+
+  <!-- ═══════════ METHODOLOGY ═══════════ -->
+  <p style="font-size:13px; color:var(--muted); font-family: Aptos, 'Segoe UI', Calibri, sans-serif; line-height:1.5;">
+    <strong>Methodology &amp; caveats:</strong> Ticket data covers 4 of ~115 EPA HR Service categories (26.1% of EPA's 7,525 Wk10 total). Excludes Leave of Absence and SLA analysis per current scope. Classification is keyword-based, first-match-wins, ~90&ndash;93% accuracy. UKG data is Week 9 (67,543 actions across 51 sites, 4 BUs, excluding self-service/TM/Automation actors). Wk10 UKG pending view deployment. Resolution rate declines are a timing artifact (extract pulled shortly after week-end). Ticket-to-UKG ratios are directional coverage proxies, not 1:1 linkages. EPA OBR total volume increased +864 WoW to 7,525 &mdash; the growth is in services outside our current scope (LOA Status 1,856, Attendance Management 438, FC Timecard Adjustments 245).
+  </p>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <div class="footer">
+    ORBIT HR Workload Lens &mdash; Executive Briefing &nbsp;|&nbsp; Weeks 9&ndash;10 (2026-02-22 to 2026-03-07)<br>
+    Phase I: Snowflake UKG_V_TIMECARD_AUDIT &nbsp;|&nbsp; Phase II: ServiceNow CSV Extract &nbsp;|&nbsp; Version 1.0
+  </div>
+
+</div>
+</body>
+</html>
