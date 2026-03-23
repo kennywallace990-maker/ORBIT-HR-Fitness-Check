@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HR Workload Lens — Variance Analysis, Weeks 9 &amp; 10</title>
+  <style>
+    :root { --ink:#1a1f2b; --body:#333b4a; --muted:#6b7385; --border:#dfe3ec; --accent:#0d5f73; --accent-soft:#e4f3f7; --green:#14643a; --green-bg:#e9f5ea; --red:#9b2c2c; --red-bg:#fee2e2; --warn:#7a3e00; --warn-bg:#fff3e3; --purple:#5b21b6; --purple-bg:#f0e6ff; }
+    * { box-sizing:border-box; margin:0; }
+    body { font-family:Georgia,"Times New Roman",serif; color:var(--body); background:#fff; line-height:1.78; font-size:16px; }
+    .wrap { max-width:780px; margin:0 auto; padding:52px 32px 72px; }
+    .header { text-align:center; padding-bottom:28px; margin-bottom:40px; border-bottom:2px solid var(--ink); }
+    .header .kicker { font-family:Aptos,"Segoe UI",Calibri,sans-serif; font-size:11.5px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); font-weight:700; }
+    .header h1 { font-size:30px; line-height:1.2; color:var(--ink); margin:12px 0 8px; }
+    .header .subtitle { font-size:17px; color:var(--muted); font-style:italic; max-width:620px; margin:0 auto 16px; }
+    .header .meta { font-family:Aptos,"Segoe UI",Calibri,sans-serif; font-size:12.5px; color:var(--muted); }
+    h2 { font-size:23px; color:var(--ink); margin:48px 0 16px; }
+    h3 { font-size:18px; color:var(--ink); margin:32px 0 10px; }
+    p { margin:0 0 16px; }
+    strong { color:var(--ink); }
+    ol, ul { margin:0 0 16px 20px; }
+    li { margin-bottom:6px; }
+    .finding { border-left:4px solid var(--accent); padding:18px 22px; margin:24px 0; background:var(--accent-soft); border-radius:0 10px 10px 0; }
+    .finding-purple { border-left:4px solid var(--purple); padding:18px 22px; margin:24px 0; background:var(--purple-bg); border-radius:0 10px 10px 0; }
+    .finding-green { border-left:4px solid var(--green); padding:18px 22px; margin:24px 0; background:var(--green-bg); border-radius:0 10px 10px 0; }
+    .finding-red { border-left:4px solid var(--red); padding:18px 22px; margin:24px 0; background:var(--red-bg); border-radius:0 10px 10px 0; }
+    .finding-warn { border-left:4px solid var(--warn); padding:18px 22px; margin:24px 0; background:var(--warn-bg); border-radius:0 10px 10px 0; }
+    .finding p:last-child { margin-bottom:0; }
+    table { width:100%; border-collapse:collapse; margin:18px 0 22px; font-family:Aptos,"Segoe UI",Calibri,sans-serif; font-size:13.5px; }
+    th,td { padding:8px 10px; border-bottom:1px solid var(--border); text-align:left; }
+    th { font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); border-bottom:2px solid var(--border); }
+    td.r { text-align:right; font-variant-numeric:tabular-nums; }
+    tr.total { font-weight:700; border-top:2px solid var(--ink); }
+    .down { color:var(--green); } .up { color:var(--red); }
+    hr { border:none; border-top:1px solid var(--border); margin:40px 0; }
+    .footer { margin-top:52px; padding-top:18px; border-top:2px solid var(--ink); font-family:Aptos,"Segoe UI",Calibri,sans-serif; font-size:12px; color:var(--muted); text-align:center; }
+    @media print { body{font-size:11pt;} .wrap{max-width:100%;padding:0;} }
+    @media (max-width:700px) { .wrap{padding:28px 16px 40px;} .header h1{font-size:24px;} }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="header">
+    <div class="kicker">ORBIT Program &bull; HR Workload Lens</div>
+    <h1>Ticket Volume Variance Analysis:<br>Causes, Drivers, and Stabilization Path</h1>
+    <div class="subtitle">A two-week integrated study of ServiceNow ticket demand, self-service classification, and UKG operational workload</div>
+    <div class="meta">
+      Kenny Wallace, ORBIT Program Lead &nbsp;|&nbsp; March 10, 2026<br>
+      Week 9 (Feb 22&ndash;28) &amp; Week 10 (Mar 1&ndash;7) &nbsp;|&nbsp; 4,168 classified tickets &nbsp;|&nbsp; 67,543 UKG actions
+    </div>
+  </header>
+
+  <!-- 1. ABSTRACT -->
+  <h2>1. Abstract</h2>
+
+  <p>This report examines the causes of week-to-week variance in HR ticket volumes by integrating three data sources: ServiceNow ticket records, a ticket-level self-service classification analysis, and UKG timecard audit data. The study covers 4,168 tickets across four HR services for Weeks 9 and 10 of 2026, alongside 67,543 UKG timecard actions from the same period.</p>
+
+  <p>The central findings are as follows. <strong>60.3% of all tickets (2,514 of 4,168) represent inquiries where the team member had a self-service tool available</strong> and could have resolved the issue without HR involvement. Ticket volume declined 11.1% week over week (2,206 to 1,962), but the decline was concentrated entirely in human-initiated demand &mdash; automation-generated tickets were perfectly stable. UKG data reveals that ServiceNow tickets capture only approximately 8% of actual HR rework; the remaining 92% is invisible to the OBR. These findings suggest that the variance leadership observes each week is not a signal of operational instability, but a natural fluctuation in team member self-reporting behavior &mdash; and that the most effective stabilization lever is self-service adoption.</p>
+
+  <hr>
+
+  <!-- 2. INTRODUCTION -->
+  <h2>2. Introduction</h2>
+
+  <p>Each week, the EPA HR Operations Business Review reports ticket volume by HR Service. When volumes shift, leadership asks three questions:</p>
+
+  <ol>
+    <li><em>What is causing the week-to-week variance we are seeing in ticket volumes?</em></li>
+    <li><em>What specific types of issues cause the variability?</em></li>
+    <li><em>Based on findings, what actions can we take to stabilize our trend?</em></li>
+  </ol>
+
+  <p>This report was commissioned to answer those questions with evidence. We examined every ticket opened during Weeks 9 and 10 across four services that represent 26.1% of EPA's total weekly volume (1,962 of 7,514 tickets in Week 10). Each of the 4,168 tickets was individually classified into one of three actionable categories &mdash; Self Service Eligible, Process Required, or Defect &mdash; based on whether the team member had a self-service tool available. This classification was then cross-referenced against UKG timecard audit data to understand the relationship between ticket demand and actual HR operational workload.</p>
+
+  <hr>
+
+  <!-- 3. METHODOLOGY -->
+  <h2>3. Methodology</h2>
+
+  <p><strong>Ticket data.</strong> ServiceNow CSV extracts for Weeks 9 and 10 covering Attendance Inquiry, CC Time &amp; Attendance, FC General Inquiry, and Timesheet Inquiry. Each ticket includes HR Service, ticket number, description, open date, resolution date, assignment group, and contact type.</p>
+
+  <p><strong>Classification.</strong> Every ticket was classified into one of four categories based on its description and contact type:</p>
+
+  <ul>
+    <li><strong>Self Service Eligible</strong> &mdash; the TM had a tool available (UKG app, timeclock, Workday) and could have handled this without HR.</li>
+    <li><strong>Process Required</strong> &mdash; the issue genuinely requires HR involvement (FMLA, NCNS documentation, accommodation processing).</li>
+    <li><strong>Defect</strong> &mdash; the ticket was caused by a system or process error (improper time-off coding, incorrect deductions).</li>
+    <li><strong>Unclear</strong> &mdash; insufficient information to classify (only 2.3% of tickets).</li>
+  </ul>
+
+  <p><strong>UKG data.</strong> Week 9 timecard audit data from Snowflake covering 67,543 HR timecard actions across 51 sites and four business units. Excludes self-service and automation actor groups. This represents the true HR operational workload, independent of ticket demand.</p>
+
+  <p><strong>Validation.</strong> CSV ticket counts were validated against OBR-reported numbers for Week 10: Attendance Inquiry (906), FC General Inquiry (316), and Timesheet Inquiry (95) matched exactly.</p>
+
+  <hr>
+
+  <!-- 4. FINDINGS -->
+  <h2>4. Findings</h2>
+
+  <h3>4.1 &nbsp; Volume Declined, but Not Evenly</h3>
+
+  <p>Total ticket volume declined from 2,206 in Week 9 to 1,962 in Week 10 &mdash; a reduction of 244 tickets (&minus;11.1%). The decline was not evenly distributed.</p>
+
+  <table>
+    <thead><tr><th>HR Service</th><th>Week 9</th><th>Week 10</th><th>WoW Delta</th><th>WoW %</th><th>% of Total</th></tr></thead>
+    <tbody>
+      <tr><td>Attendance Inquiry</td><td class="r">1,053</td><td class="r">906</td><td class="r down">&minus;147</td><td class="r down">&minus;14.0%</td><td class="r">47.0%</td></tr>
+      <tr><td>CC Time &amp; Attendance</td><td class="r">635</td><td class="r">645</td><td class="r">+10</td><td class="r">+1.6%</td><td class="r">30.7%</td></tr>
+      <tr><td>FC General Inquiry</td><td class="r">411</td><td class="r">316</td><td class="r down">&minus;95</td><td class="r down">&minus;23.1%</td><td class="r">17.4%</td></tr>
+      <tr><td>Timesheet Inquiry</td><td class="r">107</td><td class="r">95</td><td class="r down">&minus;12</td><td class="r down">&minus;11.2%</td><td class="r">4.8%</td></tr>
+      <tr class="total"><td>Total</td><td class="r">2,206</td><td class="r">1,962</td><td class="r down">&minus;244</td><td class="r down">&minus;11.1%</td><td class="r">100%</td></tr>
+    </tbody>
+  </table>
+
+  <p>Two services drove nearly all of the decline: Attendance Inquiry (&minus;147, or 60.2% of the total drop) and FC General Inquiry (&minus;95, or 38.9%). CC Time &amp; Attendance was essentially flat (+1.6%). In plain terms, the week-to-week swing was concentrated in two places, not spread across the operation.</p>
+
+  <h3>4.2 &nbsp; The Classification Reveal: 60% of Tickets Are Self-Service Eligible</h3>
+
+  <p>When we classified all 4,168 tickets, the result was unambiguous. The majority of HR ticket demand is not driven by issues that require HR. It is driven by team members contacting HR for things they could do themselves.</p>
+
+  <table>
+    <thead><tr><th>Classification</th><th>Total</th><th>% of Total</th><th>Wk 9</th><th>Wk 10</th><th>WoW Delta</th><th>WoW %</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Self Service Eligible</strong></td><td class="r"><strong>2,514</strong></td><td class="r"><strong>60.3%</strong></td><td class="r">1,319</td><td class="r">1,195</td><td class="r down">&minus;124</td><td class="r down">&minus;9.4%</td></tr>
+      <tr><td>Process Required</td><td class="r">1,199</td><td class="r">28.8%</td><td class="r">658</td><td class="r">541</td><td class="r down">&minus;117</td><td class="r down">&minus;17.8%</td></tr>
+      <tr><td>Defect</td><td class="r">359</td><td class="r">8.6%</td><td class="r">180</td><td class="r">179</td><td class="r">&minus;1</td><td class="r">&minus;0.6%</td></tr>
+      <tr><td>Unclear</td><td class="r">96</td><td class="r">2.3%</td><td class="r">49</td><td class="r">47</td><td class="r">&minus;2</td><td class="r">&minus;4.1%</td></tr>
+      <tr class="total"><td>Total</td><td class="r">4,168</td><td class="r">100%</td><td class="r">2,206</td><td class="r">1,962</td><td class="r down">&minus;244</td><td class="r down">&minus;11.1%</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Six out of every ten tickets that HR processes could have been handled by the team member through existing tools.</strong> The UKG app, timeclocks, and Workday already exist. The demand is not a capacity problem or a process failure &mdash; it is an adoption gap. Team members either do not know about, do not trust, or choose not to use the self-service tools available to them. Instead, they pick up the phone, send an email, or leave a voicemail, and HR creates a ticket.</p>
+
+  <p>This finding is consistent across both weeks. The self-service share held at approximately 60% in both weeks, meaning it is a structural characteristic of the demand mix, not a one-week anomaly.</p>
+
+  <div class="finding">
+    <p><strong>Finding 1:</strong> The single largest opportunity to reduce ticket volume and stabilize the trend is not a process change or a staffing adjustment. It is self-service adoption. If even half of the self-service-eligible tickets were deflected, weekly volume would drop by approximately 600 tickets &mdash; a 30% reduction &mdash; and the remaining volume would be inherently more stable because it would consist of tickets that genuinely require HR involvement.</p>
+  </div>
+
+  <h3>4.3 &nbsp; The Self-Service Sub-Categories: Where the Opportunity Lives</h3>
+
+  <p>Two sub-categories dominate the self-service opportunity and together account for more than half of all self-service-eligible tickets.</p>
+
+  <table>
+    <thead><tr><th>Sub-Category</th><th>Wk 9</th><th>Wk 10</th><th>Total</th><th>% of SS</th><th>Tool</th></tr></thead>
+    <tbody>
+      <tr><td>Missed punch (TM could use timeclock)</td><td class="r">410</td><td class="r">408</td><td class="r"><strong>818</strong></td><td class="r"><strong>32.5%</strong></td><td>Timeclock</td></tr>
+      <tr><td>Call out / absence report</td><td class="r">326</td><td class="r">259</td><td class="r"><strong>585</strong></td><td class="r"><strong>23.3%</strong></td><td>UKG App</td></tr>
+      <tr><td>Phone: TM time request</td><td class="r">134</td><td class="r">104</td><td class="r">238</td><td class="r">9.5%</td><td>UKG App</td></tr>
+      <tr><td>Weather absence</td><td class="r">81</td><td class="r">81</td><td class="r">162</td><td class="r">6.4%</td><td>UKG App</td></tr>
+      <tr><td>TM email inquiry</td><td class="r">71</td><td class="r">72</td><td class="r">143</td><td class="r">5.7%</td><td>UKG / Workday</td></tr>
+      <tr><td>Balance inquiry (PTO/UTO)</td><td class="r">37</td><td class="r">61</td><td class="r">98</td><td class="r">3.9%</td><td>UKG / Workday</td></tr>
+      <tr><td>Voicemail call out</td><td class="r">52</td><td class="r">38</td><td class="r">90</td><td class="r">3.6%</td><td>UKG App</td></tr>
+      <tr><td>All other self-service categories</td><td class="r">208</td><td class="r">172</td><td class="r">380</td><td class="r">15.1%</td><td>Various</td></tr>
+      <tr class="total"><td>Total Self Service Eligible</td><td class="r">1,319</td><td class="r">1,195</td><td class="r">2,514</td><td class="r">100%</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Missed punches (818 tickets, 32.5% of self-service eligible).</strong> These are team members who failed to clock in or out and then contacted HR to fix the timecard. The timeclock was available. This sub-category was remarkably stable (410 vs. 408), suggesting a persistent behavioral pattern, not a spike. UKG data shows HR processed 32,693 manual punch corrections during Week 9 alone &mdash; the 818 tickets represent only 2.5% of the actual punch correction workload. Every missed punch prevented by proper timeclock usage eliminates both a ticket and a manual UKG correction.</p>
+
+  <p><strong>Call outs and absence reports (585 tickets, 23.3%).</strong> Team members who called, emailed, or left voicemails to report an absence that could have been submitted through the UKG app. Including voicemail call outs (90), phone call outs (4), and absence notifications (70), the total absence-reporting cluster reaches 749 tickets &mdash; 29.8% of all self-service eligible volume. This cluster is also the primary driver of the Attendance Inquiry WoW variance: call outs declined from 326 to 259 (&minus;20.6%), a significant share of the 147-ticket Attendance Inquiry decline.</p>
+
+  <p><strong>Balance inquiries (98 tickets, 3.9%)</strong> are notable for their growth &mdash; from 37 to 61 (+64.9%), the fastest-growing self-service sub-category. Team members are checking PTO/UTO balances through HR rather than UKG or Workday.</p>
+
+  <div class="finding">
+    <p><strong>Finding 2:</strong> Two behaviors &mdash; failing to use the timeclock (818 tickets) and calling in absences instead of using the UKG app (749 tickets) &mdash; account for 1,567 tickets over two weeks, or 62.3% of all self-service eligible volume. These are not complex issues. They are habit-driven contacts that self-service tools already exist to handle.</p>
+  </div>
+
+  <h3>4.4 &nbsp; Classification by HR Service: Each Queue Has a Different Story</h3>
+
+  <p>The self-service opportunity is not uniform across services. Each queue has a distinct classification profile that points to different interventions.</p>
+
+  <table>
+    <thead><tr><th>HR Service</th><th>Total</th><th>Self Service %</th><th>Defect %</th><th>Process Req %</th></tr></thead>
+    <tbody>
+      <tr><td>CC Time &amp; Attendance</td><td class="r">1,280</td><td class="r"><strong>68.9%</strong></td><td class="r up">20.7%</td><td class="r">6.6%</td></tr>
+      <tr><td>Attendance Inquiry</td><td class="r">1,959</td><td class="r"><strong>63.0%</strong></td><td class="r">1.7%</td><td class="r">35.1%</td></tr>
+      <tr><td>FC General Inquiry</td><td class="r">727</td><td class="r">48.0%</td><td class="r">4.3%</td><td class="r"><strong>46.1%</strong></td></tr>
+      <tr><td>Timesheet Inquiry</td><td class="r">202</td><td class="r">24.3%</td><td class="r">14.4%</td><td class="r"><strong>46.0%</strong></td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>CC Time &amp; Attendance has the highest self-service rate (68.9%)</strong> and the highest defect rate (20.7%). Nearly seven out of ten CC T&amp;A tickets could have been self-served, and one in five is a system defect &mdash; primarily improper time-off coding from the NICE/UKG integration. Only 6.6% of CC T&amp;A tickets actually require HR process involvement.</p>
+
+  <p><strong>Attendance Inquiry has the highest volume (1,959 tickets) and a 63.0% self-service rate.</strong> The remaining 35.1% process-required share is driven by FMLA/LOA administration, Smartsheet reactive coding (which is being retired), and NCNS documentation &mdash; all legitimate HR work.</p>
+
+  <p><strong>FC General Inquiry is nearly split</strong> between self-service (48.0%) and process-required (46.1%). The process-required share is inflated by onboarding/I-9 processing (52 tickets) and internal HR communications (67 tickets) &mdash; tickets that are administrative workflow, not team member inquiries. FC General Inquiry also experienced the steepest WoW decline (&minus;23.1%), driven by I-9 seasonal taper and the Smartsheet notification reduction.</p>
+
+  <p><strong>Timesheet Inquiry has the lowest self-service rate (24.3%)</strong> and the highest process-required share (46.0%). This queue contains more complex issues that genuinely need HR review.</p>
+
+  <h3>4.5 &nbsp; The Defect Story: Small Volume, Concentrated Cause</h3>
+
+  <p>Defects represent only 8.6% of total volume (359 tickets), but they have a distinctive signature. <strong>Improper time-off coding accounts for 250 of 359 defects &mdash; 69.6%.</strong> These are cases where the system applied an incorrect time-off code, resulting in a wrong deduction or balance error. This is concentrated in CC Time &amp; Attendance (265 of 359 total defects, or 73.8%) and is a NICE/UKG system accuracy issue, not an HR process issue.</p>
+
+  <p>Defect volume was essentially flat week over week (180 vs. 179, &minus;0.6%), meaning defects contribute almost nothing to the WoW variance. They are a persistent, low-level quality issue that should be addressed through system configuration rather than process changes.</p>
+
+  <div class="finding">
+    <p><strong>Finding 3:</strong> True system defects are a small and stable share of volume (8.6%), dominated by a single root cause (improper time-off coding at 69.6% of defects). Fixing the NICE/UKG time-off coding accuracy would eliminate approximately 125 defect tickets per week. This is a system fix, not a people fix.</p>
+  </div>
+
+  <h3>4.6 &nbsp; Process Required: What Legitimately Needs HR</h3>
+
+  <p>The 1,199 process-required tickets (28.8% of total) represent work that genuinely requires HR involvement. However, even within this category, there are important distinctions.</p>
+
+  <table>
+    <thead><tr><th>Process Required Sub-Category</th><th>Wk 9</th><th>Wk 10</th><th>Total</th><th>% of PR</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Smartsheet Early Out/Late Arrival</td><td class="r">158</td><td class="r">155</td><td class="r"><strong>313</strong></td><td class="r"><strong>26.1%</strong></td><td>Going away with Smartsheet retirement</td></tr>
+      <tr><td>FMLA/LOA administration</td><td class="r">138</td><td class="r">119</td><td class="r">257</td><td class="r">21.4%</td><td>Sedgwick/ADA driven. True HR work.</td></tr>
+      <tr><td>Smartsheet automated notification</td><td class="r">79</td><td class="r">61</td><td class="r">140</td><td class="r">11.7%</td><td>Going away with Smartsheet retirement</td></tr>
+      <tr><td>NCNS documentation</td><td class="r">33</td><td class="r">35</td><td class="r">68</td><td class="r">5.7%</td><td>Required by policy</td></tr>
+      <tr><td>VET management</td><td class="r">41</td><td class="r">27</td><td class="r">68</td><td class="r">5.7%</td><td>Manager operational requests</td></tr>
+      <tr><td>Internal HR/manager communication</td><td class="r">35</td><td class="r">32</td><td class="r">67</td><td class="r">5.6%</td><td>Internal process traffic</td></tr>
+      <tr><td>IT incident resolution coding</td><td class="r">39</td><td class="r">26</td><td class="r">65</td><td class="r">5.4%</td><td>Post-incident coding</td></tr>
+      <tr><td>Accommodation processing</td><td class="r">31</td><td class="r">25</td><td class="r">56</td><td class="r">4.7%</td><td>ADA/accommodation. True HR work.</td></tr>
+      <tr><td>Onboarding/I-9 processing</td><td class="r">39</td><td class="r">13</td><td class="r">52</td><td class="r">4.3%</td><td>Seasonal. KY pharmacy renewals tapering.</td></tr>
+      <tr><td>All other process-required</td><td class="r">65</td><td class="r">48</td><td class="r">113</td><td class="r">9.4%</td><td></td></tr>
+      <tr class="total"><td>Total Process Required</td><td class="r">658</td><td class="r">541</td><td class="r">1,199</td><td class="r">100%</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <p>The most important detail here: <strong>Smartsheet-driven tickets (Early Out/Late Arrival + automated notifications) account for 453 of 1,199 process-required tickets, or 37.8%.</strong> These are going away as Smartsheet is retired. That alone will reduce the process-required category by more than a third. However, the underlying team member behavior &mdash; not proactively submitting time-off in UKG &mdash; will likely shift to other channels unless addressed at the root.</p>
+
+  <p>Process Required volume also declined more steeply than any other category (&minus;117, &minus;17.8%), driven by the seasonal taper in onboarding/I-9 processing (39 to 13, &minus;66.7%) and the reduction in Smartsheet notifications (79 to 61, &minus;22.8%). The FMLA/LOA administration sub-category (257 tickets, 21.4%) represents the true irreducible core of HR-required work &mdash; leave cases managed through Sedgwick and the ADA process.</p>
+
+  <div class="finding">
+    <p><strong>Finding 4:</strong> Nearly 38% of "process required" volume is Smartsheet-driven and will be eliminated by Smartsheet retirement. After that, the true process-required floor is approximately 750 tickets per two-week period &mdash; primarily FMLA/LOA (257), NCNS documentation (68), and accommodation processing (56). This is the irreducible minimum of work that genuinely requires HR.</p>
+  </div>
+
+  <h3>4.7 &nbsp; The UKG Bridge: Tickets Are the Tip of the Iceberg</h3>
+
+  <p>Everything discussed so far describes the 4,168 tickets that team members created. But ticket data tells us only what TMs complain about. UKG data tells us what HR actually does. The gap between these two views is what we call "dark work" &mdash; operational effort that generates no ticket and has no visibility in the OBR.</p>
+
+  <p>During Week 9, the HR network processed <strong>67,543 timecard actions consuming an estimated 760.9 FTE hours</strong> of manual effort. Of those, 22,885 were rework actions &mdash; corrections, edits, and retroactive fixes. Against that workload, the 1,962 Week 10 tickets represent approximately 8% of rework touches. The other 92% happens invisibly.</p>
+
+  <table>
+    <thead><tr><th>Issue Type</th><th>Tickets/Wk</th><th>UKG Actions/Wk</th><th>Ratio</th><th>Implication</th></tr></thead>
+    <tbody>
+      <tr><td>Punch / Clock</td><td class="r">~410</td><td class="r">32,693</td><td class="r"><strong>1 : 80</strong></td><td>For every punch ticket, HR fixes ~80 without one</td></tr>
+      <tr><td>Late / Early / Attendance</td><td class="r">~70</td><td class="r">8,517</td><td class="r"><strong>1 : 122</strong></td><td>Attendance coding is almost entirely unticketed</td></tr>
+      <tr><td>UTO / Time-Off</td><td class="r">~850</td><td class="r">4,869</td><td class="r"><strong>1 : 6</strong></td><td>Highest ticket generation rate per action</td></tr>
+      <tr><td>Leave of Absence</td><td class="r">~130</td><td class="r">2,573</td><td class="r"><strong>1 : 20</strong></td><td>LOA work is partially visible in tickets</td></tr>
+    </tbody>
+  </table>
+
+  <p>The implication is significant. <strong>The &minus;244 ticket decline does not mean HR workload decreased.</strong> UKG shows the network processed roughly the same 67,500 actions as the prior period. What changed is how many team members chose to call or email &mdash; a demand-side fluctuation, not a supply-side change. The workload did not move. The ticket count did.</p>
+
+  <div class="finding-purple">
+    <p><strong>Finding 5:</strong> Ticket volume is a measure of team member behavior, not HR workload. The 11.1% WoW decline reflects fewer TMs calling in, not less HR work being done. UKG data shows 67,543 actions and 761 FTE hours consumed &mdash; largely unchanged. Adding a UKG-derived "Rework Coverage" metric (currently 8%) to the OBR would immediately contextualize ticket swings and reduce the "explain the variance" cycle.</p>
+  </div>
+
+  <hr>
+
+  <!-- 5. ANSWERING THE THREE QUESTIONS -->
+  <h2>5. Answering the Three Questions</h2>
+
+  <p>With the findings established, we can now answer leadership's three questions directly and in plain language.</p>
+
+  <h3>Question 1: What is causing the week-to-week variance in ticket volumes?</h3>
+
+  <p>Three forces, all identifiable and measurable, explain the variance:</p>
+
+  <p><strong>First, phone-channel call volume fluctuations.</strong> Attendance Inquiry dropped 147 tickets, and 110 of those (&minus;74.8%) came specifically from fewer phone calls. The Smartsheet automation held at exactly 205 tickets both weeks. The variance lived entirely in human-initiated, manual demand. Phone volume swings because team members call in absences ad hoc &mdash; a bad weather day drives calls up, a quiet week drives them down. This single channel accounts for 45% of the total 244-ticket decline.</p>
+
+  <p><strong>Second, seasonal process artifacts tapered.</strong> FC General Inquiry dropped 95 tickets (&minus;23.1%). I-9/compliance document submissions fell from 39 to 13 (&minus;66.7%) as Kentucky pharmacy license renewal season wound down at SDF2. Smartsheet automated notifications fell from 79 to 61 (&minus;22.8%). These are calendar-driven patterns, not signals of process improvement or deterioration.</p>
+
+  <p><strong>Third, a weather event normalized.</strong> AVP2 in the Lehigh Valley experienced elevated call-off volume in Weeks 8&ndash;9 from a winter storm. By Week 10, volume receded. Weather events create 1&ndash;2 week waves that crest and return to baseline. All 162 weather-related tickets across both weeks were classified as self-service eligible.</p>
+
+  <p>Importantly, <strong>automation-generated tickets are perfectly stable</strong> at approximately 216 per week. Defect tickets are also stable (180 vs. 179). The entire variance comes from the self-service-eligible and process-required categories &mdash; the parts of the queue driven by team member behavior and seasonal patterns. If the OBR separated automation from manual volume, the WoW variance would become immediately interpretable.</p>
+
+  <h3>Question 2: What specific types of issues cause the variability?</h3>
+
+  <p>Five issue types account for more than 85% of all ticket volume and virtually all of the week-to-week variance:</p>
+
+  <p><strong>1. Missed punches (818 tickets, 19.6% of all tickets, 32.5% of self-service eligible).</strong> Stable week over week. Not a variance driver, but the largest single demand category. Every one of these could have been prevented by the TM using the timeclock. UKG shows 32,693 manual punch corrections per week &mdash; the tickets represent just 2.5% of the actual correction workload.</p>
+
+  <p><strong>2. Call outs and absence reporting (749 tickets including voicemail and notifications, 18.0% of all tickets).</strong> This is the primary variance driver. Call outs declined from 326 to 259 (&minus;20.6%), contributing directly to the Attendance Inquiry decline. TMs are calling HR instead of using the UKG app to report absences. This behavior is inherently variable because it depends on how many TMs are absent on a given day and whether they choose to call or use the app.</p>
+
+  <p><strong>3. Smartsheet-driven reactive coding (313 tickets, 7.5% of all tickets).</strong> Early out and late arrival coding triggered by Smartsheet notifications to HR. This category is going away with Smartsheet retirement and contributed to the Process Required decline (&minus;17.8%). However, the underlying issue &mdash; TMs not submitting time-off proactively in UKG &mdash; will likely shift to other channels.</p>
+
+  <p><strong>4. Improper time-off coding defects (250 tickets, 6.0% of all tickets).</strong> The dominant defect type, concentrated in CC Time &amp; Attendance. Caused by NICE/UKG system inaccuracy, not HR error. Stable week over week (not a variance driver), but a persistent quality issue affecting 1 in 5 CC T&amp;A tickets.</p>
+
+  <p><strong>5. FMLA/LOA administration (257 tickets, 6.2% of all tickets).</strong> Legitimate, irreducible HR work driven by Sedgwick and the ADA process. Declined modestly from 138 to 119 (&minus;13.8%). This is the floor &mdash; work that will always require HR involvement regardless of self-service adoption.</p>
+
+  <h3>Question 3: What actions can we take to stabilize our trend?</h3>
+
+  <p>The data points to five specific actions, each tied directly to a finding. They are ordered by expected impact.</p>
+
+  <div class="finding-green">
+    <p><strong>Recommendation 1: Drive UKG app adoption for absence reporting.</strong></p>
+    <p>Call outs and absence reports generate 749 tickets every two weeks (18.0% of volume) and are the #1 variance driver. Every one of these was classified as self-service eligible &mdash; the UKG app supports absence submissions today. A targeted adoption campaign at the top-volume sites (PHX2, AVP1, AVP2, SDF2, MCI1) focusing on the app's call-off feature would convert unstructured phone calls into structured submissions, reducing both ticket volume and variance amplitude. Even a 30% adoption rate would deflect approximately 110 tickets per week and meaningfully reduce the Monday peak, when call-off volume is highest.</p>
+  </div>
+
+  <div class="finding-green">
+    <p><strong>Recommendation 2: Address missed punch behavior at scale.</strong></p>
+    <p>Missed punches are the single largest ticket category (818 tickets, 19.6% of all volume) and the single largest UKG action type (32,693 corrections per week). Unlike call outs, missed punches are stable &mdash; they don't drive variance, but they are the structural floor that makes every spike look proportionally worse. Site-level punch compliance campaigns (visible reminders, shift-start huddle mentions, timeclock placement audits) at the highest-volume sites could reduce both the 410 weekly tickets and the 32,693 weekly UKG corrections. A 25% reduction would eliminate ~100 tickets/week and ~8,000 UKG actions/week.</p>
+  </div>
+
+  <div class="finding-green">
+    <p><strong>Recommendation 3: Fix the improper time-off coding defect.</strong></p>
+    <p>250 defect tickets over two weeks (69.6% of all defects) stem from improper time-off coding, concentrated in CC Time &amp; Attendance. This is a NICE/UKG system accuracy issue. Engaging the NICE/UKG integration team to audit the time-off coding logic would address a defect that currently generates ~125 tickets per week and damages team member trust in the system &mdash; which in turn drives more phone calls and emails to HR rather than self-service usage.</p>
+  </div>
+
+  <div class="finding-green">
+    <p><strong>Recommendation 4: Enable PTO/UTO balance self-service visibility.</strong></p>
+    <p>Balance inquiries grew 64.9% WoW (37 to 61) and UTO-related keywords appear across hundreds of Attendance Inquiry tickets. UKG data shows 4,869 manual UTO deduction actions per week. TMs cannot easily see their own balances in real time, so they call HR. Enabling a UKG TM app or Workday balance dashboard would deflect these inquiries at the source. This addresses both the growing balance inquiry trend and the broader UTO confusion that drives a substantial share of Attendance Inquiry volume.</p>
+  </div>
+
+  <div class="finding-green">
+    <p><strong>Recommendation 5: Change the OBR reporting structure.</strong></p>
+    <p>This is the lowest-cost, highest-clarity action available. Three changes would make the weekly OBR immediately interpretable:</p>
+    <p>(a) Split automation vs. manual volume in the weekly ticket table. Automation is stable at ~216/week; manual is what moves.<br>
+    (b) Add a self-service classification breakdown (60% SS / 29% PR / 9% Defect) so leadership sees the composition, not just the total.<br>
+    (c) Include the UKG Rework Coverage metric (currently 8%) to contextualize tickets against actual HR workload.</p>
+    <p>These changes cost nothing to implement and would shift the OBR conversation from "why did volume change?" to "what are we doing to drive self-service adoption and reduce the structural baseline?"</p>
+  </div>
+
+  <hr>
+
+  <!-- 6. COMBINED IMPACT -->
+  <h2>6. Expected Impact</h2>
+
+  <p>If Recommendations 1 through 4 are executed, the combined effect on weekly ticket volume would be significant:</p>
+
+  <table>
+    <thead><tr><th>Action</th><th>Target Category</th><th>Current Volume/Wk</th><th>Est. Reduction</th><th>Timeline</th></tr></thead>
+    <tbody>
+      <tr><td>UKG app absence reporting adoption (30%)</td><td>Call outs / absence</td><td class="r">~375</td><td class="r down">&minus;110/wk</td><td>30&ndash;60 days</td></tr>
+      <tr><td>Punch compliance campaign (25%)</td><td>Missed punches</td><td class="r">~410</td><td class="r down">&minus;100/wk</td><td>30&ndash;60 days</td></tr>
+      <tr><td>NICE/UKG time-off coding fix</td><td>Improper coding defects</td><td class="r">~125</td><td class="r down">&minus;100/wk</td><td>60&ndash;90 days</td></tr>
+      <tr><td>PTO/UTO balance self-service</td><td>Balance inquiries + UTO confusion</td><td class="r">~100+</td><td class="r down">&minus;50/wk</td><td>60&ndash;90 days</td></tr>
+      <tr class="total"><td>Combined</td><td></td><td></td><td class="r down">&minus;360/wk</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <p>A combined reduction of approximately 360 tickets per week would lower the baseline from ~1,960 to ~1,600 &mdash; an 18% reduction. More importantly, the remaining volume would consist primarily of process-required and true-defect tickets, which are inherently more stable week to week. The WoW variance that leadership currently observes would narrow substantially, because the variable component (self-service-eligible tickets) would have been structurally reduced.</p>
+
+  <p>The Smartsheet retirement will independently remove an additional ~225 tickets per week from the process-required category. When combined, the total addressable reduction approaches 585 tickets per week, or a roughly 30% reduction from current levels.</p>
+
+  <hr>
+
+  <!-- 7. LIMITATIONS -->
+  <h2>7. Limitations and Caveats</h2>
+
+  <ul>
+    <li><strong>Scope:</strong> Four of ~115 EPA HR Service categories. Our 4,168 tickets represent 26.1% of EPA's total Week 10 volume. Findings may not generalize to services outside this scope.</li>
+    <li><strong>Classification accuracy:</strong> Ticket classification is based on description text and contact type. Approximately 2.3% of tickets could not be classified (Unclear). Some borderline cases may be miscategorized.</li>
+    <li><strong>UKG data timing:</strong> UKG data is Week 9; Wk10 UKG data is pending Snowflake view deployment. Ticket-to-UKG ratios are directional proxies, not 1:1 linkages.</li>
+    <li><strong>Self-service deflection estimates:</strong> Adoption rates used in impact estimates (25&ndash;30%) are conservative assumptions. Actual deflection will depend on campaign design, tool usability, and change management execution.</li>
+    <li><strong>Resolution rates:</strong> Wk10 resolution rates appear lower due to extract timing (data pulled shortly after week-end). This is a known artifact, not a performance signal.</li>
+    <li><strong>EPA total context:</strong> EPA total volume increased +864 WoW to 7,525 while our tracked services declined &minus;244. Growth is in services outside our scope (LOA Status, Attendance Management, FC Timecard Adjustments).</li>
+  </ul>
+
+  <hr>
+
+  <!-- 8. CONCLUSION -->
+  <h2>8. Conclusion</h2>
+
+  <p>The week-to-week variance in ticket volumes is not random and it is not mysterious. It is the predictable result of three forces: phone-channel call volume fluctuations driven by team member absence-reporting behavior, seasonal process artifacts like pharmacy license renewals, and episodic weather events. Automation-generated tickets and system defects are stable &mdash; they do not contribute to the variance. The entire swing lives in the human-initiated, self-service-eligible portion of the queue.</p>
+
+  <p>The most important finding in this analysis is structural, not tactical: <strong>60.3% of all tickets represent contacts where the team member had an existing self-service tool available.</strong> The ticket queue is not primarily a measure of issues requiring HR expertise. It is primarily a measure of self-service non-adoption. The two largest categories &mdash; missed punches (818 tickets) and absence call outs (749 tickets) &mdash; together account for 37.6% of all volume and are entirely addressable through timeclock compliance and UKG app adoption.</p>
+
+  <p>Beneath the ticket surface, UKG data reveals that HR processes 67,543 timecard actions per week &mdash; 761 FTE hours of effort, of which only 8% is reflected in ServiceNow. The ticket queue is the tip of an iceberg. Stabilizing the visible tip requires reducing the self-service-eligible baseline; understanding the full iceberg requires integrating UKG workload data into the weekly OBR.</p>
+
+  <p>The path forward is clear: drive self-service adoption for the two dominant contact types (punches and absences), fix the systemic time-off coding defect, enable balance self-service to address the fastest-growing inquiry type, and restructure the OBR to make variance interpretable without ad hoc analysis. These actions, taken together, can reduce weekly volume by an estimated 30% and narrow the WoW variance that drives the recurring "what happened?" question.</p>
+
+  <hr>
+
+  <!-- APPENDIX -->
+  <h2>Appendix: Data Validation</h2>
+  <table>
+    <thead><tr><th>HR Service</th><th>CSV Wk10</th><th>OBR Wk10</th><th>Match?</th></tr></thead>
+    <tbody>
+      <tr><td>Attendance Inquiry</td><td class="r">906</td><td class="r">906</td><td>Exact</td></tr>
+      <tr><td>FC General Inquiry</td><td class="r">316</td><td class="r">316</td><td>Exact</td></tr>
+      <tr><td>Timesheet Inquiry</td><td class="r">95</td><td class="r">95</td><td>Exact</td></tr>
+      <tr><td>CS Time &amp; Attendance</td><td class="r">645</td><td class="r">N/A</td><td>Not in OBR Top 10</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:14px; color:var(--muted); margin-top:8px;">These four services represent 26.1% of the OBR total Week 10 volume (1,962 of 7,514).</p>
+
+  <div class="footer">
+    ORBIT HR Workload Lens &mdash; Variance Analysis &nbsp;|&nbsp; Weeks 9&ndash;10 (2026-02-22 to 2026-03-07)<br>
+    Data: ServiceNow CSV + Self-Service Classification Analysis + Snowflake UKG_V_TIMECARD_AUDIT &nbsp;|&nbsp; v1.0
+  </div>
+
+</div>
+</body>
+</html>

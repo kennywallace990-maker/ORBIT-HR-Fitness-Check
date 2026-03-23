@@ -1,0 +1,8 @@
+-- QUERY 2 (THIN) — Enterprise View by BU × Actor Group (Section 2.1)
+-- Returns ~20 rows. Reads from V_HWL_HR view.
+-- Caller must SET WEEK_START / WEEK_END session variables before executing.
+
+SELECT OBR_SITE_GROUP, OBR_ACTOR_GROUP, COUNT(*) AS TOUCHES
+FROM EDLDB.PEOPLE_ANALYTICS_SANDBOX.V_HWL_HR
+GROUP BY OBR_SITE_GROUP, OBR_ACTOR_GROUP
+ORDER BY OBR_SITE_GROUP, TOUCHES DESC;

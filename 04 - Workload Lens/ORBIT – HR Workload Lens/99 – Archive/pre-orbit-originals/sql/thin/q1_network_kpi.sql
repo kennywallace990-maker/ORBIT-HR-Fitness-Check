@@ -1,0 +1,42 @@
+-- QUERY 1 (THIN) — Network KPI Summary with 1σ Spike Flags (Section 1)
+-- Returns 1 row. Reads from V_HWL_HR view.
+-- Caller must SET WEEK_START / WEEK_END session variables before executing.
+
+WITH mp_dedup AS (
+    SELECT DISTINCT EMPLOYEE_ID, ENTITY_EVENT_DATE, DAILY_MISSED_PUNCHES
+    FROM EDLDB.PEOPLE_ANALYTICS_SANDBOX.V_HWL_HR
+    WHERE DAILY_MISSED_PUNCHES > 0
+),
+network_baseline AS (
+    SELECT 
+        SUM(TOTAL_ACTIONS) AS TOTAL_ACTIONS,
+        SUM(BUCKET_B_ACTIONS) AS BUCKET_B_ACTIONS,
+        (SUM(BUCKET_B_ACTIONS) / NULLIF(SUM(TOTAL_ACTIONS), 0)) * 100 AS MEAN_13WK_DEFECT_RATE,
+        AVG(SD_13WK_DEFECT_RATE) AS SD_13WK_DEFECT_RATE
+    FROM EDLDB.PEOPLE_ANALYTICS_SANDBOX.V_HWL_WEEKLY_SITE_METRICS
+    WHERE REPORT_WEEK = DATE_TRUNC('WEEK', $WEEK_START)
+),
+current_week_network AS (
+    SELECT
+        COUNT(*)                                                                          AS TOTAL_ACTIONS,
+        SUM(CASE WHEN BUCKET_B THEN 1 ELSE 0 END)                                        AS BUCKET_B_ACTIONS,
+        ROUND(SUM(CASE WHEN BUCKET_B THEN 1 ELSE 0 END)/COUNT(*)*100,1)                  AS DEFECT_RATE_PCT,
+        COUNT(DISTINCT EMPLOYEE_ID)                                                       AS NETWORK_UNIQUE_TMS,
+        ROUND(SUM(FRICTION_SCORE)/60.0,1)                                                 AS TOTAL_FRICTION_HRS,
+        (SELECT SUM(DAILY_MISSED_PUNCHES) FROM mp_dedup)                                  AS MISSED_PUNCH_COUNT,
+        ROUND((SELECT SUM(DAILY_MISSED_PUNCHES) FROM mp_dedup)/COUNT(*)*100,1)            AS MISSING_PUNCH_RATE_PCT,
+        SUM(CASE WHEN ENTITY_TYPE='Historical Correction' THEN 1 ELSE 0 END)             AS HIST_CORR_COUNT,
+        ROUND(SUM(CASE WHEN ENTITY_TYPE='Historical Correction' THEN 1 ELSE 0 END)/COUNT(*)*100,1) AS HIST_CORR_RATE_PCT,
+        WEEKOFYEAR(MIN(ENTITY_EVENT_DATE))                                                AS REPORTING_WEEK,
+        TO_VARCHAR(MIN(ENTITY_EVENT_DATE),'MM/DD')                                        AS WINDOW_START,
+        TO_VARCHAR(MAX(ENTITY_EVENT_DATE),'MM/DD')                                        AS WINDOW_END
+    FROM EDLDB.PEOPLE_ANALYTICS_SANDBOX.V_HWL_HR
+)
+SELECT 
+    c.*,
+    COALESCE(b.MEAN_13WK_DEFECT_RATE, 0) AS MEAN_13WK_DEFECT_RATE,
+    COALESCE(b.SD_13WK_DEFECT_RATE, 0) AS SD_13WK_DEFECT_RATE,
+    (COALESCE(b.MEAN_13WK_DEFECT_RATE, 0) + COALESCE(b.SD_13WK_DEFECT_RATE, 0)) AS UCL_13WK_DEFECT_RATE,
+    CASE WHEN c.DEFECT_RATE_PCT > (COALESCE(b.MEAN_13WK_DEFECT_RATE, 0) + COALESCE(b.SD_13WK_DEFECT_RATE, 0)) THEN TRUE ELSE FALSE END AS IS_RED_SPIKE
+FROM current_week_network c
+CROSS JOIN network_baseline b;

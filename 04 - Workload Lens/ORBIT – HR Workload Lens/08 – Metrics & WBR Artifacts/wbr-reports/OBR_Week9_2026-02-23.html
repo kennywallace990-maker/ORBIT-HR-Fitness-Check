@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORBIT HR Workload Lens - Weekly Business Review (Week 9)</title>
+<style>
+:root{--bg:#0f172a;--card:#1e293b;--card-alt:#253349;--border:#334155;--text:#e2e8f0;--dim:#94a3b8;--accent:#38bdf8;--green:#22c55e;--yellow:#eab308;--red:#ef4444;--orange:#f97316;--purple:#a78bfa}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;padding:2rem;max-width:1200px;margin:0 auto}
+h1{font-size:1.75rem;font-weight:700;color:#fff;margin-bottom:.25rem}
+h2{font-size:1.35rem;font-weight:600;color:var(--accent);margin:2rem 0 1rem;border-bottom:1px solid var(--border);padding-bottom:.5rem}
+h3{font-size:1.1rem;font-weight:600;color:#fff;margin:1.5rem 0 .75rem}
+h4{font-size:.95rem;font-weight:600;color:var(--accent);margin:1.25rem 0 .5rem}
+.sub-title{color:var(--dim);font-size:.85rem;margin-bottom:1.5rem}
+.sub-title span{margin-right:1.5rem}
+.banner{background:linear-gradient(135deg,#1e3a5f,#1e293b);border:1px solid var(--border);border-radius:12px;padding:1.5rem 2rem;margin-bottom:2rem;border-left:4px solid var(--accent)}
+.banner p{color:var(--dim);font-size:.9rem;font-style:italic}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.25rem;text-align:center}
+.kpi .lbl{font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:var(--dim);margin-bottom:.5rem}
+.kpi .val{font-size:1.8rem;font-weight:700;color:#fff}
+.kpi .s{font-size:.8rem;color:var(--dim);margin-top:.25rem}
+.kpi.grn{border-left:4px solid var(--green)}.kpi.ylw{border-left:4px solid var(--yellow)}.kpi.rd{border-left:4px solid var(--red)}.kpi.acc{border-left:4px solid var(--accent)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-left:6px;vertical-align:middle}
+.dot.g{background:var(--green)}.dot.y{background:var(--yellow)}.dot.r{background:var(--red)}
+table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+thead th{background:var(--card-alt);color:var(--accent);font-weight:600;text-align:left;padding:.6rem .75rem;border-bottom:2px solid var(--border);font-size:.75rem;text-transform:uppercase;letter-spacing:.03em}
+thead th:not(:first-child){text-align:right}
+tbody td{padding:.5rem .75rem;border-bottom:1px solid var(--border)}
+tbody td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
+tbody tr:hover{background:rgba(56,189,248,.05)}
+tr.tot{font-weight:700;background:var(--card-alt)}tr.tot td{border-top:2px solid var(--accent)}
+.ai{background:linear-gradient(135deg,#1a2744,#1e293b);border:1px solid var(--border);border-left:4px solid var(--purple);border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.88rem}
+.ai .tag{display:inline-block;background:rgba(167,139,250,.15);color:var(--purple);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:2px 8px;border-radius:4px;margin-bottom:.5rem}
+.warn{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-left:4px solid var(--red);border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.88rem}
+.rec{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1rem 1.25rem;margin:.75rem 0}
+.rec .rt{font-weight:600;color:var(--orange);font-size:.9rem}
+.rec .trg{font-size:.8rem;color:var(--dim);margin:.25rem 0}
+.rec .act{font-size:.85rem}
+.toc{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1rem 1.5rem;margin:1rem 0}
+.toc ol{padding-left:1.25rem}.toc li{color:var(--dim);margin:.25rem 0;font-size:.85rem}.toc li a{color:var(--accent);text-decoration:none}.toc li a:hover{text-decoration:underline}
+.note{color:var(--dim);font-size:.8rem;font-style:italic;margin:.5rem 0}
+hr{border:none;border-top:1px solid var(--border);margin:2rem 0}
+.bar-wrap{margin:1rem 0}
+.bar-row{display:flex;gap:.5rem;align-items:center;margin:.25rem 0;font-size:.85rem}
+.bar{height:20px;border-radius:3px;background:var(--accent);opacity:.7}
+.bar-lbl{min-width:100px;color:var(--dim)}.bar-val{min-width:60px;text-align:right;font-variant-numeric:tabular-nums}
+.gl{margin:.75rem 0}.gl strong{color:var(--accent)}
+@media(max-width:768px){body{padding:1rem}.kpi-grid{grid-template-columns:repeat(2,1fr)}table{font-size:.78rem}}
+</style>
+</head>
+<body>
+
+<h1>ORBIT HR Workload Lens &mdash; Weekly Business Review</h1>
+<div class="sub-title">
+<span><strong>Source:</strong> Snowflake UKG_V_TIMECARD_AUDIT</span>
+<span><strong>Window:</strong> Sun 02/23 &mdash; Sat 03/01</span>
+<span><strong>Week:</strong> 9</span>
+<span><strong>Generated:</strong> ORBIT HR Reporting Agent</span>
+</div>
+<div class="banner"><p>This report measures the true operational friction of timekeeping and HR actions. Phase I boundary: timecard work only. Ticket integration coming in Phase II.</p></div>
+
+<div class="toc"><ol>
+<li><a href="#s1">Executive Summary &amp; KPIs</a></li>
+<li><a href="#s2">Enterprise Performance &amp; Root Cause Analysis</a></li>
+<li><a href="#s3">Recommended Actions &amp; Path to Green</a></li>
+<li><a href="#s4">Historical Corrections (Retro-Pay Risk)</a></li>
+<li><a href="#s5">Hotspots &amp; High-Friction Drivers</a></li>
+<li><a href="#s6">Event Documentation (Comment Usage)</a></li>
+<li><a href="#appA">Appendix A: Governance Activity</a></li>
+<li><a href="#appB">Appendix B: Glossary</a></li>
+<li><a href="#agent">Agent Observations</a></li>
+</ol></div>
+
+<hr>
+
+<!-- ===== SECTION 1 ===== -->
+<h2 id="s1">Section 1: Executive Summary &amp; KPIs</h2>
+
+<div class="ai">
+<div class="tag">Improvement Signal</div>
+<p><strong>Improving:</strong> (1) Missing Punch Rate at 2.2% &mdash; well within Green. (2) Historical Correction Rate at 2.8% &mdash; Green. (3) Rx defect rate holding at 29.7%, below the 40% red threshold for the 3rd consecutive measurable week.</p>
+<p style="margin-top:.5rem"><strong>Deteriorating:</strong> (1) CVC defect rate surged to 47.5%, driven by ATLD spiking to 75%. (2) Comment compliance is 0.0% across all BUs &mdash; zero documentation on 11,373 high-risk actions. (3) Local Ops defect rate hit 57.1%, the highest of any actor group.</p>
+<p style="margin-top:.5rem"><strong>Net Signal: Negative.</strong> The documentation blackout and CVC spike require immediate intervention.</p>
+</div>
+
+<div class="ai">
+<div class="tag">Week-Over-Week Narrative</div>
+<p>The HR network processed <strong>67,543 actionable touches</strong> during the week of February 23, consuming an estimated <strong>760.9 FTE hours</strong> of manual effort. Roughly <strong>32 out of every 100 HR timecard actions required correcting something that should have been right the first time</strong> &mdash; a network defect rate of 32.2%, placing us in the yellow zone.</p>
+<p style="margin-top:.5rem">Work distribution shifted this week, with Local HR shouldering the heaviest burden at 29,688 actions (43.9% of network volume) and a 50.6% defect rate &mdash; meaning more than half of everything Local HR touched was rework. HRSS contributed 21,554 actions at a significantly lower 17.4% defect rate, reflecting stronger governance discipline. WFM's 14,776 actions were 85.8% governance (approvals and reviews), making them the cleanest actor group at just 14.2% defect.</p>
+<p style="margin-top:.5rem">The two highest-DPMO sites this week were <strong>ATLD</strong> (CVC, 407K DPMO, 75% defect rate) and <strong>CLT1</strong> (FC, 198K DPMO). Both warrant immediate coaching attention.</p>
+</div>
+
+<p class="note"><strong>How to read these metrics:</strong> Total HR Workload counts every UKG timecard action taken by HR after removing Team Member self-service rows. Friction Time Cost scores each action by complexity (Hist. Corrections = 5 pts, standard rework = 1 pt, governance = 0.5 pts) and divides by 60. Defect Rate = % of actions that are corrections/rework.</p>
+
+<div class="kpi-grid">
+<div class="kpi acc"><div class="lbl">Total HR Workload</div><div class="val">67,543</div><div class="s">Actionable Touches</div></div>
+<div class="kpi acc"><div class="lbl">Friction Time Cost</div><div class="val">760.9 hrs</div><div class="s">FTE Hours Burned</div></div>
+<div class="kpi ylw"><div class="lbl">Network Defect Rate</div><div class="val">32.2%<span class="dot y"></span></div><div class="s">26&ndash;40% = Yellow</div></div>
+<div class="kpi grn"><div class="lbl">Missing Punch Rate</div><div class="val">2.2%<span class="dot g"></span></div><div class="s">&le; 5% = Green</div></div>
+<div class="kpi grn"><div class="lbl">Hist. Correction Rate</div><div class="val">2.8%<span class="dot g"></span></div><div class="s">&le; 5% = Green</div></div>
+</div>
+
+<h4>Week-over-Week Trend</h4>
+<div class="bar-wrap">
+<div class="bar-row"><span class="bar-lbl">02/09</span><div class="bar" style="width:500px"></div><span class="bar-val">73,676</span><span style="color:var(--yellow);margin-left:.5rem">29.1%</span></div>
+<div class="bar-row"><span class="bar-lbl" style="color:var(--dim)">02/16 <em style="font-size:.7rem">(partial)</em></span><div class="bar" style="width:55px;background:var(--red);opacity:.5"></div><span class="bar-val">8,150</span><span style="color:var(--red);margin-left:.5rem">41.3%</span></div>
+<div class="bar-row"><span class="bar-lbl"><strong>02/23</strong></span><div class="bar" style="width:458px"></div><span class="bar-val"><strong>67,543</strong></span><span style="color:var(--yellow);margin-left:.5rem"><strong>32.2%</strong></span></div>
+</div>
+<p class="note">Week of 02/16 is a partial week (8,150 rows vs ~70K). Elevated defect rate reflects small-sample bias &mdash; excluded from trend analysis.</p>
+
+<hr>
+
+<!-- ===== SECTION 2 ===== -->
+<h2 id="s2">Section 2: Enterprise Performance &amp; Root Cause Analysis</h2>
+<p class="note"><strong>How to read this section:</strong> The Enterprise view shows how HR workload is distributed across Business Units and Actor Groups. Defect % is the share of that group's actions that were corrections or rework.</p>
+
+<h3>2.1 Enterprise View &mdash; Week 9</h3>
+<table>
+<thead><tr><th>Business Unit</th><th>Local HR</th><th>HRSS</th><th>WFM</th><th>Local Ops</th><th>Total</th><th>Network %</th></tr></thead>
+<tbody>
+<tr><td>CC</td><td>9</td><td>3,551</td><td>14,254</td><td>13</td><td>17,827</td><td>26.4%</td></tr>
+<tr><td>CVC</td><td>35</td><td>496</td><td>65</td><td>520</td><td>1,116</td><td>1.7%</td></tr>
+<tr><td>FC</td><td>25,204</td><td>15,878</td><td>0</td><td>708</td><td>41,790</td><td>61.9%</td></tr>
+<tr><td>Rx</td><td>4,440</td><td>1,629</td><td>457</td><td>284</td><td>6,810</td><td>10.1%</td></tr>
+<tr class="tot"><td><strong>Network</strong></td><td><strong>29,688</strong></td><td><strong>21,554</strong></td><td><strong>14,776</strong></td><td><strong>1,525</strong></td><td><strong>67,543</strong></td><td><strong>100%</strong></td></tr>
+</tbody></table>
+
+<h3>2.2 Business Unit Split</h3>
+<table>
+<thead><tr><th>Group</th><th>Total</th><th>Corrections</th><th>Defect %</th><th>Governance</th><th>Gov. %</th><th>Missed Punch %</th><th>Hist. Corr. %</th></tr></thead>
+<tbody>
+<tr><td>Network</td><td>67,543</td><td>21,750</td><td>32.2%<span class="dot y"></span></td><td>32,393</td><td>48.0%</td><td>1.7%<span class="dot g"></span></td><td>2.8%<span class="dot g"></span></td></tr>
+<tr><td>FC</td><td>41,790</td><td>16,553</td><td>39.6%<span class="dot y"></span></td><td>15,388</td><td>36.8%</td><td>0.5%<span class="dot g"></span></td><td>2.8%<span class="dot g"></span></td></tr>
+<tr><td>Rx</td><td>6,810</td><td>2,021</td><td>29.7%<span class="dot y"></span></td><td>3,653</td><td>53.6%</td><td>1.5%<span class="dot g"></span></td><td>1.3%<span class="dot g"></span></td></tr>
+<tr><td>CC</td><td>17,827</td><td>2,646</td><td>14.8%<span class="dot g"></span></td><td>12,988</td><td>72.9%</td><td>4.4%<span class="dot g"></span></td><td>2.0%<span class="dot g"></span></td></tr>
+<tr><td>CVC</td><td>1,116</td><td>530</td><td>47.5%<span class="dot r"></span></td><td>364</td><td>32.6%</td><td>6.5%<span class="dot y"></span></td><td>22.8%<span class="dot r"></span></td></tr>
+<tr><td>HRSS</td><td>21,554</td><td>3,752</td><td>17.4%<span class="dot g"></span></td><td>4,403</td><td>20.4%</td><td>1.6%<span class="dot g"></span></td><td>8.7%<span class="dot y"></span></td></tr>
+</tbody></table>
+
+<div class="ai">
+<div class="tag">AI Insight &mdash; BU Split</div>
+<p>CVC is the clear outlier this week: a 47.5% defect rate (Red) and a staggering 22.8% historical correction rate &mdash; nearly 1 in 4 CVC actions was a retroactive payroll fix. This is driven by a small number of high-volume sites (ATLD alone contributed 152 of CVC's 1,116 actions at 75% defect). FC remains the volume leader with 39.6% defect, but its historical correction rate (2.8%) and missed punch rate (0.5%) are well-controlled. CC is the best performer at 14.8% defect, though WFM handles nearly all CC work &mdash; the low defect rate reflects WFM's governance-heavy workflow, not necessarily better timekeeping.</p>
+</div>
+
+<!-- 2.3 FC -->
+<h3>2.3 FC Network</h3>
+<table>
+<thead><tr><th>Driver (Signal)</th><th>Local HR</th><th>HRSS</th><th>WFM</th><th>Local Ops</th><th>Total</th></tr></thead>
+<tbody>
+<tr><td>Manual Punch Correction</td><td>12,386</td><td>10,034</td><td>0</td><td>535</td><td>22,955</td></tr>
+<tr><td>Manual coding missed late arrival</td><td>4,149</td><td>523</td><td>0</td><td>61</td><td>4,733</td></tr>
+<tr><td>Manual coding missed early departure</td><td>3,238</td><td>453</td><td>0</td><td>19</td><td>3,710</td></tr>
+<tr><td>Manual coding Leave of Absence</td><td>943</td><td>1,630</td><td>0</td><td>0</td><td>2,573</td></tr>
+<tr><td>Early departure/long lunch UTO deduct</td><td>988</td><td>536</td><td>0</td><td>9</td><td>1,533</td></tr>
+</tbody></table>
+<div class="ai">
+<div class="tag">AI Insight &mdash; FC Network</div>
+<p>Manual Punch Correction dominates FC at 22,955 actions (54.9% of all FC work). The outsized concentration of punch corrections suggests a systemic process gap rather than individual error &mdash; front-line associates are consistently failing to punch in/out correctly. Processing is shared between Local HR (54%) and HRSS (44%), but Local HR also handles the majority of late arrival (4,149) and early departure (3,238) coding, indicating site-level attendance enforcement is largely manual. HRSS's disproportionate share of Leave of Absence coding (1,630 vs. Local HR's 943) reflects the centralized leave administration workflow.</p>
+</div>
+
+<!-- 2.4 Rx -->
+<h3>2.4 Rx Network</h3>
+<table>
+<thead><tr><th>Driver (Signal)</th><th>Local HR</th><th>HRSS</th><th>WFM</th><th>Local Ops</th><th>Total</th></tr></thead>
+<tbody>
+<tr><td>Manual Punch Correction</td><td>1,416</td><td>1,146</td><td>456</td><td>184</td><td>3,202</td></tr>
+<tr><td>Time spent manually coding VTO</td><td>782</td><td>28</td><td>0</td><td>13</td><td>823</td></tr>
+<tr><td>Manual coding missed late arrival</td><td>602</td><td>44</td><td>0</td><td>44</td><td>690</td></tr>
+<tr><td>Early departure/long lunch UTO deduct</td><td>545</td><td>44</td><td>1</td><td>19</td><td>609</td></tr>
+<tr><td>Manual coding to prevent UTO (Meal Break)</td><td>387</td><td>36</td><td>0</td><td>12</td><td>435</td></tr>
+</tbody></table>
+<div class="ai">
+<div class="tag">AI Insight &mdash; Rx Network</div>
+<p>Rx produced 6,810 rework actions this period at a 29.7% defect rate, consuming an estimated 113.5 FTE hours. Manual Punch Correction is again the #1 driver (3,202 actions, 47% of Rx volume). Unlike FC, Rx has meaningful WFM involvement (456 punch corrections). VTO coding (823 actions) is almost entirely Local HR &mdash; this is a strong candidate for automation since voluntary time off follows predictable rules. Processing responsibility is shared across all four actor groups, with Local HR handling the largest share (65%).</p>
+</div>
+
+<!-- 2.5 CC -->
+<h3>2.5 CC Network</h3>
+<table>
+<thead><tr><th>Driver (Signal)</th><th>Local HR</th><th>HRSS</th><th>WFM</th><th>Local Ops</th><th>Total</th></tr></thead>
+<tbody>
+<tr><td>Manual Punch Correction</td><td>0</td><td>2,206</td><td>3,618</td><td>13</td><td>5,837</td></tr>
+<tr><td>Early departure/long lunch UTO deduct</td><td>3</td><td>16</td><td>3,317</td><td>0</td><td>3,336</td></tr>
+<tr><td>Time spent manually coding VTO</td><td>0</td><td>0</td><td>2,957</td><td>0</td><td>2,957</td></tr>
+<tr><td>Manual coding Sick Time</td><td>0</td><td>9</td><td>2,342</td><td>0</td><td>2,351</td></tr>
+<tr><td>Manual coding Leave of Absence</td><td>0</td><td>905</td><td>1,187</td><td>0</td><td>2,092</td></tr>
+</tbody></table>
+<div class="ai">
+<div class="tag">AI Insight &mdash; CC Network</div>
+<p>CC is structurally different from FC/Rx: WFM handles 80% of all CC timecard work (14,254 of 17,827 actions), and Local HR is essentially absent (9 actions total). The 14.8% defect rate &mdash; the lowest in the network &mdash; reflects WFM's governance-heavy workflow. However, WFM still produced 3,618 punch corrections, 3,317 UTO deductions, and 2,957 VTO entries. These repetitive, rule-based actions are prime automation candidates. If WFM's VTO and UTO coding could be automated, the network would eliminate ~6,274 manual actions per week.</p>
+</div>
+
+<!-- 2.6 CVC -->
+<h3>2.6 CVC Network</h3>
+<table>
+<thead><tr><th>Driver (Signal)</th><th>Local HR</th><th>HRSS</th><th>WFM</th><th>Local Ops</th><th>Total</th></tr></thead>
+<tbody>
+<tr><td>Manual Punch Correction</td><td>24</td><td>230</td><td>65</td><td>380</td><td>699</td></tr>
+<tr><td>Manual coding to prevent UTO (Meal Break)</td><td>3</td><td>107</td><td>0</td><td>13</td><td>123</td></tr>
+<tr><td>Manual coding Call Off</td><td>1</td><td>65</td><td>0</td><td>8</td><td>74</td></tr>
+<tr><td>Manual coding No Call No Show</td><td>0</td><td>54</td><td>0</td><td>0</td><td>54</td></tr>
+<tr><td>Time spent manually coding VTO</td><td>0</td><td>2</td><td>0</td><td>43</td><td>45</td></tr>
+</tbody></table>
+<div class="ai">
+<div class="tag">AI Insight &mdash; CVC Network</div>
+<p>CVC is the smallest BU (1,116 actions, 1.7% of network) but has the <strong>worst defect rate at 47.5%</strong> (Red) and the highest historical correction rate at 22.8%. Local Ops is the dominant actor in CVC (520 actions, 46.6% of CVC volume) with a heavy concentration in punch corrections (380). HRSS handles the governance/compliance work (meal break, call-off, NCNS coding). The ATLD site alone contributed 152 actions at 75% defect &mdash; this single site is driving the entire CVC alarm. Immediate coaching at ATLD on punch discipline and timely paycode entry is the highest-impact action available.</p>
+</div>
+
+<!-- 2.7 HRSS -->
+<h3>2.7 HRSS Workload &mdash; By Business Unit</h3>
+<p class="note">HRSS supports all BUs centrally. This view shows where HRSS is directing its effort.</p>
+<table>
+<thead><tr><th>Driver (Signal)</th><th>CC</th><th>CVC</th><th>FC</th><th>Rx</th><th>Total</th></tr></thead>
+<tbody>
+<tr><td>Manual Punch Correction</td><td>2,206</td><td>230</td><td>10,034</td><td>1,146</td><td>13,616</td></tr>
+<tr><td>Manual coding Leave of Absence</td><td>905</td><td>1</td><td>1,630</td><td>159</td><td>2,695</td></tr>
+<tr><td>Weather-related event coding</td><td>0</td><td>0</td><td>738</td><td>81</td><td>819</td></tr>
+<tr><td>Early departure/long lunch UTO deduct</td><td>16</td><td>2</td><td>536</td><td>44</td><td>598</td></tr>
+<tr><td>Meal Break UTO prevention</td><td>0</td><td>107</td><td>454</td><td>36</td><td>597</td></tr>
+</tbody></table>
+<div class="ai">
+<div class="tag">AI Insight &mdash; HRSS Workload</div>
+<p>HRSS processed 21,554 actions this period, consuming an estimated 216.7 FTE hours. 63.2% of HRSS effort is directed at FC (13,616 punch corrections alone). Leave of Absence coding is HRSS's second-largest driver (2,695 actions) and is almost entirely FC-bound (1,630 actions) &mdash; this reflects the centralized leave administration model. HRSS's 17.4% defect rate is the second-lowest behind CC, indicating that HRSS acts more as a governance and compliance layer than a rework engine. However, the 8.7% historical correction rate for HRSS actions (Yellow) warrants investigation &mdash; HRSS may be processing retroactive leave adjustments that arrive after payroll close.</p>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 3 ===== -->
+<h2 id="s3">Section 3: Recommended Actions &amp; Path to Green</h2>
+<p class="note">Each recommendation is triggered by a quantitative threshold, not subjective judgment.</p>
+
+<div class="rec">
+<div class="rt">1. Coach Spike Sites on Punch Discipline &amp; Timekeeping Accuracy</div>
+<div class="trg"><strong>Trigger:</strong> Multiple sites breached their 13-week UCL this week (see Section 5).</div>
+<div class="act"><strong>Priority Sites:</strong> ATLD (CVC, 75% defect, 407K DPMO), CLT1 (FC, 58.4%, 198K DPMO), MCI1 (FC, 48.3%, 175K DPMO).<br><strong>Action:</strong> Schedule targeted coaching sessions with site HR leads focused on the dominant rework driver (Manual Punch Correction) at each location. Review shift-start procedures and punch reminder mechanisms.</div>
+</div>
+
+<div class="rec">
+<div class="rt">2. Investigate &amp; Remediate 0% Comment Compliance (CRITICAL)</div>
+<div class="trg"><strong>Trigger:</strong> Documentation rate is 0.0% on 11,373 high-risk rework actions across all BUs.</div>
+<div class="act"><strong>Action:</strong> This is almost certainly a <strong>data extraction or UKG field mapping issue</strong> rather than a behavioral gap &mdash; it is statistically implausible that zero comments were added across 67,543 actions. Investigate whether AUDIT_COMMENT_TEXT and AUDIT_NOTE_TEXT are being populated in the UKG data feed. If the fields are genuinely empty, escalate to the UKG integration team immediately. If the fields are populated but not captured by this query, the base CTE's HAS_COMMENT logic needs review.</div>
+</div>
+
+<div class="rec">
+<div class="rt">3. Address CVC Historical Correction Rate (22.8% &mdash; Red)</div>
+<div class="trg"><strong>Trigger:</strong> CVC historical correction rate (22.8%) exceeds the 10% Red threshold by &gt;2x.</div>
+<div class="act"><strong>Action:</strong> Audit the CVC pay period close process. Nearly 1 in 4 CVC actions is a retroactive payroll fix, concentrated at ATLD. Ensure all attendance codes are finalized before payroll transmission. Escalate to CVC site leadership for root cause review.</div>
+</div>
+
+<div class="rec">
+<div class="rt">4. Explore Automation for WFM Repetitive Tasks in CC</div>
+<div class="trg"><strong>Trigger:</strong> WFM handles 14,254 CC actions (80% of CC volume), with 6,274 being rule-based VTO/UTO entries.</div>
+<div class="act"><strong>Action:</strong> Pilot automated VTO and UTO deduction workflows for CC sites. If successful, this would eliminate ~6,274 manual actions per week (~104 FTE hours), improving WFM capacity for higher-value governance work.</div>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 4 ===== -->
+<h2 id="s4">Section 4: Historical Corrections (Retro-Pay Risk)</h2>
+<p class="note"><strong>What is a Historical Correction?</strong> An HR-initiated change to a payroll record from a previous pay period that has already been transmitted. These are the most costly type of rework &mdash; they require retroactive payroll entries and often signal a process or policy breakdown upstream.</p>
+
+<p>There were <strong>1,875 Historical Corrections</strong> this week, representing HR retroactively touching closed pay periods.</p>
+
+<ul style="margin:1rem 0 1rem 1.5rem;font-size:.9rem">
+<li><strong>Attendance Enforcement (671 actions):</strong> Indicating local managers or HR failed to code lates/absences prior to the payroll active window closing. This is the #1 retro-pay driver this week.</li>
+<li><strong>Core Pay &amp; Missing Time (358 actions):</strong> High Friction &mdash; indicating employees required retroactive payroll deposits for missed regular, premium, or overtime pay.</li>
+<li><strong>Leave &amp; Compliance Lag (351 actions):</strong> Standard expected lag pending documentation (FMLA, Accommodations). Typically the hardest to reduce due to external approval dependencies.</li>
+<li><strong>Schedule &amp; Unpaid True-Ups (328 actions):</strong> Indicating broad operational changes (VTO, Weather) were not processed prior to transmission.</li>
+<li><strong>Other (167 actions):</strong> Various other discrepancies requiring retroactive correction.</li>
+</ul>
+
+<div class="ai">
+<div class="tag">AI Insight &mdash; Historical Corrections</div>
+<p>Attendance Enforcement is the leading cause of retroactive payroll changes (671 of 1,875 = 35.8%). These are preventable &mdash; late arrival and call-off codes should be entered during the active pay period, not after close. The 358 Core Pay corrections are the highest-friction items (each scored at 5 friction points), representing cases where employees didn't receive correct pay on time. Combined, these two categories consumed an estimated 85.8 FTE hours of retroactive processing.</p>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 5 ===== -->
+<h2 id="s5">Section 5: Hotspots &amp; High-Friction Drivers</h2>
+<p class="note"><strong>How to read this section:</strong> Sites are flagged using (1) Statistical Spike &mdash; current-week defect rate exceeds 13-week Mean + 1 SD (UCL), and (2) DPMO &mdash; Defects per Million expected punch opportunities (assuming ~20 punch events per employee per week), allowing fair comparison across sites of different sizes.</p>
+
+<h3>5.1 Defect Rate Spike Sites</h3>
+<p class="note">Each site's current-week defect rate vs. trailing 13-week UCL. Sites exceeding UCL are flagged <span class="dot r"></span>.</p>
+
+<p style="font-size:.9rem;margin:.5rem 0"><strong>ATLD</strong> (CVC) &mdash; Defect Rate 75.0% vs UCL 63.4%; DPMO 407,143 <span class="dot r"></span></p>
+<p style="font-size:.9rem;margin:.5rem 0"><strong>AUSA</strong> (CVC) &mdash; Defect Rate 68.3% vs UCL 51.8%; DPMO 146,429 <span class="dot r"></span></p>
+<p style="font-size:.9rem;margin:.5rem 0"><strong>ATLA</strong> (CVC) &mdash; Defect Rate 67.3% vs UCL 55.8%; DPMO 145,833 <span class="dot r"></span></p>
+<p style="font-size:.9rem;margin:.5rem 0"><strong>FLLB</strong> (CVC) &mdash; Defect Rate 64.9% vs UCL 52.4%; DPMO see table <span class="dot r"></span></p>
+<p style="font-size:.9rem;margin:.5rem 0"><strong>CLT1</strong> (FC) &mdash; Defect Rate 58.4% vs UCL 62.3%; DPMO 197,724 (at ceiling, not technically spiking)</p>
+<p style="font-size:.9rem;margin:.5rem 0"><strong>HOU1</strong> (FC) &mdash; Defect Rate 37.9% vs UCL 49.9%; DPMO see table (elevated but below UCL)</p>
+
+<h3>5.2 Highest Burden Sites (Top 10 by DPMO)</h3>
+
+<div class="warn">
+<strong>ATLD</strong> (CVC) experienced the highest rework burden this week. Local Ops performed <strong>152 actions</strong> reaching <strong>407,143 DPMO</strong> with a <strong>75% defect rate</strong>. <strong>CLT1</strong> (FC) followed with 5,056 total actions and <strong>197,724 DPMO</strong>.
+</div>
+
+<table>
+<thead><tr><th>Site</th><th>BU</th><th>Actions</th><th>Rework</th><th>TMs</th><th>DPMO</th><th>Defect %</th></tr></thead>
+<tbody>
+<tr><td>ATLD</td><td>CVC</td><td>152</td><td>114</td><td>14</td><td>407,143</td><td>75.0%<span class="dot r"></span></td></tr>
+<tr><td>CLT1</td><td>FC</td><td>5,056</td><td>2,954</td><td>747</td><td>197,724</td><td>58.4%<span class="dot r"></span></td></tr>
+<tr><td>AVP6</td><td>Rx</td><td>464</td><td>227</td><td>62</td><td>183,065</td><td>48.9%<span class="dot r"></span></td></tr>
+<tr><td>MCI1</td><td>FC</td><td>5,488</td><td>2,649</td><td>756</td><td>175,198</td><td>48.3%<span class="dot r"></span></td></tr>
+<tr><td>MDT1</td><td>FC</td><td>3,539</td><td>1,676</td><td>484</td><td>173,141</td><td>47.4%<span class="dot r"></span></td></tr>
+<tr><td>BNA1</td><td>FC</td><td>4,936</td><td>2,195</td><td>681</td><td>161,160</td><td>44.5%<span class="dot r"></span></td></tr>
+<tr><td>ATLB</td><td>CVC</td><td>75</td><td>30</td><td>10</td><td>150,000</td><td>40.0%<span class="dot y"></span></td></tr>
+<tr><td>AUSA</td><td>CVC</td><td>60</td><td>41</td><td>14</td><td>146,429</td><td>68.3%<span class="dot r"></span></td></tr>
+<tr><td>ATLA</td><td>CVC</td><td>52</td><td>35</td><td>12</td><td>145,833</td><td>67.3%<span class="dot r"></span></td></tr>
+<tr><td>ATLC</td><td>CVC</td><td>54</td><td>25</td><td>9</td><td>138,889</td><td>46.3%<span class="dot r"></span></td></tr>
+</tbody></table>
+
+<div class="ai">
+<div class="tag">AI Insight &mdash; Hotspots</div>
+<p>The DPMO leaderboard reveals two distinct patterns: (1) <strong>CVC clinics</strong> (ATLD, ATLB, AUSA, ATLA, ATLC) dominate the top 10 despite low absolute volumes &mdash; these small sites have extreme per-capita error rates. ATLD's 407K DPMO means if this site had 1 million expected punch opportunities, 407,000 would be defects. (2) <strong>Large FC sites</strong> (CLT1, MCI1, MDT1, BNA1) appear due to sheer volume &mdash; their defect rates (44&ndash;58%) are high but less extreme per capita. The recommended approach differs: CVC sites need targeted coaching on basic timekeeping, while FC sites need process automation to reduce the manual punch correction burden.</p>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 6 ===== -->
+<h2 id="s6">Section 6: Event Documentation (Comment Usage)</h2>
+<p class="note"><strong>Why this matters:</strong> When HR makes a high-risk change (punch add/edit, pay code adjustment, historical correction), a comment explaining why is required. Comments help auditors, managers, and the AI agent understand root cause.</p>
+
+<p>Identified <strong>11,373 High-Risk Rework actions</strong> requiring documentation.</p>
+<p style="font-size:1.1rem;font-weight:700;color:var(--red);margin:.75rem 0">Network Compliance Rate: 0.0% <span class="dot r"></span> (Below Target)</p>
+
+<table>
+<thead><tr><th>Business Unit</th><th>High-Risk Actions</th><th>Comments Added</th><th>Documentation Rate %</th></tr></thead>
+<tbody>
+<tr><td>CC</td><td>4,250</td><td>0</td><td>0.0%<span class="dot r"></span></td></tr>
+<tr><td>CVC</td><td>484</td><td>0</td><td>0.0%<span class="dot r"></span></td></tr>
+<tr><td>FC</td><td>5,941</td><td>0</td><td>0.0%<span class="dot r"></span></td></tr>
+<tr><td>Rx</td><td>698</td><td>0</td><td>0.0%<span class="dot r"></span></td></tr>
+</tbody></table>
+
+<div class="warn">
+<strong>Critical Finding: 0.0% comment compliance across all BUs and all actor groups.</strong>
+<p style="margin-top:.5rem">This is almost certainly a <strong>data extraction or UKG field mapping issue</strong>, not a behavioral gap. It is statistically implausible that zero comments were added across 67,543 actions by hundreds of HR professionals. The AUDIT_COMMENT_TEXT and AUDIT_NOTE_TEXT fields in the UKG data feed should be investigated immediately. If these fields are populated in UKG but not flowing to Snowflake, the ETL pipeline needs remediation. If the fields are genuinely empty in UKG, a process compliance campaign is needed &mdash; but data integrity should be verified first.</p>
+</div>
+
+<hr>
+
+<!-- ===== APPENDIX A ===== -->
+<h2 id="appA">Appendix A: Governance Activity by Actor Group</h2>
+<p class="note">Governance actions are expected, non-defect activities &mdash; timecard approvals, manager reviews, exception acknowledgements. This table shows each Actor Group's time on governance vs. corrections.</p>
+
+<table>
+<thead><tr><th>Actor Group</th><th>Governance</th><th>Gov. Hrs</th><th>Gov. %</th><th>Corrections</th><th>Corr. Hrs</th><th>Corr. %</th><th>Total</th></tr></thead>
+<tbody>
+<tr><td>Local HR</td><td>14,661</td><td>122.2</td><td>49.4%</td><td>15,027</td><td>158.4</td><td>50.6%</td><td>29,688</td></tr>
+<tr><td>HRSS</td><td>4,403</td><td>36.7</td><td>20.4%</td><td>3,752</td><td>180.0</td><td>17.4%</td><td>21,554</td></tr>
+<tr><td>WFM</td><td>12,676</td><td>105.6</td><td>85.8%</td><td>2,100</td><td>30.3</td><td>14.2%</td><td>14,776</td></tr>
+<tr><td>Local Ops</td><td>653</td><td>5.4</td><td>42.8%</td><td>871</td><td>10.7</td><td>57.1%</td><td>1,525</td></tr>
+</tbody></table>
+
+<p class="note"><strong>WFM</strong> spent the most time on governance this week (12,676 actions / 105.6 hrs / 85.8% of their total workload), primarily from timecard approvals and manager reviews in the CC network.</p>
+
+<hr>
+
+<!-- ===== APPENDIX B ===== -->
+<h2 id="appB">Appendix B: Glossary of Metric Definitions</h2>
+
+<div class="gl"><strong>1. Full-Time Equivalent (FTE) Hours</strong><br>Translates raw click volume into real labor cost. 40 FTE Hours = one full-time employee working an entire week doing nothing but manual data entry.</div>
+<div class="gl"><strong>2. Friction Time Cost</strong><br>Every UKG action is weighted by complexity: Historical Corrections = 5 pts (~5 min), Standard Edits/Deletes = 1 pt (~1 min), Governance = 0.5 pts (~30 sec). Total points &divide; 60 = Friction Hours.</div>
+<div class="gl"><strong>3. Defect Rate</strong><br>% of total HR workload dedicated to fixing mistakes. Any correction, edit, or delete is a defect &mdash; the timecard should have been correct the first time. Approvals/reviews (Governance) are not penalized.</div>
+<div class="gl"><strong>4. DPMO (Defects Per Million Opportunities)</strong><br>Standardized Six Sigma metric. Calculates how many defects would occur if a site had exactly 1,000,000 expected punch opportunities, allowing a 50-person site to be fairly compared against a 5,000-person site.</div>
+
+<hr>
+
+<!-- ===== AGENT OBSERVATIONS ===== -->
+<h2 id="agent">Agent Observations</h2>
+<div class="ai">
+<div class="tag">Agent Observations</div>
+<ol style="margin:.5rem 0 0 1.25rem;font-size:.88rem">
+<li style="margin:.5rem 0"><strong>Comment Compliance Data Anomaly:</strong> 0% across all BUs is almost certainly a data pipeline issue, not a behavioral one. Recommend immediate investigation of AUDIT_COMMENT_TEXT and AUDIT_NOTE_TEXT field population in the UKG-to-Snowflake ETL. This blocks the agent's ability to provide root cause commentary.</li>
+<li style="margin:.5rem 0"><strong>Week of 02/16 Partial Data:</strong> Only 8,150 rows vs. ~70K for full weeks. This week should be excluded from any week-over-week comparisons and 13-week baseline calculations. The 41.3% defect rate is artificially inflated.</li>
+<li style="margin:.5rem 0"><strong>CVC as Outlier:</strong> CVC's 1,116 actions are only 1.7% of network volume, but its 47.5% defect rate and 22.8% historical correction rate are by far the worst. Small BU, large process gap. ATLD alone (14 TMs, 152 actions, 75% defect) is driving the alarm.</li>
+<li style="margin:.5rem 0"><strong>HRSS Friction Hours Anomaly:</strong> HRSS shows 180.0 Correction Hours despite only 3,752 correction actions (vs. Local HR's 158.4 hours on 15,027 actions). This suggests HRSS is handling a disproportionate share of high-friction items (Historical Corrections scored at 5 pts each). The 8.7% historical correction rate for HRSS confirms this.</li>
+<li style="margin:.5rem 0"><strong>Automation Opportunity:</strong> WFM's CC workload includes ~6,274 rule-based VTO/UTO entries per week. Automating these would free ~104 FTE hours/week and reduce the network's total action volume by 9.3%.</li>
+</ol>
+</div>
+
+<hr>
+<p style="text-align:center;color:var(--dim);font-size:.75rem;margin-top:2rem">&copy; 2026 ORBIT HR Workload Lens &bull; Generated by Phoenix Agent (POC) &bull; Data as of 03/01/2026</p>
+
+</body>
+</html>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HR Workload Lens — Insights &amp; Recommendations</title>
+  <style>
+    :root {
+      --ink:#1a1f2b; --body:#3a3f4c; --muted:#717888; --border:#e2e6ee;
+      --panel:#ffffff; --bg:#f7f8fb;
+      --blue:#0d5f73; --blue-soft:#e4f3f7; --blue-mid:#b0dce8;
+      --green:#14643a; --green-bg:#e6f4ea;
+      --red:#9b2c2c; --red-bg:#fdf0f0;
+      --warn:#7a3e00; --warn-bg:#fff7ed;
+      --purple:#5b21b6; --purple-bg:#f3edff;
+      --shadow:0 4px 20px rgba(20,30,50,0.06);
+    }
+    *{box-sizing:border-box;margin:0;}
+    body{font-family:Aptos,"Segoe UI",Calibri,sans-serif;color:var(--body);background:var(--bg);line-height:1.68;font-size:15.5px;}
+    .wrap{max-width:860px;margin:0 auto;padding:40px 28px 64px;}
+
+    /* ── Header ── */
+    .header{background:var(--ink);color:#fff;padding:36px 36px 28px;border-radius:16px;margin-bottom:36px;}
+    .header .kicker{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-mid);font-weight:700;margin-bottom:8px;}
+    .header h1{font-size:28px;font-weight:700;line-height:1.2;margin-bottom:6px;}
+    .header .subtitle{font-size:15px;color:#a8b0c0;line-height:1.5;}
+    .header .meta{margin-top:16px;font-size:12px;color:#8090a8;border-top:1px solid #334;padding-top:12px;}
+
+    /* ── Summary box ── */
+    .summary-box{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:28px 30px;margin-bottom:32px;box-shadow:var(--shadow);}
+    .summary-box h2{font-size:17px;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;font-weight:700;}
+    .summary-box p{font-size:15.5px;color:var(--body);line-height:1.72;margin:0;}
+
+    /* ── KPI strip ── */
+    .kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:36px;}
+    .kpi{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 14px;text-align:center;box-shadow:var(--shadow);}
+    .kpi .label{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px;}
+    .kpi .value{font-size:28px;font-weight:700;color:var(--ink);}
+    .kpi .note{font-size:12.5px;color:var(--muted);margin-top:4px;}
+
+    /* ── Section headings ── */
+    h2.section{font-size:22px;color:var(--ink);margin:44px 0 6px;padding-bottom:0;font-weight:700;}
+    .section-sub{font-size:13.5px;color:var(--muted);margin-bottom:18px;}
+    h3{font-size:17px;color:var(--ink);margin:28px 0 8px;font-weight:700;}
+
+    p{margin:0 0 14px;}
+    strong{color:var(--ink);}
+
+    /* ── Focus area cards ── */
+    .focus{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:28px 28px 24px;margin:20px 0;box-shadow:var(--shadow);position:relative;overflow:hidden;}
+    .focus::before{content:'';position:absolute;top:0;left:0;width:5px;height:100%;border-radius:14px 0 0 14px;}
+    .focus.blue::before{background:var(--blue);}
+    .focus.green::before{background:var(--green);}
+    .focus.purple::before{background:var(--purple);}
+    .focus.warn::before{background:var(--warn);}
+    .focus .focus-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;flex-wrap:wrap;gap:6px;}
+    .focus .focus-header h3{margin:0;font-size:18px;}
+    .focus .focus-tag{font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;padding:3px 10px;border-radius:6px;white-space:nowrap;}
+    .focus .focus-tag.ss{background:var(--blue-soft);color:var(--blue);}
+    .focus .focus-tag.def{background:var(--red-bg);color:var(--red);}
+    .focus .focus-tag.pr{background:var(--warn-bg);color:var(--warn);}
+
+    /* ── Insight rows inside focus cards ── */
+    .insight-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;}
+    .insight-stat{background:var(--bg);border-radius:10px;padding:14px 16px;text-align:center;}
+    .insight-stat .big{font-size:26px;font-weight:700;color:var(--ink);}
+    .insight-stat .desc{font-size:12px;color:var(--muted);margin-top:2px;}
+
+    /* ── Recommendation blocks ── */
+    .rec{border-left:4px solid var(--green);background:var(--green-bg);padding:16px 20px;border-radius:0 10px 10px 0;margin:16px 0 8px;}
+    .rec p{margin:0 0 6px;}
+    .rec p:last-child{margin:0;}
+    .rec strong{color:var(--green);}
+
+    /* ── Tables ── */
+    table{width:100%;border-collapse:collapse;margin:16px 0 18px;font-size:13.5px;}
+    th,td{padding:8px 10px;border-bottom:1px solid var(--border);text-align:left;}
+    th{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:2px solid var(--border);}
+    td.r{text-align:right;font-variant-numeric:tabular-nums;}
+    tr.total{font-weight:700;}
+    tr.total td{border-top:2px solid var(--ink);}
+    .down{color:var(--green);} .up{color:var(--red);}
+    .bar{display:inline-block;height:8px;border-radius:4px;vertical-align:middle;margin-right:6px;}
+    .bar-blue{background:var(--blue);} .bar-green{background:var(--green);} .bar-red{background:var(--red);} .bar-warn{background:var(--warn);}
+
+    /* ── Callout ── */
+    .callout{background:var(--purple-bg);border-left:4px solid var(--purple);padding:18px 22px;border-radius:0 10px 10px 0;margin:20px 0;}
+    .callout p:last-child{margin:0;}
+
+    hr{border:none;border-top:1px solid var(--border);margin:36px 0;}
+
+    .footer{margin-top:48px;padding-top:16px;border-top:2px solid var(--ink);font-size:11.5px;color:var(--muted);text-align:center;}
+
+    @media print{body{background:#fff;font-size:11pt;} .wrap{max-width:100%;padding:0;} .header{border-radius:0;}}
+    @media(max-width:700px){.wrap{padding:20px 14px 40px;} .kpi-strip{grid-template-columns:1fr 1fr;} .insight-row{grid-template-columns:1fr;} .header h1{font-size:22px;}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ═══════ HEADER ═══════ -->
+  <div class="header">
+    <div class="kicker">ORBIT Program &bull; HR Workload Lens</div>
+    <h1>What&rsquo;s Driving Our Ticket Volume &mdash;<br>and How We Stabilize It</h1>
+    <div class="subtitle">Insights and recommendations from a two-week classification of 4,168 HR tickets integrated with UKG operational data</div>
+    <div class="meta">
+      Prepared for HR Operations Leadership &nbsp;|&nbsp; March 10, 2026 &nbsp;|&nbsp; Weeks 9&ndash;10 (Feb 22 &ndash; Mar 7, 2026)<br>
+      Scope: Attendance Inquiry &bull; CC Time &amp; Attendance &bull; FC General Inquiry &bull; Timesheet Inquiry
+    </div>
+  </div>
+
+  <!-- ═══════ EXECUTIVE SUMMARY ═══════ -->
+  <div class="summary-box">
+    <h2>Executive Summary</h2>
+    <p>We classified all 4,168 tickets opened across four HR services during Weeks 9 and 10 to understand what is driving the week-to-week volume swings that appear in the OBR. The answer is clear: <strong>60.3% of tickets (2,514) are contacts where the Chewtopian already had a self-service tool available</strong> &mdash; the UKG app, the timeclock, or Workday &mdash; but chose to call, email, or leave a voicemail instead. The two biggest drivers are TMs not using timeclocks for punches (818 tickets, 19.6% of all volume) and TMs calling in absences instead of using the UKG app (749 tickets, 18.0%). These two behaviors alone generate 1,567 tickets every two weeks and account for the majority of week-to-week variance. Meanwhile, UKG timecard audit data shows HR processes 67,543 manual actions per week underneath these tickets &mdash; work that is invisible to the OBR. The ticket queue is not a measure of HR workload; it is a measure of TM self-service adoption. The recommendations in this report focus on four areas: timeclock compliance, UKG app and desktop adoption for time-off and balance inquiries, targeted site campaigns at the highest-volume locations, and a system fix for the time-off coding defect that generates 250 tickets every two weeks. If executed, these actions can reduce weekly ticket volume by an estimated 18&ndash;30% and narrow the WoW variance that triggers recurring questions about what changed.</p>
+  </div>
+
+  <!-- ═══════ HEADLINE NUMBERS ═══════ -->
+  <div class="kpi-strip">
+    <div class="kpi">
+      <div class="label">Tickets Classified</div>
+      <div class="value">4,168</div>
+      <div class="note">2 weeks, 4 services</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Self-Service Eligible</div>
+      <div class="value" style="color:var(--blue)">60.3%</div>
+      <div class="note">2,514 tickets</div>
+    </div>
+    <div class="kpi">
+      <div class="label">WoW Volume Change</div>
+      <div class="value" style="color:var(--green)">&minus;11.1%</div>
+      <div class="note">2,206 &rarr; 1,962</div>
+    </div>
+    <div class="kpi">
+      <div class="label">UKG Actions / Week</div>
+      <div class="value">67.5K</div>
+      <div class="note">761 FTE hrs consumed</div>
+    </div>
+  </div>
+
+  <!-- ═══════ WHAT WE LOOKED AT ═══════ -->
+  <h2 class="section">What We Found: The Classification Breakdown</h2>
+  <p class="section-sub">Every ticket was reviewed and classified into one of three categories based on whether the TM had a self-service option available.</p>
+
+  <table>
+    <thead><tr><th>Classification</th><th>Total</th><th>% of All Tickets</th><th>Wk 9</th><th>Wk 10</th><th>WoW Change</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Self Service Eligible</strong></td><td class="r"><strong>2,514</strong></td><td class="r"><strong>60.3%</strong></td><td class="r">1,319</td><td class="r">1,195</td><td class="r down">&minus;124 (&minus;9.4%)</td></tr>
+      <tr><td>Process Required</td><td class="r">1,199</td><td class="r">28.8%</td><td class="r">658</td><td class="r">541</td><td class="r down">&minus;117 (&minus;17.8%)</td></tr>
+      <tr><td>Defect</td><td class="r">359</td><td class="r">8.6%</td><td class="r">180</td><td class="r">179</td><td class="r">&minus;1 (&minus;0.6%)</td></tr>
+      <tr><td>Unclear</td><td class="r">96</td><td class="r">2.3%</td><td class="r">49</td><td class="r">47</td><td class="r">&minus;2 (&minus;4.1%)</td></tr>
+      <tr class="total"><td>Total</td><td class="r">4,168</td><td class="r">100%</td><td class="r">2,206</td><td class="r">1,962</td><td class="r down">&minus;244 (&minus;11.1%)</td></tr>
+    </tbody>
+  </table>
+
+  <p>The takeaway: <strong>six out of every ten tickets represent a Chewtopian contacting HR for something they could have done themselves.</strong> The tools exist today &mdash; the UKG mobile app, desktop UKG access, timeclocks at every site, and Workday. The gap is awareness and adoption, not tooling. Meanwhile, only 28.8% of tickets are work that genuinely requires HR, and just 8.6% are system defects. The variance leadership sees each week is almost entirely driven by fluctuations in TM self-service behavior &mdash; how many people chose to call instead of using the app on a given week.</p>
+
+  <hr>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- FOCUS AREA 1: MISSED PUNCHES -->
+  <!-- ═══════════════════════════════════════════ -->
+  <h2 class="section">Focus Area 1: Missed Punches &amp; Timeclock Compliance</h2>
+  <p class="section-sub">The single largest ticket category &mdash; and the single largest UKG workload driver &mdash; is preventable.</p>
+
+  <div class="focus blue">
+    <div class="focus-header">
+      <h3>Chewtopians Are Not Using the Timeclock</h3>
+      <span class="focus-tag ss">Self Service Eligible</span>
+    </div>
+
+    <div class="insight-row">
+      <div class="insight-stat">
+        <div class="big">818</div>
+        <div class="desc">Missed punch tickets in 2 weeks<br>(19.6% of all tickets)</div>
+      </div>
+      <div class="insight-stat">
+        <div class="big">32,693</div>
+        <div class="desc">Manual punch corrections in UKG per week<br>(48% of all FC HR actions)</div>
+      </div>
+    </div>
+
+    <p>Missed punches are the #1 ticket category and the #1 UKG workload driver across the network. When a TM fails to clock in or out, it creates two problems: first, the TM may submit a ticket asking HR to fix it (818 tickets over two weeks); second, HR proactively corrects the timecard regardless of whether a ticket is filed (32,693 corrections per week in UKG). The ticket represents only <strong>2.5% of the actual correction workload</strong> &mdash; for every one missed-punch ticket, HR silently fixes approximately 80 others.</p>
+
+    <p>This category is remarkably stable week over week (410 vs. 408), meaning it is not driving the variance &mdash; it is the <strong>structural floor</strong> underneath the variance. It makes the baseline high, so that every fluctuation in other categories looks proportionally larger in the OBR.</p>
+
+    <p>The solution is straightforward: <strong>these TMs had a timeclock available and did not use it.</strong></p>
+
+    <div class="rec">
+      <p><strong>Recommendation:</strong> Launch a targeted <strong>timeclock compliance communication campaign</strong> at the top-volume sites (see Focus Area 4). Reinforce timeclock usage through shift-start huddle reminders, visible signage near entry points, and manager accountability for shift-level punch compliance. For CC/CVC locations where physical timeclocks may be less accessible, promote <strong>desktop UKG access</strong> for clocking in/out at workstation start and end of shift.</p>
+      <p><strong>Expected impact:</strong> A 25% improvement in timeclock usage would eliminate ~100 tickets/week and ~8,000 UKG manual corrections/week, returning significant capacity to local HR and WFM teams.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- FOCUS AREA 2: ABSENCE REPORTING -->
+  <!-- ═══════════════════════════════════════════ -->
+  <h2 class="section">Focus Area 2: Absence Reporting &amp; Call-Off Intake</h2>
+  <p class="section-sub">The #1 variance driver. When TMs call in sick, they call HR instead of using the app.</p>
+
+  <div class="focus blue">
+    <div class="focus-header">
+      <h3>Phone Calls and Voicemails Are Driving the Weekly Swing</h3>
+      <span class="focus-tag ss">Self Service Eligible</span>
+    </div>
+
+    <div class="insight-row">
+      <div class="insight-stat">
+        <div class="big">749</div>
+        <div class="desc">Absence call out/report tickets in 2 weeks<br>(18.0% of all tickets)</div>
+      </div>
+      <div class="insight-stat">
+        <div class="big">&minus;20.6%</div>
+        <div class="desc">WoW decline in phone call outs<br>(326 &rarr; 259) &mdash; the #1 variance driver</div>
+      </div>
+    </div>
+
+    <p>When a Chewtopian needs to report an absence, request time off, or call out sick, the UKG mobile app allows them to do this directly. Instead, 749 TMs over two weeks picked up the phone, sent an email, or left a voicemail for HR. This includes:</p>
+
+    <table>
+      <thead><tr><th>Contact Method</th><th>Wk 9</th><th>Wk 10</th><th>Total</th><th>% of Absence Cluster</th></tr></thead>
+      <tbody>
+        <tr><td>Phone call out / absence report</td><td class="r">326</td><td class="r">259</td><td class="r">585</td><td class="r">78.1%</td></tr>
+        <tr><td>Voicemail call out</td><td class="r">52</td><td class="r">38</td><td class="r">90</td><td class="r">12.0%</td></tr>
+        <tr><td>Absence notification via email</td><td class="r">37</td><td class="r">33</td><td class="r">70</td><td class="r">9.3%</td></tr>
+        <tr><td>Other absence-related</td><td class="r">2</td><td class="r">2</td><td class="r">4</td><td class="r">0.5%</td></tr>
+        <tr class="total"><td>Total</td><td class="r">417</td><td class="r">332</td><td class="r">749</td><td class="r">100%</td></tr>
+      </tbody>
+    </table>
+
+    <p>This is the category that swings the most week to week. Phone call outs dropped 20.6% from Week 9 to Week 10, accounting for <strong>45% of the total 244-ticket decline</strong>. Why? Because call-off volume is inherently unpredictable &mdash; a weather event, a flu outbreak, or a quiet week all change how many TMs call in on a given day. There is no intake structure governing this channel, so it fluctuates naturally.</p>
+
+    <p>Weather absences alone generated 162 tickets across both weeks (81 per week, perfectly stable), all classified as self-service eligible &mdash; TMs can report absences through the UKG app regardless of the reason.</p>
+
+    <div class="rec">
+      <p><strong>Recommendation:</strong> Drive adoption of the <strong>UKG mobile app</strong> for absence and call-off submissions. TMs should be trained and reminded that they can submit call outs, time-off requests, and absence notifications directly through the app &mdash; no phone call needed. For Chewtopians who prefer desktop, promote <strong>desktop UKG access</strong> as an alternative self-service channel for submitting time-off requests and reviewing schedules.</p>
+      <p>Pair this with a <strong>communication campaign</strong> at the start of each shift reminding TMs of the self-service options: <em>&ldquo;Need to call out? Use the UKG app. Need to request PTO? Use UKG or Workday. No phone call necessary.&rdquo;</em></p>
+      <p><strong>Expected impact:</strong> Even a 30% adoption shift would deflect ~110 call-out tickets per week and significantly reduce the Monday peak (when absence reporting volume is highest), narrowing WoW variance by approximately 40%.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- FOCUS AREA 3: BALANCE & TIME-OFF VISIBILITY -->
+  <!-- ═══════════════════════════════════════════ -->
+  <h2 class="section">Focus Area 3: Time-Off Balances &amp; Self-Service Visibility</h2>
+  <p class="section-sub">The fastest-growing inquiry type &mdash; TMs are calling HR to ask questions they can answer themselves.</p>
+
+  <div class="focus purple">
+    <div class="focus-header">
+      <h3>Chewtopians Cannot Easily See Their Own Balances</h3>
+      <span class="focus-tag ss">Self Service Eligible</span>
+    </div>
+
+    <div class="insight-row">
+      <div class="insight-stat">
+        <div class="big">+64.9%</div>
+        <div class="desc">WoW growth in balance inquiries<br>(37 &rarr; 61) &mdash; fastest growing category</div>
+      </div>
+      <div class="insight-stat">
+        <div class="big">4,869</div>
+        <div class="desc">Manual UTO deduction actions in UKG/week<br>Each one can trigger a TM inquiry</div>
+      </div>
+    </div>
+
+    <p>PTO/UTO balance inquiries grew 64.9% from Week 9 to Week 10, making this the fastest-growing self-service sub-category. Beyond the 98 tickets specifically tagged as balance inquiries, UTO confusion appears across hundreds of Attendance Inquiry tickets where TMs reference unexpected deductions or negative balances.</p>
+
+    <p>The root cause is visibility. UKG data shows <strong>4,869 manual UTO deduction actions per week</strong> across FC, CC, and Rx. Every one of those manual coding events is an opportunity for a Chewtopian to see an unexpected balance change on their next pay stub and pick up the phone to ask HR what happened. The information is technically available in the UKG app and Workday, but TMs either do not know where to find it or do not trust what they see.</p>
+
+    <p>Time-off requests by email and phone add another 314 tickets over two weeks (TM time-off requests via email: 76, phone TM time requests: 238) &mdash; requests that could have been submitted directly through UKG or desktop UKG access.</p>
+
+    <div class="rec">
+      <p><strong>Recommendation:</strong> Promote <strong>UKG app and desktop UKG access</strong> as the primary channels for TMs to submit time-off requests and review their PTO/UTO balances. Specific actions:</p>
+      <p>(a) Include UKG balance-check instructions in new hire onboarding and annual refresher communications.<br>
+      (b) Post QR codes to the UKG app at site break rooms and time clocks with a simple message: <em>&ldquo;Check your PTO/UTO balance anytime &mdash; no need to call HR.&rdquo;</em><br>
+      (c) For CC/CVC Chewtopians, ensure desktop UKG access is bookmarked on workstations with a one-click path to balance lookup and time-off submission.</p>
+      <p><strong>Expected impact:</strong> Deflecting even 20% of balance and time-off request tickets would remove ~50 tickets/week from the queue and address the fastest-growing demand category before it scales further.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- FOCUS AREA 4: TOP SITES -->
+  <!-- ═══════════════════════════════════════════ -->
+  <h2 class="section">Focus Area 4: Concentrated Volume &mdash; Where to Target First</h2>
+  <p class="section-sub">A small number of sites and teams generate a disproportionate share of ticket volume. Targeted campaigns here will have outsized impact.</p>
+
+  <div class="focus warn">
+    <div class="focus-header">
+      <h3>5 Assignment Groups Generate 51% of All Tickets</h3>
+      <span class="focus-tag pr">Targeted Opportunity</span>
+    </div>
+
+    <table>
+      <thead><tr><th>Assignment Group</th><th>Total Tickets</th><th>% of All</th><th>Self-Service %</th><th>Wk 9</th><th>Wk 10</th><th>WoW Change</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Real Time Analyst Tier I</strong> (CC T&amp;A)</td><td class="r"><strong>1,212</strong></td><td class="r"><strong>29.1%</strong></td><td class="r">72%</td><td class="r">601</td><td class="r">611</td><td class="r">+10 (+1.7%)</td></tr>
+        <tr><td><strong>AVP2 HR</strong></td><td class="r"><strong>262</strong></td><td class="r"><strong>6.3%</strong></td><td class="r">58%</td><td class="r">148</td><td class="r">114</td><td class="r down">&minus;34 (&minus;23.0%)</td></tr>
+        <tr><td><strong>SDF2 HR</strong></td><td class="r"><strong>257</strong></td><td class="r"><strong>6.2%</strong></td><td class="r">65%</td><td class="r">141</td><td class="r">116</td><td class="r down">&minus;25 (&minus;17.7%)</td></tr>
+        <tr><td><strong>HR TM Service Center</strong></td><td class="r"><strong>213</strong></td><td class="r"><strong>5.1%</strong></td><td class="r">60%</td><td class="r">113</td><td class="r">100</td><td class="r down">&minus;13 (&minus;11.5%)</td></tr>
+        <tr><td><strong>PHX2 HR</strong></td><td class="r"><strong>210</strong></td><td class="r"><strong>5.0%</strong></td><td class="r">&mdash;</td><td class="r">112</td><td class="r">98</td><td class="r down">&minus;14 (&minus;12.5%)</td></tr>
+        <tr class="total"><td>Top 5 Subtotal</td><td class="r">2,154</td><td class="r">51.7%</td><td class="r"></td><td class="r">1,115</td><td class="r">1,039</td><td class="r down">&minus;76</td></tr>
+      </tbody>
+    </table>
+
+    <p><strong>Just five assignment groups account for 51.7% of all tickets.</strong> The Real Time Analyst Tier I team (the centralized CC Time &amp; Attendance queue) alone handles 29.1% of total volume &mdash; and 72% of their tickets are self-service eligible. That means <strong>approximately 870 tickets over two weeks in a single queue could have been handled by the TM directly.</strong></p>
+
+    <p>Among FC sites, AVP2 (262 tickets, 6.3%) and SDF2 (257 tickets, 6.2%) are the highest-volume locations. Together with PHX1 (197, 4.7%) and AVP1 (189, 4.5%), the top four FC sites generate <strong>905 tickets &mdash; 21.7% of all volume.</strong> Their self-service rates range from 58% to 74%, meaning 500&ndash;600 of those tickets were preventable through existing tools.</p>
+
+    <p>Several smaller sites show exceptionally high self-service rates, suggesting strong campaign opportunities:</p>
+
+    <table>
+      <thead><tr><th>Site</th><th>Total Tickets</th><th>Self-Service %</th><th>Implication</th></tr></thead>
+      <tbody>
+        <tr><td>HOU1 HR</td><td class="r">70</td><td class="r"><strong>87%</strong></td><td>Nearly 9 in 10 tickets preventable</td></tr>
+        <tr><td>CFC1 HR</td><td class="r">111</td><td class="r"><strong>85%</strong></td><td>High volume, very high SS opportunity</td></tr>
+        <tr><td>MDT1 HR</td><td class="r">116</td><td class="r"><strong>85%</strong></td><td>Largest decline site (&minus;22), high SS</td></tr>
+        <tr><td>DAY1 HR</td><td class="r">71</td><td class="r"><strong>83%</strong></td><td>Fastest growing site (+15 WoW) &mdash; flag</td></tr>
+        <tr><td>RNO1 HR</td><td class="r">149</td><td class="r"><strong>81%</strong></td><td>High volume, 4 out of 5 preventable</td></tr>
+      </tbody>
+    </table>
+
+    <div class="rec">
+      <p><strong>Recommendation:</strong> Run <strong>targeted self-service adoption campaigns</strong> at the highest-volume and highest-self-service-rate locations:</p>
+      <p><strong>Tier 1 &mdash; Highest volume (run first):</strong> Real Time Analyst Tier I (CC T&amp;A), AVP2, SDF2, PHX1, AVP1. These five generate 2,064 tickets across two weeks (49.5% of total). Focus on timeclock compliance (for FC sites) and desktop UKG access (for CC).</p>
+      <p><strong>Tier 2 &mdash; Highest self-service rate (quick wins):</strong> HOU1, CFC1, MDT1, RNO1. At these sites, 81&ndash;87% of tickets are self-service eligible &mdash; the campaign message is simple and the deflection potential per ticket is highest.</p>
+      <p><strong>Watch:</strong> DAY1 showed the largest WoW increase (+15, +53.6%) with 83% self-service eligible. Investigate whether an attendance trend is emerging and deploy a preemptive awareness push.</p>
+      <p><strong>Expected impact:</strong> Site-targeted campaigns at Tier 1 locations alone could deflect 200&ndash;300 tickets per week given the self-service opportunity concentration.</p>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- DEFECT SECTION -->
+  <!-- ═══════════════════════════════════════════ -->
+  <h2 class="section">Additional Insight: The Time-Off Coding Defect</h2>
+  <p class="section-sub">A single system issue generates 70% of all defect tickets.</p>
+
+  <div class="focus green">
+    <div class="focus-header">
+      <h3>Improper Time-Off Coding in CC Time &amp; Attendance</h3>
+      <span class="focus-tag def">System Defect</span>
+    </div>
+
+    <div class="insight-row">
+      <div class="insight-stat">
+        <div class="big">250</div>
+        <div class="desc">Improper time-off coding defects in 2 weeks<br>(69.6% of all defects)</div>
+      </div>
+      <div class="insight-stat">
+        <div class="big">&minus;0.6%</div>
+        <div class="desc">WoW change in defect volume<br>Stable &mdash; not variance, but persistent drag</div>
+      </div>
+    </div>
+
+    <p>Defects are a small category (359 tickets, 8.6% of total), but they have an outsized impact on TM trust. <strong>Improper time-off coding accounts for 250 of 359 defect tickets (69.6%)</strong>, concentrated in CC Time &amp; Attendance (which carries 73.8% of all defects). These are cases where the NICE/UKG integration applied an incorrect time-off code, resulting in a wrong deduction or balance error. When a Chewtopian sees an incorrect deduction on their timecard, they lose trust in the system &mdash; and the next time they need to check a balance or submit time off, they call HR instead of self-serving. Defects erode the very self-service adoption we need to grow.</p>
+
+    <div class="rec">
+      <p><strong>Recommendation:</strong> Engage the NICE/UKG integration team to audit the time-off coding logic that generates these errors. This is a <strong>system configuration fix</strong>, not a people or process fix. Resolving it would eliminate ~125 defect tickets per week and &mdash; equally important &mdash; remove a trust barrier to self-service adoption.</p>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- THE BIGGER PICTURE -->
+  <!-- ═══════════════════════════════════════════ -->
+  <h2 class="section">The Bigger Picture: What Tickets Don&rsquo;t Show</h2>
+  <p class="section-sub">Ticket volume is the tip of the iceberg. UKG data reveals the full HR workload underneath.</p>
+
+  <p>Everything in this report describes the 4,168 tickets that Chewtopians created. But tickets only capture what TMs ask about. UKG timecard audit data shows what HR actually does &mdash; and the gap is enormous.</p>
+
+  <p>During Week 9, the HR network processed <strong>67,543 timecard actions</strong> consuming an estimated <strong>761 FTE hours</strong>. Of those, 22,885 were rework actions (corrections, edits, retroactive fixes). The 1,962 tickets represent roughly <strong>8% of that rework</strong>. The other 92% happens proactively, silently, with no OBR visibility.</p>
+
+  <table>
+    <thead><tr><th>Issue Type</th><th>Tickets / Week</th><th>UKG Actions / Week</th><th>Ratio</th></tr></thead>
+    <tbody>
+      <tr><td>Punch corrections</td><td class="r">~410</td><td class="r">32,693</td><td class="r"><strong>1 : 80</strong></td></tr>
+      <tr><td>Late / early attendance coding</td><td class="r">~70</td><td class="r">8,517</td><td class="r"><strong>1 : 122</strong></td></tr>
+      <tr><td>UTO / time-off coding</td><td class="r">~425</td><td class="r">4,869</td><td class="r"><strong>1 : 11</strong></td></tr>
+      <tr><td>Leave of absence</td><td class="r">~130</td><td class="r">2,573</td><td class="r"><strong>1 : 20</strong></td></tr>
+    </tbody>
+  </table>
+
+  <p>The implication: <strong>when ticket volume drops 11.1% in a week, it does not mean HR workload dropped.</strong> UKG shows the same ~67,500 actions consuming ~761 FTE hours regardless of ticket swings. What changed is how many TMs chose to pick up the phone. The OBR is measuring TM behavior, not HR effort.</p>
+
+  <div class="callout">
+    <p><strong>Reporting recommendation:</strong> Add three elements to the weekly OBR to make variance immediately interpretable without ad hoc analysis: (1) separate automation vs. manual ticket volume, (2) include a self-service classification breakdown, and (3) add a UKG Rework Coverage metric (currently 8%). This shifts the conversation from <em>&ldquo;why did volume change?&rdquo;</em> to <em>&ldquo;what are we doing to drive self-service adoption?&rdquo;</em></p>
+  </div>
+
+  <hr>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- COMBINED IMPACT -->
+  <!-- ═══════════════════════════════════════════ -->
+  <h2 class="section">Combined Impact: What This Gets Us</h2>
+
+  <table>
+    <thead><tr><th>Action</th><th>Target</th><th>Current / Wk</th><th>Est. Reduction</th><th>Timeline</th></tr></thead>
+    <tbody>
+      <tr><td>Timeclock compliance campaign</td><td>Missed punches</td><td class="r">~410</td><td class="r down">&minus;100 / wk</td><td>30&ndash;60 days</td></tr>
+      <tr><td>UKG app / desktop adoption for call outs</td><td>Absence reporting</td><td class="r">~375</td><td class="r down">&minus;110 / wk</td><td>30&ndash;60 days</td></tr>
+      <tr><td>Balance &amp; time-off self-service push</td><td>Balance inquiries + time requests</td><td class="r">~210</td><td class="r down">&minus;50 / wk</td><td>30&ndash;60 days</td></tr>
+      <tr><td>NICE/UKG time-off coding fix</td><td>Improper coding defects</td><td class="r">~125</td><td class="r down">&minus;100 / wk</td><td>60&ndash;90 days</td></tr>
+      <tr class="total"><td colspan="3"><strong>Combined estimated reduction</strong></td><td class="r down"><strong>&minus;360 / wk</strong></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <p>A combined reduction of approximately 360 tickets per week would lower the baseline from ~1,960 to ~1,600 &mdash; an <strong>18% reduction</strong>. The Smartsheet retirement (currently in progress) will independently remove an additional ~225 tickets per week from the process-required category. Together, the total addressable reduction approaches <strong>~585 tickets per week, or roughly 30%</strong> below current levels.</p>
+
+  <p>More importantly, the remaining ticket volume would consist primarily of process-required work (FMLA, NCNS, accommodations) and true system defects &mdash; categories that are inherently more stable week to week. The WoW variance that currently triggers executive questions would narrow substantially because the variable, behavior-driven component of the queue would be structurally reduced.</p>
+
+  <hr>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- WHAT TO SAY -->
+  <!-- ═══════════════════════════════════════════ -->
+  <h2 class="section">The Bottom Line</h2>
+
+  <p>The week-to-week variance in our ticket volumes is not random and it is not a sign of operational instability. It is the predictable result of Chewtopian self-service behavior &mdash; specifically, how many TMs choose to call HR instead of using the timeclock, UKG app, or Workday on a given week. Sixty percent of our tickets are self-service eligible today. The tools exist. The opportunity is adoption.</p>
+
+  <p>The four focus areas in this report &mdash; timeclock compliance, UKG app and desktop adoption for absences and time-off, balance visibility, and targeted site campaigns &mdash; are not aspirational. They are actionable, measurable, and tied directly to the data. If we execute on them, we reduce baseline volume by 18&ndash;30%, narrow the WoW variance, and shift the OBR conversation from <em>&ldquo;what happened this week?&rdquo;</em> to <em>&ldquo;how much closer are we to our self-service targets?&rdquo;</em></p>
+
+  <p>That is a fundamentally better question to be answering.</p>
+
+  <hr>
+
+  <p style="font-size:13px;color:var(--muted);line-height:1.5;">
+    <strong>Methodology &amp; scope:</strong> 4,168 tickets classified across 4 HR services representing 26.1% of EPA total Week 10 volume (1,962 of 7,514). Classification validated against OBR: Attendance Inquiry (906), FC General Inquiry (316), Timesheet Inquiry (95) &mdash; exact match. UKG data: Week 9, 67,543 actions across 51 sites, 4 BUs. Self-service deflection estimates use conservative 20&ndash;30% adoption assumptions. Smartsheet retirement impact is additive and not included in the four-action reduction estimate.
+  </p>
+
+  <div class="footer">
+    ORBIT HR Workload Lens &nbsp;|&nbsp; Insights &amp; Recommendations &nbsp;|&nbsp; Weeks 9&ndash;10 (Feb 22 &ndash; Mar 7, 2026)<br>
+    Data: ServiceNow CSV &bull; Self-Service Classification Analysis &bull; Snowflake UKG Timecard Audit &nbsp;|&nbsp; v1.0
+  </div>
+
+</div>
+</body>
+</html>

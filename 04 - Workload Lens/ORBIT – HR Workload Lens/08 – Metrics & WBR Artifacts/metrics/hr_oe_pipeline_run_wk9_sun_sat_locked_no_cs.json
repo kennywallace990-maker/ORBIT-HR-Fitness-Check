@@ -1,0 +1,37 @@
+{
+  "pass": false,
+  "failed_step": "analysis",
+  "steps": [
+    {
+      "step": "analysis",
+      "command": [
+        "C:\\Users\\kwallace12\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\weekly_hr_oe\\hr_oe_weekly_analysis.py",
+        "--phase1-csv",
+        "test-data\\hr_dataset_3wk_2026-02-09_to_2026-03-01.csv",
+        "--week8-start",
+        "2026-02-15",
+        "--week8-end",
+        "2026-02-21",
+        "--week9-start",
+        "2026-02-22",
+        "--week9-end",
+        "2026-02-28",
+        "--output-markdown",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_answer_pack_wk9_sun_sat_locked_no_cs.md",
+        "--output-metrics",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_metrics_wk9_sun_sat_locked_no_cs.json",
+        "--phase2-csv",
+        "Phase II\\Snow Ticket Data Week 9.csv",
+        "--phase2-csv",
+        "Phase II\\Timesheet Inquiry Week 9.csv"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\weekly_hr_oe\\hr_oe_weekly_analysis.py\", line 569, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\weekly_hr_oe\\hr_oe_weekly_analysis.py\", line 510, in main\n    parsed_records, observed_columns = parse_phase2_csv(path)\n                                       ~~~~~~~~~~~~~~~~^^^^^^\n  File \"C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\weekly_hr_oe\\hr_oe_weekly_analysis.py\", line 147, in parse_phase2_csv\n    with path.open(\"r\", encoding=\"utf-8-sig\", errors=\"replace\", newline=\"\") as handle:\n         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\kwallace12\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\pathlib\\__init__.py\", line 771, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\kwallace12\\\\OneDrive - Chewy.com, LLC\\\\Desktop\\\\ORBIT Products\\\\04 - Workload Lens\\\\Phase II\\\\Snow Ticket Data Week 9.csv'"
+    }
+  ],
+  "outputs": {},
+  "run_summary_path": "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_pipeline_run_wk9_sun_sat_locked_no_cs.json",
+  "generated_at_utc": "2026-03-06T00:36:00+00:00"
+}

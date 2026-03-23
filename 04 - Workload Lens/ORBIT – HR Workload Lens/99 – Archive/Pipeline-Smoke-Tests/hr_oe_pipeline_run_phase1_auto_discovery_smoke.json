@@ -1,0 +1,9 @@
+{
+  "pass": false,
+  "failed_step": "input_validation",
+  "error": "Could not auto-discover Phase II CSV for Timesheet Inquiry in C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\Phase II CSVs",
+  "phase1_date_check": null,
+  "outputs": {},
+  "run_summary_path": "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_pipeline_run_phase1_auto_discovery_smoke.json",
+  "generated_at_utc": "2026-03-06T01:22:10+00:00"
+}

@@ -1,0 +1,365 @@
+{
+  "meta": {
+    "generated_at_utc": "2026-03-06T00:36:28+00:00",
+    "week8": {
+      "start": "2026-02-15",
+      "end": "2026-02-21"
+    },
+    "week9": {
+      "start": "2026-02-22",
+      "end": "2026-02-28"
+    },
+    "phase1_csv": "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\test-data\\hr_dataset_3wk_2026-02-09_to_2026-03-01.csv",
+    "phase2_csvs": [
+      "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\Snow Ticket Data.csv",
+      "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\Timesheet Inquiry Week 9.csv"
+    ]
+  },
+  "phase2": {
+    "week8": {
+      "total_tickets": 489,
+      "by_service": {
+        "FC General Inquiry": 369,
+        "Timesheet Inquiry": 120
+      },
+      "by_site": {
+        "CFC1": 4,
+        "AVP2": 60,
+        "AVP4": 62,
+        "AVP1": 10,
+        "CLT1": 10,
+        "MCO1": 14,
+        "PHX1": 3,
+        "SDF-CAMPUS": 26,
+        "SDF2": 109,
+        "MCI1": 21,
+        "BNA1": 12,
+        "RNO1": 22,
+        "HOU1": 7,
+        "DAY1": 2,
+        "DFW8": 1,
+        "TMSC": 6,
+        "PHX2": 1,
+        "HR": 119
+      },
+      "resolved_count": 479,
+      "resolved_pct": 97.95501022494888,
+      "avg_hours": 24.85,
+      "median_hours": 24.0,
+      "p90_hours": 48.0,
+      "over_72h_count": 22,
+      "over_168h_count": 6
+    },
+    "week9": {
+      "total_tickets": 514,
+      "by_service": {
+        "FC General Inquiry": 409,
+        "Timesheet Inquiry": 105
+      },
+      "by_site": {
+        "AVP4": 67,
+        "HOU1": 5,
+        "AVP2": 90,
+        "CLT1": 16,
+        "MCI1": 22,
+        "RNO1": 15,
+        "TMSC": 14,
+        "DAY1": 7,
+        "AVP1": 18,
+        "BNA1": 15,
+        "CFC1": 7,
+        "MCO1": 19,
+        "MDT1": 4,
+        "PHX1": 7,
+        "SDF2": 89,
+        "SDF-CAMPUS": 17,
+        "DFW1": 1,
+        "HR": 101
+      },
+      "resolved_count": 462,
+      "resolved_pct": 89.88326848249028,
+      "avg_hours": 21.09,
+      "median_hours": 24.0,
+      "p90_hours": 48.0,
+      "over_72h_count": 9,
+      "over_168h_count": 0
+    }
+  },
+  "phase1": {
+    "week8": {
+      "total_actions": 9411,
+      "rework_actions": 2452,
+      "defect_rate_pct": 26.05,
+      "by_site_actions": {
+        "AV4V": 21,
+        "DF4V": 1671,
+        "DFW4": 118,
+        "FL3V": 1401,
+        "PH0V": 225,
+        "PW0V": 12,
+        "SD2V": 714,
+        "ATLA": 3,
+        "ATLB": 13,
+        "ATLC": 2,
+        "ATLD": 3,
+        "AUSA": 4,
+        "DENA": 16,
+        "DENB": 16,
+        "DEND": 15,
+        "DFWA": 13,
+        "DFWB": 15,
+        "FLLA": 24,
+        "FLLB": 5,
+        "FLLC": 4,
+        "FLLD": 5,
+        "FLLF": 3,
+        "IAHA": 12,
+        "IAHD": 16,
+        "PHXB": 14,
+        "AVP1": 217,
+        "AVP2": 242,
+        "BNA1": 443,
+        "CFC1": 206,
+        "CLT1": 612,
+        "DAY1": 546,
+        "DFW1": 25,
+        "HOU1": 169,
+        "MCI1": 658,
+        "MCO1": 188,
+        "MDT1": 298,
+        "PHX1": 249,
+        "RNO1": 369,
+        "AVP4": 318,
+        "AVP6": 35,
+        "DFW8": 23,
+        "MCO4": 11,
+        "PHX2": 49,
+        "SDF2": 314,
+        "SDF4": 59,
+        "SDF6": 35
+      },
+      "by_site_rework": {
+        "DF4V": 110,
+        "FL3V": 114,
+        "PH0V": 4,
+        "SD2V": 79,
+        "ATLB": 2,
+        "AVP1": 90,
+        "AVP2": 122,
+        "BNA1": 207,
+        "CFC1": 99,
+        "CLT1": 391,
+        "DAY1": 131,
+        "DFW1": 8,
+        "HOU1": 122,
+        "MCI1": 314,
+        "MCO1": 80,
+        "MDT1": 143,
+        "PHX1": 114,
+        "RNO1": 221,
+        "AVP4": 24,
+        "AVP6": 18,
+        "DFW8": 6,
+        "MCO4": 1,
+        "PHX2": 14,
+        "SDF2": 11,
+        "SDF4": 15,
+        "SDF6": 12
+      }
+    },
+    "week9": {
+      "total_actions": 70981,
+      "rework_actions": 22885,
+      "defect_rate_pct": 32.24,
+      "by_site_actions": {
+        "DF4V": 7562,
+        "DFW4": 80,
+        "FL3V": 5628,
+        "PH0V": 978,
+        "PW0V": 42,
+        "SD2V": 3722,
+        "ATLD": 158,
+        "DENA": 71,
+        "DENB": 64,
+        "DFWA": 58,
+        "DFWB": 53,
+        "FLLA": 105,
+        "FLLB": 72,
+        "FLLC": 45,
+        "IAHA": 60,
+        "PHXB": 63,
+        "AVP1": 3711,
+        "AVP2": 4980,
+        "BNA1": 5029,
+        "CFC1": 1501,
+        "CLT1": 5071,
+        "DAY1": 5104,
+        "DFW1": 197,
+        "HOU1": 1888,
+        "MCI1": 5595,
+        "MCO1": 2010,
+        "MDT1": 3747,
+        "PHX1": 2727,
+        "RNO1": 3131,
+        "AVP4": 1641,
+        "AVP6": 461,
+        "DFW8": 612,
+        "MCO4": 603,
+        "PHX2": 714,
+        "SDF2": 1416,
+        "SDF4": 944,
+        "SDF6": 502,
+        "AV4V": 162,
+        "ATLA": 52,
+        "ATLB": 75,
+        "ATLC": 54,
+        "AUSA": 60,
+        "DEND": 55,
+        "FLLD": 41,
+        "FLLF": 55,
+        "IAHD": 47,
+        "AVP5": 18,
+        "PHX5": 11,
+        "SDF5": 6
+      },
+      "by_site_rework": {
+        "DF4V": 1120,
+        "FL3V": 849,
+        "PH0V": 108,
+        "PW0V": 3,
+        "SD2V": 655,
+        "ATLD": 120,
+        "DENA": 27,
+        "DFWA": 19,
+        "DFWB": 25,
+        "FLLC": 13,
+        "IAHA": 20,
+        "AVP1": 1182,
+        "AVP2": 1986,
+        "BNA1": 2186,
+        "CFC1": 600,
+        "CLT1": 2952,
+        "DAY1": 733,
+        "DFW1": 88,
+        "HOU1": 705,
+        "MCI1": 2650,
+        "MCO1": 739,
+        "MDT1": 1753,
+        "PHX1": 908,
+        "RNO1": 1035,
+        "AVP4": 521,
+        "AVP6": 222,
+        "DFW8": 160,
+        "MCO4": 209,
+        "PHX2": 246,
+        "SDF2": 255,
+        "SDF4": 226,
+        "SDF6": 173,
+        "AV4V": 39,
+        "DFW4": 13,
+        "ATLA": 35,
+        "ATLB": 30,
+        "ATLC": 25,
+        "AUSA": 41,
+        "DENB": 30,
+        "DEND": 21,
+        "FLLA": 38,
+        "FLLB": 37,
+        "FLLD": 13,
+        "FLLF": 16,
+        "IAHD": 12,
+        "PHXB": 26,
+        "AVP5": 13,
+        "PHX5": 4,
+        "SDF5": 4
+      }
+    }
+  },
+  "cross_phase": {
+    "phase2_ticket_visibility_vs_phase1_all_work_pct": 0.7241,
+    "phase2_ticket_visibility_vs_phase1_rework_pct": 2.246,
+    "non_ticket_work_proxy_count": 70467,
+    "non_ticket_rework_proxy_count": 22371,
+    "method_note": "Proxy only. Ticket count and UKG touch count are different units and are not one-to-one linked."
+  },
+  "answers": {
+    "q1": {
+      "question": "What is our plan to establish accurate SLA commitments and measurements?",
+      "status": "data_gap",
+      "answer": "The current CSV inputs do not include SLA target definitions, SLA clocks, or breach flags, so adherence accuracy cannot be validated from this dataset alone.",
+      "required_data": [
+        "SLA policy table by HR Service",
+        "Ticket level SLA target at open time",
+        "Ticket level within_SLA or breach indicator",
+        "Timestamp-level lifecycle events if business-hour clocks are used"
+      ],
+      "has_sla_columns_in_input": false
+    },
+    "q2": {
+      "question": "Which ticket types account for the volume change?",
+      "status": "answered",
+      "answer": "Week over week change is driven by the services with the largest absolute deltas between Week 8 and Week 9.",
+      "largest_decreases": [
+        {
+          "service": "Timesheet Inquiry",
+          "week8": 120,
+          "week9": 105,
+          "delta": -15,
+          "delta_pct": -12.5
+        }
+      ],
+      "largest_increases": [
+        {
+          "service": "FC General Inquiry",
+          "week8": 369,
+          "week9": 409,
+          "delta": 40,
+          "delta_pct": 10.84
+        }
+      ]
+    },
+    "q3": {
+      "question": "What is the biggest remaining opportunity, using existing process and technology, to reduce volume?",
+      "status": "answered_with_inference",
+      "answer": "The biggest immediate opportunity is concentrated in the highest volume services in Week 9, where standardized self service and intake routing can reduce avoidable ticket creation.",
+      "top_service_opportunities": [
+        {
+          "service": "FC General Inquiry",
+          "week9_volume": 409,
+          "opportunity": "Use guided intake and triage macros to route recurring requests to self service paths.",
+          "type": "inference"
+        },
+        {
+          "service": "Timesheet Inquiry",
+          "week9_volume": 105,
+          "opportunity": "Increase missed punch self service and same day approval to reduce delayed inquiries.",
+          "type": "inference"
+        }
+      ]
+    },
+    "service_deltas": [
+      {
+        "service": "FC General Inquiry",
+        "week8": 369,
+        "week9": 409,
+        "delta": 40,
+        "delta_pct": 10.84
+      },
+      {
+        "service": "Timesheet Inquiry",
+        "week8": 120,
+        "week9": 105,
+        "delta": -15,
+        "delta_pct": -12.5
+      }
+    ]
+  },
+  "observed_phase2_columns": [
+    "assignment group",
+    "description1",
+    "hr service",
+    "number",
+    "opened at",
+    "u resolved"
+  ]
+}

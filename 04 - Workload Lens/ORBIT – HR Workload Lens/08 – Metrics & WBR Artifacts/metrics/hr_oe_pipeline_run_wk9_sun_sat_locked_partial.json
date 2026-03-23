@@ -1,0 +1,91 @@
+{
+  "pass": true,
+  "steps": [
+    {
+      "step": "analysis",
+      "command": [
+        "C:\\Users\\kwallace12\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\weekly_hr_oe\\hr_oe_weekly_analysis.py",
+        "--phase1-csv",
+        "test-data\\hr_dataset_3wk_2026-02-09_to_2026-03-01.csv",
+        "--week8-start",
+        "2026-02-15",
+        "--week8-end",
+        "2026-02-21",
+        "--week9-start",
+        "2026-02-22",
+        "--week9-end",
+        "2026-02-28",
+        "--output-markdown",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_answer_pack_wk9_sun_sat_locked_partial.md",
+        "--output-metrics",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_metrics_wk9_sun_sat_locked_partial.json",
+        "--phase2-csv",
+        "Phase II\\Snow Ticket Data.csv",
+        "--phase2-csv",
+        "Phase II\\Timesheet Inquiry Week 9.csv"
+      ],
+      "returncode": 0,
+      "stdout": "{\"markdown_path\": \"C:\\\\Users\\\\kwallace12\\\\OneDrive - Chewy.com, LLC\\\\Desktop\\\\ORBIT Products\\\\04 - Workload Lens\\\\Phase II\\\\output\\\\hr_oe_answer_pack_wk9_sun_sat_locked_partial.md\", \"metrics_path\": \"C:\\\\Users\\\\kwallace12\\\\OneDrive - Chewy.com, LLC\\\\Desktop\\\\ORBIT Products\\\\04 - Workload Lens\\\\Phase II\\\\output\\\\hr_oe_metrics_wk9_sun_sat_locked_partial.json\"}",
+      "stderr": ""
+    },
+    {
+      "step": "math_validation",
+      "command": [
+        "C:\\Users\\kwallace12\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\weekly_hr_oe\\hr_oe_math_validator.py",
+        "--phase1-csv",
+        "test-data\\hr_dataset_3wk_2026-02-09_to_2026-03-01.csv",
+        "--metrics-json",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_metrics_wk9_sun_sat_locked_partial.json",
+        "--output-json",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_math_validation_wk9_sun_sat_locked_partial.json",
+        "--week8-start",
+        "2026-02-15",
+        "--week8-end",
+        "2026-02-21",
+        "--week9-start",
+        "2026-02-22",
+        "--week9-end",
+        "2026-02-28",
+        "--phase2-csv",
+        "Phase II\\Snow Ticket Data.csv",
+        "--phase2-csv",
+        "Phase II\\Timesheet Inquiry Week 9.csv"
+      ],
+      "returncode": 0,
+      "stdout": "{\"pass\": true, \"mismatch_count\": 0, \"mismatches\": [], \"validated_metrics\": [\"phase2 totals\", \"phase2 resolved counts\", \"phase2 by service\", \"phase1 total and rework touches\", \"cross phase visibility percentages\"], \"validated_at_utc\": \"2026-03-06T00:36:39+00:00\"}",
+      "stderr": ""
+    },
+    {
+      "step": "quality_validation",
+      "command": [
+        "C:\\Users\\kwallace12\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\weekly_hr_oe\\hr_oe_quality_validator.py",
+        "--markdown",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_answer_pack_wk9_sun_sat_locked_partial.md",
+        "--output-json",
+        "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_quality_validation_wk9_sun_sat_locked_partial.json",
+        "--week8-start",
+        "2026-02-15",
+        "--week8-end",
+        "2026-02-21",
+        "--week9-start",
+        "2026-02-22",
+        "--week9-end",
+        "2026-02-28"
+      ],
+      "returncode": 0,
+      "stdout": "{\"pass\": true, \"error_count\": 0, \"warning_count\": 0, \"errors\": [], \"warnings\": [], \"validated_at_utc\": \"2026-03-06T00:36:39+00:00\"}",
+      "stderr": ""
+    }
+  ],
+  "outputs": {
+    "markdown": "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_answer_pack_wk9_sun_sat_locked_partial.md",
+    "metrics": "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_metrics_wk9_sun_sat_locked_partial.json",
+    "math_validation": "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_math_validation_wk9_sun_sat_locked_partial.json",
+    "quality_validation": "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_quality_validation_wk9_sun_sat_locked_partial.json"
+  },
+  "run_summary_path": "C:\\Users\\kwallace12\\OneDrive - Chewy.com, LLC\\Desktop\\ORBIT Products\\04 - Workload Lens\\Phase II\\output\\hr_oe_pipeline_run_wk9_sun_sat_locked_partial.json",
+  "generated_at_utc": "2026-03-06T00:36:39+00:00"
+}

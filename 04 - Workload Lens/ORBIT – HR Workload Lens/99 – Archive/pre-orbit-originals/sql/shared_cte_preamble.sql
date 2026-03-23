@@ -1,0 +1,24 @@
+-- SHARED CTE PREAMBLE (v2.0)
+-- ⚠️ DEPRECATED: This preamble has been centralized into Snowflake views:
+--   - V_HWL_BASE (sql/views/V_HWL_BASE.sql) — full base CTE logic
+--   - V_HWL_HR   (sql/views/V_HWL_HR.sql)   — filtered hr layer
+--   Thin queries in sql/thin/ replace the fat sql/q1-q8 queries.
+--   The fat queries are retained ONLY for POC regression testing.
+--
+-- This file documents the shared CTE logic repeated in Q1-Q7.
+-- In production, these will be centralized into V_HWL_* Snowflake views.
+-- This file is for REFERENCE ONLY — each query embeds its own copy.
+--
+-- v2.0 CHANGES vs v1.0:
+--   1. OBR_ACTOR_GROUP: 'Super Access No Wages' → 'Automation' (was HRSS)
+--   2. OBR_ACTOR_GROUP: 'Workers Compensation' added to Local HR (was unmapped → Other)
+--   3. base WHERE: Added 'Historical Correction Comment' to exclusion list
+--   4. MISSING_PUNCH_FLAG: Weekly threshold changed from >= 4 to >= 3 (PRD §8)
+--   5. PAYCODE_CATEGORY: Added '%pto paid dur%'/'%personal unpd dur%' and '%meal break%' 
+--      patterns BEFORE the generic '%pto%' and '%personal%' matchers
+--   6. hr CTE: Filter now includes 'Automation' in exclusion list
+--   7. hr CTE: Filter now includes 'WFM' in exclusion list because Workforce Management is out of HR scope
+--
+-- OPEN ITEMS:
+--   - First-week TM exemption (HIRE_DATE filter) not yet implemented
+--   - CTE repetition is known POC debt; production will use governed views

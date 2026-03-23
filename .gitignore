@@ -1,0 +1,16 @@
+.windsurf/
+.DS_Store
+Thumbs.db
+node_modules/
+.env
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+tmp/
+output/
+test-data/
+*.csv
+*.xlsx
+*.pdf
+*.docx
+*.txt
