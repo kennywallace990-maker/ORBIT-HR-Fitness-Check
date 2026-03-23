@@ -4,17 +4,16 @@ import re
 
 
 TM_SELF_SERVICE_CAPABILITIES = [
-    "Clock in / clock out at a timeclock or via the app.",
-    "View current timecard for the pay period.",
-    "Edit or submit a missed punch or forgot-to-punch request.",
-    "Submit timecard corrections or edits for manager approval.",
-    "View punch history and punch detail, including location, device, and timestamps.",
-    "Confirm or acknowledge punches when the device or app prompts.",
-    "View published schedule and future shifts.",
-    "View time off balances and accruals.",
-    "View status of submitted requests such as timecard edits and PTO.",
-    "Get notifications of approvals, denials, or required actions.",
-    "Complete simple approval tasks in app when approver rights are enabled.",
+    "Clock in / clock out at a timeclock or via the app",
+    "View current timecard for the pay period",
+    "Edit or submit a missed punch or forgot-to-punch request",
+    "Submit timecard corrections or edits for manager approval",
+    "View punch history and punch detail (location, device, timestamps)",
+    "Confirm or acknowledge punches when the device/app prompts",
+    "View published schedule and future shifts",
+    "View time off balances and accruals",
+    "View status of submitted requests (timecard edits, PTO, etc)",
+    "Get notifications of approvals, denials, or required actions",
 ]
 
 

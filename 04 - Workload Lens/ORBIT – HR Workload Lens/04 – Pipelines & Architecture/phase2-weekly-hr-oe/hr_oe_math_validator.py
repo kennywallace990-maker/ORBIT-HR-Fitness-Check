@@ -12,7 +12,7 @@ from phase2_scope import is_wfm_assignment_group
 
 
 def normalize_header(header: str) -> str:
-    header = (header or "").replace("\ufeff", "").strip().lower()
+    header = (header or "").replace("\ufeff", "").strip().lower().replace("_", " ")
     header = re.sub(r"\s+", " ", header)
     return header
 
@@ -53,6 +53,15 @@ def parse_datetime(value: str) -> dt.datetime | None:
         except ValueError:
             pass
     return None
+
+
+def safe_hours_delta(opened: dt.datetime | None, resolved: dt.datetime | None) -> float | None:
+    if not opened or not resolved:
+        return None
+    delta = (resolved - opened).total_seconds() / 3600.0
+    if delta < 0:
+        return None
+    return delta
 
 
 def to_bucket_int(value: str) -> int:
@@ -118,7 +127,7 @@ def summarize_phase2(records: list[dict[str, object]]) -> dict[str, object]:
     resolved_count = 0
     for record in records:
         service_counts[record["service"]] += 1
-        if record["resolved"] is not None:
+        if safe_hours_delta(record["opened"], record["resolved"]) is not None:
             resolved_count += 1
     return {
         "total_tickets": len(records),

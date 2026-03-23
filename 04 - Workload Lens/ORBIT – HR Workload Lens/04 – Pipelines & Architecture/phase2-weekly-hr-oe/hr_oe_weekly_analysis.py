@@ -24,7 +24,7 @@ DATE_FORMATS = (
 
 
 def normalize_header(header: str) -> str:
-    header = (header or "").replace("\ufeff", "").strip().lower()
+    header = (header or "").replace("\ufeff", "").strip().lower().replace("_", " ")
     header = re.sub(r"\s+", " ", header)
     return header
 
@@ -304,10 +304,36 @@ def format_signed_int(value: int) -> str:
     return f"+{value}" if value > 0 else str(value)
 
 
+def calendar_week_number(week_start: dt.date) -> int:
+    return int(week_start.strftime("%U"))
+
+
+def calendar_week_label(week_start: dt.date) -> str:
+    return f"Week {calendar_week_number(week_start)}"
+
+
+def delta_direction_phrase(delta: int, baseline_label: str) -> str:
+    if delta > 0:
+        return f"up {delta} from {baseline_label}"
+    if delta < 0:
+        return f"down {abs(delta)} from {baseline_label}"
+    return f"flat versus {baseline_label}"
+
+
+def delta_change_phrase(delta: int) -> str:
+    if delta > 0:
+        return f"increased by {delta}"
+    if delta < 0:
+        return f"decreased by {abs(delta)}"
+    return "was flat"
+
+
 def build_hr_operational_excellence_answers(
     week8_phase2: dict[str, object],
     week9_phase2: dict[str, object],
     observed_phase2_columns: set[str],
+    week8_label: str,
+    week9_label: str,
 ) -> dict[str, object]:
     week8_by_service = Counter(week8_phase2["by_service"])
     week9_by_service = Counter(week9_phase2["by_service"])
@@ -350,7 +376,7 @@ def build_hr_operational_excellence_answers(
         "question": "Which ticket types account for the volume change?",
         "status": "answered",
         "answer": (
-            "Week over week change is driven by the services with the largest absolute deltas between Week 8 and Week 9."
+            f"Week over week change is driven by the services with the largest absolute deltas between {week8_label} and {week9_label}."
         ),
         "largest_decreases": decreases[:5],
         "largest_increases": increases[:5],
@@ -388,7 +414,7 @@ def build_hr_operational_excellence_answers(
         "question": "What is the biggest remaining opportunity, using existing process and technology, to reduce volume?",
         "status": "answered_with_inference",
         "answer": (
-            "The biggest immediate opportunity is concentrated in the highest volume services in Week 9, "
+            f"The biggest immediate opportunity is concentrated in the highest volume services in {week9_label}, "
             "where standardized self service and intake routing can reduce avoidable ticket creation."
         ),
         "top_service_opportunities": opportunities,
@@ -417,12 +443,16 @@ def render_markdown(
     q3 = answers["q3"]
     week8_tickets = phase2_week8["total_tickets"]
     week9_tickets = phase2_week9["total_tickets"]
+    week8_label = calendar_week_label(week8_start)
+    week9_label = calendar_week_label(week9_start)
     ticket_delta = week9_tickets - week8_tickets
     ticket_delta_pct = safe_pct(ticket_delta, week8_tickets) if week8_tickets else 0.0
     resolved_pct_delta = round(phase2_week9["resolved_pct"] - phase2_week8["resolved_pct"], 2)
+    ticket_delta_phrase = delta_direction_phrase(ticket_delta, week8_label)
+    ticket_change_phrase = delta_change_phrase(ticket_delta)
 
     week9_services = Counter(phase2_week9["by_service"])
-    attendance_week9 = week9_services.get("Attendance inquiry", 0)
+    attendance_week9 = week9_services.get("Attendance Inquiry", 0)
     cc_time_week9 = week9_services.get("CC Time and Attendance", 0) + week9_services.get("CS Time and Attendance", 0)
     timesheet_week9 = week9_services.get("Timesheet Inquiry", 0)
     attendance_time_total = attendance_week9 + cc_time_week9
@@ -436,8 +466,8 @@ def render_markdown(
     lines.append("# HR Operational Excellence Answer Pack")
     lines.append("")
     lines.append("## Week Lock")
-    lines.append(f"- Week 8: {week8_start.isoformat()} to {week8_end.isoformat()} (Sunday to Saturday)")
-    lines.append(f"- Week 9: {week9_start.isoformat()} to {week9_end.isoformat()} (Sunday to Saturday)")
+    lines.append(f"- {week8_label}: {week8_start.isoformat()} to {week8_end.isoformat()} (Sunday to Saturday)")
+    lines.append(f"- {week9_label}: {week9_start.isoformat()} to {week9_end.isoformat()} (Sunday to Saturday)")
     lines.append("")
     lines.append("## Inputs Used")
     lines.append(f"- Phase I CSV: `{phase1_file}`")
@@ -448,16 +478,16 @@ def render_markdown(
     lines.append("## Source Caveats")
     if phase1_coverage["missing_dates"]["week8"] or phase1_coverage["missing_dates"]["week9"]:
         lines.append(
-            "Phase I prior-week data is retained in this report, but the Week 8 event-date coverage is incomplete. "
+            f"Phase I prior-week data is retained in this report, but the {week8_label} event-date coverage is incomplete. "
             "Use the prior-week Phase I values as directional signal rather than full-week equivalent."
         )
         lines.append("")
         lines.append(f"- Phase I min event date: {phase1_coverage['min_event_date']}")
         lines.append(f"- Phase I max event date: {phase1_coverage['max_event_date']}")
-        lines.append(f"- Phase I Week 8 missing dates: {', '.join(phase1_coverage['missing_dates']['week8']) if phase1_coverage['missing_dates']['week8'] else 'None'}")
-        lines.append(f"- Phase I Week 9 missing dates: {', '.join(phase1_coverage['missing_dates']['week9']) if phase1_coverage['missing_dates']['week9'] else 'None'}")
+        lines.append(f"- Phase I {week8_label} missing dates: {', '.join(phase1_coverage['missing_dates']['week8']) if phase1_coverage['missing_dates']['week8'] else 'None'}")
+        lines.append(f"- Phase I {week9_label} missing dates: {', '.join(phase1_coverage['missing_dates']['week9']) if phase1_coverage['missing_dates']['week9'] else 'None'}")
         lines.append(
-            f"- Retained Phase I Week 8 sample: {phase1_week8['total_actions']} UKG touches and "
+            f"- Retained Phase I {week8_label} sample: {phase1_week8['total_actions']} UKG touches and "
             f"{phase1_week8['rework_actions']} rework touches from the available rows."
         )
     else:
@@ -466,16 +496,16 @@ def render_markdown(
     lines.append("## Supplemental Response Draft")
     lines.append("")
     lines.append(
-        f"Week 9 HR Operational Excellence ticket demand closed at {week9_tickets}, up {ticket_delta} from Week 8 "
-        f"({ticket_delta_pct:.2f}%). Resolution performance weakened at the same time, with resolved rate moving "
-        f"from {phase2_week8['resolved_pct']:.2f}% in Week 8 to {phase2_week9['resolved_pct']:.2f}% in Week 9 "
+        f"{week9_label} HR Operational Excellence ticket demand closed at {week9_tickets}, {ticket_delta_phrase} "
+        f"({ticket_delta_pct:+.2f}%). Resolution performance moved at the same time, with resolved rate shifting "
+        f"from {phase2_week8['resolved_pct']:.2f}% in {week8_label} to {phase2_week9['resolved_pct']:.2f}% in {week9_label} "
         f"({resolved_pct_delta:+.2f} pp)."
     )
     lines.append("")
     if largest_increase:
         increase_pct = "n/a" if largest_increase["delta_pct"] is None else f"{largest_increase['delta_pct']:.2f}%"
         lines.append(
-            f"Based on the supplied ticket service labels, the net increase was driven primarily by "
+            f"Based on the supplied ticket service labels, the largest positive movement was in "
             f"{largest_increase['service']} ({format_signed_int(largest_increase['delta'])} tickets, {increase_pct})."
         )
     if largest_decrease:
@@ -487,7 +517,7 @@ def render_markdown(
     lines.append("")
     lines.append(
         f"Phase I shows {phase1_week9['total_actions']} UKG touches and {phase1_week9['rework_actions']} rework "
-        f"touches in Week 9. Against that workload, the Phase II ticket stream covers "
+        f"touches in {week9_label}. Against that workload, the Phase II ticket stream covers "
         f"{cross_phase['phase2_ticket_visibility_vs_phase1_all_work_pct']:.4f}% of all UKG touches and "
         f"{cross_phase['phase2_ticket_visibility_vs_phase1_rework_pct']:.4f}% of UKG rework touches."
     )
@@ -503,15 +533,15 @@ def render_markdown(
     lines.append("")
     lines.append(
         f"Attendance Inquiry plus Time and Attendance work accounts for {attendance_time_total} of {week9_tickets} "
-        f"Week 9 tickets ({attendance_time_share:.2f}%). Standardizing intake, self-service usage, and same-day correction "
+        f"{week9_label} tickets ({attendance_time_share:.2f}%). Standardizing intake, self-service usage, and same-day correction "
         f"should produce the highest immediate impact."
     )
     lines.append("")
     lines.append("## Executive Summary")
     lines.append("")
-    lines.append(f"- Week 9 tickets: {week9_tickets} ({format_signed_int(ticket_delta)} WoW, {ticket_delta_pct:.2f}%).")
+    lines.append(f"- {week9_label} tickets: {week9_tickets} ({ticket_delta_phrase}, {ticket_delta_pct:+.2f}%).")
     lines.append(
-        f"- Week 9 resolved rate: {phase2_week9['resolved_pct']:.2f}% ({resolved_pct_delta:+.2f} pp vs Week 8)."
+        f"- {week9_label} resolved rate: {phase2_week9['resolved_pct']:.2f}% ({resolved_pct_delta:+.2f} pp vs {week8_label})."
     )
     if largest_increase:
         increase_pct = "n/a" if largest_increase["delta_pct"] is None else f"{largest_increase['delta_pct']:.2f}%"
@@ -532,9 +562,9 @@ def render_markdown(
         f"({cross_phase['non_ticket_rework_proxy_count']} rework touches beyond the ticket count proxy)."
     )
     lines.append("")
-    lines.append("## Week 8 vs Week 9 Snapshot")
+    lines.append(f"## {week8_label} vs {week9_label} Snapshot")
     lines.append("")
-    lines.append("| Metric | Week 8 | Week 9 | Delta |")
+    lines.append(f"| Metric | {week8_label} | {week9_label} | Delta |")
     lines.append("|---|---:|---:|---:|")
     lines.append(
         f"| Phase II total tickets | {phase2_week8['total_tickets']} | {phase2_week9['total_tickets']} | {format_signed_int(phase2_week9['total_tickets'] - phase2_week8['total_tickets'])} |"
@@ -584,27 +614,27 @@ def render_markdown(
     lines.append(q2["question"])
     lines.append("")
     lines.append(
-        f"Direct answer: Week 9 volume increased by {ticket_delta} tickets ({ticket_delta_pct:.2f}%). "
-        "Based on the supplied service labels, the increase was concentrated in Time and Attendance demand rather than "
-        "broad-based growth across all services."
+        f"Direct answer: {week9_label} volume {ticket_change_phrase} ({ticket_delta_pct:+.2f}%). "
+        "Based on the supplied service labels, the net movement was concentrated in Time and Attendance demand rather than "
+        "being broad-based across all services."
     )
     lines.append("")
     if largest_increase:
         increase_pct = "n/a" if largest_increase["delta_pct"] is None else f"{largest_increase['delta_pct']:.2f}%"
         lines.append(
             f"The primary growth driver was {largest_increase['service']} at {largest_increase['week9']} tickets, "
-            f"up {abs(largest_increase['delta'])} ({increase_pct}) from Week 8."
+            f"up {abs(largest_increase['delta'])} ({increase_pct}) from {week8_label}."
         )
     if largest_decrease:
         decrease_pct = "n/a" if largest_decrease["delta_pct"] is None else f"{largest_decrease['delta_pct']:.2f}%"
         lines.append(
             f"The largest offset came from {largest_decrease['service']}, down {abs(largest_decrease['delta'])} "
-            f"({decrease_pct}) from Week 8."
+            f"({decrease_pct}) from {week8_label}."
         )
     lines.append("")
     lines.append("Largest decreases:")
     if q2["largest_decreases"]:
-        lines.append("| Service | Week 8 | Week 9 | Delta | Delta % |")
+        lines.append(f"| Service | {week8_label} | {week9_label} | Delta | Delta % |")
         lines.append("|---|---:|---:|---:|---:|")
         for row in q2["largest_decreases"]:
             pct = "n/a" if row["delta_pct"] is None else f"{row['delta_pct']:.2f}%"
@@ -616,7 +646,7 @@ def render_markdown(
     lines.append("")
     lines.append("Largest increases:")
     if q2["largest_increases"]:
-        lines.append("| Service | Week 8 | Week 9 | Delta | Delta % |")
+        lines.append(f"| Service | {week8_label} | {week9_label} | Delta | Delta % |")
         lines.append("|---|---:|---:|---:|---:|")
         for row in q2["largest_increases"]:
             pct = "n/a" if row["delta_pct"] is None else f"{row['delta_pct']:.2f}%"
@@ -632,7 +662,7 @@ def render_markdown(
     lines.append(
         f"Direct answer: the biggest near-term opportunity is to reduce avoidable attendance and timekeeping contacts "
         f"with existing tools and process controls. Those demand types represent {attendance_time_total} of {week9_tickets} "
-        f"Week 9 tickets ({attendance_time_share:.2f}%)."
+        f"{week9_label} tickets ({attendance_time_share:.2f}%)."
     )
     lines.append("")
     lines.append(
@@ -640,7 +670,7 @@ def render_markdown(
         "and same-day correction before work converts into inquiries or rework."
     )
     lines.append("")
-    lines.append("| Service | Week 9 Volume | Opportunity | Source Type |")
+    lines.append(f"| Service | {week9_label} Volume | Opportunity | Source Type |")
     lines.append("|---|---:|---|---|")
     for item in q3["top_service_opportunities"]:
         lines.append(
@@ -653,14 +683,14 @@ def render_markdown(
     lines.append("")
     lines.append("### Narrative")
     lines.append(
-        f"Week 9 ticket demand increased modestly, but the increase was concentrated in Time and Attendance work. "
-        f"At the same time, closure performance fell from {phase2_week8['resolved_pct']:.2f}% to "
+        f"{week9_label} ticket demand changed modestly, but the movement was concentrated in Time and Attendance work. "
+        f"At the same time, closure performance moved from {phase2_week8['resolved_pct']:.2f}% to "
         f"{phase2_week9['resolved_pct']:.2f}%, indicating more work remained open at week close."
     )
     lines.append("")
     lines.append(
         f"Phase I reinforces that the ticket queue is only a partial view of workload. "
-        f"Week 9 recorded {phase1_week9['total_actions']} UKG touches and {phase1_week9['rework_actions']} rework touches, "
+        f"{week9_label} recorded {phase1_week9['total_actions']} UKG touches and {phase1_week9['rework_actions']} rework touches, "
         f"compared with {week9_tickets} tickets."
     )
     lines.append("")
@@ -671,16 +701,19 @@ def render_markdown(
     lines.append("")
     lines.append("### Recommended Actions This Week")
     lines.append("- Stand up ticket-level SLA measurement design before reporting SLA attainment to leadership.")
-    lines.append("- Target CC Time and Attendance and Attendance Inquiry first because they dominate Week 9 demand.")
+    lines.append(f"- Target CS Time and Attendance and Attendance Inquiry first because they dominate {week9_label} demand.")
     lines.append("- Use Ticketed Rework Coverage % as the primary dark-work KPI for cross-phase reporting.")
-    lines.append("- Keep Phase I Week 8 in the narrative as directional context until EPA refreshes the missing event dates.")
+    if phase1_coverage["missing_dates"]["week8"] or phase1_coverage["missing_dates"]["week9"]:
+        lines.append(f"- Keep Phase I {week8_label} in the narrative as directional context until the missing event dates are refreshed.")
+    else:
+        lines.append(f"- Treat both {week8_label} and {week9_label} as fully locked comparison weeks in leadership reporting.")
     lines.append("")
     lines.append("## Cross Phase Coverage Proxy")
     lines.append(
         "Ticket to touch mapping is not one to one. The following values are directional coverage proxies to estimate dark work."
     )
     lines.append("")
-    lines.append("| Metric | Week 9 Value |")
+    lines.append(f"| Metric | {week9_label} Value |")
     lines.append("|---|---:|")
     lines.append(
         f"| Ticketed Rework Coverage % (recommended primary KPI) | {cross_phase['phase2_ticket_visibility_vs_phase1_rework_pct']:.4f}% |"
@@ -759,13 +792,29 @@ def main() -> int:
     phase1_week9 = summarize_phase1_week(phase1_week9_rows)
     phase1_coverage = summarize_phase1_coverage(phase1_rows, week8_start, week8_end, week9_start, week9_end)
     cross_phase = compute_cross_phase(phase1_week9, phase2_week9)
-    answers = build_hr_operational_excellence_answers(phase2_week8, phase2_week9, observed_phase2_columns)
+    answers = build_hr_operational_excellence_answers(
+        phase2_week8,
+        phase2_week9,
+        observed_phase2_columns,
+        calendar_week_label(week8_start),
+        calendar_week_label(week9_start),
+    )
 
     metrics = {
         "meta": {
             "generated_at_utc": dt.datetime.now(dt.UTC).isoformat(timespec="seconds"),
-            "week8": {"start": week8_start.isoformat(), "end": week8_end.isoformat()},
-            "week9": {"start": week9_start.isoformat(), "end": week9_end.isoformat()},
+            "week8": {
+                "start": week8_start.isoformat(),
+                "end": week8_end.isoformat(),
+                "week_number": calendar_week_number(week8_start),
+                "label": calendar_week_label(week8_start),
+            },
+            "week9": {
+                "start": week9_start.isoformat(),
+                "end": week9_end.isoformat(),
+                "week_number": calendar_week_number(week9_start),
+                "label": calendar_week_label(week9_start),
+            },
             "phase1_csv": str(phase1_path),
             "phase2_csvs": [str(path) for path in phase2_paths],
             "phase2_scope_filters": phase2_scope_filters,

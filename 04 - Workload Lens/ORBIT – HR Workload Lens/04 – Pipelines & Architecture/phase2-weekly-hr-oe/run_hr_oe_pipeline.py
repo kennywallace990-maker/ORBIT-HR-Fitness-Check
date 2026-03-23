@@ -18,6 +18,10 @@ PHASE2_SERVICE_SPECS = [
 ]
 
 
+def calendar_week_label(week_start: dt.date) -> str:
+    return f"Week {int(week_start.strftime('%U'))}"
+
+
 def run_step(command: list[str]) -> dict[str, object]:
     completed = subprocess.run(command, capture_output=True, text=True)
     return {
@@ -36,6 +40,8 @@ def write_chat_handoff(
     week9_start: str,
     week9_end: str,
 ) -> None:
+    week8_label = calendar_week_label(dt.date.fromisoformat(week8_start))
+    week9_label = calendar_week_label(dt.date.fromisoformat(week9_start))
     outputs = summary.get("outputs", {})
     metrics_path = Path(outputs["metrics"]) if isinstance(outputs, dict) and "metrics" in outputs else None
     key_lines = []
@@ -46,9 +52,9 @@ def write_chat_handoff(
             p2w9 = metrics["phase2"]["week9"]
             cross = metrics["cross_phase"]
             key_lines = [
-                f"- Phase I Week 9 UKG touches: {p1w9['total_actions']}",
-                f"- Phase I Week 9 UKG rework touches: {p1w9['rework_actions']}",
-                f"- Phase II Week 9 ticket count: {p2w9['total_tickets']}",
+                f"- Phase I {week9_label} UKG touches: {p1w9['total_actions']}",
+                f"- Phase I {week9_label} UKG rework touches: {p1w9['rework_actions']}",
+                f"- Phase II {week9_label} ticket count: {p2w9['total_tickets']}",
                 f"- Ticket visibility vs all UKG touches: {cross['phase2_ticket_visibility_vs_phase1_all_work_pct']}%",
                 f"- Ticket visibility vs UKG rework touches: {cross['phase2_ticket_visibility_vs_phase1_rework_pct']}%",
             ]
@@ -73,8 +79,8 @@ def write_chat_handoff(
     lines.extend([
         "",
         "## Week Lock",
-        f"- Week 8: {week8_start} to {week8_end} (Sunday to Saturday)",
-        f"- Week 9: {week9_start} to {week9_end} (Sunday to Saturday)",
+        f"- {week8_label}: {week8_start} to {week8_end} (Sunday to Saturday)",
+        f"- {week9_label}: {week9_start} to {week9_end} (Sunday to Saturday)",
         "",
         "## Outputs",
         f"- Run summary: {summary.get('run_summary_path', 'n/a')}",
@@ -188,6 +194,14 @@ def latest_completed_saturday(pull_date: dt.date) -> dt.date:
     return pull_date - dt.timedelta(days=days_since_saturday)
 
 
+def build_default_weeks(pull_date: dt.date) -> tuple[dt.date, dt.date, dt.date, dt.date]:
+    week9_end = latest_completed_saturday(pull_date)
+    week9_start = week9_end - dt.timedelta(days=6)
+    week8_end = week9_start - dt.timedelta(days=1)
+    week8_start = week8_end - dt.timedelta(days=6)
+    return week8_start, week8_end, week9_start, week9_end
+
+
 def validate_phase1_csv_dates(
     phase1_csv: Path,
     week8_start: dt.date,
@@ -243,21 +257,27 @@ def main() -> int:
     parser.add_argument("--phase1-dir", default="Phase I\\Phase I CSV")
     parser.add_argument("--phase2-csv", action="append")
     parser.add_argument("--phase2-dir")
+    parser.add_argument("--phase2-bi-dir")
     parser.add_argument("--pull-date", default=dt.date.today().isoformat())
     parser.add_argument("--allow-partial-phase1", action="store_true")
-    parser.add_argument("--week8-start", default="2026-02-15")
-    parser.add_argument("--week8-end", default="2026-02-21")
-    parser.add_argument("--week9-start", default="2026-02-22")
-    parser.add_argument("--week9-end", default="2026-02-28")
+    parser.add_argument("--week8-start")
+    parser.add_argument("--week8-end")
+    parser.add_argument("--week9-start")
+    parser.add_argument("--week9-end")
     parser.add_argument("--out-dir", default="Phase II/output")
     parser.add_argument("--label", default="wk9_2026_02_22_to_2026_02_28")
     args = parser.parse_args()
 
-    week8_start = dt.date.fromisoformat(args.week8_start)
-    week8_end = dt.date.fromisoformat(args.week8_end)
-    week9_start = dt.date.fromisoformat(args.week9_start)
-    week9_end = dt.date.fromisoformat(args.week9_end)
     pull_date = dt.date.fromisoformat(args.pull_date)
+    default_week8_start, default_week8_end, default_week9_start, default_week9_end = build_default_weeks(pull_date)
+    week8_start = dt.date.fromisoformat(args.week8_start) if args.week8_start else default_week8_start
+    week8_end = dt.date.fromisoformat(args.week8_end) if args.week8_end else default_week8_end
+    week9_start = dt.date.fromisoformat(args.week9_start) if args.week9_start else default_week9_start
+    week9_end = dt.date.fromisoformat(args.week9_end) if args.week9_end else default_week9_end
+    week8_start_str = week8_start.isoformat()
+    week8_end_str = week8_end.isoformat()
+    week9_start_str = week9_start.isoformat()
+    week9_end_str = week9_end.isoformat()
 
     script_dir = Path(__file__).resolve().parent
     out_dir = Path(args.out_dir).resolve()
@@ -270,6 +290,8 @@ def main() -> int:
     run_summary_path = out_dir / f"hr_oe_pipeline_run_{args.label}.json"
     handoff_path = out_dir / f"hr_oe_chat_handoff_{args.label}.md"
 
+    phase2_input_mode = "service_csvs"
+    phase2_source_manifest = None
     try:
         phase1_csv = Path(args.phase1_csv).resolve() if args.phase1_csv else discover_phase1_csv(Path(args.phase1_dir).resolve())
         if not phase1_csv.exists():
@@ -281,7 +303,45 @@ def main() -> int:
                     "Phase I CSV does not cover the required trailing two-week window. "
                     f"Missing dates: {phase1_date_check['required_trailing_two_week_window']['missing_dates']}"
                 )
-        if args.phase2_dir:
+        if args.phase2_bi_dir:
+            phase2_input_mode = "bi_weekly_two_report_folder"
+            intake_out_dir = out_dir / f"_phase2_bi_inputs_{args.label}"
+            intake_cmd = [
+                sys.executable,
+                str(script_dir / "build_ticket_bi_service_inputs.py"),
+                "--bi-weekly-dir",
+                str(Path(args.phase2_bi_dir).resolve()),
+                "--pull-date",
+                pull_date.isoformat(),
+                "--week8-start",
+                week8_start_str,
+                "--week8-end",
+                week8_end_str,
+                "--week9-start",
+                week9_start_str,
+                "--week9-end",
+                week9_end_str,
+                "--out-dir",
+                str(intake_out_dir),
+            ]
+            intake_result = run_step(intake_cmd)
+            if intake_result["returncode"] != 0:
+                raise ValueError(
+                    "Phase II BI intake failed. "
+                    f"stderr={intake_result['stderr'] or 'n/a'} "
+                    f"stdout={intake_result['stdout'] or 'n/a'}"
+                )
+            try:
+                intake_payload = json.loads(intake_result["stdout"])
+            except json.JSONDecodeError as exc:
+                raise ValueError(f"Phase II BI intake did not return valid JSON: {exc}") from exc
+            phase2_csvs = [Path(item["path"]).resolve() for item in intake_payload.get("service_csvs", [])]
+            phase2_source_manifest = intake_payload.get("manifest_json")
+            if len(phase2_csvs) != len(PHASE2_SERVICE_SPECS):
+                raise FileNotFoundError(
+                    "Phase II BI intake did not generate all expected service CSVs."
+                )
+        elif args.phase2_dir:
             phase2_csvs = discover_phase2_csvs(Path(args.phase2_dir).resolve())
         else:
             if not args.phase2_csv:
@@ -296,6 +356,8 @@ def main() -> int:
             "failed_step": "input_validation",
             "error": str(exc),
             "allow_partial_phase1": args.allow_partial_phase1,
+            "phase2_input_mode": phase2_input_mode,
+            "phase2_source_manifest": phase2_source_manifest,
             "phase1_date_check": phase1_date_check if 'phase1_date_check' in locals() else None,
             "outputs": {},
             "run_summary_path": str(run_summary_path),
@@ -305,10 +367,10 @@ def main() -> int:
         write_chat_handoff(
             handoff_path,
             summary,
-            args.week8_start,
-            args.week8_end,
-            args.week9_start,
-            args.week9_end,
+            week8_start_str,
+            week8_end_str,
+            week9_start_str,
+            week9_end_str,
         )
         print(json.dumps(summary))
         return 1
@@ -319,13 +381,13 @@ def main() -> int:
         "--phase1-csv",
         str(phase1_csv),
         "--week8-start",
-        args.week8_start,
+        week8_start_str,
         "--week8-end",
-        args.week8_end,
+        week8_end_str,
         "--week9-start",
-        args.week9_start,
+        week9_start_str,
         "--week9-end",
-        args.week9_end,
+        week9_end_str,
         "--output-markdown",
         str(markdown_path),
         "--output-metrics",
@@ -344,13 +406,13 @@ def main() -> int:
         "--output-json",
         str(math_path),
         "--week8-start",
-        args.week8_start,
+        week8_start_str,
         "--week8-end",
-        args.week8_end,
+        week8_end_str,
         "--week9-start",
-        args.week9_start,
+        week9_start_str,
         "--week9-end",
-        args.week9_end,
+        week9_end_str,
     ]
     for phase2 in phase2_csvs:
         math_cmd.extend(["--phase2-csv", str(phase2)])
@@ -363,13 +425,13 @@ def main() -> int:
         "--output-json",
         str(quality_path),
         "--week8-start",
-        args.week8_start,
+        week8_start_str,
         "--week8-end",
-        args.week8_end,
+        week8_end_str,
         "--week9-start",
-        args.week9_start,
+        week9_start_str,
         "--week9-end",
-        args.week9_end,
+        week9_end_str,
     ]
 
     steps = []
@@ -383,6 +445,8 @@ def main() -> int:
             "phase1_csv": str(phase1_csv),
             "phase2_csvs": [str(path) for path in phase2_csvs],
             "allow_partial_phase1": args.allow_partial_phase1,
+            "phase2_input_mode": phase2_input_mode,
+            "phase2_source_manifest": phase2_source_manifest,
             "phase1_date_check": phase1_date_check,
             "outputs": {},
             "run_summary_path": str(run_summary_path),
@@ -392,10 +456,10 @@ def main() -> int:
         write_chat_handoff(
             handoff_path,
             summary,
-            args.week8_start,
-            args.week8_end,
-            args.week9_start,
-            args.week9_end,
+            week8_start_str,
+            week8_end_str,
+            week9_start_str,
+            week9_end_str,
         )
         print(json.dumps(summary))
         return 1
@@ -413,6 +477,8 @@ def main() -> int:
         "phase1_csv": str(phase1_csv),
         "phase2_csvs": [str(path) for path in phase2_csvs],
         "allow_partial_phase1": args.allow_partial_phase1,
+        "phase2_input_mode": phase2_input_mode,
+        "phase2_source_manifest": phase2_source_manifest,
         "phase1_date_check": phase1_date_check,
         "outputs": {
             "markdown": str(markdown_path),
@@ -427,10 +493,10 @@ def main() -> int:
     write_chat_handoff(
         handoff_path,
         summary,
-        args.week8_start,
-        args.week8_end,
-        args.week9_start,
-        args.week9_end,
+        week8_start_str,
+        week8_end_str,
+        week9_start_str,
+        week9_end_str,
     )
     print(json.dumps(summary))
     return 0 if passed else 1

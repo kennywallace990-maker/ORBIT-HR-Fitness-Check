@@ -17,6 +17,23 @@ def safe_pct(num: float, den: float) -> float:
     return (num / den) * 100.0
 
 
+def calendar_week_label(week_start_iso: str) -> str:
+    week_start = dt.date.fromisoformat(week_start_iso)
+    return f"Week {int(week_start.strftime('%U'))}"
+
+
+def resolve_week_label(week_meta: dict[str, object]) -> str:
+    return str(week_meta.get("label") or calendar_week_label(str(week_meta["start"])))
+
+
+def delta_direction_phrase(delta: int, baseline_label: str) -> str:
+    if delta > 0:
+        return f"up {delta} from {baseline_label}"
+    if delta < 0:
+        return f"down {abs(delta)} from {baseline_label}"
+    return f"flat versus {baseline_label}"
+
+
 def load_json(path: Path) -> dict[str, object]:
     return json.loads(path.read_text(encoding="utf-8"))
 
@@ -25,6 +42,8 @@ def render_review_markdown(metrics: dict[str, object], source_markdown: str) -> 
     meta = metrics["meta"]
     week8 = meta["week8"]
     week9 = meta["week9"]
+    week8_label = resolve_week_label(week8)
+    week9_label = resolve_week_label(week9)
     phase1_coverage = metrics["phase1_coverage"]
     phase1_week8 = metrics["phase1"]["week8"]
     phase1_week9 = metrics["phase1"]["week9"]
@@ -37,6 +56,7 @@ def render_review_markdown(metrics: dict[str, object], source_markdown: str) -> 
     week8_tickets = phase2_week8["total_tickets"]
     ticket_delta = week9_tickets - week8_tickets
     ticket_delta_pct = safe_pct(ticket_delta, week8_tickets)
+    ticket_delta_phrase = delta_direction_phrase(ticket_delta, week8_label)
     resolved_pct_delta = phase2_week9["resolved_pct"] - phase2_week8["resolved_pct"]
     largest_increase = q2["largest_increases"][0] if q2["largest_increases"] else None
 
@@ -46,14 +66,14 @@ def render_review_markdown(metrics: dict[str, object], source_markdown: str) -> 
     lines.append("Preview this file in the IDE Markdown preview pane to review and comment.")
     lines.append("")
     lines.append("## Review Header")
-    lines.append(f"- Week 8: {week8['start']} to {week8['end']} (Sunday to Saturday)")
-    lines.append(f"- Week 9: {week9['start']} to {week9['end']} (Sunday to Saturday)")
+    lines.append(f"- {week8_label}: {week8['start']} to {week8['end']} (Sunday to Saturday)")
+    lines.append(f"- {week9_label}: {week9['start']} to {week9['end']} (Sunday to Saturday)")
     lines.append(f"- Generated UTC: {meta['generated_at_utc']}")
     lines.append("")
     lines.append("## VP Summary")
     lines.append(
-        f"Week 9 closed at {week9_tickets} HR Operational Excellence tickets, up {ticket_delta} from Week 8 "
-        f"({ticket_delta_pct:.2f}%)."
+        f"{week9_label} closed at {week9_tickets} HR Operational Excellence tickets, {ticket_delta_phrase} "
+        f"({ticket_delta_pct:+.2f}%)."
     )
     lines.append(
         f"Resolved rate moved from {phase2_week8['resolved_pct']:.2f}% to {phase2_week9['resolved_pct']:.2f}% "
@@ -72,14 +92,14 @@ def render_review_markdown(metrics: dict[str, object], source_markdown: str) -> 
     lines.append("## Data Caveat")
     if phase1_coverage["missing_dates"]["week8"]:
         lines.append(
-            "Phase I Week 8 is retained as directional context only because event-date coverage is incomplete."
+            f"Phase I {week8_label} is retained as directional context only because event-date coverage is incomplete."
         )
         lines.append(
             f"Retained sample: {phase1_week8['total_actions']} UKG touches and "
             f"{phase1_week8['rework_actions']} rework touches."
         )
         lines.append(
-            f"Missing Phase I Week 8 dates: {', '.join(phase1_coverage['missing_dates']['week8'])}"
+            f"Missing Phase I {week8_label} dates: {', '.join(phase1_coverage['missing_dates']['week8'])}"
         )
     else:
         lines.append("No Phase I week-lock coverage caveat detected.")
@@ -108,6 +128,8 @@ def render_html(metrics: dict[str, object]) -> str:
     meta = metrics["meta"]
     week8 = meta["week8"]
     week9 = meta["week9"]
+    week8_label = resolve_week_label(week8)
+    week9_label = resolve_week_label(week9)
     phase1_week8 = metrics["phase1"]["week8"]
     phase1_week9 = metrics["phase1"]["week9"]
     phase2_week8 = metrics["phase2"]["week8"]
@@ -122,10 +144,11 @@ def render_html(metrics: dict[str, object]) -> str:
     week9_tickets = phase2_week9["total_tickets"]
     ticket_delta = week9_tickets - week8_tickets
     ticket_delta_pct = safe_pct(ticket_delta, week8_tickets)
+    ticket_delta_phrase = delta_direction_phrase(ticket_delta, week8_label)
     resolved_pct_delta = phase2_week9["resolved_pct"] - phase2_week8["resolved_pct"]
 
     week9_services = phase2_week9["by_service"]
-    attendance_week9 = week9_services.get("Attendance inquiry", 0)
+    attendance_week9 = week9_services.get("Attendance Inquiry", 0)
     time_week9 = week9_services.get("CC Time and Attendance", 0) + week9_services.get("CS Time and Attendance", 0)
     timesheet_week9 = week9_services.get("Timesheet Inquiry", 0)
     attendance_time_total = attendance_week9 + time_week9
@@ -160,6 +183,49 @@ def render_html(metrics: dict[str, object]) -> str:
 
     missing_dates = ", ".join(phase1_coverage["missing_dates"]["week8"]) if phase1_coverage["missing_dates"]["week8"] else "None"
     generated_label = meta["generated_at_utc"].replace("T", " ").replace("+00:00", " UTC")
+    if phase1_coverage["week8_comparable"] and phase1_coverage["week9_comparable"]:
+        phase1_snapshot_rows = f"""
+          <tr>
+            <td>Phase I total UKG touches</td>
+            <td>{phase1_week8['total_actions']}</td>
+            <td>{phase1_week9['total_actions']}</td>
+            <td>{format_signed(phase1_week9['total_actions'] - phase1_week8['total_actions'])}</td>
+          </tr>
+          <tr>
+            <td>Phase I UKG rework touches</td>
+            <td>{phase1_week8['rework_actions']}</td>
+            <td>{phase1_week9['rework_actions']}</td>
+            <td>{format_signed(phase1_week9['rework_actions'] - phase1_week8['rework_actions'])}</td>
+          </tr>
+"""
+        phase1_caveat_html = """
+      <div class="callout">
+        <strong>Phase I week-lock coverage is complete.</strong>
+        Both comparison weeks are fully covered and can be treated as locked for leadership reporting.
+      </div>
+"""
+    else:
+        phase1_snapshot_rows = f"""
+          <tr>
+            <td>Phase I total UKG touches</td>
+            <td>{phase1_week8['total_actions']} (partial prior-week sample)</td>
+            <td>{phase1_week9['total_actions']}</td>
+            <td>directional only</td>
+          </tr>
+          <tr>
+            <td>Phase I UKG rework touches</td>
+            <td>{phase1_week8['rework_actions']} (partial prior-week sample)</td>
+            <td>{phase1_week9['rework_actions']}</td>
+            <td>directional only</td>
+          </tr>
+"""
+        phase1_caveat_html = f"""
+      <div class="callout warning">
+        <strong>Phase I {week8_label} remains directional.</strong>
+        Missing Phase I event dates: {html.escape(missing_dates)}.
+        Retained sample: {phase1_week8['total_actions']} UKG touches and {phase1_week8['rework_actions']} rework touches.
+      </div>
+"""
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -347,24 +413,24 @@ def render_html(metrics: dict[str, object]) -> str:
     <section class="hero">
       <div class="pill">Supplemental Draft</div>
       <h1>HR Operational Excellence</h1>
-      <p>Week 9 closed at <strong>{week9_tickets}</strong> tickets, up <strong>{ticket_delta}</strong> from Week 8 ({ticket_delta_pct:.2f}%). Volume growth was concentrated in Time and Attendance while resolution performance weakened.</p>
-      <p>Phase I confirms the queue is only a partial view of work: Week 9 recorded <strong>{phase1_week9['total_actions']}</strong> UKG touches and <strong>{phase1_week9['rework_actions']}</strong> rework touches.</p>
-      <div class="stamp">Week 8: {week8['start']} to {week8['end']} | Week 9: {week9['start']} to {week9['end']} | Generated {generated_label}</div>
+      <p>{week9_label} closed at <strong>{week9_tickets}</strong> tickets, {html.escape(ticket_delta_phrase)} ({ticket_delta_pct:+.2f}%). Volume movement was concentrated in Time and Attendance while resolution performance shifted.</p>
+      <p>Phase I confirms the queue is only a partial view of work: {week9_label} recorded <strong>{phase1_week9['total_actions']}</strong> UKG touches and <strong>{phase1_week9['rework_actions']}</strong> rework touches.</p>
+      <div class="stamp">{week8_label}: {week8['start']} to {week8['end']} | {week9_label}: {week9['start']} to {week9['end']} | Generated {generated_label}</div>
     </section>
 
     <section class="grid">
-      {metric_card("Week 9 Tickets", str(week9_tickets), f"{format_signed(ticket_delta)} vs Week 8 | {ticket_delta_pct:.2f}%")}
-      {metric_card("Resolved Rate", f"{phase2_week9['resolved_pct']:.2f}%", f"{resolved_pct_delta:+.2f} pp vs Week 8")}
+      {metric_card(f"{week9_label} Tickets", str(week9_tickets), f"{ticket_delta_phrase} | {ticket_delta_pct:+.2f}%")}
+      {metric_card("Resolved Rate", f"{phase2_week9['resolved_pct']:.2f}%", f"{resolved_pct_delta:+.2f} pp vs {week8_label}")}
       {metric_card("Rework Coverage", f"{cross_phase['phase2_ticket_visibility_vs_phase1_rework_pct']:.4f}%", "Recommended primary KPI")}
-      {metric_card("Attendance + Time Share", f"{attendance_time_share:.2f}%", f"{attendance_time_total} of {week9_tickets} Week 9 tickets")}
+      {metric_card("Attendance + Time Share", f"{attendance_time_share:.2f}%", f"{attendance_time_total} of {week9_tickets} {week9_label} tickets")}
     </section>
 
     <section class="section">
       <h2>Executive Readout</h2>
-      <p>Week 9 ticket demand increased modestly, but the increase was not broad-based. The primary driver was <strong>{html.escape(largest_increase['service']) if largest_increase else 'the top service category'}</strong>{f' at {largest_increase["week9"]} tickets, up {abs(largest_increase["delta"])} ({largest_increase["delta_pct"]:.2f}%) from Week 8' if largest_increase else ''}. The largest offsetting decline came from <strong>{html.escape(largest_decrease['service']) if largest_decrease else 'another service category'}</strong>{f', down {abs(largest_decrease["delta"])} ({largest_decrease["delta_pct"]:.2f}%)' if largest_decrease else ''}.</p>
-      <p>The most actionable near-term reduction opportunity remains attendance and timekeeping demand. Attendance Inquiry plus Time and Attendance work accounts for <strong>{attendance_time_total}</strong> of <strong>{week9_tickets}</strong> Week 9 tickets ({attendance_time_share:.2f}%), which makes that flow the best place to use existing self-service, standardized intake, and same-day correction levers.</p>
+      <p>{week9_label} ticket demand changed modestly, but the movement was not broad-based. The primary driver was <strong>{html.escape(largest_increase['service']) if largest_increase else 'the top service category'}</strong>{f' at {largest_increase["week9"]} tickets, up {abs(largest_increase["delta"])} ({largest_increase["delta_pct"]:.2f}%) from {week8_label}' if largest_increase else ''}. The largest offsetting decline came from <strong>{html.escape(largest_decrease['service']) if largest_decrease else 'another service category'}</strong>{f', down {abs(largest_decrease["delta"])} ({largest_decrease["delta_pct"]:.2f}%) from {week8_label}' if largest_decrease else ''}.</p>
+      <p>The most actionable near-term reduction opportunity remains attendance and timekeeping demand. Attendance Inquiry plus Time and Attendance work accounts for <strong>{attendance_time_total}</strong> of <strong>{week9_tickets}</strong> {week9_label} tickets ({attendance_time_share:.2f}%), which makes that flow the best place to use existing self-service, standardized intake, and same-day correction levers.</p>
       <div class="callout">
-        <strong>Recommendation:</strong> Use <strong>Ticketed Rework Coverage %</strong> as the primary cross-phase KPI. Week 9 closed at <strong>{cross_phase['phase2_ticket_visibility_vs_phase1_rework_pct']:.4f}%</strong> ticketed rework coverage, leaving an <strong>Unticketed Rework Proxy %</strong> of <strong>{unticketed_rework_proxy_pct:.4f}%</strong>.
+        <strong>Recommendation:</strong> Use <strong>Ticketed Rework Coverage %</strong> as the primary cross-phase KPI. {week9_label} closed at <strong>{cross_phase['phase2_ticket_visibility_vs_phase1_rework_pct']:.4f}%</strong> ticketed rework coverage, leaving an <strong>Unticketed Rework Proxy %</strong> of <strong>{unticketed_rework_proxy_pct:.4f}%</strong>.
       </div>
     </section>
 
@@ -384,7 +450,7 @@ def render_html(metrics: dict[str, object]) -> str:
         </div>
         <div>
           <h3>Q2. Ticket types driving volume change</h3>
-          <p>Week 9 volume increased by <strong>{ticket_delta}</strong> tickets ({ticket_delta_pct:.2f}%). Based on the supplied service labels, the increase was concentrated in Time and Attendance demand.</p>
+          <p>{week9_label} volume changed by <strong>{ticket_delta}</strong> tickets ({ticket_delta_pct:+.2f}%). Based on the supplied service labels, the movement was concentrated in Time and Attendance demand.</p>
           <h3>Q3. Biggest opportunity to reduce volume</h3>
           <p>The strongest immediate opportunity is to reduce avoidable attendance and timekeeping contacts using the tools and process controls already in place.</p>
         </div>
@@ -392,13 +458,13 @@ def render_html(metrics: dict[str, object]) -> str:
     </section>
 
     <section class="section">
-      <h2>Week 8 vs Week 9 Snapshot</h2>
+      <h2>{week8_label} vs {week9_label} Snapshot</h2>
       <table>
         <thead>
           <tr>
             <th>Metric</th>
-            <th>Week 8</th>
-            <th>Week 9</th>
+            <th>{week8_label}</th>
+            <th>{week9_label}</th>
             <th>Delta</th>
           </tr>
         </thead>
@@ -421,18 +487,7 @@ def render_html(metrics: dict[str, object]) -> str:
             <td>{phase2_week9['resolved_pct']:.2f}%</td>
             <td>{resolved_pct_delta:+.2f} pp</td>
           </tr>
-          <tr>
-            <td>Phase I total UKG touches</td>
-            <td>{phase1_week8['total_actions']} (partial prior-week sample)</td>
-            <td>{phase1_week9['total_actions']}</td>
-            <td>directional only</td>
-          </tr>
-          <tr>
-            <td>Phase I UKG rework touches</td>
-            <td>{phase1_week8['rework_actions']} (partial prior-week sample)</td>
-            <td>{phase1_week9['rework_actions']}</td>
-            <td>directional only</td>
-          </tr>
+{phase1_snapshot_rows.rstrip()}
         </tbody>
       </table>
     </section>
@@ -443,8 +498,8 @@ def render_html(metrics: dict[str, object]) -> str:
         <thead>
           <tr>
             <th>Service</th>
-            <th>Week 8</th>
-            <th>Week 9</th>
+            <th>{week8_label}</th>
+            <th>{week9_label}</th>
             <th>Delta</th>
             <th>Delta %</th>
           </tr>
@@ -459,15 +514,15 @@ def render_html(metrics: dict[str, object]) -> str:
       <h2>Recommended Actions This Week</h2>
       <ul>
         <li>Stand up ticket-level SLA measurement design before reporting SLA attainment to leadership.</li>
-        <li>Target Attendance Inquiry and Time and Attendance demand first because they dominate Week 9 volume.</li>
+        <li>Target Attendance Inquiry and Time and Attendance demand first because they dominate {week9_label} volume.</li>
         <li>Use Ticketed Rework Coverage % as the primary dark-work KPI for cross-phase reporting.</li>
-        <li>Keep Phase I Week 8 in the narrative as directional context until EPA refreshes the missing event dates.</li>
+        <li>{'Keep Phase I ' + week8_label + ' in the narrative as directional context until the missing event dates are refreshed.' if phase1_coverage["missing_dates"]["week8"] else 'Treat both ' + week8_label + ' and ' + week9_label + ' as fully locked comparison weeks in leadership reporting.'}</li>
       </ul>
       <table>
         <thead>
           <tr>
             <th>Service</th>
-            <th>Week 9 Volume</th>
+            <th>{week9_label} Volume</th>
             <th>Immediate Opportunity</th>
           </tr>
         </thead>
@@ -479,11 +534,7 @@ def render_html(metrics: dict[str, object]) -> str:
 
     <section class="section">
       <h2>Data Caveats</h2>
-      <div class="callout warning">
-        <strong>Phase I Week 8 remains directional.</strong>
-        Missing Phase I event dates: {html.escape(missing_dates)}.
-        Retained sample: {phase1_week8['total_actions']} UKG touches and {phase1_week8['rework_actions']} rework touches.
-      </div>
+{phase1_caveat_html.rstrip()}
       <p class="muted">Method note: {html.escape(cross_phase['method_note'])}</p>
       <p class="muted">SLA gap: {html.escape(q1['answer'])}</p>
     </section>

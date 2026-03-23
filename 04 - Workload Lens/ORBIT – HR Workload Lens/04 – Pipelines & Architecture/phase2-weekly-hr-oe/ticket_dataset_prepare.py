@@ -9,7 +9,7 @@ import re
 from collections import Counter, defaultdict
 from pathlib import Path
 
-from phase2_scope import WFM_ASSIGNMENT_GROUP_SCOPE_NOTE, is_wfm_assignment_group
+from phase2_scope import TM_SELF_SERVICE_CAPABILITIES, WFM_ASSIGNMENT_GROUP_SCOPE_NOTE, is_wfm_assignment_group
 
 
 DATE_FORMATS = (
@@ -77,8 +77,202 @@ CATEGORY_RULES = [
 ]
 
 
+SELF_SERVICE_EXCLUDED_CATEGORIES = {
+    "I-9 / Onboarding / Compliance Docs",
+    "Pay Discrepancy / Missing Pay",
+    "Leave of Absence / FMLA / LOA",
+    "Suspension / Termination / Discipline / TM Relations",
+    "Transfer / Job Change / Position",
+    "Benefits / Enrollment / Payroll",
+    "VTO / VET / Voluntary Time",
+    "Badge / Access / IT / Workday",
+    "Personal Info / Verification / Records",
+    "Noise / Spam / Auto-Generated Junk",
+    "Other / Unclassified",
+    "Empty / No Description",
+}
+
+
+SELF_SERVICE_RULES = [
+    {
+        "option": TM_SELF_SERVICE_CAPABILITIES[2],
+        "keywords": [
+            "missed punch",
+            "forgot-to-punch",
+            "forgot to punch",
+            "forgot punch",
+            "missed in punch",
+            "missed out punch",
+            "forgot to clock",
+            "forgot clock",
+        ],
+        "exclude_keywords": [],
+    },
+    {
+        "option": TM_SELF_SERVICE_CAPABILITIES[3],
+        "keywords": [
+            "timecard correction",
+            "time card correction",
+            "edit my timecard",
+            "edit my time card",
+            "edit timecard",
+            "edit time card",
+            "submit timecard edit",
+            "submit time card edit",
+            "time adjustment",
+            "correct my timecard",
+            "correct my time card",
+        ],
+        "exclude_keywords": [
+            "missing pay",
+            "not paid",
+            "underpaid",
+            "overpaid",
+            "wrong pay",
+            "incorrect pay",
+            "pay discrepancy",
+        ],
+    },
+    {
+        "option": TM_SELF_SERVICE_CAPABILITIES[4],
+        "keywords": [
+            "punch history",
+            "punch detail",
+            "clock history",
+            "punch timestamp",
+            "punch timestamps",
+            "where did i clock",
+            "when did i clock",
+            "device used",
+            "clock location",
+        ],
+        "exclude_keywords": [
+            "not working",
+            "system error",
+            "issue",
+            "problem",
+        ],
+    },
+    {
+        "option": TM_SELF_SERVICE_CAPABILITIES[5],
+        "keywords": [
+            "acknowledge punch",
+            "acknowledge my punch",
+            "confirm punch",
+            "confirm my punch",
+        ],
+        "exclude_keywords": [],
+    },
+    {
+        "option": TM_SELF_SERVICE_CAPABILITIES[0],
+        "keywords": [
+            "clock in",
+            "clock out",
+            "how do i clock",
+            "how to clock",
+            "clocked in",
+            "clocked out",
+        ],
+        "exclude_keywords": [
+            "missed punch",
+            "forgot to punch",
+            "forgot punch",
+            "not working",
+            "badge",
+            "error",
+            "issue",
+            "problem",
+        ],
+    },
+    {
+        "option": TM_SELF_SERVICE_CAPABILITIES[1],
+        "keywords": [
+            "view my timecard",
+            "view my time card",
+            "see my timecard",
+            "see my time card",
+            "current timecard",
+            "current time card",
+            "check my timecard",
+            "check my time card",
+            "timecard for the pay period",
+            "time card for the pay period",
+        ],
+        "exclude_keywords": [
+            "error",
+            "issue",
+            "wrong",
+            "incorrect",
+            "not working",
+        ],
+    },
+    {
+        "option": TM_SELF_SERVICE_CAPABILITIES[6],
+        "keywords": [
+            "published schedule",
+            "future shifts",
+            "future shift",
+            "my schedule",
+            "upcoming shift",
+            "what shift am i",
+            "when do i work",
+        ],
+        "exclude_keywords": [
+            "swap",
+            "change",
+            "adjust",
+        ],
+    },
+    {
+        "option": TM_SELF_SERVICE_CAPABILITIES[7],
+        "keywords": [
+            "pto balance",
+            "time off balance",
+            "vacation balance",
+            "sick balance",
+            "holiday balance",
+            "accrual",
+            "accrued",
+            "how much pto",
+            "how many pto",
+        ],
+        "exclude_keywords": [],
+    },
+    {
+        "option": TM_SELF_SERVICE_CAPABILITIES[8],
+        "keywords": [
+            "request status",
+            "status of my request",
+            "status on my request",
+            "submitted request",
+            "pto status",
+            "timecard edit status",
+            "time card edit status",
+            "pending approval",
+            "is my pto approved",
+            "has my pto been approved",
+        ],
+        "exclude_keywords": [],
+    },
+    {
+        "option": TM_SELF_SERVICE_CAPABILITIES[9],
+        "keywords": [
+            "approval notification",
+            "denial notification",
+            "required action notification",
+            "required action",
+            "approval notice",
+            "denial notice",
+            "notification",
+            "notified",
+        ],
+        "exclude_keywords": [],
+    },
+]
+
+
 def normalize_header(header: str) -> str:
-    header = (header or "").replace("\ufeff", "").strip().lower()
+    header = (header or "").replace("\ufeff", "").strip().lower().replace("_", " ")
     return re.sub(r"\s+", " ", header)
 
 
@@ -154,6 +348,22 @@ def classify_description(description: str) -> tuple[str, str]:
     return "Other / Unclassified", "fallback"
 
 
+def classify_self_service_candidate(description: str, category: str) -> tuple[str, str, str]:
+    if not description:
+        return "no", "", "empty"
+    if category in SELF_SERVICE_EXCLUDED_CATEGORIES:
+        return "no", "", "category_excluded"
+
+    desc = f" {description.lower()} "
+    for rule in SELF_SERVICE_RULES:
+        if any(keyword in desc for keyword in rule["exclude_keywords"]):
+            continue
+        for keyword in rule["keywords"]:
+            if keyword in desc:
+                return "yes", rule["option"], keyword
+    return "no", "", "not_self_service_candidate"
+
+
 def to_slug(text: str) -> str:
     slug = re.sub(r"[^a-z0-9]+", "_", text.lower()).strip("_")
     return slug or "dataset"
@@ -190,6 +400,22 @@ def summarize_resolution(records: list[dict[str, object]]) -> dict[str, float]:
         "p90_hours": round(values[p90_idx], 2),
         "over_72h": sum(1 for value in values if value > 72),
         "over_168h": sum(1 for value in values if value > 168),
+    }
+
+
+def summarize_self_service(records: list[dict[str, object]]) -> dict[str, object]:
+    option_counts = Counter(
+        str(record["self_service_option"])
+        for record in records
+        if record["ukg_self_service_eligible"] == "yes" and record["self_service_option"]
+    )
+    candidate_count = sum(1 for record in records if record["ukg_self_service_eligible"] == "yes")
+    return {
+        "ukg_self_service_eligible_count": candidate_count,
+        "ukg_self_service_eligible_pct": round(safe_pct(candidate_count, len(records)), 2),
+        "self_service_candidate_count": candidate_count,
+        "self_service_candidate_pct": round(safe_pct(candidate_count, len(records)), 2),
+        "self_service_option_counts": dict(option_counts),
     }
 
 
@@ -271,6 +497,7 @@ def main() -> int:
             dedupe_keys.add(dedupe_key)
 
             category, rule_hit = classify_description(description)
+            could_have_been_self_service, self_service_option, self_service_rule_hit = classify_self_service_candidate(description, category)
             site = extract_site(assignment_group)
             opened_date = opened_at.date()
             if week8_start <= opened_date <= week8_end:
@@ -293,6 +520,10 @@ def main() -> int:
                     "description_clean": description,
                     "category": category,
                     "rule_hit": rule_hit,
+                    "ukg_self_service_eligible": could_have_been_self_service,
+                    "could_have_been_self_service": could_have_been_self_service,
+                    "self_service_option": self_service_option,
+                    "self_service_rule_hit": self_service_rule_hit,
                     "is_noise": "yes" if category == "Noise / Spam / Auto-Generated Junk" else "no",
                     "resolution_hours": hours_between(opened_at, resolved_at),
                 }
@@ -333,6 +564,13 @@ def main() -> int:
     week8_categories = Counter(record["category"] for record in week8_records)
     week9_categories = Counter(record["category"] for record in week9_records)
     week9_sites = Counter(record["site"] for record in week9_records)
+    week8_self_service = summarize_self_service(week8_records)
+    week9_self_service = summarize_self_service(week9_records)
+    week9_self_service_options = Counter(
+        str(record["self_service_option"])
+        for record in week9_records
+        if record["ukg_self_service_eligible"] == "yes" and record["self_service_option"]
+    )
     category_deltas = []
     for category in sorted(set(week8_categories.keys()) | set(week9_categories.keys())):
         count8 = week8_categories.get(category, 0)
@@ -390,14 +628,17 @@ def main() -> int:
             "ticket_count": len(week8_records),
             "resolution": summarize_resolution(week8_records),
             "category_counts": dict(week8_categories),
+            **week8_self_service,
         },
         "week9": {
             "ticket_count": len(week9_records),
             "resolution": summarize_resolution(week9_records),
             "category_counts": dict(week9_categories),
+            **week9_self_service,
             "top_sites": [{"site": site, "count": count} for site, count in week9_sites.most_common(10)],
         },
         "wow_category_deltas": category_deltas,
+        "self_service_reference": TM_SELF_SERVICE_CAPABILITIES,
     }
 
     # Compact artifact for LLM context efficiency.
@@ -416,6 +657,7 @@ def main() -> int:
                 "ticket_number": record["ticket_number"],
                 "site": record["site"],
                 "category": category,
+                "self_service_option": record["self_service_option"],
                 "opened_date": record["opened_date"],
                 "resolution_hours": record["resolution_hours"],
                 "description_excerpt": desc[:240],
@@ -434,8 +676,18 @@ def main() -> int:
             "week9_vs_week8_delta": summary["week9"]["ticket_count"] - summary["week8"]["ticket_count"],
             "week9_resolution_pct": summary["week9"]["resolution"]["resolved_pct"],
             "week9_avg_resolution_hours": summary["week9"]["resolution"]["avg_hours"],
+            "week8_self_service_candidate_count": summary["week8"]["self_service_candidate_count"],
+            "week9_self_service_candidate_count": summary["week9"]["self_service_candidate_count"],
+            "week8_ukg_self_service_eligible_count": summary["week8"]["ukg_self_service_eligible_count"],
+            "week9_ukg_self_service_eligible_count": summary["week9"]["ukg_self_service_eligible_count"],
+            "week9_ukg_self_service_eligible_pct": summary["week9"]["ukg_self_service_eligible_pct"],
+            "week9_self_service_candidate_pct": summary["week9"]["self_service_candidate_pct"],
         },
         "top_categories_week9": [{"category": category, "count": count} for category, count in top_week9_categories],
+        "top_self_service_options_week9": [
+            {"self_service_option": option, "count": count}
+            for option, count in week9_self_service_options.most_common(8)
+        ],
         "top_sites_week9": summary["week9"]["top_sites"][:8],
         "largest_category_deltas_wow": summary["wow_category_deltas"][:8],
         "evidence_samples": evidence_samples,
@@ -446,6 +698,7 @@ def main() -> int:
         },
         "limitations": [
             "Rows are classified with deterministic keyword rules only.",
+            "Self-service candidate flags are conservative and only assigned when ticket text clearly matches the approved UKG capability list.",
             "No SLA adherence fields are present in this source extract.",
             WFM_ASSIGNMENT_GROUP_SCOPE_NOTE,
             "Samples are truncated for token efficiency.",
@@ -463,6 +716,10 @@ def main() -> int:
         "site",
         "category",
         "rule_hit",
+        "ukg_self_service_eligible",
+        "could_have_been_self_service",
+        "self_service_option",
+        "self_service_rule_hit",
         "is_noise",
         "resolution_hours",
         "description_clean",

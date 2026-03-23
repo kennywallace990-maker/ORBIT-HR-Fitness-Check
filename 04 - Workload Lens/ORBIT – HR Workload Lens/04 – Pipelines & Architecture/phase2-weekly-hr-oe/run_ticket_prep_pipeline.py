@@ -37,6 +37,10 @@ SERVICE_SPECS = [
 ]
 
 
+def calendar_week_label(week_start: dt.date) -> str:
+    return f"Week {int(week_start.strftime('%U'))}"
+
+
 def run_command(command: list[str]) -> dict[str, object]:
     completed = subprocess.run(command, capture_output=True, text=True)
     parsed_stdout = None
@@ -56,6 +60,8 @@ def run_command(command: list[str]) -> dict[str, object]:
 
 
 def write_chat_handoff(path: Path, manifest: dict[str, object], rollup: dict[str, object]) -> None:
+    week8_label = manifest["week_lock"].get("week8_label", "Week 8")
+    week9_label = manifest["week_lock"].get("week9_label", "Week 9")
     lines = [
         "# Ticket Prep Chat Handoff",
         "",
@@ -64,16 +70,17 @@ def write_chat_handoff(path: Path, manifest: dict[str, object], rollup: dict[str
         f"- Pull date: {manifest.get('pull_date')}",
         "",
         "## Week Lock",
-        f"- Week 8: {manifest['week_lock']['week8_start']} to {manifest['week_lock']['week8_end']}",
-        f"- Week 9: {manifest['week_lock']['week9_start']} to {manifest['week_lock']['week9_end']}",
+        f"- {week8_label}: {manifest['week_lock']['week8_start']} to {manifest['week_lock']['week8_end']}",
+        f"- {week9_label}: {manifest['week_lock']['week9_start']} to {manifest['week_lock']['week9_end']}",
         "",
         "## Services",
     ]
     for service in rollup.get("services", []):
         coverage = service.get("date_coverage", {})
         lines.append(
-            f"- {service['service_name']}: Week9={service['week9_ticket_count']}, "
-            f"WoW={service['week9_vs_week8_delta']}, "
+            f"- {service['service_name']}: {week9_label}={service['week9_ticket_count']}, "
+            f"WoW vs {week8_label}={service['week9_vs_week8_delta']}, "
+            f"self_service_candidates={service.get('week9_self_service_candidate_count')}, "
             f"required_range_covered={coverage.get('required_range_covered')}"
         )
     lines.append("")
@@ -139,6 +146,10 @@ def main() -> int:
     parser.add_argument("--timesheet-inquiry-csv")
     parser.add_argument("--fc-general-inquiry-csv")
     parser.add_argument("--phase2-dir", help="Optional folder for auto-discovery of the four CSVs.")
+    parser.add_argument(
+        "--bi-weekly-dir",
+        help="Optional rolling folder containing weekly BI 'opened last week' and 'closed last week' reports.",
+    )
     parser.add_argument("--week8-start", default="2026-02-15")
     parser.add_argument("--week8-end", default="2026-02-21")
     parser.add_argument("--week9-start", default="2026-02-22")
@@ -165,7 +176,46 @@ def main() -> int:
         "timesheet_inquiry_csv": args.timesheet_inquiry_csv,
         "fc_general_inquiry_csv": args.fc_general_inquiry_csv,
     }
-    if args.phase2_dir:
+    source_mode = "legacy_service_files"
+    source_manifest_path = None
+    if args.bi_weekly_dir:
+        source_mode = "bi_weekly_two_report_folder"
+        intake_script = script_dir / "build_ticket_bi_service_inputs.py"
+        intake_dir = run_dir / "_bi_service_inputs"
+        intake_command = [
+            sys.executable,
+            str(intake_script),
+            "--bi-weekly-dir",
+            str(Path(args.bi_weekly_dir).resolve()),
+            "--pull-date",
+            pull_date.isoformat(),
+            "--week8-start",
+            week8_start.isoformat(),
+            "--week8-end",
+            week8_end.isoformat(),
+            "--week9-start",
+            week9_start.isoformat(),
+            "--week9-end",
+            week9_end.isoformat(),
+            "--out-dir",
+            str(intake_dir),
+        ]
+        intake_result = run_command(intake_command)
+        if intake_result["returncode"] != 0 or not isinstance(intake_result["parsed_stdout"], dict):
+            raise SystemExit(
+                "BI weekly intake failed. "
+                f"stderr={intake_result['stderr'] or 'n/a'} "
+                f"stdout={intake_result['stdout'] or 'n/a'}"
+            )
+        source_manifest_path = intake_result["parsed_stdout"].get("manifest_json")
+        service_inputs = {
+            item["arg_name"]: Path(item["path"]).resolve()
+            for item in intake_result["parsed_stdout"].get("service_csvs", [])
+        }
+        missing = [spec["arg_name"] for spec in SERVICE_SPECS if spec["arg_name"] not in service_inputs]
+        if missing:
+            raise SystemExit(f"BI weekly intake did not generate all expected service files. Missing: {missing}")
+    elif args.phase2_dir:
         phase2_dir = Path(args.phase2_dir).resolve()
         service_inputs = discover_input_files(phase2_dir)
     else:
@@ -220,11 +270,15 @@ def main() -> int:
     manifest = {
         "pass": overall_pass,
         "generated_at_utc": dt.datetime.now(dt.UTC).isoformat(timespec="seconds"),
+        "source_mode": source_mode,
+        "source_manifest_path": source_manifest_path,
         "week_lock": {
             "week8_start": week8_start.isoformat(),
             "week8_end": week8_end.isoformat(),
             "week9_start": week9_start.isoformat(),
             "week9_end": week9_end.isoformat(),
+            "week8_label": calendar_week_label(week8_start),
+            "week9_label": calendar_week_label(week9_start),
             "definition": "Sunday through Saturday",
         },
         "pull_date": pull_date.isoformat(),
@@ -303,7 +357,14 @@ def main() -> int:
                 "llm_compact_json": llm_path,
                 "week9_ticket_count": summary_data["week9"]["ticket_count"],
                 "week9_vs_week8_delta": llm_data["kpis"]["week9_vs_week8_delta"],
+                "week9_self_service_candidate_count": summary_data["week9"].get("self_service_candidate_count", 0),
+                "week9_self_service_candidate_pct": summary_data["week9"].get("self_service_candidate_pct", 0.0),
                 "top_category_week9": llm_data["top_categories_week9"][0] if llm_data["top_categories_week9"] else None,
+                "top_self_service_option_week9": (
+                    llm_data["top_self_service_options_week9"][0]
+                    if llm_data.get("top_self_service_options_week9")
+                    else None
+                ),
                 "date_coverage": {
                     "locked_window_coverage_pct": date_coverage.get("locked_window_coverage_pct"),
                     "required_range_covered": range_covered,

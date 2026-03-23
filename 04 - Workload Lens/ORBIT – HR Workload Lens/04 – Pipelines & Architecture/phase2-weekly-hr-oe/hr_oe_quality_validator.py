@@ -15,6 +15,11 @@ def contains_all(text: str, required_snippets: list[str]) -> list[str]:
     return missing
 
 
+def calendar_week_label(week_start_iso: str) -> str:
+    week_start = dt.date.fromisoformat(week_start_iso)
+    return f"Week {int(week_start.strftime('%U'))}"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Writing quality validator for HR OE weekly pack.")
     parser.add_argument("--markdown", required=True)
@@ -28,12 +33,14 @@ def main() -> int:
     md_path = Path(args.markdown).resolve()
     output_path = Path(args.output_json).resolve()
     text = md_path.read_text(encoding="utf-8")
+    week8_label = calendar_week_label(args.week8_start)
+    week9_label = calendar_week_label(args.week9_start)
 
     required_headings = [
         "# HR Operational Excellence Answer Pack",
         "## Week Lock",
         "## Inputs Used",
-        "## Week 8 vs Week 9 Snapshot",
+        f"## {week8_label} vs {week9_label} Snapshot",
         "## HR Operational Excellence Answers",
         "### Q1",
         "### Q2",
@@ -44,8 +51,8 @@ def main() -> int:
     missing_headings = contains_all(text, required_headings)
 
     week_lock_required = [
-        f"Week 8: {args.week8_start} to {args.week8_end} (Sunday to Saturday)",
-        f"Week 9: {args.week9_start} to {args.week9_end} (Sunday to Saturday)",
+        f"{week8_label}: {args.week8_start} to {args.week8_end} (Sunday to Saturday)",
+        f"{week9_label}: {args.week9_start} to {args.week9_end} (Sunday to Saturday)",
     ]
     missing_week_lock = contains_all(text, week_lock_required)
 
@@ -59,7 +66,8 @@ def main() -> int:
     }
     missing_questions = [qid for qid, sentence in question_sentence_checks.items() if sentence not in text]
 
-    has_table_pattern = bool(re.search(r"\| Metric \| Week 8 \| Week 9 \| Delta \|", text))
+    table_pattern = re.escape(f"| Metric | {week8_label} | {week9_label} | Delta |")
+    has_table_pattern = bool(re.search(table_pattern, text))
     long_lines = [idx + 1 for idx, line in enumerate(text.splitlines()) if len(line) > 260]
 
     errors: list[str] = []
@@ -74,7 +82,7 @@ def main() -> int:
     if found_prohibited:
         errors.append(f"Found prohibited placeholders: {found_prohibited}")
     if not has_table_pattern:
-        errors.append("Missing required Week 8 vs Week 9 snapshot table.")
+        errors.append(f"Missing required {week8_label} vs {week9_label} snapshot table.")
     if long_lines:
         warnings.append(f"Found long lines over 260 characters at lines: {long_lines[:20]}")
 
