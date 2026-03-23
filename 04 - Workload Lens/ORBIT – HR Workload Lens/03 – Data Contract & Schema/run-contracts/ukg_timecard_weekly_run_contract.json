@@ -1,0 +1,107 @@
+{
+  "contract_name": "Workload Lens UKG Timecard Weekly Run Contract",
+  "version": "1.0",
+  "last_updated": "2026-03-18",
+  "source_family": "ukg_timecard",
+  "governing_policy": "Workload_Lens_Data_Handling_Policy.md",
+  "source_specific_reference": "UKG_Timecard_Intake_Cleanup_and_Deidentification_Working_Artifact.md",
+  "keep_separate_from_other_sources": true,
+  "allow_raw_row_merge_with_ticket_data": false,
+  "canonical_structured_format": "json",
+  "flat_analytical_companion": "csv",
+  "recommended_run_layout": {
+    "run_folder_pattern": "ukg/<run_label>/",
+    "raw_dir": "ukg/<run_label>/raw/",
+    "prepared_dir": "ukg/<run_label>/prepared/"
+  },
+  "accepted_input_formats": [
+    "csv",
+    "xlsx",
+    "json"
+  ],
+  "required_processing_steps": [
+    "land_raw_file_unchanged",
+    "capture_run_metadata",
+    "validate_required_columns",
+    "normalize_headers",
+    "parse_dates_and_timestamps",
+    "detect_and_mask_pii",
+    "suppress_or_minimize_high_risk_free_text",
+    "preserve_analytical_fields_needed_for_actor_and_work_type_analysis",
+    "produce_cleaned_flat_file",
+    "produce_structured_json_output",
+    "produce_redaction_audit",
+    "produce_llm_safe_compact_json",
+    "produce_chat_handoff"
+  ],
+  "required_preserved_fields": [
+    "reporting_week_or_date_range",
+    "site_or_building_location",
+    "business_unit",
+    "revision_actor_or_access_profile",
+    "entity_type",
+    "revision_type",
+    "paycode_name_or_normalized_paycode",
+    "partition_or_event_date",
+    "controlled_traceability_key"
+  ],
+  "high_risk_fields": [
+    "employee_name",
+    "employee_id",
+    "manager_name",
+    "audit_comment_text",
+    "audit_note_text"
+  ],
+  "required_outputs": [
+    {
+      "file_name": "ukg_run_manifest.json",
+      "purpose": "machine-readable run summary including row counts, coverage checks, and output paths"
+    },
+    {
+      "file_name": "ukg_redaction_audit.json",
+      "purpose": "counts and examples of what was masked, removed, or minimized"
+    },
+    {
+      "file_name": "ukg_cleaned.csv",
+      "purpose": "flat analytical dataset for inspection and downstream QA"
+    },
+    {
+      "file_name": "ukg_cleaned_structured.json",
+      "purpose": "canonical structured source output for agent handoff"
+    },
+    {
+      "file_name": "ukg_llm_compact.json",
+      "purpose": "LLM-safe compact evidence pack with minimized text and no avoidable PII"
+    },
+    {
+      "file_name": "ukg_chat_handoff.md",
+      "purpose": "human-readable weekly handoff"
+    }
+  ],
+  "required_manifest_fields": [
+    "pass",
+    "generated_at_utc",
+    "run_label",
+    "source_family",
+    "input_files",
+    "reporting_window",
+    "input_row_count",
+    "clean_row_count",
+    "dropped_row_count",
+    "pii_redaction_summary",
+    "coverage_warnings",
+    "limitations",
+    "output_paths"
+  ],
+  "llm_rules": {
+    "allowed_input_artifacts": [
+      "ukg_llm_compact.json",
+      "ukg_chat_handoff.md"
+    ],
+    "forbidden_input_artifacts": [
+      "raw_files",
+      "unredacted_comment_text",
+      "unmasked_person_identifiers"
+    ]
+  }
+}

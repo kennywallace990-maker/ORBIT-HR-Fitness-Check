@@ -2,7 +2,7 @@
 
 ## Required Files
 
-- [ ] `Runbook – ECHO Intelligence.docx` *(includes on-call details, SLAs, rotations)*
+- [x] `Runbook, ECHO Intelligence.md` *(created 2026-03-17; covers pipeline execution, modification procedures, troubleshooting, and operational calendar)*
 - [ ] `Incident Playbook – ECHO Intelligence.docx`
 - [ ] `Monitoring & Alerts – ECHO Intelligence.xlsx`
-- [ ] `Release Notes – ECHO Intelligence.md`
+- [x] `Release Notes, ECHO Intelligence.md` *(created 2026-03-17; v1.0 initial release)*

@@ -16,6 +16,7 @@
 - [x] `phase2-pipeline/` -- Weekly ticket classification pipeline (classifier.py, run_weekly.py, validate_metrics.py)
 - [x] `phase2-weekly-hr-oe/` -- HR OE weekly analysis scripts (8 Python files)
 - [x] `phase2-utilities/` -- Data analysis utilities (7 Python files)
+- [x] `agent-prompts/` -- Reusable weekly UKG and ticket cleanup prompt templates
 
 ## Status
 - **2 of 4 standard files present** (Architecture diagram and Snowflake inventory needed)

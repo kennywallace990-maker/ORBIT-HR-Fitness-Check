@@ -4,5 +4,5 @@
 
 - [ ] `ORBIT ECHO Intelligence – Governance Sign-Off Checklist.xlsx`
 - [ ] `ORBIT ECHO Intelligence – Risk Assessment & NIST AI RMF Mapping.docx`
-- [ ] `Data Classification Mapping – ECHO Intelligence.xlsx`
+- [x] `Data Map and Classification Declaration, ECHO Intelligence.md` *(created 2026-03-17; replaces .xlsx Data Classification Mapping)*
 - [ ] `Legal / ER / Compliance Approvals – ECHO Intelligence.pdf`

@@ -1,0 +1,136 @@
+{
+  "contract_name": "Workload Lens Ticket Weekly Run Contract",
+  "version": "2.0",
+  "last_updated": "2026-03-18",
+  "source_family": "hr_ticket",
+  "source_delivery_model": "bi_weekly_opened_closed_pair",
+  "governing_policy": "Workload_Lens_Data_Handling_Policy.md",
+  "source_specific_reference": "Ticket_Cleanup_and_Classification_Standard.md",
+  "keep_separate_from_other_sources": true,
+  "allow_raw_row_merge_with_ukg_data": false,
+  "allow_raw_row_merge_across_ticket_services": false,
+  "allow_controlled_merge_between_bi_report_types": true,
+  "canonical_structured_format": "json",
+  "flat_analytical_companion": "csv",
+  "source_reports": [
+    "cases opened last week",
+    "cases closed last week"
+  ],
+  "required_services": [
+    "Attendance Inquiry",
+    "CS Time and Attendance",
+    "FC General Inquiry",
+    "Timesheet Inquiry"
+  ],
+  "recommended_run_layout": {
+    "run_folder_pattern": "ticket/<run_label>/",
+    "raw_dir": "ticket/<run_label>/raw/",
+    "raw_bi_dir": "ticket/<run_label>/raw/bi_reports/",
+    "prepared_dir": "ticket/<run_label>/prepared/",
+    "prepared_service_input_dir": "ticket/<run_label>/prepared/service_inputs/",
+    "service_subfolder_pattern": "ticket/<run_label>/<service_slug>/"
+  },
+  "required_processing_steps": [
+    "land_raw_bi_reports_unchanged",
+    "select_required_week8_and_week9_opened_closed_reports",
+    "reconstruct_service_specific_working_files",
+    "normalize_headers",
+    "parse_opened_and_resolved_dates",
+    "remove_or_suppress_html_signatures_ooo_and_system_noise",
+    "mask_or_remove_pii_before_llm_packaging",
+    "exclude_wfm_owned_scope_using_current_proxy_rules",
+    "deduplicate_within_each_service_file",
+    "classify_with_deterministic_rules",
+    "assign_deterministic_self_service_candidate_fields",
+    "produce_bi_intake_manifest",
+    "produce_per_service_cleaned_csv",
+    "produce_per_service_summary_json",
+    "produce_per_service_llm_compact_json",
+    "produce_ticket_rollup_json_without_raw_merge",
+    "produce_chat_handoff"
+  ],
+  "high_risk_fields": [
+    "requestor_name",
+    "email_address",
+    "phone_number",
+    "description",
+    "short_description",
+    "free_text_thread_content"
+  ],
+  "required_outputs": [
+    {
+      "file_name": "bi_weekly_ticket_intake_manifest.json",
+      "purpose": "machine-readable BI report selection and reconstruction summary"
+    },
+    {
+      "file_name": "ticket_prep_manifest.json",
+      "purpose": "machine-readable run summary"
+    },
+    {
+      "file_name": "ticket_prep_rollup_for_llm.json",
+      "purpose": "pointer-based rollup that references isolated service outputs"
+    },
+    {
+      "file_name": "ticket_prep_chat_handoff.md",
+      "purpose": "human-readable weekly handoff"
+    },
+    {
+      "file_name_pattern": "prepared/service_inputs/*_from_bi_weekly_reports.csv",
+      "purpose": "reconstructed service-specific working CSVs built from the weekly opened / closed reports"
+    },
+    {
+      "file_name_pattern": "<service_slug>/*_cleaned.csv",
+      "purpose": "flat cleaned service-specific analytical output"
+    },
+    {
+      "file_name_pattern": "<service_slug>/*_summary.json",
+      "purpose": "service-specific structured summary output"
+    },
+    {
+      "file_name_pattern": "<service_slug>/*_llm_compact.json",
+      "purpose": "service-specific compact LLM-safe evidence pack"
+    },
+    {
+      "file_name_pattern": "<service_slug>/*_redaction_audit.json",
+      "purpose": "optional but recommended when additional free-text redaction is performed"
+    }
+  ],
+  "required_cleaned_columns": [
+    "category",
+    "rule_hit",
+    "ukg_self_service_eligible",
+    "could_have_been_self_service",
+    "self_service_option",
+    "self_service_rule_hit",
+    "is_noise"
+  ],
+  "required_manifest_fields": [
+    "pass",
+    "generated_at_utc",
+    "source_mode",
+    "pull_date",
+    "week_lock",
+    "services",
+    "coverage_warnings"
+  ],
+  "llm_rules": {
+    "allowed_input_artifacts": [
+      "ticket_prep_rollup_for_llm.json",
+      "<service_slug>/*_llm_compact.json",
+      "ticket_prep_chat_handoff.md"
+    ],
+    "forbidden_input_artifacts": [
+      "raw_bi_report_files",
+      "raw_csv_files",
+      "unredacted_free_text",
+      "merged_raw_ticket_rows",
+      "blended_ticket_and_ukg_rows"
+    ]
+  },
+  "current_operational_notes": [
+    "WFM-owned work is excluded using assignment-group proxy rules until a true resolver or owning-team field is available.",
+    "Week boundaries are Sunday through Saturday.",
+    "Official classification remains deterministic and auditable.",
+    "The BI source folder must retain at least the recent two weekly opened / closed pairs so the required trailing window can be reconstructed."
+  ]
+}
