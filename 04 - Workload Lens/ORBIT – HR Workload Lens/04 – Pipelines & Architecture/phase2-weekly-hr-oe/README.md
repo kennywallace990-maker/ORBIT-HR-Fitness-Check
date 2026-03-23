@@ -27,6 +27,16 @@ If you drag the Outlook emails themselves into the folder, save or drop them as 
 
 The configured PowerShell launchers also scan the default Outlook Inbox for the observed weekly ServiceDesk report emails and extract their BI attachments into the same OneDrive folder.
 
+## Preferred Weekly Entry Point
+
+If you are running the full weekly operating flow, the preferred entry point is:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File "04 - Workload Lens\ORBIT – HR Workload Lens\04 – Pipelines & Architecture\phase2-weekly-hr-oe\Run-Configured-Weekly-HR-OE.ps1"
+```
+
+Use this after the manual Phase I UKG refresh is complete. The wrapper runs the configured ticket intake first, then the full HR/OE pipeline, and writes a small orchestration summary JSON into `Phase II\output`.
+
 Current Outlook pattern observed in production:
 
 - sender: `ServiceDesk@chewy.com`

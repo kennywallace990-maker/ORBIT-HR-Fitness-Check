@@ -60,7 +60,24 @@ Operational notes:
 - This output is sufficient for the current cross-phase reporting flow.
 - If Phase I has not been refreshed yet, the full HR/OE pipeline can still be run with `--allow-partial-phase1` or `-AllowPartialPhase1` for ticket-only validation, but that is a fallback path rather than the weekly target state.
 
-### Step 1: Run the automated ticket intake
+### Step 1: Use the preferred weekly one-command launcher
+
+After the manual UKG refresh is complete, this is the preferred weekly entrypoint:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File "04 - Workload Lens\ORBIT – HR Workload Lens\04 – Pipelines & Architecture\phase2-weekly-hr-oe\Run-Configured-Weekly-HR-OE.ps1"
+```
+
+What this wrapper does:
+
+1. runs the configured ticket folder-drop workflow first
+2. reuses that ticket prep result for the weekly pipeline
+3. skips duplicate Outlook extraction on the second step
+4. writes a small orchestration summary file in `Phase II\output`
+
+Use `-AllowPartialPhase1` only when the manual UKG refresh has not happened yet and you intentionally want a ticket-only validation pass.
+
+### Step 2: Run the automated ticket intake directly when needed
 
 Use the configured launcher:
 
@@ -87,7 +104,7 @@ Observed Outlook pattern in production:
 2. subject `WBR Previous Week Open Cases`
 3. subject `WBR Previous Week Resolved Cases`
 
-### Step 2: Verify ticket intake success
+### Step 3: Verify ticket intake success
 
 Check these artifacts first:
 
@@ -103,7 +120,7 @@ Confirm:
 
 `already_processed` on a repeated run for the same successful week is expected behavior, not an error.
 
-### Step 3: Run the full HR Operational Excellence pipeline
+### Step 4: Run the full HR Operational Excellence pipeline
 
 Use the configured launcher:
 
@@ -125,7 +142,7 @@ What this launcher does:
 4. Runs weekly analysis, math validation, and quality validation.
 5. Writes the answer pack, metrics JSON, chat handoff, and pipeline run manifest.
 
-### Step 4: Review and publish the weekly outputs
+### Step 5: Review and publish the weekly outputs
 
 Primary deliverables:
 
@@ -133,6 +150,7 @@ Primary deliverables:
 - `C:\Users\kwallace12\OneDrive - Chewy.com, LLC\Desktop\ORBIT Products\04 - Workload Lens\Phase II\output\hr_oe_metrics_<label>.json`
 - `C:\Users\kwallace12\OneDrive - Chewy.com, LLC\Desktop\ORBIT Products\04 - Workload Lens\Phase II\output\hr_oe_chat_handoff_<label>.md`
 - `C:\Users\kwallace12\OneDrive - Chewy.com, LLC\Desktop\ORBIT Products\04 - Workload Lens\Phase II\output\hr_oe_pipeline_run_<label>.json`
+- `C:\Users\kwallace12\OneDrive - Chewy.com, LLC\Desktop\ORBIT Products\04 - Workload Lens\Phase II\output\weekly_hr_oe_orchestration_<pull_date>.json`
 
 Review expectations:
 
