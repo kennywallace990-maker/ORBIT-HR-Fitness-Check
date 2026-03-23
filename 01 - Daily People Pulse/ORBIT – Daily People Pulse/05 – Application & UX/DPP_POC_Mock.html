@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily People Pulse — SDF4 — March 19, 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --blue: #0046BE;
+  --dark: #002E7D;
+  --light: #E8F0FE;
+  --red-bg: #FFEBEE;
+  --red: #C62828;
+  --green-bg: #E8F5E9;
+  --green: #2E7D32;
+  --amber-bg: #FFF8E1;
+  --amber: #E65100;
+  --yellow-bg: #FFFDE7;
+  --yellow: #F57F17;
+  --bg: #F7F9FC;
+  --surface: #FFF;
+  --t1: #1A1A2E;
+  --t2: #4A4A6A;
+  --tm: #8888A8;
+  --border: #E2E8F0;
+  --r: 10px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 15px; }
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--t1);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── PRINT ─────────────────────────────────────────────── */
+@media print {
+  @page { size: letter; margin: 0.55in 0.5in 0.75in 0.5in; }
+  body  { background: #fff; font-size: 9pt; }
+  .hero { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  thead { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .risk-red, .risk-yellow, .dept-code, .scope-note,
+  .insight-box, .sec-desc, .how-to-read, .dept-hdr,
+  .att-card, .stat { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .section { break-before: page; }
+  .section.no-break-before { break-before: avoid; }
+  .no-break { break-inside: avoid; }
+  table, .att-grid, .dept-section, .insight-box { break-inside: avoid; }
+  .hero { break-after: page; }
+}
+
+/* ── HERO ───────────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, #001A5E, var(--dark) 35%, var(--blue) 70%, #1565C0);
+  color: #fff;
+  padding: 52px 56px 44px;
+}
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,.13);
+  border: 1px solid rgba(255,255,255,.22);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.hero h1 {
+  font-size: 2.4rem;
+  font-weight: 900;
+  letter-spacing: -.6px;
+  line-height: 1.08;
+  margin-bottom: 8px;
+}
+.hero .sub {
+  font-size: .95rem;
+  font-weight: 300;
+  opacity: .82;
+  margin-bottom: 10px;
+}
+.hero-desc {
+  font-size: .82rem;
+  opacity: .72;
+  max-width: 680px;
+  line-height: 1.6;
+  margin-bottom: 28px;
+  font-weight: 300;
+}
+.stats {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.stat {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: var(--r);
+  padding: 14px 20px;
+  min-width: 115px;
+  text-align: center;
+}
+.stat .n { font-size: 1.5rem; font-weight: 800; display: block; line-height: 1; }
+.stat .l { font-size: .62rem; text-transform: uppercase; letter-spacing: .9px; opacity: .7; margin-top: 5px; display: block; font-weight: 600; }
+.hero-meta {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  font-size: .75rem;
+  opacity: .6;
+  border-top: 1px solid rgba(255,255,255,.14);
+  padding-top: 14px;
+}
+.hero-meta span::before { content: '·'; margin-right: 7px; opacity: .5; }
+.hero-meta span:first-child::before { content: none; }
+
+/* ── HOW TO READ ─────────────────────────────────────────── */
+.how-to-read {
+  background: var(--light);
+  border-left: 5px solid var(--blue);
+  padding: 20px 28px;
+  margin: 28px 40px 0;
+  border-radius: 0 var(--r) var(--r) 0;
+}
+.how-to-read h3 {
+  font-size: .68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  color: var(--blue);
+  margin-bottom: 10px;
+}
+.how-to-read p { font-size: .83rem; color: var(--t2); margin-bottom: 6px; line-height: 1.55; }
+.how-to-read p:last-child { margin-bottom: 0; }
+.how-to-read strong { color: var(--t1); }
+.dept-pills { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+.dept-pill {
+  background: white;
+  border: 1px solid #C5D8FF;
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+/* ── SECTION ────────────────────────────────────────────── */
+.section { padding: 30px 40px; border-top: 1px solid var(--border); }
+.section.no-break-before { border-top: none; }
+.sec-hdr { display: flex; align-items: baseline; gap: 12px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 3px solid var(--blue); }
+.sec-num { font-size: .68rem; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 2px; white-space: nowrap; }
+.sec-title { font-size: 1.25rem; font-weight: 800; color: var(--t1); }
+.sec-desc {
+  font-size: .82rem;
+  color: var(--t2);
+  margin-bottom: 20px;
+  line-height: 1.55;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--blue);
+  padding: 11px 16px;
+  border-radius: 0 8px 8px 0;
+}
+.scope-note {
+  display: inline-block;
+  background: var(--light);
+  color: var(--blue);
+  font-size: .7rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  border: 1px solid #C5D8FF;
+  letter-spacing: .3px;
+}
+
+/* ── DEPT SUBSECTION ─────────────────────────────────────── */
+.dept-section { margin-bottom: 26px; }
+.dept-hdr {
+  font-size: .88rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 12px;
+  padding: 8px 14px;
+  background: var(--light);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.dept-code {
+  font-size: .64rem;
+  font-weight: 700;
+  background: var(--dark);
+  color: white;
+  padding: 2px 7px;
+  border-radius: 4px;
+  letter-spacing: .4px;
+}
+.dept-note { font-size: .72rem; font-weight: 400; color: var(--tm); margin-left: auto; font-style: italic; }
+
+/* ── ATTENDANCE METRICS ──────────────────────────────────── */
+.att-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px; }
+.att-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 14px 18px;
+}
+.att-period { font-size: .62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--tm); margin-bottom: 10px; }
+.att-shifts { display: flex; gap: 24px; }
+.att-shift .shift-label { font-size: .65rem; color: var(--tm); font-weight: 500; text-transform: uppercase; letter-spacing: .7px; margin-bottom: 1px; }
+.att-pct { font-size: 1.45rem; font-weight: 800; line-height: 1.05; }
+.att-pct.good { color: var(--green); }
+.att-pct.warn { color: #E65100; }
+.att-pct.bad  { color: var(--red); }
+.att-fraction { font-size: .69rem; color: var(--tm); margin-top: 2px; }
+.att-divider { height: 1px; background: var(--border); margin: 10px 0; }
+.att-break-label { font-size: .62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.1px; color: var(--tm); margin-bottom: 5px; }
+.att-bullets { list-style: none; padding: 0; }
+.att-bullets li { font-size: .75rem; color: var(--t2); padding-left: 13px; position: relative; margin-bottom: 2px; line-height: 1.4; }
+.att-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--blue); font-size: .65rem; top: 2px; }
+.no-night { font-size: .72rem; color: var(--tm); font-style: italic; }
+
+/* ── INSIGHT BOX ─────────────────────────────────────────── */
+.insight-box {
+  background: #FFFBF0;
+  border-left: 4px solid var(--amber);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  margin-top: 10px;
+}
+.insight-box .ib-label { font-size: .62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--amber); margin-bottom: 5px; }
+.insight-box p { font-size: .8rem; color: var(--t1); line-height: 1.55; margin: 0; }
+
+/* ── TABLES ──────────────────────────────────────────────── */
+table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 14px 0; font-size: .78rem; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+thead th { background: var(--dark); color: #fff; font-weight: 600; padding: 9px 12px; text-align: left; font-size: .67rem; text-transform: uppercase; letter-spacing: .5px; }
+tbody td { padding: 8px 12px; border-bottom: 1px solid #F1F5F9; color: var(--t2); vertical-align: top; line-height: 1.4; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:nth-child(even) { background: #F8FAFC; }
+td.eid { font-family: Consolas, 'Courier New', monospace; font-size: .72rem; color: var(--tm); white-space: nowrap; }
+td.name { font-weight: 600; color: var(--t1); white-space: nowrap; }
+td.dept { font-size: .74rem; }
+td.rec { font-size: .73rem; line-height: 1.45; }
+td.num { text-align: right; font-family: Consolas, 'Courier New', monospace; font-size: .75rem; }
+td.over { text-align: right; font-family: Consolas, 'Courier New', monospace; font-size: .75rem; font-weight: 700; color: var(--amber); }
+td strong { color: var(--t1); }
+
+/* ── RISK BADGES ─────────────────────────────────────────── */
+.risk-red {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--red-bg); color: var(--red);
+  font-size: .68rem; font-weight: 700; padding: 3px 8px;
+  border-radius: 5px; white-space: nowrap;
+}
+.risk-yellow {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--yellow-bg); color: var(--yellow);
+  font-size: .68rem; font-weight: 700; padding: 3px 8px;
+  border-radius: 5px; white-space: nowrap;
+}
+
+/* ── SUMMARY TABLE ───────────────────────────────────────── */
+.summary-table thead th { background: #37474F; }
+.summary-table tbody td:first-child { font-weight: 700; color: var(--t1); }
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+.footer { text-align: center; padding: 20px 40px; color: var(--tm); font-size: .7rem; border-top: 1px solid var(--border); margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════ -->
+<header class="hero">
+  <div class="hero-badge">Chewy Confidential · Internal Use Only</div>
+  <h1>Daily People Pulse</h1>
+  <p class="sub">SDF4 · Wednesday, March 19, 2026 · Week-to-Date Report</p>
+  <p class="hero-desc">
+    A daily operational snapshot for HR Partners, surfacing attendance patterns, timecard exceptions, time-off coverage gaps,
+    and overtime risk. Data is sourced directly from UKG — not PUMA — to ensure real-time accuracy.
+    Use this report to prioritize same-day outreach, timecard corrections, and staffing adjustments before shift start.
+  </p>
+  <div class="stats">
+    <div class="stat"><span class="n">SDF4</span><span class="l">Location</span></div>
+    <div class="stat"><span class="n">6</span><span class="l">Departments</span></div>
+    <div class="stat"><span class="n">WTD</span><span class="l">Report Mode</span></div>
+    <div class="stat"><span class="n">10</span><span class="l">NCNS Flags</span></div>
+    <div class="stat"><span class="n">2</span><span class="l">OT Critical</span></div>
+  </div>
+  <div class="hero-meta">
+    <span>Generated: Wednesday, March 19, 2026 at 6:02 AM ET</span>
+    <span>Data window: March 15 – 18, 2026 (WTD) + Prior Day (March 18)</span>
+    <span>Data source: UKG API</span>
+    <span>Rows processed: 1,218</span>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════
+     HOW TO READ THIS REPORT
+════════════════════════════════════════════════ -->
+<div class="how-to-read no-break-before section" style="border-top:none; padding-top: 0;">
+  <h3>How to Read This Report</h3>
+  <p>
+    <strong>Report mode varies by day of week.</strong> On <strong>Tuesday through Saturday</strong>, this report shows
+    Week-to-Date (WTD) metrics — Sunday through the prior day — alongside a Prior Day detail.
+    On <strong>Sunday and Monday</strong>, it shows Prior Week and Prior Day only (no WTD).
+    Today is Wednesday, so all figures reflect <strong>WTD (Sun 3/15 – Tue 3/18) and Prior Day (Tue 3/18)</strong>.
+  </p>
+  <p>
+    <strong>All hours are UKG hours, not PUMA.</strong> Attendance is expressed as
+    <em>hours worked ÷ hours scheduled</em>. A 100% figure means all scheduled hours were covered.
+    Any figure below 85% warrants manager attention.
+  </p>
+  <p><strong>Departments covered at this site:</strong></p>
+  <div class="dept-pills">
+    <span class="dept-pill">Outbound · 2300</span>
+    <span class="dept-pill">Inbound · 2100</span>
+    <span class="dept-pill">Replenishment · 2200</span>
+    <span class="dept-pill">Inventory Control · 2400</span>
+    <span class="dept-pill">Pharmacy · 3300</span>
+    <span class="dept-pill">Vet Services – Tech I</span>
+    <span class="dept-pill">Vet Services – Tech II</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 1 — ATTENDANCE SUMMARY
+════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-hdr">
+    <span class="sec-num">Section 01</span>
+    <span class="sec-title">Attendance Summary</span>
+  </div>
+  <p class="sec-desc">
+    Attendance is calculated as <strong>hours worked ÷ hours scheduled (UKG)</strong> and expressed as a percentage.
+    WTD figures reflect Sunday, March 15 through Tuesday, March 18. Prior Day figures reflect Tuesday, March 18 only.
+    Where applicable, Day and Night shifts are reported separately. Some departments at this site do not operate a Night shift.
+  </p>
+
+  <!-- OUTBOUND -->
+  <div class="dept-section no-break">
+    <div class="dept-hdr">
+      Outbound Technicians
+      <span class="dept-code">2300</span>
+    </div>
+    <div class="att-grid">
+      <div class="att-card">
+        <div class="att-period">Week to Date · Sun 3/15 – Tue 3/18</div>
+        <div class="att-shifts">
+          <div class="att-shift">
+            <div class="shift-label">Day</div>
+            <div class="att-pct warn">82.3%</div>
+            <div class="att-fraction">744:30 of 904:30 hrs worked/sched</div>
+          </div>
+          <div class="att-shift">
+            <div class="shift-label">Night</div>
+            <div class="att-pct warn">78.5%</div>
+            <div class="att-fraction">581:00 of 740:00 hrs worked/sched</div>
+          </div>
+        </div>
+      </div>
+      <div class="att-card">
+        <div class="att-period">Prior Day · Tuesday, March 18</div>
+        <div class="att-shifts">
+          <div class="att-shift">
+            <div class="shift-label">Day</div>
+            <div class="att-pct warn">78.2%</div>
+            <div class="att-fraction">312:00 of 399:00 hrs worked/sched</div>
+          </div>
+          <div class="att-shift">
+            <div class="shift-label">Night</div>
+            <div class="att-pct warn">81.4%</div>
+            <div class="att-fraction">206:00 of 253:00 hrs worked/sched</div>
+          </div>
+        </div>
+        <div class="att-divider"></div>
+        <div class="att-break-label">Hours Lost — Day</div>
+        <ul class="att-bullets">
+          <li>7 full missed shifts (70:00 hrs)</li>
+          <li>4 Early Departures (08:30 hrs)</li>
+          <li>2 Late Arrivals (00:30 hrs)</li>
+        </ul>
+        <div class="att-break-label" style="margin-top:7px;">Hours Lost — Night</div>
+        <ul class="att-bullets">
+          <li>3 full missed shifts (30:00 hrs)</li>
+          <li>2 Early Departures (03:00 hrs)</li>
+          <li>1 Late Arrival (00:15 hrs)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="insight-box">
+      <div class="ib-label">AI Insight</div>
+      <p>Outbound is the most significant attendance concern on site this week. Day shift has run below the 85% benchmark on
+      both Monday and Tuesday, with Tuesday's 78.2% representing the lowest single-day figure for any department this week.
+      Seven full missed shifts on Tuesday alone account for 70 hours of lost labor — a volume that puts floor operations under
+      meaningful strain. Night shift is recovering slightly but has not cleared 85% WTD. With this trajectory, Outbound will
+      close the week well below benchmark unless today's staffing holds. Recommend the Outbound Operations Manager review
+      today's headcount before shift start and flag repeat no-shows for NCNS follow-up.</p>
+    </div>
+  </div>
+
+  <!-- INBOUND -->
+  <div class="dept-section no-break">
+    <div class="dept-hdr">
+      Inbound Technicians
+      <span class="dept-code">2100</span>
+    </div>
+    <div class="att-grid">
+      <div class="att-card">
+        <div class="att-period">Week to Date · Sun 3/15 – Tue 3/18</div>
+        <div class="att-shifts">
+          <div class="att-shift">
+            <div class="shift-label">Day</div>
+            <div class="att-pct good">91.2%</div>
+            <div class="att-fraction">355:45 of 390:00 hrs worked/sched</div>
+          </div>
+          <div class="att-shift">
+            <div class="shift-label">Night</div>
+            <div class="att-pct good">88.7%</div>
+            <div class="att-fraction">255:00 of 287:30 hrs worked/sched</div>
+          </div>
+        </div>
+      </div>
+      <div class="att-card">
+        <div class="att-period">Prior Day · Tuesday, March 18</div>
+        <div class="att-shifts">
+          <div class="att-shift">
+            <div class="shift-label">Day</div>
+            <div class="att-pct good">90.1%</div>
+            <div class="att-fraction">135:45 of 150:45 hrs worked/sched</div>
+          </div>
+          <div class="att-shift">
+            <div class="shift-label">Night</div>
+            <div class="att-pct good">88.0%</div>
+            <div class="att-fraction">88:00 of 100:00 hrs worked/sched</div>
+          </div>
+        </div>
+        <div class="att-divider"></div>
+        <div class="att-break-label">Hours Lost — Day</div>
+        <ul class="att-bullets">
+          <li>1 full missed shift (10:00 hrs)</li>
+          <li>1 Early Departure (00:45 hrs)</li>
+        </ul>
+        <div class="att-break-label" style="margin-top:7px;">Hours Lost — Night</div>
+        <ul class="att-bullets">
+          <li>1 full missed shift (12:00 hrs)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="insight-box">
+      <div class="ib-label">AI Insight</div>
+      <p>Inbound is the strongest performing department on site this week. Both shifts are tracking above 88% WTD, and
+      Tuesday's performance reflects a clean operation with minimal disruption. No systemic attendance concern is present.
+      No action required at this time.</p>
+    </div>
+  </div>
+
+  <!-- REPLEN -->
+  <div class="dept-section no-break">
+    <div class="dept-hdr">
+      Replenishment
+      <span class="dept-code">2200</span>
+      <span class="dept-note">Day shift only at this site</span>
+    </div>
+    <div class="att-grid">
+      <div class="att-card">
+        <div class="att-period">Week to Date · Sun 3/15 – Tue 3/18</div>
+        <div class="att-shifts">
+          <div class="att-shift">
+            <div class="shift-label">Day</div>
+            <div class="att-pct good">94.8%</div>
+            <div class="att-fraction">218:30 of 230:30 hrs worked/sched</div>
+          </div>
+        </div>
+        <div class="no-night" style="margin-top:8px;">Night shift not active at SDF4 for this department.</div>
+      </div>
+      <div class="att-card">
+        <div class="att-period">Prior Day · Tuesday, March 18</div>
+        <div class="att-shifts">
+          <div class="att-shift">
+            <div class="shift-label">Day</div>
+            <div class="att-pct good">92.3%</div>
+            <div class="att-fraction">72:00 of 78:00 hrs worked/sched</div>
+          </div>
+        </div>
+        <div class="att-divider"></div>
+        <div class="att-break-label">Hours Lost — Day</div>
+        <ul class="att-bullets">
+          <li>1 Early Departure (00:30 hrs)</li>
+          <li>1 full missed shift (06:00 hrs)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="insight-box">
+      <div class="ib-label">AI Insight</div>
+      <p>Replenishment is holding well above benchmark. Tuesday's 92.3% reflects one early departure and one missed shift —
+      neither indicates a pattern. WTD performance at 94.8% is healthy. No escalation warranted.</p>
+    </div>
+  </div>
+
+  <!-- IC -->
+  <div class="dept-section no-break">
+    <div class="dept-hdr">
+      Inventory Control
+      <span class="dept-code">2400</span>
+      <span class="dept-note">Day shift only at this site</span>
+    </div>
+    <div class="att-grid">
+      <div class="att-card">
+        <div class="att-period">Week to Date · Sun 3/15 – Tue 3/18</div>
+        <div class="att-shifts">
+          <div class="att-shift">
+            <div class="shift-label">Day</div>
+            <div class="att-pct good">96.2%</div>
+            <div class="att-fraction">115:00 of 119:30 hrs worked/sched</div>
+          </div>
+        </div>
+        <div class="no-night" style="margin-top:8px;">Night shift not active at SDF4 for this department.</div>
+      </div>
+      <div class="att-card">
+        <div class="att-period">Prior Day · Tuesday, March 18</div>
+        <div class="att-shifts">
+          <div class="att-shift">
+            <div class="shift-label">Day</div>
+            <div class="att-pct good">95.0%</div>
+            <div class="att-fraction">38:00 of 40:00 hrs worked/sched</div>
+          </div>
+        </div>
+        <div class="att-divider"></div>
+        <div class="att-break-label">Hours Lost — Day</div>
+        <ul class="att-bullets">
+          <li>1 partial absence (02:00 hrs)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="insight-box">
+      <div class="ib-label">AI Insight</div>
+      <p>Inventory Control had a near-perfect week. At 96.2% WTD, this is the highest-performing department on site.
+      Tuesday's partial absence is isolated. No action needed.</p>
+    </div>
+  </div>
+
+  <!-- PHARMACY -->
+  <div class="dept-section no-break">
+    <div class="dept-hdr">
+      Pharmacy
+      <span class="dept-code">3300</span>
+    </div>
+    <div class="att-grid">
+      <div class="att-card">
+        <div class="att-period">Week to Date · Sun 3/15 – Tue 3/18</div>
+        <div class="att-shifts">
+          <div class="att-shift">
+            <div class="shift-label">Day</div>
+            <div class="att-pct warn">88.5%</div>
+            <div class="att-fraction">552:45 of 624:30 hrs worked/sched</div>
+          </div>
+          <div class="att-shift">
+            <div class="shift-label">Night</div>
+            <div class="att-pct bad">79.2%</div>
+            <div class="att-fraction">236:00 of 298:00 hrs worked/sched</div>
+          </div>
+        </div>
+      </div>
+      <div class="att-card">
+        <div class="att-period">Prior Day · Tuesday, March 18</div>
+        <div class="att-shifts">
+          <div class="att-shift">
+            <div class="shift-label">Day</div>
+            <div class="att-pct warn">87.4%</div>
+            <div class="att-fraction">194:30 of 222:30 hrs worked/sched</div>
+          </div>
+          <div class="att-shift">
+            <div class="shift-label">Night</div>
+            <div class="att-pct bad">81.4%</div>
+            <div class="att-fraction">79:00 of 97:00 hrs worked/sched</div>
+          </div>
+        </div>
+        <div class="att-divider"></div>
+        <div class="att-break-label">Hours Lost — Day</div>
+        <ul class="att-bullets">
+          <li>2 full missed shifts (20:00 hrs)</li>
+          <li>3 Early Departures (02:30 hrs)</li>
+        </ul>
+        <div class="att-break-label" style="margin-top:7px;">Hours Lost — Night</div>
+        <ul class="att-bullets">
+          <li>1 full missed shift (10:00 hrs)</li>
+          <li>2 Early Departures (08:00 hrs)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="insight-box">
+      <div class="ib-label">AI Insight</div>
+      <p>Pharmacy night shift is the second most acute attendance concern on site this week. At 79.2% WTD, it has not
+      cleared the 85% benchmark on any single day this week. Two early departures on Tuesday night — totaling 8 hours —
+      suggest a possible recurring pattern (transportation issues, shift length concerns, or personal obligations) worth a
+      targeted 1:1 from the Pharmacy Manager. Day shift is tracking above benchmark but trending downward from Monday to
+      Tuesday. Brown, David has been an NCNS for two consecutive days (see Section 02), which contributes to this pattern.
+      Recommend the Pharmacy Manager review today's staffing before shift start given two TMs are on planned UTO today
+      (see Section 05).</p>
+    </div>
+  </div>
+
+  <!-- VET TECH I -->
+  <div class="dept-section no-break">
+    <div class="dept-hdr">
+      Vet Services – Tech I
+      <span class="dept-note">Day shift only at this site</span>
+    </div>
+    <div class="att-grid">
+      <div class="att-card">
+        <div class="att-period">Week to Date · Sun 3/15 – Tue 3/18</div>
+        <div class="att-shifts">
+          <div class="att-shift">
+            <div class="shift-label">Day</div>
+            <div class="att-pct good">93.5%</div>
+            <div class="att-fraction">99:00 of 105:54 hrs worked/sched</div>
+          </div>
+        </div>
+        <div class="no-night" style="margin-top:8px;">Night shift not active at SDF4 for this department.</div>
+      </div>
+      <div class="att-card">
+        <div class="att-period">Prior Day · Tuesday, March 18</div>
+        <div class="att-shifts">
+          <div class="att-shift">
+            <div class="shift-label">Day</div>
+            <div class="att-pct good">91.7%</div>
+            <div class="att-fraction">33:00 of 36:00 hrs worked/sched</div>
+          </div>
+        </div>
+        <div class="att-divider"></div>
+        <div class="att-break-label">Hours Lost — Day</div>
+        <ul class="att-bullets">
+          <li>1 Early Departure (00:30 hrs)</li>
+          <li>1 partial absence (02:30 hrs)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="insight-box">
+      <div class="ib-label">AI Insight</div>
+      <p>Vet Tech I is performing above benchmark WTD. Tuesday's minor dip to 91.7% is isolated to one early departure
+      and one partial absence. No systemic concern — no escalation needed.</p>
+    </div>
+  </div>
+
+  <!-- VET TECH II -->
+  <div class="dept-section no-break">
+    <div class="dept-hdr">
+      Vet Services – Tech II
+      <span class="dept-note">Day shift only at this site</span>
+    </div>
+    <div class="att-grid">
+      <div class="att-card">
+        <div class="att-period">Week to Date · Sun 3/15 – Tue 3/18</div>
+        <div class="att-shifts">
+          <div class="att-shift">
+            <div class="shift-label">Day</div>
+            <div class="att-pct good">88.0%</div>
+            <div class="att-fraction">63:00 of 71:35 hrs worked/sched</div>
+          </div>
+        </div>
+        <div class="no-night" style="margin-top:8px;">Night shift not active at SDF4 for this department.</div>
+      </div>
+      <div class="att-card">
+        <div class="att-period">Prior Day · Tuesday, March 18</div>
+        <div class="att-shifts">
+          <div class="att-shift">
+            <div class="shift-label">Day</div>
+            <div class="att-pct warn">87.5%</div>
+            <div class="att-fraction">21:00 of 24:00 hrs worked/sched</div>
+          </div>
+        </div>
+        <div class="att-divider"></div>
+        <div class="att-break-label">Hours Lost — Day</div>
+        <ul class="att-bullets">
+          <li>1 full missed shift (03:00 hrs)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="insight-box">
+      <div class="ib-label">AI Insight</div>
+      <p>Vet Tech II is a small department — with roughly 8 TMs on roster, a single missed shift moves the needle
+      significantly. Tuesday's 87.5% was driven by one no-show. WTD is healthy at 88.0%. No recurrence noted this
+      week — no escalation needed.</p>
+    </div>
+  </div>
+</div><!-- /section 1 -->
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 2 — NO CALL NO SHOW (NCNS)
+════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-hdr">
+    <span class="sec-num">Section 02</span>
+    <span class="sec-title">No Call No Show (NCNS)</span>
+  </div>
+  <p class="sec-desc">
+    <strong>What this is:</strong> Employees who were scheduled to work and have a No Call No Show paycode applied in UKG — no pre-approved PTO, UTO, or other leave on record.
+    This section does <em>not</em> include employees with approved time off; only confirmed NCNS paycode instances are shown.
+    Sorted by TM Name, then date (most recent first) to surface repeat absences at a glance.
+    <br><br>
+    <strong>TMDM Workflow:</strong> Validate NCNS on timesheet → Initiate NCNS Comm (Day 1 / Day 2 / Day 3) → Send Term Review Ticket to Site HR within 36 hours of Day 3 comm.
+    <strong>Site HR:</strong> Respond to each Term Review Ticket with a termination decision or documented feedback.
+  </p>
+  <div class="scope-note">📅 Scope: WTD — Sunday, March 15 through Tuesday, March 18</div>
+  <table>
+    <thead>
+      <tr>
+        <th>EID</th>
+        <th>TM Name</th>
+        <th>Department</th>
+        <th>Schedule Group</th>
+        <th>Reports To</th>
+        <th>Date</th>
+        <th>Recommended Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="eid">12034</td>
+        <td class="name">Alvarez, Maria</td>
+        <td class="dept">Outbound (2300)</td>
+        <td>F06-SDF4-SMTW-0600-1630-A</td>
+        <td>Harden, TJ</td>
+        <td>03/18</td>
+        <td class="rec"><strong>Day 2:</strong> NCNS Comm Day 2 sent — monitor for Day 3 threshold. If absent again, initiate Term Review Ticket within 36 hrs of Day 3 comm.</td>
+      </tr>
+      <tr>
+        <td class="eid">12034</td>
+        <td class="name">Alvarez, Maria</td>
+        <td class="dept">Outbound (2300)</td>
+        <td>F06-SDF4-SMTW-0600-1630-A</td>
+        <td>Harden, TJ</td>
+        <td>03/17</td>
+        <td class="rec"><strong>Day 1:</strong> Validate NCNS on timesheet → NCNS Comm Day 1 completed.</td>
+      </tr>
+      <tr>
+        <td class="eid">11892</td>
+        <td class="name">Brown, David</td>
+        <td class="dept">Pharmacy (3300)</td>
+        <td>F07-SDF4-MTWRF-0730-1600-I</td>
+        <td>Tweed, Tasha</td>
+        <td>03/18</td>
+        <td class="rec"><strong>Day 2:</strong> NCNS Comm Day 2 sent — monitor for Day 3 threshold. If absent again, initiate Term Review Ticket within 36 hrs of Day 3 comm.</td>
+      </tr>
+      <tr>
+        <td class="eid">11892</td>
+        <td class="name">Brown, David</td>
+        <td class="dept">Pharmacy (3300)</td>
+        <td>F07-SDF4-MTWRF-0730-1600-I</td>
+        <td>Tweed, Tasha</td>
+        <td>03/17</td>
+        <td class="rec"><strong>Day 1:</strong> Validate NCNS on timesheet → NCNS Comm Day 1 completed.</td>
+      </tr>
+      <tr>
+        <td class="eid">12108</td>
+        <td class="name">Carter, James</td>
+        <td class="dept">Outbound (2300)</td>
+        <td>F06-SDF4-MTRF-0600-1630-F</td>
+        <td>Stevens, David</td>
+        <td>03/18</td>
+        <td class="rec"><strong>Day 1:</strong> Validate NCNS on timesheet → Initiate NCNS Comm Day 1 today.</td>
+      </tr>
+      <tr>
+        <td class="eid">13501</td>
+        <td class="name">Davis, Keisha</td>
+        <td class="dept">Replenishment (2200)</td>
+        <td>F08-SDF4-MTWRF-0800-1630-I</td>
+        <td>Parker, Lisa</td>
+        <td>03/18</td>
+        <td class="rec"><strong>Day 1:</strong> Validate NCNS on timesheet → Initiate NCNS Comm Day 1 today.</td>
+      </tr>
+      <tr>
+        <td class="eid">12456</td>
+        <td class="name">Gill, Priya</td>
+        <td class="dept">Inbound (2100)</td>
+        <td>F06-SDF4-SMTW-0600-1630-B</td>
+        <td>Martin, Sara</td>
+        <td>03/17</td>
+        <td class="rec"><strong>Day 1:</strong> Validate NCNS on timesheet → Initiate NCNS Comm Day 1 today.</td>
+      </tr>
+      <tr>
+        <td class="eid">13201</td>
+        <td class="name">Hernandez, Luis</td>
+        <td class="dept">Outbound (2300)</td>
+        <td>F17-SDF4-WRFZ-1700-0330-2B</td>
+        <td>Shank, Kevin</td>
+        <td>03/17</td>
+        <td class="rec"><strong>Day 1:</strong> Validate NCNS on timesheet → Initiate NCNS Comm Day 1 today.</td>
+      </tr>
+      <tr>
+        <td class="eid">10983</td>
+        <td class="name">Patel, Raj</td>
+        <td class="dept">Outbound (2300)</td>
+        <td>F06-SDF4-SMTW-0600-1630-A</td>
+        <td>Harden, TJ</td>
+        <td>03/17</td>
+        <td class="rec"><strong>Day 1:</strong> Validate NCNS on timesheet → Initiate NCNS Comm Day 1 today.</td>
+      </tr>
+      <tr>
+        <td class="eid">11745</td>
+        <td class="name">Williams, Angela</td>
+        <td class="dept">Pharmacy (3300)</td>
+        <td>F10HR-SDF4-MT-0900-WR-1030-G5</td>
+        <td>Tweed, Tasha</td>
+        <td>03/17</td>
+        <td class="rec"><strong>Day 1:</strong> Validate NCNS on timesheet → Initiate NCNS Comm Day 1 today.</td>
+      </tr>
+    </tbody>
+  </table>
+</div><!-- /section 2 -->
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 3 — UNSCHEDULED BUT WORKED
+════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-hdr">
+    <span class="sec-num">Section 03</span>
+    <span class="sec-title">Unscheduled but Worked</span>
+  </div>
+  <p class="sec-desc">
+    <strong>What this is:</strong> Team Members who worked 10 or more minutes beyond their scheduled hours on the prior day,
+    with no approved VET (Voluntary Extended Time) on record in UKG.
+    This may indicate unauthorized overtime, a missed clock-out, or an unapproved schedule extension.
+    <br><br>
+    This section covers <strong>Tuesday, March 18, 2026</strong> only.
+    <strong>Recommendation for all entries:</strong> Local HR to review timecard → confirm VET approval or adjust schedule; document per SOP.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>EID</th>
+        <th>TM Name</th>
+        <th>Department</th>
+        <th>Schedule Group</th>
+        <th>Reports To</th>
+        <th style="text-align:right;">Scheduled</th>
+        <th style="text-align:right;">Worked</th>
+        <th style="text-align:right;">Over</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="eid">11234</td>
+        <td class="name">Adams, Jennifer</td>
+        <td class="dept">Pharmacy (3300)</td>
+        <td>F10HR-SDF4-MT-0900-WR-1030-G5</td>
+        <td>Tweed, Tasha</td>
+        <td class="num">10:00</td>
+        <td class="num">10:18</td>
+        <td class="over">+00:18</td>
+      </tr>
+      <tr>
+        <td class="eid">12789</td>
+        <td class="name">Garcia, Roberto</td>
+        <td class="dept">Outbound (2300)</td>
+        <td>F06-SDF4-SMTW-0600-1630-A</td>
+        <td>Harden, TJ</td>
+        <td class="num">10:00</td>
+        <td class="num">10:14</td>
+        <td class="over">+00:14</td>
+      </tr>
+      <tr>
+        <td class="eid">13102</td>
+        <td class="name">Johnson, Marcus</td>
+        <td class="dept">Outbound (2300)</td>
+        <td>F17-SDF4-WRFZ-1700-0330-2B</td>
+        <td>Shank, Kevin</td>
+        <td class="num">10:00</td>
+        <td class="num">10:22</td>
+        <td class="over">+00:22</td>
+      </tr>
+      <tr>
+        <td class="eid">12567</td>
+        <td class="name">Lee, Sarah</td>
+        <td class="dept">Inbound (2100)</td>
+        <td>F06-SDF4-SMTW-0600-1630-B</td>
+        <td>Martin, Sara</td>
+        <td class="num">10:00</td>
+        <td class="num">10:11</td>
+        <td class="over">+00:11</td>
+      </tr>
+      <tr>
+        <td class="eid">14002</td>
+        <td class="name">Morgan, Tyler</td>
+        <td class="dept">Pharmacy (3300)</td>
+        <td>F07-SDF4-MTWRF-0730-1600-I</td>
+        <td>Tweed, Tasha</td>
+        <td class="num">10:00</td>
+        <td class="num">10:45</td>
+        <td class="over">+00:45</td>
+      </tr>
+      <tr>
+        <td class="eid">11678</td>
+        <td class="name">Nguyen, Linh</td>
+        <td class="dept">Replenishment (2200)</td>
+        <td>F08-SDF4-MTWRF-0800-1630-I</td>
+        <td>Parker, Lisa</td>
+        <td class="num">10:00</td>
+        <td class="num">10:17</td>
+        <td class="over">+00:17</td>
+      </tr>
+      <tr>
+        <td class="eid">13890</td>
+        <td class="name">Robinson, Danielle</td>
+        <td class="dept">Outbound (2300)</td>
+        <td>F06-SDF4-MTRF-0600-1630-F</td>
+        <td>Stevens, David</td>
+        <td class="num">10:00</td>
+        <td class="num">10:12</td>
+        <td class="over">+00:12</td>
+      </tr>
+      <tr>
+        <td class="eid">12345</td>
+        <td class="name">Thompson, Andre</td>
+        <td class="dept">Pharmacy (3300)</td>
+        <td>F10HR-SDF4-MT-0900-WR-1030-G5</td>
+        <td>Tweed, Tasha</td>
+        <td class="num">10:30</td>
+        <td class="num">10:48</td>
+        <td class="over">+00:18</td>
+      </tr>
+    </tbody>
+  </table>
+</div><!-- /section 3 -->
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 4 — PAYCODE RECONCILER
+════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-hdr">
+    <span class="sec-num">Section 04</span>
+    <span class="sec-title">Paycode Reconciler</span>
+  </div>
+  <p class="sec-desc">
+    <strong>What this is:</strong> Identifies Team Members where time-off paycodes applied in UKG do not align with
+    their scheduled hours — either over-applied (paycode exceeds scheduled) or under-applied (paycode does not cover
+    the full absence). These mismatches can cause payroll errors if not corrected before the pay period closes.
+    Sorted by TM Name, then date (most recent first).
+  </p>
+  <div class="scope-note">📅 Scope: WTD — Sunday, March 15 through Tuesday, March 18</div>
+  <table>
+    <thead>
+      <tr>
+        <th>EID</th>
+        <th>TM Name</th>
+        <th>Department</th>
+        <th>Schedule Group</th>
+        <th>Reports To</th>
+        <th>Date</th>
+        <th style="text-align:right;">Scheduled</th>
+        <th style="text-align:right;">Applied</th>
+        <th>Paycodes</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="eid">11234</td>
+        <td class="name">Adams, Jennifer</td>
+        <td class="dept">Pharmacy (3300)</td>
+        <td>F10HR-SDF4-MT-0900-WR-1030-G5</td>
+        <td>Tweed, Tasha</td>
+        <td>03/18</td>
+        <td class="num">10:00</td>
+        <td class="num">10:15</td>
+        <td>PTO PAID: 10:15</td>
+        <td class="rec">Over-applied by 00:15 — review &amp; correct PTO entry</td>
+      </tr>
+      <tr>
+        <td class="eid">11892</td>
+        <td class="name">Brown, David</td>
+        <td class="dept">Pharmacy (3300)</td>
+        <td>F07-SDF4-MTWRF-0730-1600-I</td>
+        <td>Tweed, Tasha</td>
+        <td>03/17</td>
+        <td class="num">10:00</td>
+        <td class="num">10:30</td>
+        <td>PTO PAID: 10:30</td>
+        <td class="rec">Over-applied by 00:30 — review &amp; correct PTO entry</td>
+      </tr>
+      <tr>
+        <td class="eid">13201</td>
+        <td class="name">Hernandez, Luis</td>
+        <td class="dept">Outbound (2300)</td>
+        <td>F17-SDF4-WRFZ-1700-0330-2B</td>
+        <td>Shank, Kevin</td>
+        <td>03/18</td>
+        <td class="num">10:00</td>
+        <td class="num">07:00</td>
+        <td>Personal Unpaid Call Off: 07:00</td>
+        <td class="rec">Under-applied by 03:00 — paycode does not cover full scheduled shift; review for missing paycode or NCNS designation</td>
+      </tr>
+      <tr>
+        <td class="eid">12890</td>
+        <td class="name">Kim, Jessica</td>
+        <td class="dept">Vet Services – Tech I</td>
+        <td>F07-SDF4-MTWRF-0730-1600-I</td>
+        <td>Osman, Rachel</td>
+        <td>03/18</td>
+        <td class="num">09:00</td>
+        <td class="num">09:30</td>
+        <td>UTO: 09:30</td>
+        <td class="rec">Over-applied by 00:30 — review &amp; correct UTO entry</td>
+      </tr>
+    </tbody>
+  </table>
+</div><!-- /section 4 -->
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 5 — UPCOMING TIME OFF
+════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-hdr">
+    <span class="sec-num">Section 05</span>
+    <span class="sec-title">Upcoming Time Off</span>
+  </div>
+  <p class="sec-desc">
+    <strong>What this is:</strong> PTO and UTO scheduled in UKG for the next 7 days (March 19–25), organized by department.
+    Use this section to labor plan by shift and date, and to identify coverage gaps before they occur.
+    Each department's data is sorted by date, newest to oldest.
+    An AI-generated insight follows each department to surface any coverage risks or patterns worth action.
+  </p>
+
+  <!-- OUTBOUND -->
+  <div class="dept-section no-break">
+    <div class="dept-hdr">Outbound Technicians <span class="dept-code">2300</span></div>
+    <div class="scope-note">📅 March 19–25, 2026</div>
+    <table>
+      <thead>
+        <tr>
+          <th>EID</th><th>TM Name</th><th>Reports To</th><th>Date(s)</th><th style="text-align:right;">PTO</th><th style="text-align:right;">UTO</th><th style="text-align:right;">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="eid">12108</td><td class="name">Carter, James</td><td>Stevens, David</td><td>03/23, 03/24</td><td class="num">00:00</td><td class="num">20:00</td><td class="num">20:00</td>
+        </tr>
+        <tr>
+          <td class="eid">12789</td><td class="name">Garcia, Roberto</td><td>Harden, TJ</td><td>03/20</td><td class="num">10:00</td><td class="num">00:00</td><td class="num">10:00</td>
+        </tr>
+        <tr>
+          <td class="eid">13201</td><td class="name">Hernandez, Luis</td><td>Shank, Kevin</td><td>03/20, 03/21</td><td class="num">00:00</td><td class="num">20:00</td><td class="num">20:00</td>
+        </tr>
+        <tr>
+          <td class="eid">13890</td><td class="name">Robinson, Danielle</td><td>Stevens, David</td><td>03/22</td><td class="num">08:00</td><td class="num">00:00</td><td class="num">08:00</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="insight-box">
+      <div class="ib-label">AI Insight</div>
+      <p>Outbound has planned absences spread across four separate days this week, with Thursday the most concentrated — Garcia
+      (PTO) and Hernandez (UTO Day 2) are both out on the same day. Wednesday–Thursday also carries Carter's 2-day UTO block
+      later in the week. Given Outbound's ongoing attendance issues (82.3% WTD day, 78.5% night), there is very little buffer
+      if today's unplanned absences continue. Recommend the Outbound OM confirm Thursday's shift headcount today and plan
+      coverage adjustments in advance.</p>
+    </div>
+  </div>
+
+  <!-- INBOUND -->
+  <div class="dept-section no-break">
+    <div class="dept-hdr">Inbound Technicians <span class="dept-code">2100</span></div>
+    <div class="scope-note">📅 March 19–25, 2026</div>
+    <table>
+      <thead>
+        <tr>
+          <th>EID</th><th>TM Name</th><th>Reports To</th><th>Date(s)</th><th style="text-align:right;">PTO</th><th style="text-align:right;">UTO</th><th style="text-align:right;">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="eid">12567</td><td class="name">Lee, Sarah</td><td>Martin, Sara</td><td>03/21</td><td class="num">10:00</td><td class="num">00:00</td><td class="num">10:00</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="insight-box">
+      <div class="ib-label">AI Insight</div>
+      <p>One planned absence in Inbound this week — Lee on Friday. Given Inbound's strong WTD performance (91.2% day, 88.7% night),
+      a single absence carries no coverage risk. No action required.</p>
+    </div>
+  </div>
+
+  <!-- REPLEN -->
+  <div class="dept-section no-break">
+    <div class="dept-hdr">Replenishment <span class="dept-code">2200</span></div>
+    <div class="scope-note">📅 March 19–25, 2026</div>
+    <table>
+      <thead>
+        <tr>
+          <th>EID</th><th>TM Name</th><th>Reports To</th><th>Date(s)</th><th style="text-align:right;">PTO</th><th style="text-align:right;">UTO</th><th style="text-align:right;">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="eid">13501</td><td class="name">Davis, Keisha</td><td>Parker, Lisa</td><td>03/20, 03/21</td><td class="num">00:00</td><td class="num">16:00</td><td class="num">16:00</td>
+        </tr>
+        <tr>
+          <td class="eid">11678</td><td class="name">Nguyen, Linh</td><td>Parker, Lisa</td><td>03/22</td><td class="num">08:00</td><td class="num">00:00</td><td class="num">08:00</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="insight-box">
+      <div class="ib-label">AI Insight</div>
+      <p>Davis, who was an NCNS on Tuesday, has UTO scheduled for Thursday and Friday — two consecutive days away from a department
+      that is small enough to feel single-person absences. Combined with Nguyen's PTO on Saturday, Replen loses at least one TM
+      on three of the next five days. Recommend Parker confirm coverage for Thursday–Saturday before end of day today.
+      Note: Davis's UTO following a confirmed NCNS warrants verification that the leave is legitimately approved.</p>
+    </div>
+  </div>
+
+  <!-- IC -->
+  <div class="dept-section no-break">
+    <div class="dept-hdr">Inventory Control <span class="dept-code">2400</span></div>
+    <div class="scope-note">📅 March 19–25, 2026</div>
+    <p style="font-size:.8rem; color: var(--tm); font-style:italic; padding: 10px 0;">No planned time off this week for Inventory Control.</p>
+    <div class="insight-box">
+      <div class="ib-label">AI Insight</div>
+      <p>No planned absences in Inventory Control this week. Combined with 96.2% WTD attendance, this department is fully
+      resourced going into the remainder of the week.</p>
+    </div>
+  </div>
+
+  <!-- PHARMACY -->
+  <div class="dept-section no-break">
+    <div class="dept-hdr">Pharmacy <span class="dept-code">3300</span></div>
+    <div class="scope-note">📅 March 19–25, 2026</div>
+    <table>
+      <thead>
+        <tr>
+          <th>EID</th><th>TM Name</th><th>Reports To</th><th>Date(s)</th><th style="text-align:right;">PTO</th><th style="text-align:right;">UTO</th><th style="text-align:right;">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="eid">11234</td><td class="name">Adams, Jennifer</td><td>Tweed, Tasha</td><td>03/23</td><td class="num">10:00</td><td class="num">00:00</td><td class="num">10:00</td>
+        </tr>
+        <tr>
+          <td class="eid">11892</td><td class="name">Brown, David</td><td>Tweed, Tasha</td><td>03/19</td><td class="num">00:00</td><td class="num">10:00</td><td class="num">10:00</td>
+        </tr>
+        <tr>
+          <td class="eid">11745</td><td class="name">Williams, Angela</td><td>Tweed, Tasha</td><td>03/19, 03/20</td><td class="num">00:00</td><td class="num">20:00</td><td class="num">20:00</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="insight-box">
+      <div class="ib-label">AI Insight</div>
+      <p><strong>Today carries the highest planned absence load in Pharmacy this week.</strong> Brown (10 hrs UTO) and Williams
+      (first of a 2-day UTO block, 20 hrs) are both out today — 30 hours of planned absence on a single day in a department
+      already running below 85% on night shift. Williams continues through Thursday, extending the coverage gap into a second
+      day. Brown has also been an NCNS for two consecutive days (Mon–Tue); today's UTO should be verified as legitimately
+      approved. Recommend Tweed review today's staffing now and consider proactive coverage adjustments before shift start.
+      Adams' PTO on Sunday is lower risk given the performance trend.</p>
+    </div>
+  </div>
+
+  <!-- VET TECH I -->
+  <div class="dept-section no-break">
+    <div class="dept-hdr">Vet Services – Tech I</div>
+    <div class="scope-note">📅 March 19–25, 2026</div>
+    <table>
+      <thead>
+        <tr>
+          <th>EID</th><th>TM Name</th><th>Reports To</th><th>Date(s)</th><th style="text-align:right;">PTO</th><th style="text-align:right;">UTO</th><th style="text-align:right;">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="eid">12890</td><td class="name">Kim, Jessica</td><td>Osman, Rachel</td><td>03/21</td><td class="num">09:00</td><td class="num">00:00</td><td class="num">09:00</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="insight-box">
+      <div class="ib-label">AI Insight</div>
+      <p>One planned absence — Kim on Friday. Vet Tech I is performing above benchmark this week. No coverage concern noted.</p>
+    </div>
+  </div>
+
+  <!-- VET TECH II -->
+  <div class="dept-section no-break">
+    <div class="dept-hdr">Vet Services – Tech II</div>
+    <div class="scope-note">📅 March 19–25, 2026</div>
+    <p style="font-size:.8rem; color: var(--tm); font-style:italic; padding: 10px 0;">No planned time off this week for Vet Services – Tech II.</p>
+    <div class="insight-box">
+      <div class="ib-label">AI Insight</div>
+      <p>No planned absences this week. No action required.</p>
+    </div>
+  </div>
+</div><!-- /section 5 -->
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 6 — 60+ HOUR WATCH
+════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-hdr">
+    <span class="sec-num">Section 06</span>
+    <span class="sec-title">60+ Hour Watch</span>
+  </div>
+  <p class="sec-desc">
+    <strong>What this is:</strong> Team Members whose hours this week have exceeded, or are projected to exceed, 60 hours
+    based on WTD hours worked and remaining scheduled hours.
+    <br><br>
+    <span class="risk-red" style="font-size:.75rem; margin-right:6px;">🔴 CRITICAL</span> TM has already worked 60 or more hours WTD.&nbsp;&nbsp;
+    <span class="risk-yellow" style="font-size:.75rem;">🟡 WATCH</span> WTD hours ≥ 58, or projected total (WTD worked + remaining scheduled) exceeds 60 hours.
+  </p>
+  <div class="scope-note">📅 WTD Worked: Sunday, March 15 – Tuesday, March 18</div>
+  <table>
+    <thead>
+      <tr>
+        <th>EID</th>
+        <th>TM Name</th>
+        <th>Department</th>
+        <th>Schedule Group</th>
+        <th>Reports To</th>
+        <th style="text-align:right;">WTD Worked</th>
+        <th style="text-align:right;">Remaining Sched</th>
+        <th style="text-align:right;">Projected Total</th>
+        <th>Risk</th>
+        <th>Recommendation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="eid">12789</td>
+        <td class="name">Garcia, Roberto</td>
+        <td class="dept">Outbound (2300)</td>
+        <td>F06-SDF4-SMTW-0600-1630-A</td>
+        <td>Harden, TJ</td>
+        <td class="num">32:10</td>
+        <td class="num">30:00</td>
+        <td class="num" style="font-weight:700;color:var(--red);">62:10</td>
+        <td><span class="risk-red">🔴 CRITICAL</span></td>
+        <td class="rec">Immediate manager intervention — adjust remaining schedule to prevent further exceedance; review and document business justification per SOP</td>
+      </tr>
+      <tr>
+        <td class="eid">13102</td>
+        <td class="name">Johnson, Marcus</td>
+        <td class="dept">Outbound (2300)</td>
+        <td>F17-SDF4-WRFZ-1700-0330-2B</td>
+        <td>Shank, Kevin</td>
+        <td class="num">29:45</td>
+        <td class="num">30:00</td>
+        <td class="num" style="font-weight:700;color:var(--yellow);">59:45</td>
+        <td><span class="risk-yellow">🟡 WATCH</span></td>
+        <td class="rec">Monitor closely; do not approve additional OT; review upcoming schedule and cap remaining hours below 60</td>
+      </tr>
+      <tr>
+        <td class="eid">14002</td>
+        <td class="name">Morgan, Tyler</td>
+        <td class="dept">Pharmacy (3300)</td>
+        <td>F07-SDF4-MTWRF-0730-1600-I</td>
+        <td>Tweed, Tasha</td>
+        <td class="num">31:00</td>
+        <td class="num">30:00</td>
+        <td class="num" style="font-weight:700;color:var(--red);">61:00</td>
+        <td><span class="risk-red">🔴 CRITICAL</span></td>
+        <td class="rec">Immediate manager intervention — adjust remaining schedule to prevent further exceedance; review and document business justification per SOP</td>
+      </tr>
+      <tr>
+        <td class="eid">13890</td>
+        <td class="name">Robinson, Danielle</td>
+        <td class="dept">Outbound (2300)</td>
+        <td>F06-SDF4-MTRF-0600-1630-F</td>
+        <td>Stevens, David</td>
+        <td class="num">28:55</td>
+        <td class="num">30:00</td>
+        <td class="num" style="font-weight:700;color:var(--yellow);">58:55</td>
+        <td><span class="risk-yellow">🟡 WATCH</span></td>
+        <td class="rec">Monitor closely; do not approve additional OT; review upcoming schedule and cap remaining hours below 60</td>
+      </tr>
+    </tbody>
+  </table>
+</div><!-- /section 6 -->
+
+<!-- ═══════════════════════════════════════════════
+     SUMMARY OF HR FINDINGS
+════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-hdr">
+    <span class="sec-num">Summary</span>
+    <span class="sec-title">HR Findings — Action Required Today</span>
+  </div>
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Finding</th>
+        <th>Recommended Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Attendance</strong></td>
+        <td>Outbound below 85% WTD (Day 82.3%, Night 78.5%); Pharmacy Night below 85% WTD (79.2%)</td>
+        <td>Flag to Operations and Pharmacy Managers; review today's headcount before shift start</td>
+      </tr>
+      <tr>
+        <td><strong>NCNS</strong></td>
+        <td>10 NCNS instances WTD (6 on 3/17, 4 on 3/18); Alvarez &amp; Brown are on Day 2 comm — next absence triggers Term Review</td>
+        <td>TDMs to complete Day 2 comm for Alvarez and Brown today; complete Day 1 comm for remaining 6 TMs</td>
+      </tr>
+      <tr>
+        <td><strong>Unscheduled Work</strong></td>
+        <td>8 TMs worked 10+ minutes beyond schedule on Tuesday, March 18; Morgan (Pharmacy) highest at +00:45</td>
+        <td>Local HR to review each timecard; confirm VET approval or adjust schedule; document per SOP</td>
+      </tr>
+      <tr>
+        <td><strong>Paycode Errors</strong></td>
+        <td>4 paycode mismatches WTD — 3 over-applied, 1 under-applied (Hernandez, Outbound)</td>
+        <td>Review and correct all timecards before pay period close; Hernandez entry requires NCNS verification</td>
+      </tr>
+      <tr>
+        <td><strong>Time Off Coverage</strong></td>
+        <td>Pharmacy: 30 hrs planned absent today (Brown + Williams); Outbound: coverage gap Thursday</td>
+        <td>Tweed and Outbound OM to confirm coverage plans before shift start; verify Brown's UTO approval</td>
+      </tr>
+      <tr>
+        <td><strong>Overtime Risk</strong></td>
+        <td>Garcia (Outbound, 62:10 projected) and Morgan (Pharmacy, 61:00 projected) exceed 60-hr threshold</td>
+        <td>Immediate schedule adjustment required for both; Harden and Tweed to act before today's shift</td>
+      </tr>
+    </tbody>
+  </table>
+</div><!-- /summary -->
+
+<div class="footer">
+  Daily People Pulse &nbsp;·&nbsp; SDF4 &nbsp;·&nbsp; Wednesday, March 19, 2026 &nbsp;·&nbsp; Data source: UKG API &nbsp;·&nbsp; Chewy Confidential — Internal Use Only
+  <br>Generated by ORBIT · Daily People Pulse &nbsp;·&nbsp; An ORBIT Product
+</div>
+
+</body>
+</html>
