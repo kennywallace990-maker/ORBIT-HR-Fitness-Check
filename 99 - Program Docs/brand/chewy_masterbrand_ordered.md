@@ -1,0 +1,780 @@
+# Chewy Master Brand Guidelines Ordered Extract
+
+This file mirrors the top-level Bynder navigation order from the saved Chewy Master Brand Guidelines export.
+
+It is a cleaned extract, not a perfect source rebuild. Some sections are noisier than others because they were pulled from saved HTML pages. Where a section was not found in the export, that is called out directly.
+
+## 1. Our brand
+### Why we exist
+
+- Every pet parent shares a common experience: a beautiful, unpredictable ride of highs and lows Note: This chart is illustrative of the journey, but does not represent quantitative data. Chewy is the only brand with an ecosystem of products and services to support pet parents throughout their journey.
+- Every pet parent's journey is different, but one thing is always true: it's filled with moments of joy, challenges, and everything in between. Through the highs, the lows, and the everyday, Chewy is here - offering the right products and services at just the right moments alongside guidance, reassurance, and encouragement. From the first vet visit to training triumphs, mealtime to playtime, Chewy takes care of pet parents like no one else. For life with pets, there's Chewy.
+
+### How we act
+
+- Pets are always there for us - their curiosity, affection and quirks inspiring us to embrace our own. And in return, we care for them with everything we've got. At Chewy, we're inspired by that bond. It's at the heart of everything we do. Just as pets show up for their people, and pet parents show up for their pets, we show up for both. To guide how we do that, we look to our Brand Behaviors - principles that shape how we act, speak and show up. Rooted in the pet - pet parent relationship, they reflect the way we strive to serve, support, and celebrate the journey of life with pets.
+- Welcoming Whether we've been gone five minutes or five hours, pets greet us like it's the best moment of their day - tail twirls, snuggles, chirps, even a fin shake or two. At Chewy we bring that same spirit - warm, generous, and full of joy. It's how we turn everyday pet parenting into something worth celebrating. Dependable We brave the rain for a walk because they need it. We give up our seat when they're ready for a nap. And when our day has been especially prickly, a scaly friend waiting for us at home is our kind of therapy. At Chewy, we mirror that kind of everyday loyalty - making care easier and support always available, through every up and down.
+- Welcoming
+- Dependable
+- Quirky The parrot that sounds exactly like the microwave. The betta who wins every staring match. Every pet moves to the rhythm of their own beat - and we're here for it. At Chewy, we mirror that spirited energy, infusing enthusiasm and personality into everything we do. We make pet care not just easy, but entertaining, fun, and totally relatable. Curious Poking at boxes. Sniffing shoes. Tilting their heads at something only they understand. There's something about the way pets explore their world that sparks our own curiosity. At Chewy, that spark moves us forward. It drives us to explore new ideas, learn from pet parents, and keep finding better ways to care - for whatever comes next.
+- Quirky
+- Curious
+
+### How we start
+
+- We created this guide to clearly define our brand identity and to make it easy to put into practice. Rooted in enduring companionship, these unique brand elements are what make Chewy, well, Chewy. Chewy creative is built on:
+- Our logo Our typography Our shapes Our C Our photography Our tone of voice Our color Our illustration Our box
+- Our logo
+- Our typography
+- Our shapes
+- Our C
+- Our photography
+- Our tone of voice
+- Our color
+- Our illustration
+- Our box
+- It's the consistent use of these brand elements that make our brand distinctive, recognizable, and authentically us. So go ahead, dive on in.
+
+## 2. Brand architecture
+### Introduction
+
+- Our brand architecture organizes all the products, services, and offerings under the Chewy umbrella to create a cohesive and unified brand experience for our customers.
+- Parent model Chewy is the singular parent brand for all our B2C and B2B products and services that are core to our ecosystem, value proposition, and master brand equity ( e.g. Chewy Pharmacy).
+- Parent model
+
+### Parent model usage
+
+- Once you have developed your service name, you will want to type out the service name in Gordita Medium, then lock it up with our parent brand Chewy logo. Follow these guidelines to appropriately maintain legibility and scalability.
+- Separation space The Chewy logo word mark and the service name should be separated by the X height of the Chewy C. While, the service name starts where the H and E letterforms meet.
+- Separation space
+- Minimum size Logos with service names should never be smaller than 75px in digital and 1.5 in print. When placing the service to the right, keep a consistent baseline and adhere to the exclusion zone.
+- Minimum size
+- Sub-brand
+- Products & services Because of the inconsistencies with our brands and their logos it is tough to build one consistent size requirement for every brand. When building a new logo that will be locked up with the Chewy logo please consult with the brand team so they can match its sizing with our other brands.
+
+### "By Chewy" lock-up
+
+- By Chewy lock-up This is our by Chewy logo lock-up for all endorsed brands. It should be in blue, white, or, if necessary, black.
+- By Chewy lock-up
+- By Chewy usage Once you have developed your endorsed brand logo, add the by Chewy attribution. The space between the endorsed brand logo and our by Chewy attribution should be equal to the height of the letter C in by Chewy. Always right align the attribution underneath the endorsed brand logo. When scaling down, establishing a minimum size ensures that impact and legibility are maintained. If the logo and attribution ever need to be smaller than the recommended size, please arrange the by Chewy after the endorsed brand.
+- By Chewy usage
+- Separation space The logo wordmark and the attribution should be separated by the height of the by Chewy C.
+- Separation space
+- Minimum size Logos with attribution should never be smaller than 75px in digital and 1.5 in print. When placing the attribution to the right, keep a consistent baseline and adhere to the exclusion zone.
+- Minimum size
+- Endorser brands
+- Private brands Because of the inconsistencies with our Brands and their logos it is tough to build one consistent size requirement for every brand. When building a new logo that will need the By Chewy attribution, please consult with the brand team so they can match its sizing with our other brands.
+- Private brands
+
+## 3. Logo
+### Primary logo
+
+- How we say hello Our logo is the graphical representation of our brand and mission - and we're all for slobbery first impressions. We don't take ourselves too seriously, and our logo doesn't either. Like us, it's playful and quirky, but also dependably consistent.
+- How we say hello
+- Primary logo Our wordmark is simple yet full of personality. The bouncy lowercase letters are informal, friendly, and approachable, while the blue hue is cheerful and welcoming.
+- Primary logo
+- Logo color Our logo should primarily appear in our Chewy blue. For dark backgrounds our logo can also appear in white. The logo should not exist in any other color*. When color isn't an option, black may be used.
+- Logo color
+- *There's always one exception to the rule and that's on our box. Our iconic box utilizes one color printing and the Chewy logo appears in the cardboard texture rather than white. This isn't a style that should be used anywhere else.
+
+### Logo don'ts
+
+- Consistent logo usage preserves the integrity of the brand. The logo should never be manipulated, modified, or altered in any way. Keep the orientation, color, and composition as indicated in this guide with no exceptions.
+- Do not use off-brand color Do not create logos using Chewy logo Do not warp Do not add icons or graphics Do not use low contrast colors Do not crop the word mark Do not create text using word mark font Do not use drop shadows Do not squeeze or stretch Do not rotate Do not add texture Do not use Chewy blue logo on color Do not use the logo within copy text Do not use old Chewy logo
+- Do not warp
+- Do not rotate
+- Do not add texture
+
+### Logo guidelines
+
+- Logo sizing & clear space guidelines When it comes to using the logo, adhering to proper clear space and logo size ensures that it gets the attention it deserves. Primary logo
+- Primary logo
+- Exclusion zone The logo word mark and the C mark's exclusion zone is equal to the height of the counter form within the letter C. C logo
+- Exclusion zone
+- C logo
+- Minimum size Establishing a minimum size ensures that the impact and legibility of the logo is not compromised in application. Primary logo should never be smaller than 50px in digital and 0.5 in print
+- Minimum size
+- C logo mark should never be smaller than 21px in digital and 0.25 in print
+
+### The Chewy ''C''
+
+- Our C While we mostly use the wordmark logo, the C gives us a ton of versatility for ultimate impact. It can be small so pets can show up big. Or it can be big to make a bold brand statement. The C logo becomes synonymous with our brand when we use it in meaningful ways.
+- Our C
+- C as a logo Once people get to know us (and have the cat hair on their cardigans to prove it), the shorthand C version can come out and play, especially when space is tight.
+- C as a logo
+- C as an icon We use our C logo as an icon on social media and app where space is an issue. The logo as it is translates to any social avatar or app icon while maintaining logo integrity. Note: The C logo should not be modified in any way. Start typing your story
+- C as an icon
+- C as a graphic When appearing within Chewy-owned spaces, the C appears on its own without the word mark. In external spaces (not Chewy-owned), the C logo should always be used along with the wordmark.
+- C as a graphic
+- When using our C logo as a graphical element, we must follow some color guidelines. Our primary use of the logo mark is Chewy blue on white, or white on Chewy blue. All of our brand blues can be used together in a combination of ways. When using our accent colors for backgrounds, you may only use white to represent our logo mark.
+
+### Logo positioning
+
+- Our logos can sit anywhere within a design as long it fits the aesthetic and overall look and feel. Our C lettermark can be cropped to bleed out of the frame, but must remain legible and recognizable as a C.
+
+## 4. Co-Branding
+### Co-branding guidelines
+
+- When Chewy teams up with other brands to promote products, we must adhere to the current logo guidelines - with a few additional guardrails.
+- Dos ✔ Get every co-branding element approved by the Chewy brand team (branding@chewy.com). ✔ Follow all previous guidelines for the Chewy brand. ✔ Avoid overuse of the Chewy logo. ✔ Ensure logos are up to date. ✔ Always use the Chewy wordmark when co-branding. Don'ts ✖ Do not drive to external sites outside of Chewy. ✖ Do not manipulate, modify, or alter the Chewy logo in any way. ✖ Do not place the full color logo on a colored background, use white. ✖ Do not partially cover any portion of the Chewy logo. ✖ Do not place an image within the Chewy logo.
+- "D"o"s"
+- Co-branding examples When we partner with a third party, we may use a co-branded logo. To maintain consistency, the logo lockups follow some simple rules. Dos ✔ The Chewy word mark logo is positioned first. ✔ A gray dividing line separates the logos. ✔ The third-party logo is positioned after the dividing line. ✔ The logos should appear equal in size. ✔ Make sure each logo is equidistant from the gray dividing line.
+
+## 5. Private brands
+### Our purpose
+
+- Private Brands by Chewy are pet products designed to deliver on the promise of bringing the best value to pet parents. Our Private Brands are an important part of meeting our mission to be the most trusted and convenient destination for pet parents and partners, everywhere. As an extension of the Chewy brand, they reflect our brand values and behaviors, with a focus on supporting the pet/parent relationships every step of the way through value, quality, and selection. Built upon the trust and loyalty of the Chewy brand, our Private Brands uniquely meet our customers' needs wherever they are on their journey. Each products is made with care; designed, curated, and tested in house.
+- Chewy Private Brands by Chewy lock-up guidance
+- Our Private Brand offerings
+- Hard goods with toys, potty products, wearables. Consumables with litter and cleaning products. Dog and cat food, treats. Vitamins and wellness supplements. Dog food and treats. Cat food and treats. Dog treats. Dog bones, chews, and treats.
+- Dog treats.
+
+### How we start
+
+- These are the core elements that both Chewy and Private Brands have in common while allowing for unique creative expression:
+- Unique logo paired with 'by Chewy' logo lockup. Color palette leveraging Chewy brand colors, with the addition of unique colors. Tone of voice founded in the Chewy brand, using unique inflections based on the private brand's personality. Unique brand typography, leveraging Gordita when in Chewy environment. Pet-as-the-hero photography style with unique viewpoint. Unique brand illustration style as part of brand visual language.
+- A note on how Private Brands show up: In owned environments (e.g. packaging, paid social, performance marketing, mid-funnel video, etc.), we have full brand expression. When in Chewy-branded environments (e.g. site, app, email, organic social), the brand's expression will be more limited as we defer to Chewy Master brand elements such as colors, typography and shape language. This means that we'd lean into Chewy blues and Gordita font, while limiting gesture doodles and color palette.
+
+### How we act
+
+- Brand personality Our Chewy brand traits form the basis for crafting the voice of a Private Brand. Through the scale, we dial into the attributes which will define the voice unique to each brand. That way we can build a distinct tone of voice while staying true to how Chewy shows up in the world.
+- Brand personality
+
+### Frisco
+
+- Frisco Frisco's palette pumps up blues with pops of select bright colors. No bored-looking pets here (unless they're napping in a comfy bed, of course). With Frisco, there's so much to play with, snooze in, walk on, roll around in and love them with, and the photography reflects that enthusiasm. When it comes to voice, Frisco is enthusiastic about sharing even more ways to play, nap, walk, roll, you name it.
+- Frisco
+- Frisco brand personality You'll find Frisco within the range of the Enthusiastic and Dependable Chewy brand traits. The enthusiasm comes through in how pets interact with products, and the dependability is the quality of the products which are designed to cover all pet parents' needs.
+- Frisco tone of voice The Frisco voice is rooted in our enthusiasm for pets because they're more than pets. We amplify the experiences our products enable using word play to reimagine what a squeak toy or a bed brings to the relationship. No pet subject is ever boring. Because it's not just an aquarium lid when your betta fish is your life coach. - Chewy Brand Guidelines
+- Frisco color palette Current adjustments: Limiting digital palette to 3 core brand colors and 5 accents. Matching current navy to the Chewy navy for consistency. Replacing current Frisco colors with brand accents (key lime, emerald, orange and magenta). Limiting fonts to only Gordita on-site.
+- Frisco photography Pets are the hero with a focus on dynamic and real-life interactions with products.
+- Frisco photography
+- How Frisco shows up
+- In owned environment - Gesture doodles - Brand fonts - Wider color palette Start typing your story In Chewy environment Gordita font Limited color palette Limited gesture doodles
+- Gordita font
+
+### Building a new brand
+
+- Building a new brand checklist Leverage Chewy brand colors with the addition of unique brand colors Use Chewy-style photography Use Chewy typography on site Have unique brand illustrations as part of the visual language Write with Chewy brand TOV as foundation Use unique voice inflections per brand
+
+## 6. Color
+### Chewy blue
+
+- Blue comes through Just like the sky is there whether it's sunny or stormy, we're there for pet parents through all the ups and downs, and we're also blue. It's our go-to color. But just like pet personalities, we're anything but monochrome.
+- Chewy blue colors our world. It's the hero hue that is the most recognizably us. This shade of blue evokes compassion, trust, and purity and symbolizes our empathy, reliability, and honesty.
+- Chewy blue may vary slightly between print and digital execution or because of variations in computer screen calibrations. Do not adjust color codes for any reason.
+
+### Core colors
+
+- If we were building a doghouse it would be Chewy blue. The door, roof, and trim would be our rich navy, bluey, light blue, and white.
+- Exact core palette values from the 2026 Chewy Brand Toolkit PDF:
+
+#### Chewy Blue
+- HEX: #1C49C2
+- RGB: 28, 73, 194
+- CMYK: 99, 76, 0, 0
+- PMS: 2728
+
+#### Royal Blue
+- HEX: #001A70
+- RGB: 0, 26, 112
+- CMYK: 100, 96, 24, 21
+- PMS: 2748 C
+
+#### Sky Blue
+- HEX: #DFEAFF
+- RGB: 223, 234, 255
+- CMYK: 25, 6, 0, 0
+- PMS: 657 C
+
+#### White
+- HEX: #FFFFFF
+- RGB: 255, 255, 255
+- CMYK: 0, 0, 0, 0
+- PMS: Bright White
+
+### Core accent colors
+
+- Accent colors are only approved for Chewy-owned channels.
+- Never pair two accent colors on the same design.
+
+#### Magenta
+- HEX: #E83B91
+- RGB: 232, 59, 145
+- CMYK: 2, 91, 33, 0
+- PMS: 2093 C
+
+#### Orange
+- HEX: #FF7A2F
+- RGB: 255, 122, 47
+- CMYK: 0, 65, 89, 0
+- PMS: 1575 C
+
+#### Emerald
+- HEX: #00CC75
+- RGB: 0, 204, 117
+- CMYK: 71, 0, 76, 0
+- PMS: 7480 C
+
+#### Key Lime
+- HEX: #D4FDAA
+- RGB: 212, 253, 170
+- CMYK: 18, 0, 44, 0
+- PMS: 365 C
+
+#### Bluey
+- HEX: #A8B8F7
+- RGB: 168, 184, 247
+- CMYK: 32, 26, 0, 3
+- PMS: 2716 C
+
+### Full palette
+
+- How we balance the use of the core colors and core accent colors changes depending on where assets are being used. Within the confines of Chewy-owned channels, we can use accent colors more liberally. Outside of Chewy-owned channels, our core colors should be predominant with accent colors used more sparingly.
+- On-site, organic social, and inside of any other Chewy experience accent colors can be used more liberally. Outside of any Chewy experience, core colors should dominate.
+
+### Neutral palette
+
+- When you need a neutral color to separate information or make white pop, use the approved neutral palette only.
+- The saved export references Grey 1, Grey 2, Grey 3, and Black, but exact values were not clearly captured in the extract.
+
+### Color application
+
+- Our core colors can be used anywhere and everywhere, while accent colors should be used strategically.
+- Use one of our core blue hues for brand recognition even in the absence of a logo.
+- Choose an accent color to add vibrancy and draw attention.
+- Make sure type is legible and follows typography guidelines.
+- Do not use more than one accent color in a design.
+- Do not add new colors to the palette or deviate from approved pairings.
+- Do not use accent colors in CTA buttons.
+- The core blue palette should drive CTA buttons.
+- White copy is approved on Chewy Blue.
+- Approved color combinations are defined by the brand toolkit and should be followed as-is.
+
+### Logo color rules
+
+- Our primary use of the logo mark is Chewy Blue on white, or white on Chewy Blue.
+- All brand blues can be used together in approved combinations.
+- When using accent colors for backgrounds, only white may be used for the logo mark.
+- On dark backgrounds, the logo can also appear in white.
+- The logo should not exist in any other color unless color is unavailable and black is required.
+
+### Specialty + seasonal colors
+
+- When it comes to holidays, seasons, and trends, we can be adaptive while staying true to our brand.
+- Seasonal and specialty palettes pair core colors and accent colors.
+- The brand team creates these seasonal palettes using core colors, two core accent colors, and two new colors.
+- Seasonal palettes are applied across the Chewy brand ecosystem, not to a single campaign.
+- Once the season has ended, the new colors should be phased out.
+
+## 7. Typography
+### Brand typeface
+
+- Typography with a purpose Pet parents are counting on us to be clear and helpful. Our simple yet expressive typography is an important part of how we accomplish that. And just like an untangled dog leash makes every walk smoother, our typography helps tether our message and keep it flowing at the same time.
+- Brand typeface We exclusively use the Gordita family of fonts. They are modern, approachable, and easy to read. They also work well across print and digital, in both small and large scales. We primarily use regular weight and sparingly use bold. For internal use only when Gordita won't load, please use Roboto. Do not use this alternative for any external assets. Gordita regular Gordita bold
+- Brand typeface
+- Gordita regular
+- Gordita bold
+- Download Gordita
+
+### Type rules and guidelines
+
+- When we use typography in a consistent way, our messages cut through the clutter and our brand shines. As a design element, it can amplify or add meaning to the messaging beyond the words themselves and can even serve as a means of communication in lieu of photography.
+- Dos ✔ Use text colors in our core palette. ✔ Make sure text is clear and legible. ✔ Use regular weight for the majority of text. ✔ Add bold weight sparingly and intentionally. ✔ Bolded text should be in the same color as the rest of the type. Don'ts ✖ Never use accent colors for text. ✖ Never place text at an angle; it should be upright only. ✖ Never use more than one text color in a single design. ✖ Do not bold more than one grouping of words within a design; choose the most important few words to bold and that's it. ✖ Do not use drop shadows, scribble treatments, or any other text embellishment. ✖ Do not use all capital letters or italics for emphasis.
+- "D"o"s"
+- When using typography on an image, we only use our core colors.
+- Do not use accent colors for typography on imagery. Ensure legibility and follow all remaining guidelines throughout.
+- Color and type When using our color palette with typography, follow these pairing guidelines to stay on brand and keep it legible. Please note that all color combination have been approved by the brand team with accessibility top of mind. Reminder: colors may vary slightly between print and digital executions or because of variations in computer screen calibrations. Do not adjust color codes for any reason.
+- Color and type
+
+### Hierarchy
+
+- It is important to maintain a consistent type hierarchy. This allows for clarity, legibility, and a stable balance for our core brand communications. We use sentence case to keep our brand approachable and welcoming. We talk to you on screen and in print the same way we would in person. Headlines are written in sentence case without periods and subcopy is sentence case with periods. There will never be an instance where we use all capital letters or italics for emphasis.
+
+### When to bold
+
+- Using both the bold and regular weights in one headline adds a finished look to the text. Be selective about what words or phrases you choose to bold. Apply it thoughtfully to draw attention and add emphasis within your overall message.
+
+### Line breaks
+
+- When laying out type or body copy blocks, we do not hyphenate any headlines or supporting body copy when a word doesn't fit on one line. Bad visual line breaks disrupt the flow of our text and create an unintended pause in the storytelling. If you have longer words in your copy blocks, please push them down to the next line of copy to avoid hyphenating.
+- Do Don't
+- "D"o"
+- Don't
+
+### Leading and kerning
+
+- Leading rules Leading is the space between lines of text. Measured from baseline to baseline, it should be 120 - 145% of the point size. Go too wide and it starts to look unprofessional, too tight and your ascenders and descenders will inevitably overlap.
+- Leading rules
+- Kerning rules Kerning is the space between letterforms. There is a typical rule indicating that two vertical straight stems need more space between letters than two rounded letters. This rule might seem strange when looking at an isolated instance, but when reading text in a paragraph, the letters will look evenly spaced. Text that is too tight can be hard to read, especially at small sizes. While text that is too loose can make it difficult for your eyes to separate words in a sentence.
+- Kerning rules
+
+## 8. Photography
+### Our purpose
+
+- Why photography? Photography is as much a part of our voice as our words. It's the universal language that connects right to the heart. Whether it's stock or shot in-house, our approach is to create an emotional connection with our audience.
+- Why photography?
+- Our Purpose The sole purpose of our brand photography is to connect on an emotional level. We prioritize capturing a moment emotionally over the functional use of photography. Because pet parenting is more irrational than practical. And because no pet or pet-parent relationship is the same, we start with simplicity to allow for every individual expression of Enduring Companionship to shine through.
+- Our Purpose
+- As such, our brand photography won't be trying to do any extra jobs including: Explaining steps or giving instructions , like how to put diapers on a cat. Our purpose is emotional over functional. Creating a surreal environment to tell an imaginary story. People connect to what's relatable. Standing in for messaging , like having an image of a dog to reassure customers we sell dog food. Filling in space without a story to tell.
+- Looking for brand-approved photography to use? Visit our photo library .
+
+### Core tenets
+
+- Our brand photography's core tenets Our brand photography isn't just one style. We are guided by our sole purpose of connecting on an emotional level. To help us do that, we've found 4 core tenets that nudge us in the right direction to achieve our purpose while allowing for flexibility, exploration, and creativity.
+- Pets are the protagonists Our brand photography makes the pet the hero. They've got the main role, not supporting cast. By letting pets tell the story, we help viewers connect to the relatable moment like they're right there with their own pets.
+- Genuine moments Pets are the heroes of unrehearsed reality. Our brand photography captures the relatable sincerity of the moment without any pretending. We go for unscripted emotion, action or interaction so that viewers can connect to what's happening on an emotional level. It's easy for them because they've been there, too.
+- Genuine moments
+- Simple storytelling Simple stories foster more of an emotional connection because there is less to distract from the moment. Simplicity allows viewers to engage with the story effortlessly by concentrating their attention where it matters most.
+- Crop is purposeful A purposeful crop supports the pet as protagonist, reduces distractions, and helps bring viewers into the moment. When cropping, keep these in mind: Subtract distracting elements to bring the viewer's attention to the pet and relationship. Crop human faces so the person is visible but not telling the story. Support the core tenets with every crop decision you make.
+- Crop is purposeful
+- Core tenets in action Pet is the protagonist
+- Moments are genuine
+
+### Photography and illustration usage
+
+- What they share in common: Pet is protagonist Emotional/relatability connection Storytelling, not decoration
+- Pet is protagonist
+- How are they different: Photography Real life moments Purely emotional Genuine multi-pet stories Illustration Larger than life moments Sometimes functional More curated multi-pet stories
+- Photography
+- Real life moments
+- Purely emotional
+- Illustration
+
+### Private brands
+
+- Private Brands can find their own creative expression that feels connected to Chewy through adhering to the core tenets of our brand photography. They can create a photography style that is uniquely theirs while upholding a shared visual continuity with the Chewy brand.
+
+### Healthcare
+
+- Healthcare photography allows expertise to come through. Pets are still the heroes and professionals only there to support the story. Genuine moments may be less spontaneous given the scenarios but we are still framing stories of emotional connection around care, trust, and empathy.
+
+### Lifestyle and seamless
+
+- Our brand photography spans both lifestyle and seamless. We make decisions based on when to use each depending on what we want to achieve and what story we want to tell. They both put our core tenets to practice and represent a visual continuity for our brand so it stands out as uniquely ours.
+- Lifestyle and our brand They take place in real-life settings and capture genuine relationships within an interactive environment.
+
+### The scene
+
+- Our stories unfold in relatable environments, creating an immersive experience by emphasizing what truly matters: the viewer's ability to connect with the pet as the hero. We don't focus on every single detail of a scene, but only the ones that are essential to capture the emotional resonance of the photo.
+- Indoor We subtract whatever could get in the way of the viewer connecting to the pet. Our indoor settings aren't the story in and of themselves. So we don't get lost in the props and decor because our viewer will too.
+- Indoor
+- Create scenes that prioritize the pet as the hero. Keep propping to a minimum to stay relatable. Use a process of subtraction to remove distracting elements. Dial up the moment , not every detail.
+- This not that Genuine moments Start typing your story
+- This not that
+- Genuine moments
+- Pet is the protagonist Start typing your story
+- Intentional crops Start typing your story
+- Intentional crops
+- Outdoor When our pets' stories take them outdoors, our approach stays consistent. We amplify the moment by eliminating unnecessary elements. In our outdoor scenes, pets own the narrative of wherever they're going.
+- Outdoor
+- Tell a story of pets outside, not the outdoors. Focus on key elements to nod to a place, not the whole dog park. Capture the connection, not the distance.
+- This not that Capture the connection Start typing your story
+- Not to a place Start typing your story
+- Not to a place
+- Emotive, but not aggressive Start typing your story
+
+### The scene
+
+- Our stories unfold in relatable environments, creating an immersive experience by emphasizing what truly matters: the viewer's ability to connect with the pet as the hero. We don't focus on every single detail of a scene, but only the ones that are essential to capture the emotional resonance of the photo.
+- Indoor We subtract whatever could get in the way of the viewer connecting to the pet. Our indoor settings aren't the story in and of themselves. So we don't get lost in the props and decor because our viewer will too.
+- Indoor
+- Create scenes that prioritize the pet as the hero. Keep propping to a minimum to stay relatable. Use a process of subtraction to remove distracting elements. Dial up the moment , not every detail.
+- This not that Genuine moments Start typing your story
+- This not that
+- Genuine moments
+- Pet is the protagonist Start typing your story
+- Intentional crops Start typing your story
+- Intentional crops
+- Outdoor When our pets' stories take them outdoors, our approach stays consistent. We amplify the moment by eliminating unnecessary elements. In our outdoor scenes, pets own the narrative of wherever they're going.
+- Outdoor
+- Tell a story of pets outside, not the outdoors. Focus on key elements to nod to a place, not the whole dog park. Capture the connection, not the distance.
+- This not that Capture the connection Start typing your story
+- Not to a place Start typing your story
+- Not to a place
+- Emotive, but not aggressive Start typing your story
+
+### The mood
+
+- We adjust lighting, time of day, propping and talent to dial into the right mood that feels authentic for the scene. Depending on the story and which moment of the pet parenting journey we're in, mood is an essential component of an emotionally engaging photograph.
+
+### Flexibility in style
+
+- Enduring Companionship shows up in so many ways and every pet and pet parent relationship is unique. That's why it's important that we maintain flexibility of style to allow us to represent every story, journey, and personality. It allows us to explore creative possibilities for unique brand expressions.
+- On brand On brand Also on brand Yup, this is Chewy too
+- On brand
+- Also on brand
+
+### The talent
+
+- Our talent base is diverse and from various backgrounds. Our approach is about real pets, real people, and real pros. There's no acting, just authenticity. No performance art, just personalities. Only when our talent is relatable can our photography resonate.
+- Pet talent We want pets from all walks, struts, and rolls of life. Not all dogs are four-legged. Cats only smile on the inside. Birds boop, too. No stereotypes (stereopets?) here. In fact, we don't have a type - but we avoid arranged perfection. Getting authenticity from pets is easy because they can only be 120% themselves. So, we just let them.
+- Pet talent
+- "D"o"'"s"
+- Parent talent Pet parents are relatable, approachable, quirky people, not styled models. They're diverse in age, gender, ethnicity, orientation, culture, ability, and socioeconomics. And they're not just comfortable with pets, they're the person who never leaves a party without a goodbye hug...for the cat. They've never met a dog who's a complete stranger. They're not pet lovers, their love for pets is sincere, authentic, and obvious.
+- Parent talent
+- Professional talent It's all about the pros, not poses. Choosing real professionals like experienced vets, techs, trainers, and other pet experts who are working in the field every day reinforces our commitment to genuine expertise. We build credibility and foster trust with our audience, who can rely on our team's authentic knowledge and experience.
+- The products We want our products to feel like they belong in the real lives of our customers and not in an artificially perfect environment. A bed that was just napped on in the perfect sunny spot, kibble how you see it when you feed your pet in the morning. It's about real products in real moments.
+- The products
+
+### The talent
+
+- Our talent base is diverse and from various backgrounds. Our approach is about real pets, real people, and real pros. There's no acting, just authenticity. No performance art, just personalities. Only when our talent is relatable can our photography resonate.
+- Pet talent We want pets from all walks, struts, and rolls of life. Not all dogs are four-legged. Cats only smile on the inside. Birds boop, too. No stereotypes (stereopets?) here. In fact, we don't have a type - but we avoid arranged perfection. Getting authenticity from pets is easy because they can only be 120% themselves. So, we just let them.
+- Pet talent
+- "D"o"'"s"
+- Parent talent Pet parents are relatable, approachable, quirky people, not styled models. They're diverse in age, gender, ethnicity, orientation, culture, ability, and socioeconomics. And they're not just comfortable with pets, they're the person who never leaves a party without a goodbye hug...for the cat. They've never met a dog who's a complete stranger. They're not pet lovers, their love for pets is sincere, authentic, and obvious.
+- Parent talent
+- Professional talent It's all about the pros, not poses. Choosing real professionals like experienced vets, techs, trainers, and other pet experts who are working in the field every day reinforces our commitment to genuine expertise. We build credibility and foster trust with our audience, who can rely on our team's authentic knowledge and experience.
+- The products We want our products to feel like they belong in the real lives of our customers and not in an artificially perfect environment. A bed that was just napped on in the perfect sunny spot, kibble how you see it when you feed your pet in the morning. It's about real products in real moments.
+- The products
+
+### The crop
+
+- Cropping is essential to simple storytelling by focusing on what's important, eliminating distractions, and bringing viewers into the moment. Purposeful cropping creates a compelling visual narrative that dials up the ability of our brand photography to connect with our audience.
+- - Support the core tenets with every crop decision you make. - Subtract distracting elements to bring the viewer's attention to the pet and relationship. - Crop human faces so the person is visible but not telling the story.
+- What a purposeful crop looks like We crop to further fine-tune our focus, support pets as the protagonists, and eliminate elements from the periphery that distract from the relatable moment.
+- The crop
+
+### Use of color
+
+- We feature our colors seamlessly by focusing on nuance instead of overt use either in accessories, props, or clothing. The colors don't take over the focus but integrate into the moment or scene.
+- Whenever we want to add pops of our brand colors, we look to existing elements within the photo that can represent our hues. Whether it's on a toy, sofa, or shirt, color is part of the story but not the reason for it.
+
+### What makes it Chewy?
+
+- Are pets the protagonists ? Is it a genuine , relatable moment? Are you telling a simple story ? Is the cropping purposefully supporting all of the above? Does the photo evoke an emotional connection?
+
+## 9. Video
+No distinct page for this section was found in the saved export.
+
+## 10. Illustration
+### Introduction
+
+- A bold style built on flat line illustrations that use brand colors and thoughtful exaggerations to show enduring companionship through larger-than-life storytelling.
+- Chewy uses illustrations when moments and stories cannot fully be told through the lens of a photograph
+- We use them to convey helpful information for customers. To tell a more complex story, or to provide instruction. To show a larger-than-life, imaginative pet parent story. To tell more dedicated multi-pet stories.
+- Our core illustration tenets 1. Pets are the main character Our pet heroes take center stage - we visualize their vibrant, unapologetic selves in an emotionally relatable way. 2. Larger-than-life storytelling We exaggerate the proportions of our pets , environments, and situations in order to tell quirky, amplified, and uncommon multi-pet stories. 3. Diverse, genuine expression Our stories are distinct, accessible, and rooted in audience insight. We ensure they represent all types of pets and pet-parent relationships. 4. Built-in Flexibility Our illustrations can flex from simple to complex, functional to expressive, depending on the need and use case.
+- You will not see our brand illustrations doing any of these: Serving any straightforward narrative that can be easily conveyed by photography Visually or tonally deviating from our larger brand guidelines, including color Telling any magical or fantastical storybook tales not rooted in reality or audience insights Describing pets or medical topics in elaborate anatomical detail Aimlessly decorating creative without a clear business goal
+- We build our illustration scenarios based on these three elements... Primary Pets Our pets are always the hero of every story we are trying to tell. We bring them to life with unique, diverse, imperfect, and emotional characteristics. Environment To showcase our hero pets in different situations, we bring them into familiar surroundings to emphasize their story, with playful twists. Exaggerated Proportions We weave in our playful brand thread and create visual interest by both upsizing and de-emphasizing elements, both our characters and environments, for more compelling visual storytelling.
+- Our system uses 7 types of illustrations across a spectrum of use cases Large spots - Expressive everyday assets that tell complete stories Medium spots - Paired down from large spots for mobile experiences Small spots - Simplified assets for quick-hit stories Infographics - Visualizations that convey data, instruction or information Brand icons - Single assets to convey brand value, products or services Wayfinding symbols - Single assets to guide users through digital site/app experiences Campaign supports - Scalable supportive graphics for seasonal multichannel experiences Story scenes - Full-scale illustrations for big brand moments
+
+### Icons & wayfinding
+
+- Brand icons Functional and informative Communicates core brand benefits and value propositions Often shown in groupings: in the footer of an email, along the edge of a direct mail piece, etc 50 x 50 pixels, two color or single color
+- Brand icons
+- These bite-sized graphics are used throughout our channels. Each icon communicates a single core brand benefit or value proposition, and can be displayed in groupings to better tailor messages to our customers. Icons should not be confused with small spots or wayfinding symbols and can be distinguished by their 50 x 50px and limited color palette (core blues + white only). Note that brand icons still use the same style of linework and have grounding lines/motion lines whenever possible.
+- Wayfinding symbols Functional guidance for digital ecosystems Appears in navigation and menu bars on the site and app 24 x 24 pixels, single color The tiniest assets of all, wayfinding symbols are important for digital signposting throughout our user interfaces both on the site and app. Wayfinding symbols should be clear, consistent across platforms, and generally recognizable at a glance. To keep things seamless, we use many of the icons already present in the Google Materials Library (filtered to rounded style) to fulfill our basic needs. Any bespoke requests should be drawn to match: single color, 24 x 24px PNG/SVG.
+- Wayfinding symbols
+
+### Infographics
+
+- Visualizations used to display data, information, or instructions, especially those that use visuals of specific pets Typical use cases include blog articles, social carousels, CGB Not to be confused with charts or other straightforward types of data visualizations which do not need illustration support Used in both desktop/mobile applications; size variable Uses core color palette with an accent color as needed
+
+### Infographics
+
+- Visualizations used to display data, information, or instructions, especially those that use visuals of specific pets Typical use cases include blog articles, social carousels, CGB Not to be confused with charts or other straightforward types of data visualizations which do not need illustration support Used in both desktop/mobile applications; size variable Uses core color palette with an accent color as needed
+
+### Campaign supports
+
+- Expressive graphics used to embellish campaign assets for appropriate tier 1 (Holiday) Graphics should work in conjunction with campaign photography and be simple enough to layer, frame, and otherwise accent images without visually competing Scalable and able to work across many digital sizes, from social to display Primarily incorporates brand shapes May use gradients, color fills, and textures as informed by corresponding campaign Uses either core + accent palette or seasonal palette, depending on campaign
+
+### Story scenes
+
+- Larger scale, expressive work for big brand moments Style flexible with regard to brand guidelines Used in experiential OOH such as murals or event collateral, or more complex requests for unique channel needs Can tell a complete story on their own Can be print or digital Uses core color palette with an accent color as needed May use textures, fills or gradients
+
+### Stroke lines
+
+- Our illustration style utilizes just enough detail to capture a range of unique pets in distinct settings. All our illustrations have smooth line work with no shading for easy replication. Depending on scale, channel, or function, our drawings can feel streamlined or fairly detailed: a small spot for compound medicine will be naturally less detailed than a healthcare diagram about administering the Heimlich. Regardless of usage, all Chewy pet illustrations use Chewy brand dark blue strokes. See line specs. * Don't forget to enable scale stroke.
+
+### Body styles
+
+- For both consistency and readability, all pets start with blank white bodies outlined in navy blue stroke lines. To keep our visuals interesting, genuine, and show diversity in pets, we add occasional coat patterns in navy fill only to define specific breeds and help break up the use of white, especially in multi-pet spots.
+
+### Exaggerated attributes
+
+- Tying into the playful, larger-than-life nature of the Chewy brand, we exaggerate select physical features of our unique pet types. There are many opportunities for creative exaggerations: Expressive emphasis heightens a specific emotion or narrative - think an extra-tall crown of feathers for an excited cockatoo, or long slender legs for a prizewinning show horse. Breed emphasis depicts specific commonalities between animal types to drive authenticity. For example, this dachshund's notoriously long body is now so long that he bleeds off the screen while chasing his own tail. Take care that expressive changes don't veer too far into fantasy, and that breed exaggerations do not verge on caricature. Illustrated pets should always feel relatable and genuine.
+
+### Facial expressions
+
+- Another way to connect with our audience, facial expressions quickly cue the major emotion of the drawing and work in tandem with body exaggerations to craft each unique pet hero. Even some anthropomorphisms, like eyebrows, can be added for levity. Our Chewy box-armored feline hero to the right shows his full range of emotions. Eyes should generally fall within two shapes: a fully outlined shape or an open shape with upper lid. Irises can be filled navy, or blank with a navy pupil, to suggest dark and light eye colors, respectively. Animal specific details are encouraged.
+- Full range of emotions Our Chewy box-armored feline hero to the right shows his full range of emotions.
+
+### Simplification
+
+- Now that we've covered purposeful overexaggeration, let's take a look at ways to simplify attributes in a cohesive and streamlined way. General anatomy should stay simple but faithful. For example, a dog's leg has a combination of straight lines and curves to suggest joints without defining musculature. Paws translate to a single curve (no separations for toes or presence of claws). An overly rendered image loses that emotional connection, while a very cartoony approach can downplay pet diversity. Overall, strike the right balance of details when depictingany pet type.
+
+### Collars
+
+- Our pet heroes draw inspiration from real-life pets, all of which have pet parents who love them. Whenever possible, we should show that our illustrated pets have loving owners by adding a collar and tag. Each collar should be represented by a Chewy accent color matching the color chosen for any secondary elements in a spot. For animals that don't wear collars, consider other elements to imply the pet-parent relationship: a cuddly ferret curled up unexpectedly in his owner's slipper, or a playful parrot making off with her owner's car keys.
+
+### Fur, feathers and more
+
+- Pets come in a whole range of oh-so-pettable coats, and we aim to show a diverse range of treatments.
+- Fur Flat lines for short or hairless animals Pointed tufts for longer hair Bouncy, cloud-like curlicues for fluffy, fuzzy or woolen animals Mixed - flat lines for most of the body, long strands on manes, tails, or other areas that require more definition Feathers Flat lines should contour the body, with clumps of feathers for crests or tails, scallops around the wings and chest to show texture, and tufts where legs begin Scales Flat lines should be used for smooth bodies like snakes. Light/occasional use of scallops to show texture as needed on fish, plus flat sweeping lines for fins
+- "F"u"r"
+- Feathers
+- Scales
+
+### Shadows
+
+- The last touch on any pet hero, shadows anchor all terrestrial pets to their environment and provide a sense of place. All pets should feel grounded and dimensional with a simplified elliptical shadow. (Our swimming and flying pets can have shadows if the ground is within frame, but environmental elements like clouds or bubbles will provide the visual context.) To add a bit more dimension within a drawing, feel free to occasionally fill in small shapes that would be in shadow anyway, like corners of boxes or open pet mouths.
+
+### Storytelling tools
+
+- Here are the techniques we utilize from our illustration toolbox to ensure Chewy's unique brand playfulness comes through in our stories.
+- Key background elements Always built in an accent color with white strokes for details Critical to the narrative Secondary assets Always built with navy blue strokes and white fill Embellishes narrative and adds realism or emotion to settings Element exaggeration (overemphasis vs minimization) Key background element can grow, shrink, change shape and more, all to serve the larger narrative and back the hero
+- Grounding line Flat navy blue line to suggest the ground or floor, helping anchor all elements in spaceve Motion lines and emotive accents Can be built in an accent color or navy, depending on use case Imbues narrative with playfulness Pet parents Depending on POV - can be white with navy or accent color with white outlines Shown as bodies/appendages, but not fully realized so the main emphasis is on pet heroes.
+
+### Putting it all together
+
+- Let's take a look at all these techniques combined in a large spot for a 404 error message.
+
+## 11. Graphical shapes, textures and gradients
+### Fun with emphasis
+
+- Notice how the playfulness amps up when different aspects of an illustration grow or shrink. This large spot uses breed emphasis to exaggerate our two pet heroes - a tiny chihuahua and a towering great dane. It also uses expressive emphasis to arrange the heroes in a humorous way and show that they're companions. The key background element, a sofa, shrinks down to create a unique juxtaposition between the heroes and the setting. Secondary assets like a painting and plant make this spot feel like anyone's home.
+
+### Adding bounce
+
+- More functional illustrations tend to rely on straightforward aspects of the business: Chewy boxes, delivery trucks, shopping carts, cell phones, etc. While exaggerations in organic forms can feel quite natural, take care to ensure rectilinear objects do not feel too stiff or perfect - such a contrast may lack cohesion with other drawings, or clash with your pet hero.
+- We call these adjustments adding bounce . Try some of the following methods to add playfulness to angular inanimate objects:
+- Rounded corners and curves Rounded objects naturally feel more friendly and playful. Soften severe or serious shapes with round corners and gentle curves. Diagonal shearing Add speed and forward motion to trucks and carts using diagonal lines and shearing shapes. Perspective To keep objects from falling flat, adjust the perspective for interesting (but not necessarily accurate) angles. Useful for creating a dynamic mood!
+
+### Rounding out designs
+
+- Shapes, textures, and gradients can add dimension to a design and make it feel even more dynamic. They can help bring our brand to life, but they're not the star of the show. Keep it clean and simple, never too busy, when applying these design elements. Use them thoughtfully to help our pets and purpose really shine.
+
+### Containing shapes
+
+- Using shapes When building shapes, always keep them soft with rounded edges. We push to minimize the hard edges, the sharp points, and anything that distracts us from our main messages and our engaging photography.
+- Using shapes
+- Containing Shapes Use containing shapes to emphasize or spotlight within a design. You can manipulate these shapes or design new ones to help tell the campaign story. Just avoid creating shapes that are too literal. E.g. don't draw a bat shape for a Halloween campaign.
+- Containing Shapes
+- C as a containing shape We should not place products or imagery inside of or too close to our C.
+- Do place images on top of the C Do keep C clear of products Don't place images inside of the C Don't place products inside of the C
+- How to crop Feel free to crop containing shapes in whatever way works for the design - make them big, crop off-page - as long as the shapes don't overshadow the photography.
+- How to crop
+
+### Shape rules
+
+- Shape rules and guidelines Use shapes to frame, as a background, or as a layering element. Just make sure they are adding something to your concept, not overpowering it. In our new look and feel we will continue to use organic forms, but will be retiring the old blob shapes. Please no longer feel limited to using these as shapes in our designs. You are encouraged to come up with unique ways to showcase our brand. Have fun and be creative, but please follow these limited guidelines.
+- Dos ✔ Use pieces of shapes when cropping or zooming. ✔ Keep shapes soft with rounded corners, with or without a border outline. ✔ Use C as a spotlight brand shape/element. Follow all existing color rules. ✔ Limit interaction with photography.
+- "D"o"s"
+- Don'ts ✖ Do not use previous brand guideline blobs. ✖ Do not crop the Chewy C so it's unrecognizable. ✖ Do not use shapes with multiple accent colors in one piece. ✖ Do not use shapes that come in contact with the C logo. ✖ Do not use shapes that are too representative of the campaign. ✖ Do not let shapes overtake your design
+
+### Textures and gradients
+
+- Using textures and gradients Intentionality is the key to creating visual interest that subtly supports a story.
+- Textures Our textures are monochromatic designs that create depth and add visual interest. They are always tone on tone. Use them to help convey tone or message rather than relying on them to create order in your design. Your design should work even if the texture is removed. Dos ✔ Use textures to help tell a story, don't have it be the entire story. ✔ Use tints of the same colors for a more subtle look and feel. ✔ Use opacity or reduce saturation of your textures. ✔ Use as a background. Don'ts ✖ Do not use textures overlayed on top of photography. ✖ Do not use multiple textures in a single campaign. ✖ Do not use multiple accent colors while designing with textures. ✖ Do not use textures just to use them, have good reasoning. ✖ Do not use textures that distract from the purpose of your design. ✖ Do not apply dark textures on top of dark color blocks; this will result in failure of visibility. Start typing your story
+- Textures
+- Examples Textures subtly reinforce the Chewy brand while adding visual interest to backgrounds and other graphic elements. Using textures can help shape the narrative for telling a certain story within each campaign. These textures should never be too loud or distract from the campaign's message; they should blend cleanly into the background. There are no right or wrong textures to use when creating a campaign. We only ask that whatever texture you are thinking about using, make sure there is a reasonable explanation for why you want to create designs with it.
+- Examples
+- Gradients When we use gradients we want to use them to draw attention to the concept needs. They should never distract from your overall concept. Dos ✔ Use gradients to help tell a story, don't have it be the entire story. ✔ Use tone on tone gradients. ✔ Use singular fade points to limit visual focal points. ✔ Use a gradient to subtly draw the eye to certain focal points, like messaging. Don'ts ✖ Do not combine different colors. ✖ Do not base your concept completely on gradients. ✖ Do not use more than one gradient in your design.
+- Gradients
+
+## 12. Writing guidelines
+### Writing goals
+
+- We exist so no one pet parents alone, and we set writing goals so that everything we write reflects that mission through and through. It's the why to our writing style and it's a pretty big why. It gives every word a purpose and every idea a meaningful direction. These goals aren't just for marketing but for everything we write at Chewy.
+- Connect We create an emotional connection with our audience that goes beyond the transactional - like even further than you could ever toss a bouncy ball. Because we know that pet parenting is about much more than having all the supplies one could ever need. It's about a relationship. Some of us have cat hair on our keyboards right now (true story). We may get our best ideas from Simon, the Betta fish. We've never met a dog who's a complete stranger. Our audience can relate. Our companionship with our pets connects us. We write to connect through our shared love of pets
+- Connect
+- Respect Right now, a bunny in Boise is defying gravity. Someone's aunt's guinea pig is literally smiling. We want pet parents to take in all those moments with their pets, big or small, instead of spending any more time than they have to figuring out what we want them to do, or what we're trying to say. So we make choices simpler, we use words and not jargon, and we say things in as few words as possible wherever possible. Because no one has time to read a five-line-long headline when they could be going on an extra walk, getting in an extra snuggle sesh, or just staring into the aquarium for another half hour. We respect that. We write like pet parents have better things to do, because they do.
+- Respect
+- Inspire We know - and pet parents know we know - that pets are so much more than pets. They're family, best friends, coaches, trainers, teachers, and the list goes on. They not only make us more us, but we're all about them (and dare we say even better versions of ourselves because of them?) . Their companionship inspires us more than anything in the world, just as it does every pet parent out there. And we're here for it. We write to celebrate all the ways pets are more than pets.
+- Inspire
+- Guide We're there for pet parents from day one to day 1,001 and anytime they need us. Because we know pet parenting isn't always a smooth ride. Sometimes things get messy, muddy, itchy, and mighty confusing, just for starters. As a guide, we provide options to help them find the best solutions for them. We share knowledge so they can feel confident in their choices. And we lend our expertise with empathy because as pet parents we've been there too. We write to guide pet parents through the ups and downs.
+- Guide
+
+### Our voice
+
+- Now that we know our writing goals, let's get into how we express those goals in our writing. We know what our writing must do, and our voice helps us do it in a way that's consistent and recognizably us. These are the basic elements of our voice. Don't think of them as rules, just as gentle nudges to help you along the way.
+- We start with the relationship Pet parenting is a relationship, so it's more emotional than rational. (Our best guess is that it's 99% emotional and 1% rational.) Ask yourself: What can I say that's true about the pet & pet parent relationship? That's your starting point. We don't just offer products and services but ways to support, enhance, celebrate and enrich the relationships between pets and their people.
+- We're clear and action-oriented
+- We put away the puns because clear is better than clever. Relevant is better than stylized. And simple is better than catchy. Why? Because pet parents depend on us for clear solutions. We don't overwhelm with too much copy or too many choices all at once. Messaging hierarchies help us write in a way that's digestible, instead of dumping the whole bag of kibble in the bowl. Think of reading your copy on all those small screens. We talk about things people can see and understand, not abstract notions. Instead of saying bring the love you could say get that tail wagging because you can immediately imagine a happy dog. We say what we'll do instead of making vague statements. We'll handle pet prescription approvals and deliver to your door is better than convenient pet meds. Instead of great prices you could say prices that won't break that treat budget.
+- We're empathetically helpful
+- We are empowering. We know that pet parents are the experts on their pets, and we make them feel that way. They aren't helpless, but they can always count on our help. We equip them to face any situation by answering their questions and offering solutions to challenges. We focus on solutions. Whether the customer is confused about what their new puppy needs or is frustrated that an Autoship item is out of stock, we're here to let them know we get it, and are here help. We respect intelligence. We don't want to patronize by overexplaining a subject, but we also don't want to leave them guessing by not saying enough. Consider the know-how of your audience so you can be that knowledgeable friend customers can count on. We don't lecture, we interact. We don't preach, we explain. And we don't scold, we support. We give people credit. Be mindful of stating the obvious like, did you know hydration is important? or separation anxiety is stressful for pups or did you know your dog needs walks? Everyone is doing their best. We start there. Then we give them ways to help with hydration or anxiety or taking walks.
+- We're pet-centric, not generic
+- Pet parenting is a wild, imperfect, beautiful ride and we are 1,000% in it. We won't ever make it sound like pet parenting is a chore or a burden, even in the tough and messy moments. We won't just say, bearded dragons are cute. Everyone knows that. We know more. Like what makes bearded dragons the best listeners. When it comes to sharing knowledge about pets, we won't just say what everyone else says. We will lean into the quirks that make pets the best relationships. No pet subject is ever boring. We talk about even mundane pet subjects with enthusiasm. Because it's not just an aquarium lid when your beta is your life coach. We are playful, not goofy. Our clever and quirky is always rooted in how much we love pets, not being silly for its own sake.
+- We're not a funny brand, but we have fun Pets make us laugh. Our humor is based on the quirky things they do, and not generic pet puns. When we use humor we will make sure it's based on:
+- Observational honesty Make it about the real dynamics between pets and people, not fiction or irreverent humor for its own sake. If talking from a pet's perspective, think about what pets would say based on their knowledge of the world. Relatability Our humor is based on a common insight pet parents can relate to. When in doubt, keep it simple. Pets are funny. We do funny things for them. If you know pets, you get it. Empathy & positivity Our humor has heart. Don't overlook the warmth and affection of the pet-parent relationship in going after a punchline.
+
+### Our tone
+
+- Our voice is how we write. Our tone is how we write for every situation. Tone is our voice in play. Pet parenting is full of ups and downs and we want to be in tune with pet parents. You don't want to be up when it's a down moment, or down in an up moment.
+- Tone is our voice in play Tone is tuning our voice to fit the context and objective of your message. Here are some things you want to consider when choosing your tone.
+- Where your writing will show up: Are you writing a paid ad or an email or a billboard? Is this an instruction manual or a get-well card? The context of where your writing will be seen is essential when considering tone.
+- What the customer is thinking, doing, and expecting: Are they at the vet or the park? Has the customer been waiting for their order past our promised delivery time? Understanding what the customer is experiencing will help clue you in to what is an appropriate tone.
+- What we want customers to do: What do you want customers to do? Maybe the action needs to be crisp, clear, and simple because it's inherently complex, or maybe it can be more playful if the customer can easily understand what they're to do. The priority of the messaging will drive the tone.
+- Gauging the tone using a range Let's look at a few scenarios to help you see how the tone might shift depending on the situation and how you can lean into different aspects of our voice to get the tone just right. Let's do some quick exercises (sweating optional). Scenario 1: Letting a customer know their pet's medication is out of stock. Clear and action-oriented/Start with the relationship Here you want to be clear about what's next. It's not a time to talk about the pet and pet parent relationship because the customer is expecting a solution. Leaning into clarity and action will help you get the right tone here. Like a friend, we apologize when it's necessary, be we never let sorry take the place of a clear solution.
+- Scenario 2: Educating customers about heartworm prevention meds. Clear and action-oriented/Empathetically helpful While you want to be clear and action-oriented, you want to balance it out with empathy so you can show up as an expert who understands that heartworm medicine can be tough to keep up with.
+- Scenario 3: Talking about getting supplies for a new pet. Real, not market-y/Pet-centric We're going to be real by not claiming getting a new puppy is all sunshine and rainbows (honesty), but we're also not going to make it sound like it's a burden. We're going to be real about the fact that they will miss the pee pee pad and not pretend that new pet supplies will solve everything, but also reinforce that those moments can be bonding experiences too. so we'll set you up with everything you need to make the most of them.
+- Voice and tone at a glance Chewy is: Real Clear Inspiring Positive Helpful Concise Chewy is not: Negative Patronizing Negative Judgmental Fear-mongering Long-winded
+- "R"e"a"l"
+- Clear
+- Inspiring
+- Positive
+- Helpful
+- Concise
+- Negative
+- Patronizing
+- Judgmental
+- Fear-mongering
+- Long-winded
+
+### Writing about Chewy
+
+- Our name began as a playful wordmark that reminded us of the fun, joy, and love our pets bring to our lives. Today, our name means so much more, so we handle it with soft paws.
+- The word Chewy We don't use Chewy in any context other than referencing the brand - unless we're talking about actual chewy treats. We avoid using imagery or language that makes it sound like our brand is literally chewy, a treat, or a pet's name.
+- The word Chewy
+- Talking about ourselves We're a brand that's all about pets and pet parents. It's about them, not us. Just as it's annoying when people make everything about themselves, we don't start every sentence with our name. We prefer With Chewy over At Chewy, but most of the time, if it's obvious customers are in a Chewy experience, we don't have to say our name at all. We can use we and us instead.
+- Using our name Although our logo is all lowercase letters, we capitalize it in copy as we would any proper name. We never bold our name or spell it out in all caps. We don't break up our brand name to create a new name for a product or service, with the exception of Chewtopian and Chewtorial. Our brand name can, however, buddy up with another word to create an idea: Example: Chewy Eats And we can say by Chewy when we're talking about our private brands.
+- Using our name
+
+### Writing about pets
+
+- We already know that at Chewy we speak to pets and their people. Since pets are the protagonists of our stories, here are some guidelines on how to talk about them in a way they would approve of.
+- What we call pets We can call pets pets or by their individual species - Parakeets, bearded dragons, betas. They're who/whom and they/them and not it. If we're making up pet names, we represent diverse names, not just Buster for a dog and Luna for a cat. We can say pup for dog and kitty for cat. Avoid using traditionally gendered names unless it's important to the story - like the cat's name is actually Hank. Remember that although pets have a sex for medical reasons, we don't give pets genders because they can be whoever they want to be. When you're writing for our site, it's okay to say them referring to pets, if the context is clear. Examples: Treats just for them. Get them what they need and what they can't be without.
+- What we call pets
+- Terms of endearment Let's call pets pets - or by their actual names - and leave the terms of endearment up to pet parents. They're just too personal. Not everyone sees their pet as their bestie or BFF. While to some, pets are their favorite kids, we won't call pets anyone's fur baby or four-legged children. We may refer to pets as companions internally, but not customer-facing. Though we realize that pet parenting can definitely be considered a long-term relationship, avoid overly romantic terms of endearment. We know that pets play different roles in our lives, from being cheerleaders to babysitters to personal trainers to karaoke sidekicks. Just like terms of endearment, roles are also personal, so we'll let pet parents define those, and not us.
+- We also write from pets' POV In some instances, we can write from a pet's point of view. Just think about what a pet would actually say versus what we want them to say. Or even what you would say. We don't want to put words in pets' mouths, just treats. Pets should not be spokespeople for our brand, products, or services. When writing from a pet's POV, consider what they would say given their knowledge - or lack thereof - about the world. Examples of something a pet could say: I'm itchy. Did my tail just do that? The peanut butter box! Thanks for getting me back to the dog park. Wow you got extra treats! But they probably wouldn't say: Think I have allergy symptoms? That toy makes my tail wag. That delivery was sure fast. Thanks for taking me to the vet. Chewy has great prices.
+- I'm itchy.
+- Pet personalities, not stereotypes Just like people, pets have personalities. And it's a kaleidoscope. Keep that in mind so you don't make pets seem like one-dimensional caricatures, i.e., the cat that's aloof and the dog that's over-the-top excited. We can lean into personality traits associated with certain breeds (i.e., huskies can be quite vocal), but let's not rely on them. Treat every pet as one of a kind, because that's how every pet parent sees them.
+- We're not Sarah McLachlan When talking about shelters and rescues, we keep it positive. Talk about the positive outcomes of adoption versus the negative consequences of not adopting. Avoid saying in need, desperately, suffering, going hungry, need homes, or anything that makes it sound melodramatic. We don't need to tug on heartstrings, although we know some cats who dig a good classical playlist. By and large, avoid scare-tactics and negative connotations. We're here for the down notes and the up notes. To show up with empathy, we write things in a way that says we understand what our customers are going through. But we don't want to wallow in the negative or barge through the doggy door with solutions without listening. We don't dramatize but we also don't make light of challenges. Our optimism is situational. When it's appropriate, we flip the thinking on common terms that have negative connotations to positive ones, like calling it the cone of confidence.
+- Differently abled pets We embrace pets of all shapes, proportions, and capabilities. No matter their size or body type, or whether they move on fins, wings, or wheels. Avoid using a pet's physical condition as a cheap pun like writing on a roll for a dog in a doggy wheelchair. On the go is ok. We incorporate pets of different abilities in our creative. We want to show all pets living their best lives. Avoid calling attention to their condition unless it's an important part of the story.
+
+### Writing about pets
+
+- We already know that at Chewy we speak to pets and their people. Since pets are the protagonists of our stories, here are some guidelines on how to talk about them in a way they would approve of.
+- What we call pets We can call pets pets or by their individual species - Parakeets, bearded dragons, betas. They're who/whom and they/them and not it. If we're making up pet names, we represent diverse names, not just Buster for a dog and Luna for a cat. We can say pup for dog and kitty for cat. Avoid using traditionally gendered names unless it's important to the story - like the cat's name is actually Hank. Remember that although pets have a sex for medical reasons, we don't give pets genders because they can be whoever they want to be. When you're writing for our site, it's okay to say them referring to pets, if the context is clear. Examples: Treats just for them. Get them what they need and what they can't be without.
+- What we call pets
+- Terms of endearment Let's call pets pets - or by their actual names - and leave the terms of endearment up to pet parents. They're just too personal. Not everyone sees their pet as their bestie or BFF. While to some, pets are their favorite kids, we won't call pets anyone's fur baby or four-legged children. We may refer to pets as companions internally, but not customer-facing. Though we realize that pet parenting can definitely be considered a long-term relationship, avoid overly romantic terms of endearment. We know that pets play different roles in our lives, from being cheerleaders to babysitters to personal trainers to karaoke sidekicks. Just like terms of endearment, roles are also personal, so we'll let pet parents define those, and not us.
+- We also write from pets' POV In some instances, we can write from a pet's point of view. Just think about what a pet would actually say versus what we want them to say. Or even what you would say. We don't want to put words in pets' mouths, just treats. Pets should not be spokespeople for our brand, products, or services. When writing from a pet's POV, consider what they would say given their knowledge - or lack thereof - about the world. Examples of something a pet could say: I'm itchy. Did my tail just do that? The peanut butter box! Thanks for getting me back to the dog park. Wow you got extra treats! But they probably wouldn't say: Think I have allergy symptoms? That toy makes my tail wag. That delivery was sure fast. Thanks for taking me to the vet. Chewy has great prices.
+- I'm itchy.
+- Pet personalities, not stereotypes Just like people, pets have personalities. And it's a kaleidoscope. Keep that in mind so you don't make pets seem like one-dimensional caricatures, i.e., the cat that's aloof and the dog that's over-the-top excited. We can lean into personality traits associated with certain breeds (i.e., huskies can be quite vocal), but let's not rely on them. Treat every pet as one of a kind, because that's how every pet parent sees them.
+- We're not Sarah McLachlan When talking about shelters and rescues, we keep it positive. Talk about the positive outcomes of adoption versus the negative consequences of not adopting. Avoid saying in need, desperately, suffering, going hungry, need homes, or anything that makes it sound melodramatic. We don't need to tug on heartstrings, although we know some cats who dig a good classical playlist. By and large, avoid scare-tactics and negative connotations. We're here for the down notes and the up notes. To show up with empathy, we write things in a way that says we understand what our customers are going through. But we don't want to wallow in the negative or barge through the doggy door with solutions without listening. We don't dramatize but we also don't make light of challenges. Our optimism is situational. When it's appropriate, we flip the thinking on common terms that have negative connotations to positive ones, like calling it the cone of confidence.
+- Differently abled pets We embrace pets of all shapes, proportions, and capabilities. No matter their size or body type, or whether they move on fins, wings, or wheels. Avoid using a pet's physical condition as a cheap pun like writing on a roll for a dog in a doggy wheelchair. On the go is ok. We incorporate pets of different abilities in our creative. We want to show all pets living their best lives. Avoid calling attention to their condition unless it's an important part of the story.
+
+### Writing about savings & offers
+
+- Writing offers We're not a discount brand, but we want pet parents to save because that means they can get more of what their pets love.
+- Writing offers
+- Our most common offer constructions:
+- Specific percentage off - XX% off - Up to XX% off - Get XX% off - Get up to XX% off - Save XX% - Save up to XX% Note: The get is optional, depending on space. Sometimes this promo requires that customers order something specific, so we pair with: when you buy or when you spend or when you order. Do not use: with your order of Example: - Get 25% off When you spend $100 on cat food. Green bar messaging for this offer should be: - Get XX% off when you buy select items Do not add on in the subcopy continuing an offer headline as in: - 50% off On treats, toys, & more. Just make it: - 50% off Treats, toys, & more.
+- Specific dollar-amount off - $XX off - Get $XX off - Up to $XX off - Get up to $XX off Again, this promo usually requires that customers order something specific, so we pair with: when you buy or when you spend or when you order. Do not use: with your order of Example: - Get $25 off When you spend $100 on cat food. Green bar messaging for this offer should be: - Get $XX off when you buy select items
+- Use this format with BOGO offers - Buy X, get Y Use numerals instead of spelling out numbers EXCEPT when the offer is Buy 1, get 1 strung together in a line of copy next to another numeral. For example, Buy one, get one 50% off. This is so there is a clear distinction between the numbers. For offers in which you need to buy more than one item, use a superscript number for the get that's one more than the buy number, i.e., Instead of Buy 2, get 1 free, we'd say Buy 2, get 3rd free. Do not use: BOGO Green bar messaging reflects the specific offer, for example: - Buy one, get one 50% off - Buy one, get one 50% off with code - Buy 1, get 1 free - mix & match
+- BOGO offers
+- Another item is given with a purchase of the specified item - Free X with Y Do not use: With your order of (instead use When you buy) The word free with any KONG promotions (so, Get a KONG toy when you buy, etc) A correct example of a full offer of this type would be: - Get a free Frisco dog toy when you buy select Purina dog food.
+- eGift card offers - $XX eGift card - Free $XX eGift card Typically followed by when you spend. Do not use: - With $XX order of - The word free with any KONG promotion Example: - Free $25 eGift card When you spend $100 on select items. Green bar messaging should follow this example format: - Spend $XX on select food, get a $XX eGift card
+- eGift card offers
+- Percentage off, autoship only - XX% off - Autoship only If the Autoship logo is present, the word Autoship does not need to repeat in the copy. If the Autoship logo is not used, then the word Autoship must appear in the offer copy. Examples: - [Autoship logo] - 35% off your first order - [Autoship logo] - 35% off your first order Plus, 5% off repeat deliveries. - 25% off Your first Autoship order of flea & tick meds.
+- Note: For legal-approved customer-facing copy, please see the Marketing promotional language quick guides .
+- Dos - Save XX% on - Save up to XX% on - Get $XX off - Get up to $XX off - Up to XX% off - Save up to XX% at checkout - XX% off OR Save XX% Green bar variations: - XX% off at checkout - Save XX% at checkout with code - Save XX% with first Autoship - Extra XX% off at checkout - Code: XXX - savings - offers - sale - save - great prices - order - free - offer expires at midnight - off Don'ts - Save XX% off - Save XX% off on - Get $XX off on - Get up to $XX off on - Save up to XX% off - Save up to XX% off on - Save up to XX% on - Take up to XX% off - Save XX% off - Take XX% off - Use code - clearance - deals - bargain - cheap - best prices - lowest prices - incredible prices - moolah - bucks - dollars - dinero - wallet - purchase - FREE - HURRY - ACT FAST - OFF
+- "D"o"s"
+- Things to keep in mind Using bold casing Because we do not want to seem like we are yelling, we do not use all caps. Emphasis can instead be made using weighted font. For example, we can emphasize an offer by bolding the important information: Up to XX% off; Buy 1, get 1 free. Using emojis Emojis are okay to use, but do so sparingly. A clock or hourglass here and there is ok, but a clock, hourglass, and fire emoji is probably too much. Celebratory emojis like clapping or confetti can be used to bring in some fun, but don't rely on them to tell the whole story. Sense of urgency Avoid making people feel like we're dangling an offer in front of them like a cat wand that we'll snatch away before they can grab it. Look for ways to express a sense of urgency without relying on cold offer language like last chance or this offer won't last. Limited-time offer is ok as that just describes the offer (helpful). Hyperbole Don't make our promos sound like the best thing in the world. Instead, celebrate pet parents for saving and, as a result, bringing home more for their pets. Through our promos, we're helping pet parents express their affection. So, it's less about not breaking the bank, and more about breaking out more of the things they love. Possessive adjectives Where space allows, use your in offers like 50% off your first order as without it, the copy can sound robotic.
+- Using bold casing
+- Using emojis
+- Sense of urgency
+- Hyperbole
+- Lists Less this Get toys, treats, poop bags, meal toppers, bowls, and more. More this Get what your pet loves from mealtime to playtime. Exceptions In an offer, do be clear as to what customers are saving on.
+- Lists
+- Less this
+- More this
+- Exceptions
+
+### Reference for healthcare products
+
+
+### Grammar & Style terrarium
+
+- Your one stop for anything and everything you need to know about grammar and style at Chewy. Well, almost. If it's not here, it'll be in the AP style book (any called out pages use the 55th edition). For spelling and word use, our go-to dictionary is Merriam-Webster . We like the digital version because it won't get chewed up like the last one.
+- Capitalization
+- Headlines, subcopy, eyebrows & CTAs We use sentence case because it's friendly and approachable. Headlines, sub copy, CTAs, eyebrows and subject lines are in sentence case, which means they each start with a capital letter. Only subsequent proper nouns are capitalized. Subcopy always begins with a capitalized word.
+- eyebrows & CTAs
+- Proper nouns The name of an individual person, pet, place, or organization is spelled with initial capital letters, e.g., Buster, Australia, and Boston Red Sox. Proper names are capitalized as in the names of people and pets (remember that pets have middle names and last names, too), product names, and names of programs at Chewy, eg: American Journey or Customer Service. Categories (eg: Dry Food, Flea & Tick): Treat categories as proper nouns in site navigation assets, page headers, CTAs, and sometimes when you're referencing the category within copy. Examples: Explore Fresh & Prepared recipes your dog will daydream about. See what's new in Flea & Tick. Shop Dry Food If the reference is in a descriptive sense, there's no need to capitalize. Examples: Fleas and ticks are gonna play. But don't hate the player, hate the game. There's dog treats and then there's American Journey dog treats. You know you have a puppy when you have dog treats in your pocket. You just found the dry food that your dog will dig into. You can pat yourself on the back for a change. Pseudo-categories: These are words that are not actual categories but we treat them as such because they refer to a specific set of products or offerings. Treat them as proper nouns when referring to a specific shopping experience. Use your discretion to make the best choice. Example use cases: When referring to a page on our site, treat as proper noun in CTAs or eyebrows: Black Friday Deals Otherwise, only capitalize the proper noun in headlines and subcopy: Shop our Black Friday deals.
+- Proper nouns
+- When to use all caps We don't use all caps for emphasis. Some dictionary words, brands that need to be in all caps, capped abbreviations, and text abbreviations are okay. Examples: ORIJEN KONG FTW LLC DNA EST WOW Team OP (Operating Principles)
+- Breeds and scientific names Start typing your story Follow dictionary spelling, and in general only capitalize proper nouns (basset hound, but Boston terrier). In scientific names, capitalize the first Latin name and lowercase the species name. For birds, capitalize official bird names and species (White-throated Sparrow, Bald-headed Eagle; Grey Parrot, but in general parrot). Follow the IOC World Bird List
+- Trademark names vs common names Styrofoam for the brand, otherwise use plastic foam. Instead of Velcro, which is a brand, we use hook-and-loop fasteners. Velboa is velboa. Sherpa is only Sherpa if it's made by the Sherpa company. Otherwise, it's sherpa, but just as fuzzy.
+- Trademark names vs
+- common names
+- Common Elements
+- Conjunctions & prepositions Conjunctions You can start sentences with conjunctions, just don't place them at the end. Prepositions You can start and end sentences with prepositions. In headlines and subcopy: You can start a subcopy line with either a conjunction or a preposition. Just make sure to capitalize the first letter in all cases. It's okay if it's a sentence fragment.
+- Fragments Sentence fragments are okay. It's how people think naturally. You don't think in complete sentences, right? It's also how people speak informally. As long as it's clear, a fragment is a stylistic choice that's totally okay to use.
+- Fragments
+- Headline & subcopy composition The headline and subcopy structure comes from the early days of print and journalism. The headline grabbed the attention in a few words and the subcopy gave a little more info in a few more words. How we use headlines and subcopy today is still the same. They're basically separate elements that complement each other and not: Complete sentences Completely separate ideas Detailed information Long reads A list or steps In our communications, we use two options to compose our ideas: 1 - Headline with subcopy Example: headline: Favorite litter subcopy: Clumps how kitty likes. 2 - Headline only Example: headline: Litter that clumps how kitty likes Notice that we don't have an option where it's subcopy only. How to decide which option to use? It will largely depend on the available space in an asset. But consider both options when putting together your message.
+- Complete sentences
+- Long reads
+- A list or steps
+- Contractions We use common contractions to sound friendly and approachable. Use we're, we've, they're, they'll, aren't, let's and other common contractions freely. It's okay to not use a contraction if you're worried about clarity, as in instructions. Less common contractions like 'em, gonna, shoulda, ain't aren't off the table but you need a very good reason to use them. Don't use uncommon contractions like needn't, mustn't, shan't, ain't, and others. 'Tis is an exception.
+- Contractions
+- Clichés and puns Avoid clichés, puns and common idioms. Though tempting, they lock us into things that have already been said and prevent us from sharing a unique point of view. Be original. Drop these like stinky gym socks: Let sleeping dogs lie Cat's out of the bag Bird in the bush Paw-some time And other unoriginal pet puns and stale clichés.
+- Clichés and puns
+- Bird in the bush
+- Paw-some time
+- Questions Sometimes we use questions because they're conversational and attention-grabbing. When asking questions we always ask ourselves: Is it a rhetorical question? Unless you're being tongue-in-cheek, avoid rhetorical questions. They can create disconnect if the implied answer is not what the reader believes. Is it respecting the audience? Don't ask questions that assume the reader doesn't know something they should. If your goal is education or awareness, it's probably clearer to make it a statement. Does it call for a question? Don't just ask a question to grab the reader's attention. Use them sparingly and with a clear purpose.
+- Questions
+- Rhyming & other style choices Style choices are just that, choices. As long as we follow the Writing goals you met earlier, we have creative flexibility. Just don't choose style elements for their own sake. They should further your idea, not replace it. So don't rhyme for the sake of rhyming. Focus first on what you're saying, and only then on how you're saying it.
+- Punctuation We keep it simple with punctuation by relying on periods and commas. No need to get fancy. In headlines and sub copy, we keep punctuation minimal so that the message is easier to read. Still, you may want to use an em dash here and there in long-form copy. In-depth punctuation rules can be found in the AP Stylebook (55th edition), beginning on page 333. Most punctuation rules follow common sense.
+- Periods in headlines No periods in headlines Exception: If a headline is composed of two or more sentences, both sentences must have ending punctuation. Examples: Long walks ahead The right leash makes together time even better No more fleas. No more ticks. Save on flea & tick treatments
+- Periods in subcopy Subcopy has ending punctuation. Examples: Big on pets not on prices. Save on everything they love & need.
+- Periods in subcopy
+- Periods in offer structures Offer structures don't need periods if they are headlines. But do use a period when the offer is part of the subcopy. Example: 35% off your first Autoship order Plus, get 35% off your first Autoship order.
+- Exclamation points & question marks If you want to use an exclamation point, try to write it so you don't need it. Make it an exciting idea, rather than a line that needs an exclamation point to sound exciting. Exceptions: On social or in on-screen supers you can use exclamation points.
+- Exclamation points
+- & question marks
+- Commas We use the Oxford comma (the final commas placed in a series, typically preceding the final conjunction). Use the Oxford comma except when an ampersand appears in place of and.
+- Examples Cats love treats, catnip, and their personal space. Then I turned to her and said, Hey, isn't that your Yorkie's name? Cats love treats, catnip, and their personal space (in that order). Cats love treats, catnip & their personal space (in that order). For full instructional use of commas please see AP Stylebook (55th edition), pages 336-338.
+- Examples
+- Other punctuation
+- Colon vs semicolon vs em dash (if you must) Colons Use for emphasis, lists, and listings. The first word after a colon is capitalized when it starts a complete sentence or is a proper noun. Em dashes Use for abrupt changes, setting off a series within a phrase, or for dramatic emphasis. We don't space before or after an em dash. (An em dash appears as a long hyphen. Some programs will auto format when using double hyphens, otherwise use the special character. Mac hotkey: option + shift + dash.) Example: This is the toy everyone's talking - well, squeaking - about.
+
+### Copy checklist
+
+- Didn't have time to go through the entire guide yet? No worries, we won't cough up any hairballs over it. You can check if your writing sounds Chewy by asking these top questions. Be honest and go back as many times as you need to get it just right.
+- Are you focusing on the pet/parent relationship? What's in it for the pet, the pet parent, and their relationship? Start there. Yes, sometimes you'll need to be clear about a feature of a product or service, but try to think from the angle of how it strengthens the relationship because that is our unique positioning.
+- Is your copy clear & helpful? Use your expertise to prioritize info so pet parents can make decisions with confidence - don't make people dig to get to the good stuff. Remember that clarity is more important than cleverness (we're looking at you, puns).
+- Is your copy specific (aka show don't tell)? Create a vivid picture that pet parents can relate to. For example, when talking about a new chew toy make your dog happy is generic while get those tails wagging immediately conjures an image and emotion. When talking about a UV light for aquatic turtles, light up their tank falls flat while let the basking begin creates the image of a happy turtle on a rock.
+- Does your writing inspire you? Are you just stating the facts or pointing to a solution or does a certain enthusiasm come through? Are you geeking out or phoning it in? Find a way to be inspired by your subject so that our customers can be inspired too.
+- Do you sound like a real person? Speak to customers like you would a fellow pet-obsessed friend. Don't market at people, speak to them. That's what makes us relatable.
+- Are you guiding or overwhelming? Make sure you aren't saying everything there is to say all in one go. That's like throwing a bunch of balls at your dog all at once. Not only will they get annoyed, but they probably won't catch any, either. Respect customers' time by using a messaging hierarchy that presents information clearly without overwhelming.
+- Are you being real? We connect by showing we get it. Pet parenting is the best relationship but it also comes with its share of struggles. We recognize the challenges but always offer encouragement and support with the belief that they're worth it. Getting soaked when you give a bath, cat hair on every single one of your favorite outfits, and messes to clean up when you were just winding down. We wouldn't have it any other way, so we embrace everything about having a pet.
+- Does your tone match the context? Our voice should stay consistent, but our tone should match the setting and scenario. For example, we'll always be real and honest, but on Instagram you might be a little cheekier than on a banner ad. How we sound in an email about receiving your cat's asthma medicine on time won't be the same as the tone of an email about toys.
+
+## 13. Examples
+### Examples
+
+
+## 14. Downloads
+### Downloads
+
+- How to Click a logo below and your asset collection will be opened in another browser window. From there you can choose the file format you need for the application.
+- How to
+- Standard Chewy logo Click on the logo to download the file. Multiple formats available. Blue Black White
+- Standard
+- Chewy logo
+- "B"l"u"e"
+- Black
+- White
+- C logo Click on the logo to download the file. Multiple formats available. Blue White
+- C logo
+- Product & service logos Click on the links to access the collections of logos created for different applications. There are different colors and layouts and also different file formats. Autoship Chewy Gives Back Chewy Vet Care Chewy Health Benchmarking+ PracticeHub Connect with a Vet Pharmacy Compounded Medications PetMD CarePlus
+- Product &
+- service logos
+- Brand Toolkit Click on the image to get a PDF or AI file.
+- Brand Toolkit
+- Guideline documentation Looking for guidance on a product or service? Autoship Chewy Gives Back Chewy Vet Care Healthcare
+- Autoship
+- Chewy Gives Back
+- Chewy Vet Care
+- Healthcare
+- Team member tools and resources Email signature template Chewy letterhead letterhead 1 letterhead 3 Powerpoint template Click above to download letterhead 2 letterhead 4 Start typing your story
+- resources
+- Chewy letterhead
+- letterhead 1
+- letterhead 3
+- letterhead 2
+- letterhead 4
+- Additional resources Image library Illustration library * Icon library Adobe color library Looking to create a t-shirt? We have customizable templates available here . *For external use of illustrations from this library, please reach out to branding@chewy.com for approval.
+- Additional
+- Questions? Reach out to us on Slack at #brand-guidelines-public or email us at branding@chewy.com
