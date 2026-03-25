@@ -14,3 +14,6 @@ test-data/
 *.pdf
 *.docx
 *.txt
+.vscode/
+01 - Daily People Pulse/.claude/
+tmp_workload_lens_self_service_smoke/
