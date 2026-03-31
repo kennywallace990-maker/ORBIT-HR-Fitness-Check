@@ -9,7 +9,7 @@
 ## Files Present
 - [x] `chat_handoff_2026-03-06.md` -- Session handoff brief
 - [x] `workload_lens_handoff_brief.md` -- Product handoff brief
-- [x] `handoffs/` -- 8 chat handoff documents (smoke tests, weekly runs)
+- [x] `handoffs/` -- 9 chat handoff documents (smoke tests, weekly runs, TMDM crossover starter)
 - [x] `answer-packs/` -- 3 answer pack documents for stakeholder prep
 
 ## Status
