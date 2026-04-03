@@ -2,13 +2,45 @@
 
 > **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build a Python pipeline that reads UKG data, computes all six report sections, calls the Anthropic API for AI insights, renders a print-ready HTML report, and saves it for Phoenix to convert to PDF.
+**Goal:** Build a Python pipeline that reads UKG data, computes all six report sections, prepares provider-agnostic insight inputs, renders a print-ready HTML report, and saves it for Phoenix to convert to PDF.
 
-**Architecture:** Multi-stage CLI pipeline following the ORBIT standard: one Python file per stage, `main() -> int` entry points, argparse config, standard library only (except Anthropic API called directly via `urllib.request`). An orchestrator `run_dpp_pipeline.py` executes stages in order. The HTML template is a Jinja2-style f-string rendered in Python (no template engine dependency).
+**Architecture:** Multi-stage CLI pipeline following the ORBIT standard: one Python file per stage, `main() -> int` entry points, argparse config, and standard-library data processing. An orchestrator `run_dpp_pipeline.py` executes stages in order. The HTML template is a Jinja2-style f-string rendered in Python (no template engine dependency). Insight generation remains provider-agnostic and should be wired through Phoenix or another upstream integration layer rather than a direct vendor-specific API call from this plan.
 
-**Tech Stack:** Python 3.9+, standard library (`argparse`, `csv`, `json`, `datetime`, `pathlib`, `collections`, `urllib.request`), Anthropic API via HTTP (no SDK), HTML/CSS output (from POC template in `05 – Application & UX/DPP_POC_Mock.html`).
+**Tech Stack:** Python 3.9+, standard library (`argparse`, `csv`, `json`, `datetime`, `pathlib`, `collections`), HTML/CSS output (from POC template in `05 – Application & UX/DPP_POC_Mock.html`). Insight generation is intentionally provider-agnostic in this plan.
 
 **Spec:** `docs/superpowers/specs/2026-03-23-daily-people-pulse-poc-design.md`
+
+## Current Delivery Status (2026-03-27)
+
+- ORBIT Infra is live and active testing is underway in the Phoenix dev environment.
+- Orbit API integration has been validated within the Phoenix backend.
+- Phoenix-side updates are complete for the DPP migration from Snowflake to Orbit API.
+- DPP remains the primary launch track with a target launch date of April 20, 2026.
+- Bubble report migration is the dependent follow-on track with a target launch date of May 12, 2026.
+
+## Release Readiness Focus
+
+Near-term DPP work is centered on architecture validation and release readiness:
+
+- End-to-end integration testing
+- Data accuracy and calculation validation
+- Phoenix staging validation
+- Final UI updates
+- Approval and review readiness
+
+## Near-Term Sequencing
+
+### 2026-03-30 through 2026-04-03
+
+- Kenny + Mandy: validate data accuracy and calculations across DPP and Bubble reports
+- Aiza + Mandy: continue infrastructure testing in Phoenix staging once code updates are committed
+
+### 2026-04-06 through 2026-04-10
+
+- Kenny + Mandy: validate DPP calculations
+- Mandy: update DPP UI
+- Move DPP into approval/review workflow
+- Prepare DPP deployment for the April 20 launch target
 
 ---
 
@@ -27,7 +59,7 @@ All files live under:
 | `sections/dpp_paycode.py` | Identifies Section 04 paycode mismatches (WTD or prior week) |
 | `sections/dpp_time_off.py` | Computes Section 05 upcoming time off per dept |
 | `sections/dpp_overtime.py` | Computes Section 06 60+ hour watch with CRITICAL/WATCH precedence |
-| `dpp_insights.py` | Calls Anthropic API to generate AI insight text per dept section |
+| `dpp_insights.py` | Builds insight prompts, fallback text, and provider-agnostic helpers for dept-level insights |
 | `dpp_html_renderer.py` | Assembles all section data into the final HTML string |
 | `run_dpp_pipeline.py` | Orchestrator: runs all stages, handles errors, writes output HTML |
 | `tests/test_dpp_scope.py` | Tests for date window and report mode logic |
@@ -1227,16 +1259,16 @@ git commit -m "feat(dpp): add Section 05 time off and Section 06 overtime watch"
 
 ---
 
-## Chunk 6: AI Insights
+## Chunk 6: Insight Prompting & Integration
 
 ### Task 9: `dpp_insights.py`
 
 **Files:**
 - Create: `04 – Pipelines & Architecture/dpp-pipeline/dpp_insights.py`
 
-Calls the Anthropic API via `urllib.request` (no SDK). Takes computed section data and a plain-text data summary, returns insight strings per dept/section. Falls back to a stub string on API error.
+Builds the prompt text and fallback handling for Section 01 / Section 05 insights. This module should not hard-code any model vendor. Phoenix (or the surrounding orchestration layer) owns provider selection and can inject a provider callable or precomputed response text.
 
-**Before implementing:** Confirm the `ANTHROPIC_API_KEY` environment variable is set in your Phoenix/local environment. The pipeline reads it from `os.environ`.
+**Before implementing:** Confirm where live insight generation occurs in the final Phoenix flow. If Phoenix already owns the AI call, keep this module limited to prompt-building, fallback handling, and a thin provider-agnostic adapter.
 
 - [ ] **Step 1: Write the failing tests**
 
@@ -1244,7 +1276,6 @@ Calls the Anthropic API via `urllib.request` (no SDK). Takes computed section da
 # tests/test_dpp_insights.py
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
-from unittest.mock import patch, MagicMock
 from dpp_insights import build_attendance_prompt, build_time_off_prompt, FALLBACK_INSIGHT
 
 def test_attendance_prompt_contains_dept_name():
@@ -1279,20 +1310,13 @@ python -m pytest tests/test_dpp_insights.py -v 2>&1
 ```python
 # dpp_insights.py
 """
-AI Insights — calls Anthropic API to generate narrative insight text.
-Uses urllib.request only (no SDK). Reads ANTHROPIC_API_KEY from environment.
-Falls back to FALLBACK_INSIGHT on any API error.
+AI Insights — prompt builders and provider-agnostic integration helpers.
+This module does not call a vendor API directly. Phoenix owns model/provider selection.
 """
-import json
-import os
-import urllib.request
-import urllib.error
-from datetime import date
+from typing import Callable, Optional
 
 FALLBACK_INSIGHT = "Insufficient data to generate an insight for this department this period."
-API_URL = "https://api.anthropic.com/v1/messages"
-MODEL   = "claude-haiku-4-5-20251001"    # verified: Haiku 4.5 model ID as of 2026-03-23
-MAX_TOKENS = 300
+InsightProvider = Callable[[str], str]
 
 # ── Prompt builders ───────────────────────────────────────────────────────────
 
@@ -1332,7 +1356,7 @@ def build_attendance_prompt(dept_name: str, data: dict) -> str:
     ]
 
     return (
-        "You are generating a brief AI Insight for an HR daily report. "
+        "You are generating a brief Insight for an HR daily report. "
         "RULES: (1) Do NOT re-state the numbers in the data above — they already appear in the report. "
         "(2) Interpret trends, identify risks, and recommend one specific action. "
         "(3) Do NOT make disciplinary recommendations or speculate about protected characteristics. "
@@ -1351,7 +1375,7 @@ def build_time_off_prompt(dept_name: str, rows: list[dict], dept_attendance_pct:
         for r in rows
     ]
     return (
-        "You are generating a brief AI Insight about upcoming time off for an HR daily report. "
+        "You are generating a brief Insight about upcoming time off for an HR daily report. "
         "RULES: (1) Do NOT re-state the dates or hours — they already appear in the table. "
         "(2) Identify coverage risks, flag any patterns (multi-day absences, same-day overlap), "
         "and recommend one specific action. "
@@ -1366,56 +1390,40 @@ def build_time_off_prompt(dept_name: str, rows: list[dict], dept_attendance_pct:
 
 # ── API caller ────────────────────────────────────────────────────────────────
 
-def call_anthropic(prompt: str) -> str:
+def resolve_insight(prompt: str, provider: Optional[InsightProvider]) -> str:
     """
-    Call the Anthropic Messages API and return the text content.
-    Returns FALLBACK_INSIGHT on any error.
+    Resolve insight text through an injected provider.
+    Returns FALLBACK_INSIGHT if no provider is configured or on any error.
     """
-    api_key = os.environ.get("ANTHROPIC_API_KEY", "")
-    if not api_key:
-        print("  [warn] ANTHROPIC_API_KEY not set — using fallback insight")
+    if not prompt:
+        return FALLBACK_INSIGHT
+    if provider is None:
         return FALLBACK_INSIGHT
 
-    payload = json.dumps({
-        "model": MODEL,
-        "max_tokens": MAX_TOKENS,
-        "messages": [{"role": "user", "content": prompt}],
-    }).encode("utf-8")
-
-    req = urllib.request.Request(
-        API_URL,
-        data=payload,
-        headers={
-            "x-api-key":         api_key,
-            "anthropic-version": "2023-06-01",
-            "content-type":      "application/json",
-        },
-        method="POST",
-    )
-
     try:
-        with urllib.request.urlopen(req, timeout=20) as resp:
-            body = json.loads(resp.read().decode("utf-8"))
-            return body["content"][0]["text"].strip()
-    except (urllib.error.URLError, KeyError, json.JSONDecodeError) as exc:
-        print(f"  [warn] Anthropic API error: {exc} — using fallback insight")
+        text = (provider(prompt) or "").strip()
+        return text or FALLBACK_INSIGHT
+    except Exception as exc:
+        print(f"  [warn] Insight generation error: {exc} - using fallback insight")
         return FALLBACK_INSIGHT
 
 # ── Public interface ──────────────────────────────────────────────────────────
 
-def generate_attendance_insight(dept_name: str, data: dict) -> str:
+def generate_attendance_insight(dept_name: str, data: dict,
+                                provider: Optional[InsightProvider] = None) -> str:
     prompt = build_attendance_prompt(dept_name, data)
-    return call_anthropic(prompt)
+    return resolve_insight(prompt, provider)
 
 def generate_time_off_insight(dept_name: str, rows: list[dict],
-                               dept_attendance_pct: float) -> str:
+                               dept_attendance_pct: float,
+                               provider: Optional[InsightProvider] = None) -> str:
     if not rows:
         return FALLBACK_INSIGHT
     prompt = build_time_off_prompt(dept_name, rows, dept_attendance_pct)
-    return call_anthropic(prompt)
+    return resolve_insight(prompt, provider)
 ```
 
-- [ ] **Step 4: Run tests (no API key required — tests mock or test prompt shape only)**
+- [ ] **Step 4: Run tests (no live provider required — tests cover prompt shape and fallback behavior)**
 
 ```bash
 python -m pytest tests/test_dpp_insights.py -v 2>&1
@@ -1428,7 +1436,7 @@ Expected: Both tests PASS
 ```bash
 git add "ORBIT – Daily People Pulse/04 – Pipelines & Architecture/dpp-pipeline/dpp_insights.py"
 git add "ORBIT – Daily People Pulse/04 – Pipelines & Architecture/dpp-pipeline/tests/test_dpp_insights.py"
-git commit -m "feat(dpp): add AI insights module with Anthropic API caller and fallback"
+git commit -m "feat(dpp): add provider-agnostic insight helper module"
 ```
 
 ---
@@ -2097,22 +2105,23 @@ def main() -> int:
     print(f"  NCNS: {len(ncns_rows)}  Unscheduled: {len(unsched)}"
           f"  Paycode: {len(paycode)}  OT flags: {len(overtime)}")
 
-    # 5. Generate AI insights
+    # 5. Resolve insight text
     insights = {"attendance": {}, "time_off": {}}
+    insight_provider = None  # Wired in Phoenix or another upstream integration layer.
     if not args.no_insights:
-        print("[dpp] Generating AI insights...")
+        print("[dpp] Resolving insight text...")
         for dk, dinfo in DEPT_REGISTRY.items():
             dc = dinfo.get("code")
             dept_att = att_data.get(dc, {})
             insights["attendance"][dk] = generate_attendance_insight(
-                dinfo["label"], dept_att)
+                dinfo["label"], dept_att, provider=insight_provider)
             to_rows = time_off.get(dc, [])
             wtd_pct = (dept_att.get("wtd", {}).get("Day", {}).get("pct", 0.0)
                        + dept_att.get("wtd", {}).get("Night", {}).get("pct", 0.0)) / 2
             insights["time_off"][dk] = generate_time_off_insight(
-                dinfo["label"], to_rows, wtd_pct)
+                dinfo["label"], to_rows, wtd_pct, provider=insight_provider)
     else:
-        print("[dpp] Skipping AI insights (--no-insights flag set)")
+        print("[dpp] Skipping insight resolution (--no-insights flag set)")
 
     # 6. Render HTML
     print("[dpp] Rendering HTML...")
@@ -2146,7 +2155,7 @@ if __name__ == "__main__":
 
 - [ ] **Step 2: Smoke-test the full pipeline with mock data**
 
-Use `--no-insights` to avoid needing the Anthropic API key during testing.
+Use `--no-insights` to skip live insight resolution during testing.
 
 ```bash
 cd "c:/Users/kwallace12/OneDrive - Chewy.com, LLC/Desktop/ORBIT Products/01 - Daily People Pulse/ORBIT – Daily People Pulse/04 – Pipelines & Architecture/dpp-pipeline"
@@ -2163,10 +2172,9 @@ Expected: `[dpp] Report written to: ./output/DPP_SDF4_2026-03-19.html`
 
 Open the output HTML in Chrome and verify it renders correctly. Print → Save as PDF to verify PDF fidelity.
 
-- [ ] **Step 3: Full pipeline test with real API key**
+- [ ] **Step 3: Full pipeline test with configured Phoenix insight provider**
 
 ```bash
-set ANTHROPIC_API_KEY=<your-key>
 python run_dpp_pipeline.py \
   --input "path/to/sample_ukg.csv" \
   --site SDF4 \
@@ -2174,7 +2182,7 @@ python run_dpp_pipeline.py \
   --output "./output"
 ```
 
-Verify AI insight boxes are populated with real text.
+Run this in the environment where Phoenix wires the live provider. Verify insight boxes are populated with real text; if no provider is configured, verify fallback text renders consistently.
 
 - [ ] **Step 4: Run full test suite**
 
@@ -2200,7 +2208,7 @@ Before handing off to Phoenix:
 
 - [ ] Confirm UKG CSV column names match `FIELD_MAP` in `dpp_ukg_reader.py`
 - [ ] Confirm Vet Services Tech I / Tech II dept codes with product owner and update `DEPT_REGISTRY` in `dpp_scope.py`
-- [ ] Set `ANTHROPIC_API_KEY` in Phoenix environment
+- [ ] Confirm Phoenix-side insight provider wiring/configuration before live insight generation
 - [ ] Run a full pipeline test against a real UKG CSV export for SDF4
 - [ ] Open the generated HTML in Chrome → Print → Save as PDF; verify all sections render correctly, no table row splits across pages
 - [ ] Confirm Phoenix Chrome headless PDF render matches the Chrome browser print preview
