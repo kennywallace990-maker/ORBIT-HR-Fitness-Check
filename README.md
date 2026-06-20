@@ -80,18 +80,21 @@ python .\poc\scripts\extract_workbook_data.py
 
 ```
 ORBIT-HR-Fitness-Check/
-├── poc/                          # Proof of Concept - Static ORBIT workspace
-│   ├── index.html               # Main entry point
-│   ├── app.js                   # Core application logic
-│   ├── styles.css               # Styling
-│   ├── README.md                # POC-specific documentation
-│   ├── assets/                  # Images, icons, logos
-│   ├── data/                    # Generated assessment data
-│   └── scripts/
-│       └── extract_workbook_data.py  # Data extraction from Excel workbooks
-├── output/                       # Generated outputs and reports
-├── LICENSE                       # License information
-└── README.md                     # This file
+|-- poc/                          # Proof of Concept - Static ORBIT workspace
+|   |-- index.html                # Main entry point
+|   |-- app.js                    # Core application logic
+|   |-- styles.css                # Styling
+|   |-- README.md                 # POC-specific documentation
+|   |-- assets/                   # Images, icons, logos
+|   |-- data/                     # Generated assessment data
+|   `-- scripts/
+|       `-- extract_workbook_data.py  # Data extraction from Excel workbooks
+|-- docs/                         # Discovery PRD and checklist disposition
+|-- knowledge-base/               # Source discovery and ingestion planning
+|-- outputs/                      # Generated grounding partner workbook
+|-- output/                       # Generated POC outputs and reports
+|-- LICENSE                       # License information
+`-- README.md                     # This file
 ```
 
 ---
@@ -100,13 +103,13 @@ ORBIT-HR-Fitness-Check/
 
 ```
 Source Workbooks (Excel)
-    ↓
+    ->
 extract_workbook_data.py
-    ↓
+    ->
 data.json (Generated assessment data)
-    ↓
+    ->
 app.js (Client-side processing)
-    ↓
+    ->
 Browser UI (Phoenix-style ORBIT workspace)
 ```
 
@@ -239,6 +242,24 @@ HR Fitness Check tracks the provenance of every assessment metric:
 - **`computed`**: Calculated from other metrics (e.g., rollups, averages)
 
 This lineage is visible in the UI and preserved through all transformations.
+
+---
+
+## Discovery Knowledge Base
+
+The current discovery package is in the root documentation and knowledge-base folders:
+
+- `docs/HR-Fitness-Check-PRD.md`
+- `docs/Reviewed-Checklist-Disposition.md`
+- `knowledge-base/README.md`
+- `knowledge-base/source-inventory.md`
+- `knowledge-base/voc-pulse-action-roadmap.md`
+- `knowledge-base/ingestion-backlog.md`
+- `knowledge-base/snowflake-discovery-playbook.md`
+- `knowledge-base/snowflake-discovery-results.md`
+- `knowledge-base/research-log.md`
+
+The VOC Pulse action roadmap is action-loop and recommendation-library context. It should not be treated as direct Fitness Check scoring input unless a specific approved metric, source field, and rule are added to the catalog.
 
 ---
 
